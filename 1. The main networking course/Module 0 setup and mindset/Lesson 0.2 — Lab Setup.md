@@ -1,10 +1,10 @@
 # Module 0 — Setup and Mindset
 
-# Lesson 0.2 — Lab Setup
+## Lesson 0.2 — Lab Setup
 
 ---
 
-## Introduction
+### Introduction
 
 A networking course requires a practical environment in which concepts can be tested, configurations can be applied, and protocols can be observed. Reading documentation or watching demonstrations is not sufficient to develop networking skills. Every concept introduced throughout this course will be reinforced through hands-on laboratories.
 

@@ -2140,14 +2140,14 @@ Every stage of communication introduces potential security risks.
 
 Understanding these risks is essential for secure network design.
 
-| Stage | Possible Attack |
-|---------|----------------|
-| DNS | DNS Spoofing |
-| ARP | ARP Poisoning |
-| TCP | SYN Flood |
-| HTTP | Session Hijacking |
-| TLS | Certificate Forgery |
-| Routing | Route Hijacking |
+| Stage   | Possible Attack     |
+| ------- | ------------------- |
+| DNS     | DNS Spoofing        |
+| ARP     | ARP Poisoning       |
+| TCP     | SYN Flood           |
+| HTTP    | Session Hijacking   |
+| TLS     | Certificate Forgery |
+| Routing | Route Hijacking     |
 
 Future modules explore these attacks together with the defensive technologies used to mitigate them.
 
