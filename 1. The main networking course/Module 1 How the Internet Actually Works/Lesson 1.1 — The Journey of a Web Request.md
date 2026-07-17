@@ -1,22 +1,22 @@
 # Module 1 — How the Internet Actually Works
 
-# Lesson 1.1 — The Journey of a Web Request (Part 1)
+## Lesson 1.1 — The Journey of a Web Request (Part 1)
 
 ---
 
-# Introduction
+### Introduction
 
 Every interaction with the Internet begins with a simple action. A user opens a web browser, types a website address such as `google.com`, and presses **Enter**. Within a fraction of a second, the requested webpage appears on the screen. Although this process feels instantaneous, it involves dozens of protocols, multiple devices, several operating system components, and thousands of exchanged packets.
 
 Understanding this sequence is one of the most important milestones in networking education. Almost every networking concept introduced later in this course—including Ethernet, ARP, IP addressing, routing, DNS, TCP, TLS, HTTP, switching, firewalls, and network security—represents one step in this communication process.
 
-Rather than studying these technologies independently, this lesson presents the complete communication process from beginning to end. Later modules revisit each stage individually, examining the underlying protocols, packet structures, configurations, and troubleshooting techniques in greater detail.
+Rather than studying these technologies independently, this lesson presents the complete communication process from beginning to end. Later modules revisit each stage individually, examining the underlying protocols, packet structures, configurations, and troubleshooting techniques in greater detail, but still, we will have a proper introduction to what they do from this moment building up the knowledge about them.
 
-By the end of this lesson, students should understand the overall journey of a web request and recognize how different networking protocols cooperate to deliver a webpage.
+By the end of this lesson, students should understand the overall journey of a web request and recognize how different networking protocols *cooperate* to deliver a webpage.
 
----
+![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Cooperate|Terminology]]
 
-# Learning Objectives
+### Learning Objectives
 
 After completing this lesson, students should be able to:
 
@@ -27,74 +27,56 @@ After completing this lesson, students should be able to:
 - Understand the purpose of DNS resolution.
 - Recognize where future networking topics fit within the communication process.
 
----
+### The Big Picture
 
-# The Big Picture
-
-Consider the following action.
-
-A user enters the following address into a browser:
+Consider the following action; A user enters the following address into a browser:
 
 ```
 https://www.google.com
 ```
 
-After pressing **Enter**, the browser eventually displays Google's homepage.
+After pressing **Enter**, the browser <u>eventually</u> displays Google's homepage.
 
-Although this appears to be a single action, the operating system performs many independent tasks before any webpage can be displayed.
+Although this appears to be a single action, the *[[Operating system]]* performs many independent tasks before any webpage can be displayed.
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Operating system (OS)|Definitions]]
 
 A simplified overview is shown below.
 
 ```text
 User
- │
  │ Types URL
- ▼
 Browser
  │
- ▼
 DNS Lookup
  │
- ▼
 Local Network
  │
- ▼
 Router
  │
- ▼
 Internet
  │
- ▼
 Google Server
  │
- ▼
 HTTP Response
  │
- ▼
 Browser Rendering
  │
- ▼
 Webpage Displayed
 ```
 
 Each box in this diagram represents multiple networking technologies working together.
 
----
+### A Communication Problem
 
-# A Communication Problem
-
-Humans and computers communicate differently.
-
-Humans prefer names because they are meaningful and easy to remember.
-
-Examples include:
+Humans and computers communicate differently; Humans prefer names because they are meaningful and easy to remember. Examples include:
 
 - google.com
 - microsoft.com
 - openai.com
 - wikipedia.org
 
-Computers, however, communicate using numerical addresses known as IP addresses.
+Computers, however, communicate using <u><mark style="background:#fff88f">numerical addresses known as IP addresses.</mark></u>
 
 For example:
 
@@ -108,81 +90,83 @@ or
 2607:f8b0:4004:c1b::66
 ```
 
-A computer cannot directly communicate using the name **google.com**.
+A computer cannot directly communicate using the name **google.com**. Before any connection can be established, the name must first be translated into an IP address.
 
-Before any connection can be established, the name must first be translated into an IP address.
+This translation process is performed by the *[[Domain Name System (DNS)]]*, one of the most fundamental services on the Internet, and that's why the browser does a DNS lookup first thing.
 
-This translation process is performed by the Domain Name System (DNS), one of the most fundamental services on the Internet.
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Domain name system (DNS)|Definitions]]
 
----
+### Breaking Down a *[[Uniform Resource Locator (URL)]]*
 
-# Breaking Down a URL
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Uniform resource locator (URL)|Definitions]]
 
-Before contacting any remote server, the browser analyzes the address entered by the user.
-
-Consider the following URL.
+Before contacting any remote server, the browser analyzes the address entered by the user. Consider the following URL :
 
 ```
 https://www.google.com/search?q=networking
 ```
 
-This address consists of several components.
+This address consists of several components :
 
-| Component | Value | Purpose |
-|------------|------|----------|
-| Protocol | https | Communication protocol |
-| Hostname | www.google.com | Target server |
-| Path | /search | Requested resource |
-| Query | q=networking | Additional parameters |
+| Component | Value          | Purpose                |
+| --------- | -------------- | ---------------------- |
+| Protocol  | https          | Communication protocol |
+| Hostname  | www.google.com | Target server          |
+| Path      | /search        | Requested resource     |
+| Query     | q=networking   | Additional parameters  |
 
-The browser interprets each component independently.
+The browser *interprets* each component independently.
+
+![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Interpret|Terminology]]
 
 The hostname identifies the server.
-
 The protocol determines how communication should occur.
-
 The path specifies which resource is requested.
-
 The query string supplies additional information to the server.
-
 At this stage, no network communication has occurred.
-
 The browser is simply interpreting the information supplied by the user.
 
----
+### Browser Processing
 
-# Browser Processing
+A modern *[[Web browser]]* performs significantly more work than displaying web pages.
 
-Modern web browsers perform significantly more work than displaying web pages.
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Web browser|Definitions]]
 
-They function as sophisticated networking applications responsible for managing multiple communication tasks simultaneously.
+It functions as <u>sophisticated</u> networking applications responsible for managing multiple communication tasks simultaneously.
 
-Immediately after the URL is entered, the browser begins several checks.
-
-These include:
+Immediately after the URL is entered, the browser begins several checks, these include:
 
 - Verifying URL syntax
-- Checking browser cache
-- Checking DNS cache
-- Looking for existing TCP connections
+- Checking *browser cache*
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Browser cache|Definitions]]
+
+![[Cybersecurity journey/1. Networking/Q&A#❔ - Why does the browser check its cache processing a URL ?|Q&A]]
+
+- Checking *DNS cache*
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - DNS cache|Definitions]]
+
+- Looking for existing *[[Transmission Control Protocol (TCP)]]* connections
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Transmission Control Protocol (TCP)|Definitions]]
+
+![[Cybersecurity journey/1. Networking/Q&A#❔ - Why does a browser look for existing TCP connecting processnig a URL ?|Q&A]]
+
 - Applying browser security policies
 - Determining whether HTTPS is required
 
-Some of these checks may eliminate unnecessary network communication.
-
-For example, if the requested webpage is already stored in the browser cache and remains valid, downloading the page again may not be necessary.
+Some of these checks may eliminate unnecessary network communication. For example, if the requested webpage is already stored in the browser cache and remains valid, downloading the page again may not be necessary.
 
 Similarly, if the IP address of the website is already stored in the local DNS cache, a new DNS lookup can be avoided.
 
-Caching significantly reduces network traffic and improves browsing performance.
+*Caching* significantly reduces network traffic and improves browsing performance.
 
----
+![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Caching|Terminology]]
 
-# Browser Cache
+### Browser Cache
 
-Browsers store previously downloaded resources locally.
-
-These may include:
+Browsers store previously downloaded resources locally. These may include:
 
 - HTML pages
 - Images
@@ -190,144 +174,113 @@ These may include:
 - JavaScript files
 - Fonts
 
-If a previously downloaded resource remains valid, the browser can reuse it without downloading it again.
-
-For example:
+If a previously downloaded resource remains valid, the browser can reuse it without downloading it again. For example:
 
 ```
-First Visit
-
+First Visit :
 Browser
       │
-      ▼
 Download Logo.png
       │
-      ▼
 Store Locally
 ```
 
 Later:
 
 ```
-Second Visit
-
+Second Visit :
 Browser
       │
-      ▼
-Read Logo.png
-from Local Cache
+Read Logo.png from Local Cache
 ```
 
-No Internet communication is required.
+No Internet communication is required, because the resource needed is, now, local (in your machine).
 
-Caching improves:
-
+Caching improves :
 - Page loading speed
 - User experience
 - Server performance
 - Bandwidth utilization
 
-Later modules will examine HTTP caching in detail.
+Later modules will examine *[[HTTP caching]]* in detail.
 
----
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - HTTP caching|Definitions]]
 
-# DNS Cache
+### DNS Cache
 
-Operating systems also maintain a DNS cache.
-
-Suppose a computer recently visited Google.
-
-Instead of asking a DNS server again, the operating system may already know Google's IP address.
+Operating systems also maintain a DNS cache; suppose a computer recently visited Google, instead of asking a DNS server again, the operating system may already know Google's IP address.
 
 ```
 google.com
-
 ↓
-
 142.250.x.x
 ```
 
-If the cached record has not expired, the operating system immediately returns the stored IP address.
+If the cached *DNS record* has not expired, the operating system immediately returns the stored IP address.
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - DNS record|Definitions]]
 
 This avoids another DNS request.
 
-Every DNS record contains a value known as the **Time To Live (TTL)**.
+Every DNS record contains a value known as the ***Time To Live (TTL)***.
 
-The TTL determines how long a record may remain cached before it must be requested again.
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Time-To-Live (TTL)|Definitions]]
+
+The TTL determines how long a record may remain cached before it <u>must</u> be requested again.
 
 Caching allows frequently visited websites to load more quickly while reducing the workload placed on DNS servers.
 
----
+### Why DNS Exists
 
-# Why DNS Exists
-
-Imagine attempting to browse the Internet without DNS.
-
-Instead of typing:
+Imagine attempting to browse the Internet without DNS, Instead of typing:
 
 ```
 google.com
 ```
 
-Users would need to remember addresses such as:
+Users would need to remember addresses such as :
 
 ```
 142.250.190.78
 ```
 
-Every website would require memorizing one or more IP addresses.
+- Every website would require memorizing one or more IP addresses.
+- Furthermore, if a company changed servers, every user would need to learn the new address.
 
-Furthermore, if a company changed servers, every user would need to learn the new address.
+DNS solves this problem by separating names from addresses. Users remember names. Computers communicate using IP addresses. DNS acts as the translator between these two worlds.
 
-DNS solves this problem by separating names from addresses.
+### What Is DNS?
 
-Users remember names.
-
-Computers communicate using IP addresses.
-
-DNS acts as the translator between these two worlds.
-
----
-
-# What Is DNS?
-
-The Domain Name System (DNS) is a distributed database responsible for translating domain names into IP addresses.
-
-It is often compared to a telephone directory.
-
-Instead of looking up telephone numbers by name, DNS looks up IP addresses by domain name.
+The Domain Name System (DNS) is a distributed database responsible for translating domain names into IP addresses, it is often compared to a telephone directory, instead of looking up telephone numbers by name, DNS looks up IP addresses by domain name.
 
 Example:
 
 ```
 google.com
-
 ↓
-
 142.250.190.78
 ```
 
 DNS does **not** transport webpages.
-
 DNS does **not** establish network connections.
+DNS performs only one task : **Name resolution.**
 
-DNS performs only one task:
+Once the IP address has been discovered, DNS has completed its work, <mark style="background:#fff88f">other protocols take over</mark>.
 
-**Name resolution.**
+### Where Does the DNS Query Go?
 
-Once the IP address has been discovered, DNS has completed its work.
+When the operating system cannot answer from its local cache, it sends a *DNS query* to a *DNS server*.
 
-Other protocols take over.
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - DNS query|Definitions]]
 
----
-
-# Where Does the DNS Query Go?
-
-When the operating system cannot answer from its local cache, it sends a DNS query to a DNS server.
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - DNS server|Definitions]]
 
 This server is usually operated by:
 
-- The Internet Service Provider (ISP)
+- The *[[Internet Service Provider (ISP)]]*
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Internet service provider (ISP)|Definitions]]
+
 - Google Public DNS
 - Cloudflare
 - Quad9
@@ -337,101 +290,74 @@ Example:
 
 ```
 Computer
-
 ↓
-
 DNS Server
-
 ↓
-
 Returns IP Address
 ```
 
-The computer does not contact Google immediately.
-
-Instead, it first asks another server:
+The computer does not contact Google immediately, instead, it first asks another server:
 
 > "What is the IP address of google.com?"
 
-The DNS server responds with the requested address.
+The DNS server responds with the requested address, <u>Only</u> after receiving this response can communication with Google's servers begin.
 
-Only after receiving this response can communication with Google's servers begin.
+### Recursive DNS Resolution
 
----
+Most computers communicate with a recursive DNS resolver. The resolver performs the difficult work of locating the correct server. 
 
-# Recursive DNS Resolution
+![[Cybersecurity journey/1. Networking/Q&A#❔ - Why is it called "recursive" DNS resolution ?|Q&A]]
 
-Most computers communicate with a recursive DNS resolver.
 
-The resolver performs the difficult work of locating the correct server.
-
-The process is simplified below.
+The process is simplified below :
 
 ```text
 Computer
      │
-     ▼
 Recursive DNS Resolver
      │
-     ▼
 Root DNS Server
      │
-     ▼
 .com DNS Server
      │
-     ▼
 google.com Authoritative DNS Server
      │
-     ▼
 IP Address Returned
 ```
 
-Although several servers may participate in the lookup, the client typically communicates only with the recursive resolver.
+Although several servers may participate in the lookup, the client typically communicates only with the recursive resolver, the resolver performs the remaining steps on behalf of the client.
 
-The resolver performs the remaining steps on behalf of the client.
+> This process is explored in detail in Module 8.
 
-This process is explored in detail in Module 8.
+### Multiple IP Addresses
 
----
-
-# Multiple IP Addresses
-
-Large websites rarely use a single server.
-
-Instead, DNS may return multiple IP addresses.
-
-Example:
+<u>Large websites rarely use a single server</u>, instead, DNS may return multiple IP addresses. Example:
 
 ```
 google.com
-
 ↓
-
 142.250.x.x
-
 ↓
-
 142.251.x.x
-
 ↓
-
 172.217.x.x
 ```
 
 This provides several advantages.
 
-- Load balancing
+- *Load balancing*
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Load balancing|Definitions]]
+
 - Geographic distribution
 - Redundancy
 - High availability
 
-Users in different countries may receive different IP addresses even when requesting the same website.
+Users in different countries may receive different IP addresses even when requesting the same website, this allows users to connect to nearby data centers, reducing *latency*.
 
-This allows users to connect to nearby data centers, reducing latency.
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Latency|Definitions]]
 
----
-
-# At This Point in the Journey
+### At This Point in the Journey
 
 After DNS resolution has completed, the computer finally knows the destination IP address.
 
@@ -449,9 +375,7 @@ These questions are answered by the protocols operating below DNS.
 
 The next part of this lesson begins at the moment the operating system has obtained the destination IP address and must prepare the packet for transmission across the local Ethernet network.
 
----
-
-# Key Takeaways
+### Key Takeaways
 
 - Browsers perform significant processing before any network communication begins.
 - URLs contain multiple components, including the protocol, hostname, path, and query string.
@@ -462,13 +386,9 @@ The next part of this lesson begins at the moment the operating system has obtai
 - DNS completes its work before any connection to the destination server is established.
 - Obtaining an IP address is only the beginning of the communication process.
 
----
+### Preview
 
-# Preview
-
-Part 2 begins immediately after DNS resolution.
-
-The following topics will be covered:
+Part 2 begins immediately after DNS resolution. The following topics will be covered:
 
 - Default gateways
 - ARP resolution
@@ -478,9 +398,6 @@ The following topics will be covered:
 - Router forwarding
 - Packet traversal across the Internet
 - Arrival at the destination network
-
-___
-___
 
 # Lesson 1.1 — The Journey of a Web Request (Part 2)
 
