@@ -2,8 +2,6 @@
 
 ## Lesson 1.1 — The Journey of a Web Request (Part 1)
 
----
-
 ### Introduction
 
 Every interaction with the Internet begins with a simple action. A user opens a web browser, types a website address such as `google.com`, and presses **Enter**. Within a fraction of a second, the requested webpage appears on the screen. Although this process feels instantaneous, it involves dozens of protocols, multiple devices, several operating system components, and thousands of exchanged packets.
@@ -44,8 +42,8 @@ Although this appears to be a single action, the *[[Operating system]]* performs
 A simplified overview is shown below.
 
 ```text
-User
- │ Types URL
+User types URL and hit enter
+ │
 Browser
  │
 DNS Lookup
@@ -399,11 +397,9 @@ Part 2 begins immediately after DNS resolution. The following topics will be cov
 - Packet traversal across the Internet
 - Arrival at the destination network
 
-# Lesson 1.1 — The Journey of a Web Request (Part 2)
+## Lesson 1.1 — The Journey of a Web Request (Part 2)
 
----
-
-# From DNS to Data Transmission
+### From DNS to Data Transmission
 
 At the end of the DNS resolution process, the operating system knows the IP address of the destination server. Suppose the DNS server returned the following address for `google.com`.
 
@@ -411,7 +407,7 @@ At the end of the DNS resolution process, the operating system knows the IP addr
 142.250.190.78
 ```
 
-Knowing the destination IP address does not mean communication can begin immediately. The computer still needs to determine how the packet should leave the local network.
+Knowing the destination IP address does not mean communication can begin immediately. The computer still needs to determine <u>how the packet should leave the local network.</u>
 
 At this point, the operating system asks an important question:
 
@@ -419,11 +415,15 @@ At this point, the operating system asks an important question:
 
 The answer determines the next step.
 
----
+### *Local Network* vs Remote Network
 
-# Local Network vs Remote Network
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Local Area Network (LAN)|Definitions]]
 
-Every device connected to a network belongs to an IP network, sometimes called a subnet.
+Every device connected to a network belongs to an IP network, sometimes called a *subnet*.
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Subnet|Definitions]]
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Subnet mask|Definitions]]
 
 Consider the following example.
 
@@ -433,7 +433,7 @@ IP Address: 192.168.1.10
 Subnet Mask: 255.255.255.0
 ```
 
-This subnet mask indicates that every address from:
+This *[[Subnet mask]]* indicates that every address from :
 
 ```
 192.168.1.1
@@ -445,15 +445,14 @@ to
 192.168.1.254
 ```
 
-belongs to the same local network.
-
-Suppose the destination is:
+<u>belongs to the same local network</u>.
+Suppose the destination is :
 
 ```
 192.168.1.50
 ```
 
-Because both devices belong to the same subnet, communication can occur directly.
+Because both devices belong to the same subnet, communication can occur directly; in simple words, they won't need to much work to talk to each other since they're so close in terms of "do I need to deal with <u>routing</u> and other things to get to the other device", these are concept that will covered in the future parts.
 
 Now consider a different destination.
 
@@ -463,26 +462,26 @@ Now consider a different destination.
 
 This address belongs to an entirely different network.
 
-The computer cannot send packets directly to Google because Google is not connected to the local Ethernet network.
+The computer cannot send packets directly to Google because Google is not connected to the local *Ethernet network*.
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Ethernet network|Definitions]]
+
+> Just a note, Networking concepts can get from 0 to 100 very fast in terms of density and complexity, but you should not worry about some terms that you don't understand yet, just know they exist and they won't affect your understanding of the current material that you're reading, at the end of the lessons and whole chapters, labs will be a great tool to visualize and really stabilize what you've learned so far.
 
 Instead, the packet must first be delivered to another device known as the **default gateway**.
 
----
+### The Default Gateway
 
-# The Default Gateway
+A *default gateway* is a router responsible for forwarding packets to other networks, every computer connected to a network normally has one configured.
 
-A default gateway is a router responsible for forwarding packets to other networks.
-
-Every computer connected to a network normally has one configured.
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Default gateway|Definitions]]
 
 Example:
 
 ```
 PC
-
 IP Address:
 192.168.1.10
-
 Default Gateway:
 192.168.1.1
 ```
@@ -491,42 +490,33 @@ Whenever the destination exists outside the local subnet, packets are transmitte
 
 The router then determines the next hop toward the destination.
 
-A simplified network appears below.
+A simplified network appears below :
 
-```text
-               Internet
-                   │
-                   │
-            Router (Gateway)
-          192.168.1.1
-                   │
-     ─────────────────────────
-          Local Network
-     ─────────────────────────
-      │                  │
- PC                Laptop
-192.168.1.10     192.168.1.20
-```
+![[Pasted image 20260718185048.png]]
 
-The router acts as the exit point from the local network.
+Focus on the fact that a the router acts as the exit point from the local network, more specifically; the *interface* `G0/1` facing the LAN is the one configured to be the default gateway of the LAN.
 
----
+For now, the WAN, which means wide area network, just means the internet.
 
-# Another Problem
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Interface|Definitions]]
 
-The computer now knows that the router should receive the packet.
+### Another Problem
 
-However, Ethernet networks do not deliver frames using IP addresses.
+The computer now knows that the router should receive the packet. However, Ethernet networks do not deliver *frames* using IP addresses. Ethernet uses **MAC addresses** for that.
 
-Ethernet uses **MAC addresses**.
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Ethernet frame|Definitions]]
+
+![[Cybersecurity journey/1. Networking/Q&A#❔ - Why not just call it data, why should we call it a frame or another name ?|Q&A]]
+
+You noticed that inside the LAN we have another piece of hardware called a switch, for now, you should just know it doesn't need IP addresses to communicate, it need *MAC addresses*.
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Media Access Control (MAC) address|Definitions]]
 
 The computer therefore knows:
 
 ```
 Destination IP
-
 ↓
-
 192.168.1.1
 ```
 
@@ -534,122 +524,85 @@ but still needs:
 
 ```
 Destination MAC
-
 ↓
-
 ??
 ```
 
-Without the router's MAC address, the computer cannot build an Ethernet frame.
+Without the router's MAC address, the computer cannot <u>build</u> an Ethernet frame.
 
-Another protocol is required.
+Another protocol is required, a protocol that specializes in getting the destination MAC address knowing the IP address.
 
----
+### [[Address Resolution Protocol (ARP)]]
 
-# Address Resolution Protocol (ARP)
+The *Address Resolution Protocol (ARP)* maps IP addresses to MAC addresses <mark style="background:#fff88f">on local Ethernet networks.</mark>
 
-The Address Resolution Protocol (ARP) maps IP addresses to MAC addresses on local Ethernet networks.
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Address Resolution Protocol (ARP)|Definitions]]
 
-Its purpose is simple.
+Its purpose is simple :
 
 ```
 Known:
-
 IP Address
-
 Need:
-
 MAC Address
 ```
 
-ARP performs this translation automatically.
+ARP performs this translation <u>automatically</u>.
 
----
+#### The ARP Request
 
-# The ARP Request
-
-Suppose the computer wants to reach:
+Suppose the computer wants to reach :
 
 ```
 192.168.1.1
 ```
 
-but does not know its MAC address.
-
-The operating system sends an ARP Request.
-
-Conceptually, the message says:
+but does not know its MAC address, The operating system sends an ARP Request. Conceptually, the message says:
 
 > "Who owns IP address 192.168.1.1?"
 
-Because the computer does not know which device owns this address, the request is sent to every device on the local network.
+Because the computer does not know which device owns this address, the request is <mark style="background:#fff88f">sent to every device on the local network.</mark> This is known as a *broadcast*.
 
-This is known as a **broadcast**.
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Broadcast|Definitions]]
 
 ```text
 PC
-
 ↓
-
 ARP Request
-
 ↓
-
 All Devices
 ```
 
 Every connected device receives the request.
 
----
+#### The ARP Reply
 
-# The ARP Reply
-
-Each device examines the requested IP address.
-
-Only the router recognizes the address as its own.
-
-The router replies.
+Each device examines the requested IP address. Only the router recognizes the address as its own (because in the example we set its address as 192.168.1.1). The router replies :
 
 ```
 192.168.1.1
-
 ↓
-
 AA:BB:CC:DD:EE:FF
 ```
 
-The reply is transmitted only to the requesting computer.
+The reply is transmitted only to the requesting computer. Unlike the broadcast request, the reply is a *unicast transmission*. The computer now knows the router's MAC address.
 
-Unlike the broadcast request, the reply is a **unicast** transmission.
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Unicast transmission|Definitions]]
 
-The computer now knows the router's MAC address.
+#### The ARP Cache
 
----
+To avoid repeating this process for every packet, operating systems store ARP results temporarily, This table is called the **ARP cache**. Example :
 
-# The ARP Cache
-
-To avoid repeating this process for every packet, operating systems store ARP results temporarily.
-
-This table is called the **ARP cache**.
-
-Example:
-
-| IP Address | MAC Address |
-|------------|-------------|
-| 192.168.1.1 | AA:BB:CC:DD:EE:FF |
+| IP Address   | MAC Address       |
+| ------------ | ----------------- |
+| 192.168.1.1  | AA:BB:CC:DD:EE:FF |
 | 192.168.1.15 | 98:71:23:55:8A:21 |
 
-Future packets destined for the same router reuse this cached information until the entry expires.
+Future packets destined for the same router reuse this cached information until the entry expires. This significantly reduces unnecessary broadcast traffic.
 
-This significantly reduces unnecessary broadcast traffic.
+### Building the Packet
 
----
-
-# Building the Packet
-
-The application has produced data that must be transmitted across the network.
-
-Before transmission, the operating system adds protocol headers.
+The application has produced data that must be transmitted across the network. Before transmission, the operating system adds *protocol headers*.
 
 This process is called **encapsulation**.
 
