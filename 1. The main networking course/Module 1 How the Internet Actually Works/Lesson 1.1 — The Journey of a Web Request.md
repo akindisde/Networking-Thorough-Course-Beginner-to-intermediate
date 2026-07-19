@@ -604,39 +604,37 @@ Future packets destined for the same router reuse this cached information until 
 
 The application has produced data that must be transmitted across the network. Before transmission, the operating system adds *protocol headers*.
 
-This process is called **encapsulation**.
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Protocol header|Definitions]]
 
-At a high level:
+Here's a quick illustration of protocols and their headers (information related) that they add to the original data that you wanna send over the internet or any network, mind not the complexity, just observe how rich the information added to your data to reliably deliver it to the destination successfully: 
+
+![[Pasted image 20260718230825.png]]
+
+Protocols add information so they control many aspects of the process of sending and receiving, that information is the headers, and adding headers to data is called *[[Encapsulation]]*.
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Encapsulation|Definitions]]
+
+Mind that a protocol can add a header and the whole result now is still called data, so when another protocol receives that data, it can add headers on top of the headers already their. More on this in the future.
+
+At a high level :
 
 ```
 Application Data
-
 ↓
-
 TCP Segment
-
 ↓
-
 IP Packet
-
 ↓
-
 Ethernet Frame
-
 ↓
-
 Bits
 ```
 
-Each protocol adds information required for its specific task.
+<mark style="background:#fff88f">Each protocol adds information required for its specific task.</mark> Protocols belong to layers, and when data leaves a layer, its conventional name changes, for example : raw data is just data until it leaves the transport layer, and now its a segment.
 
----
+### Ethernet Frame Construction
 
-# Ethernet Frame Construction
-
-The Ethernet header contains information used only on the local network.
-
-A simplified Ethernet frame appears below.
+The Ethernet header contains information <u>used only on the local network.</u> A simplified Ethernet frame appears below :
 
 ```text
 +----------------------------------------------+
@@ -652,17 +650,11 @@ A simplified Ethernet frame appears below.
 +----------------------------------------------+
 ```
 
-Notice that the destination is **the router's MAC address**, not Google's MAC address.
+Notice that the destination is **the router's MAC address**, not Google's MAC address. Google's MAC address is unknown and <u>irrelevant</u> because MAC addresses matter only within a local Ethernet network.
 
-Google's MAC address is unknown and irrelevant because MAC addresses exist only within a local Ethernet network.
+### IP Packet Construction
 
----
-
-# IP Packet Construction
-
-Inside the Ethernet frame is an IP packet.
-
-A simplified packet appears below.
+Inside the Ethernet frame is an IP packet. A simplified packet appears below :
 
 ```text
 +--------------------------------+
@@ -682,21 +674,15 @@ Unlike the Ethernet header, the destination IP remains Google's IP address.
 
 ```
 Destination IP
-
 ↓
-
 142.250.190.78
 ```
 
 The IP address remains unchanged while the packet travels across the Internet.
 
----
+### Ethernet vs IP
 
-# Ethernet vs IP
-
-Students often confuse these two addressing systems.
-
-Their responsibilities are completely different.
+Students often confuse these two addressing systems. Their responsibilities are completely different :
 
 | Ethernet | IP |
 |-----------|----|
@@ -707,119 +693,83 @@ Their responsibilities are completely different.
 
 This distinction is one of the most important concepts in networking.
 
----
+### The First Transmission
 
-# The First Transmission
+The computer converts the Ethernet frame into electrical, optical, or radio signals depending on the physical medium. The signals travel to the first networking device. In most networks, this device is an Ethernet [[Switch]].
 
-The computer converts the Ethernet frame into electrical, optical, or radio signals depending on the physical medium.
+#### What the Switch Does
 
-The signals travel to the first networking device.
+Switches operate at Layer 2 of the OSI model. Unlike hubs, switches examine only the Ethernet header.
 
-In most networks, this device is an Ethernet switch.
+![[Cybersecurity journey/1. Networking/Q&A#❔ - What do we mean when we say a device operates at a certain layer ?|Q&A]]
 
----
-
-# What the Switch Does
-
-Switches operate at Layer 2 of the OSI model.
-
-Unlike hubs, switches examine only the Ethernet header.
-
-The switch reads:
+The switch reads :
 
 ```
 Destination MAC Address
 ```
 
-It does **not** examine:
-
+It <u>can not</u> examine :
 - IP addresses
 - TCP ports
 - HTTP requests
 
-The switch simply determines which port leads to the destination MAC address.
+The switch simply determines which port leads to the destination MAC address. If the destination is already known, the frame is forwarded only through the appropriate *physical port*.
 
-If the destination is already known, the frame is forwarded only through the appropriate port.
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Physical port|Definitions]]
 
-If the destination is unknown, the frame is temporarily flooded to every port except the incoming one.
+If the destination is unknown, the frame is temporarily flooded (sent through) to every port except the incoming one.
 
----
+![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Flooded|Terminology]]
 
-# The Frame Reaches the Router
+#### The Frame Reaches the Router
 
-Eventually the frame reaches the default gateway.
-
-The router receives the Ethernet frame and performs several actions.
-
+Eventually the frame reaches the default gateway, The router receives the Ethernet frame and performs several actions :
 1. Verifies the frame integrity.
 2. Removes the Ethernet header.
 3. Reads the destination IP address.
-4. Searches the routing table.
-5. Determines the next hop.
+4. Searches the *routing table*.
 
-Notice that the original Ethernet frame no longer exists.
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Routing table|Definitions]]
 
-Routers do not forward Ethernet frames.
+5. Determines the next hop (next router).
 
-Routers forward **IP packets**.
+Notice that the original Ethernet frame no longer exists. <mark style="background:#fff88f">Routers do not forward Ethernet frames</mark>, they remove the original ones and build entirely new ones.
 
----
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Forwarding data|Definitions]]
 
-# Routing Decisions
+#### Routing Decisions
 
-Every router maintains a routing table.
-
-The routing table tells the router where packets should be sent.
-
-Conceptually:
+Every router maintains a routing table. The routing table tells the router where packets should be sent. Conceptually :
 
 ```
 Destination
-
 ↓
-
 Routing Table
-
 ↓
-
 Outgoing Interface
-
 ↓
-
 Next Router
 ```
 
-Each router repeats this process independently.
+Each router repeats this process independently. The router does not know the complete Internet path. It only knows the <mark style="background:#fff88f">best</mark> next hop.
 
-The router does not know the complete Internet path.
+#### Rebuilding the Ethernet Frame
 
-It only knows the best next hop.
+After selecting the outgoing interface, the router <u>constructs an entirely new Ethernet frame.</u> This new frame contains different MAC addresses.
 
----
-
-# Rebuilding the Ethernet Frame
-
-After selecting the outgoing interface, the router constructs an entirely new Ethernet frame.
-
-This new frame contains different MAC addresses.
-
-For example:
-
-Original frame:
+For example :
+Original frame :
 
 ```
 Source MAC
-
 ↓
-
 PC
 ```
 
 ```
 Destination MAC
-
 ↓
-
 Router
 ```
 
@@ -827,67 +777,45 @@ New frame:
 
 ```
 Source MAC
-
 ↓
-
 Router
 ```
 
 ```
 Destination MAC
-
 ↓
-
-ISP Router
+next router
 ```
 
-The IP packet inside the frame remains almost unchanged.
+The IP packet inside the frame remains almost unchanged. Only a few fields, such as the Time To Live (TTL), are modified.
 
-Only a few fields, such as the Time To Live (TTL), are modified.
+### Hop-by-Hop Communication
 
----
-
-# Hop-by-Hop Communication
-
-Communication across the Internet occurs one hop at a time.
-
-Each router performs the same sequence.
+Communication across the Internet occurs one hop at a time, a hop is simply a router. Each router performs the same sequence :
 
 ```
 Receive Frame
-
 ↓
-
 Remove Ethernet Header
-
 ↓
-
 Read IP Packet
-
 ↓
-
 Routing Decision
-
 ↓
-
 Create New Ethernet Frame
-
 ↓
-
 Forward
 ```
 
-This process repeats until the destination network is reached.
+This process repeats until the destination network is reached. The Internet is therefore not a single direct connection. Instead, it consists of thousands of independent routers forwarding packets one hop at a time, here is a diagram that clears things up for you :
 
-The Internet is therefore not a single direct connection.
+![[Pasted image 20260718235613.png]]
 
-Instead, it consists of thousands of independent routers forwarding packets one hop at a time.
+> This diagram is built using what you now know, but the internet and networks in general are very complex, you're learning networking layer by layer and piece by piece, until you have the big picture.
 
----
+### Key Concepts Introduced
 
-# Key Concepts Introduced
-
-This section introduced several concepts that become major topics later in the course.
+This section introduced several concepts that become major topics later in the course :
 
 | Concept | Future Module |
 |----------|---------------|
@@ -901,9 +829,7 @@ This section introduced several concepts that become major topics later in the c
 
 Each concept will later be explored in detail, including packet structures, protocol operation, configuration, and troubleshooting.
 
----
-
-# Key Takeaways
+### Key Takeaways
 
 - DNS provides the destination IP address but does not transport data.
 - Computers determine whether a destination is local or remote.
@@ -916,13 +842,9 @@ Each concept will later be explored in detail, including packet structures, prot
 - Routers remove and rebuild Ethernet frames at every hop.
 - Internet communication is a hop-by-hop forwarding process rather than a direct connection.
 
----
+### Preview
 
-# Preview
-
-Part 3 begins when the packet finally reaches Google's server.
-
-The following topics will be covered:
+Part 3 begins when the packet finally reaches Google's server. The following topics will be covered:
 
 - TCP three-way handshake
 - Establishing a reliable connection
@@ -933,106 +855,74 @@ The following topics will be covered:
 - Browser rendering
 - Displaying the final webpage
 
-___
-___
+## Lesson 1.1 — The Journey of a Web Request (Part 3)
 
-# Lesson 1.1 — The Journey of a Web Request (Part 3)
-
----
-
-# Arrival at the Destination Network
+### Arrival at the Destination Network
 
 After traversing multiple routers across the Internet, the packet eventually reaches the network that contains Google's servers.
 
 The final router performs the same forwarding process as every previous router. It examines the destination IP address, consults its routing table, determines that the destination is directly connected, constructs a new Ethernet frame, and forwards the packet to the destination server.
 
-At this point, the packet has successfully completed its journey across the Internet.
+At this point, the packet has successfully completed its journey across the Internet. However, communication between the client and the server has not yet begun.
 
-However, communication has not yet begun.
+The server has received a packet, but before any webpage can be exchanged, both devices must establish a <u>reliable communication channel.</u>
 
-The server has received a packet, but before any webpage can be exchanged, both devices must establish a reliable communication channel.
+### Why a Connection Is Needed
 
----
-
-# Why a Connection Is Needed
-
-Sending a webpage is different from broadcasting a radio signal.
-
-The browser expects:
-
+Sending a webpage is different from broadcasting a radio signal. The browser expects :
 - Every packet to arrive.
 - Packets to arrive in the correct order.
 - Missing packets to be retransmitted.
 - Corrupted packets to be discarded.
 - Communication to continue until the transfer is complete.
 
-The Internet itself provides none of these guarantees.
+The Internet itself provides none of these guarantees. *[[Internet protocol (IP)]]* simply delivers packets on a best-effort basis. To provide reliability, another protocol is required; That protocol is the **[[Transmission Control Protocol (TCP)]].**
 
-IP simply delivers packets on a best-effort basis.
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Internet protocol (IP)|Definitions]]
 
-To provide reliability, another protocol is required.
+### Transmission Control Protocol (TCP)
 
-That protocol is the **Transmission Control Protocol (TCP).**
+TCP is a *connection-oriented* transport protocol operating at Layer 4 of the OSI model.
 
----
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Connection-oriented|Definitions]]
 
-# Transmission Control Protocol (TCP)
-
-TCP is a connection-oriented transport protocol operating at Layer 4 of the OSI model.
-
-Its primary responsibilities include:
-
-- Establishing connections.
-- Reliable delivery.
-- Packet sequencing.
-- Flow control.
-- Error detection.
-- Retransmission of lost segments.
-- Connection termination.
+Its primary responsibilities include :
+- Establishing connections
+- Reliable delivery
+- Packet sequencing
+- Flow control
+- Error detection
+- Retransmission of lost segments
+- Connection termination
 
 Most web applications use TCP because reliability is more important than speed.
 
----
+### Before Any Data Is Sent
 
-# Before Any Data Is Sent
+Neither the client nor the server immediately begins transmitting webpage data. Instead, they first establish a TCP connection. This process is known as the **TCP Three-Way Handshake**.
 
-Neither the client nor the server immediately begins transmitting webpage data.
+### The TCP Three-Way Handshake
 
-Instead, they first establish a TCP connection.
+The handshake establishes communication between two devices. It synchronizes *sequence numbers* and confirms that both sides are ready to exchange data.
 
-This process is known as the **TCP Three-Way Handshake**.
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Sequence number|Definitions]]
 
----
-
-# The TCP Three-Way Handshake
-
-The handshake establishes communication between two devices.
-
-It synchronizes sequence numbers and confirms that both sides are ready to exchange data.
-
-The process consists of three packets.
+The process consists of three packets :
 
 ```text
 Client                     Server
-
   SYN  -------------------->
-
        <-------------------  SYN-ACK
-
   ACK  -------------------->
 ```
 
 Only after these three packets have been exchanged can application data be transmitted.
 
----
+#### Step 1 — SYN
 
-# Step 1 — SYN
+The browser (the client) requests a new connection. The client sends a packet with the SYN (Synchronize) flag (a field in the TCP header) set.
 
-The browser requests a new connection.
-
-The client sends a packet with the SYN (Synchronize) flag set.
-
-Conceptually, the message says:
+Conceptually, the message says :
 
 > "I would like to establish a TCP connection."
 
@@ -1040,62 +930,40 @@ The packet contains an initial sequence number that identifies the first byte of
 
 No webpage data is transmitted during this step.
 
----
+#### Step 2 — SYN-ACK
 
-# Step 2 — SYN-ACK
-
-The server receives the SYN packet.
-
-If the requested service is available, the server responds with:
-
+The server receives the SYN packet. <mark style="background:#fff88f">If the requested service</mark> is available, the server responds with :
 - SYN
 - ACK
 
 The SYN indicates that the server is also willing to establish a connection.
 
-The ACK acknowledges receipt of the client's sequence number.
-
-Conceptually, the message becomes:
+The ACK acknowledges receipt of the client's sequence number. Conceptually, the message becomes:
 
 > "I received your request, and I am ready."
 
----
+#### Step 3 — ACK
 
-# Step 3 — ACK
+The client acknowledges the server's response. After this acknowledgement is received, both devices consider the TCP session established.
 
-The client acknowledges the server's response.
+Communication can now begin, here is a diagram for you to best visualize it :
 
-After this acknowledgement is received, both devices consider the TCP session established.
+![[Pasted image 20260719131124.png]]
 
-Communication can now begin.
+### Why Three Packets?
 
----
-
-# Why Three Packets?
-
-A common question is why TCP requires three packets instead of one.
-
-The answer is reliability.
-
-Both devices must independently confirm:
-
+A common question is why TCP requires three packets instead of one. The answer is reliability. Both devices must independently confirm :
 - They can transmit.
 - They can receive.
 - They agree on sequence numbers.
 
 Without this confirmation, neither side can safely begin transferring data.
 
----
+### Port Numbers
 
-# Port Numbers
+TCP connections are identified using **port numbers**. An IP address identifies a computer. A port identifies a specific application running on that computer.
 
-TCP connections are identified using **port numbers**.
-
-An IP address identifies a computer.
-
-A port identifies a specific application running on that computer.
-
-Example:
+Example :
 
 ```
 142.250.190.78
@@ -1107,241 +975,190 @@ This identifies Google's server.
 Port 443
 ```
 
-This identifies the HTTPS service.
-
-Together they form:
+This identifies the HTTPS service on that server.
+Together they form :
 
 ```
 142.250.190.78:443
 ```
 
-Likewise, the client selects a temporary source port.
+Likewise, the client selects a <u>temporary source port</u>.
 
-Example:
+![[Cybersecurity journey/1. Networking/Q&A#❔ - How are the temporary port number allocated to the applications by the OS ?|Q&A]]
+
+Example :
 
 ```
 192.168.1.10:52318
 ```
 
-A complete TCP connection therefore consists of:
+A complete TCP connection therefore consists of :
 
 ```
 Client IP
-
 Client Port
-
 ↓
-
 Server IP
-
 Server Port
 ```
 
 This combination uniquely identifies the communication session.
 
----
-
-# Why HTTPS?
+### Why HTTPS?
 
 Most modern websites use HTTPS instead of HTTP.
-
-HTTPS provides:
-
+HTTPS provides :
 - Confidentiality
 - Integrity
 - Authentication
 
-Without HTTPS:
-
+Without HTTPS :
 - Passwords could be intercepted.
 - Cookies could be stolen.
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Cookie|Definitions]]
+
 - Data could be modified in transit.
 - Users could unknowingly communicate with fraudulent servers.
 
 Before HTTP communication begins, encryption must first be established.
 
----
+![[Cybersecurity journey/1. Networking/Q&A#❔ - What's the difference between http and https for a beginner|Q&A]]
 
-# The TLS Handshake
+### The TLS Handshake
 
-HTTPS uses **Transport Layer Security (TLS).**
+HTTPS uses *[[Transport Layer Security (TLS)]]*.
 
 TLS establishes an encrypted communication channel before any webpage data is exchanged.
 
-The handshake performs several tasks.
-
-It:
-
-- Negotiates encryption algorithms.
-- Verifies the server's identity.
-- Exchanges encryption keys.
-- Creates secure session keys.
+The handshake performs several tasks. It :
+- Negotiates encryption algorithms
+- Verifies the server's identity
+- Exchanges encryption keys
+- Creates secure session keys
 
 Only after this process completes does encrypted communication begin.
 
----
+### Server Certificate
 
-# Server Certificate
+One of the server's first responses during the TLS handshake is its [[Digital certificate]].
 
-One of the server's first responses during the TLS handshake is its digital certificate.
-
-The certificate contains information including:
-
+The certificate contains information including :
 - Server name.
 - Public key.
 - Certificate issuer.
 - Expiration date.
 - Digital signature.
 
-The browser verifies that the certificate:
-
+The browser verifies that the certificate :
 - Matches the requested domain.
 - Has not expired.
-- Was issued by a trusted Certificate Authority (CA).
+- Was issued by a trusted *Certificate Authority (CA)*.
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Certificate Authority (CA)|Definitions]]
 
 If verification fails, the browser displays a security warning.
 
----
+### Encryption Begins
 
-# Encryption Begins
+After successful certificate validation, both client and server derive identical *session keys*.
 
-After successful certificate validation, both client and server derive identical session keys.
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Session key|Definitions]]
 
-From this point onward:
-
+From this point onward :
 - HTTP requests become encrypted.
 - HTTP responses become encrypted.
 - Cookies become encrypted.
 - Authentication credentials become encrypted.
 
-Anyone intercepting packets can still observe IP addresses and packet sizes, but the application data itself is unreadable.
+Anyone *intercepting* packets can still observe IP addresses and packet sizes, but the application data itself is unreadable.
 
----
+![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Intercept|Terminology]]
 
-# The HTTP Request
+### The HTTP Request
 
-With TCP established and TLS completed, the browser finally sends the first HTTP request.
-
-A simplified request appears below.
+With TCP established and TLS completed, the browser finally sends the first HTTP request. A simplified request appears below :
 
 ```http
 GET / HTTP/1.1
-
 Host: www.google.com
-
 User-Agent: Chrome
-
 Accept: text/html
 ```
 
 This request asks the server to send the homepage.
-
 Although shown in plain text here, HTTPS encrypts this request before transmission.
 
----
+### The Server Processes the Request
 
-# The Server Processes the Request
-
-The web server receives the request.
-
-Several internal operations may occur.
-
-For example:
-
-- Authentication.
-- Authorization.
-- Database queries.
-- Session validation.
-- Business logic execution.
-- Content generation.
+The web server receives the request. Several internal operations may occur, For example :
+- Authentication (who are you)
+- Authorization (what you're authorized to do after you're authenticated)
+- Database queries
+- Session validation
+- Business logic execution
+- Content generation
 
 Dynamic websites often generate pages in real time rather than retrieving static HTML files.
 
 The complexity of this processing depends entirely on the application.
 
----
+### The HTTP Response
 
-# The HTTP Response
-
-Once processing is complete, the server returns an HTTP response.
-
-Example:
+Once processing is complete, the server returns an HTTP response. Example :
 
 ```http
 HTTP/1.1 200 OK
-
 Content-Type: text/html
-
 Content-Length: 12546
 ```
 
-The response contains:
-
-- Status code.
-- Response headers.
-- HTML document.
+The response contains :
+- Status code (what happened while processing your request ?)
+- Response headers
+- HTML document
 
 Again, this information is encrypted by TLS before leaving the server.
 
----
+### HTTP Status Codes
 
-# HTTP Status Codes
+Servers use status codes to describe the result of a request. Some common examples include :
 
-Servers use status codes to describe the result of a request.
-
-Some common examples include:
-
-| Code | Meaning |
-|------|---------|
-| 200 | OK |
-| 301 | Moved Permanently |
-| 302 | Temporary Redirect |
-| 304 | Not Modified |
-| 400 | Bad Request |
-| 401 | Unauthorized |
-| 403 | Forbidden |
-| 404 | Not Found |
-| 500 | Internal Server Error |
-| 503 | Service Unavailable |
+| Code | Meaning               |
+| ---- | --------------------- |
+| 200  | OK                    |
+| 301  | Moved Permanently     |
+| 302  | Temporary Redirect    |
+| 304  | Not Modified          |
+| 400  | Bad Request           |
+| 401  | Unauthorized          |
+| 403  | Forbidden             |
+| 404  | Not Found             |
+| 500  | Internal Server Error |
+| 503  | Service Unavailable   |
 
 These codes become valuable during troubleshooting.
 
----
-
-# Downloading the HTML
+### Downloading the HTML
 
 The browser receives the encrypted response.
-
 TLS decrypts the data.
-
 TCP reorders any out-of-sequence segments.
-
 The browser now possesses the HTML document.
-
 However, displaying the page immediately is impossible.
-
-The HTML references many additional resources.
-
-Example:
+The HTML references many additional resources. Example:
 
 ```html
 <link rel="stylesheet">
-
 <script src="app.js">
-
 <img src="logo.png">
 ```
 
-Each resource requires additional HTTP requests.
+Each resource requires additional HTTP requests, and the cycle restarts, in the same TCP connection.
 
----
+### Additional Resource Requests
 
-# Additional Resource Requests
-
-Modern webpages rarely consist of a single file.
-
-Instead, browsers request:
-
+Modern webpages rarely consist of a single file. Instead, browsers request :
 - HTML
 - CSS
 - JavaScript
@@ -1350,18 +1167,15 @@ Instead, browsers request:
 - Videos
 - Icons
 
-Each resource may generate another HTTP request.
+Each resource may generate another HTTP request. Large websites routinely require dozens or even hundreds of requests before rendering is complete.
 
-Large websites routinely require dozens or even hundreds of requests before rendering is complete.
+### Browser Rendering
 
----
+Once sufficient resources have been downloaded, the browser begins *rendering* the page.
 
-# Browser Rendering
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Page rendering|Definitions]]
 
-Once sufficient resources have been downloaded, the browser begins rendering the page.
-
-The rendering pipeline generally includes:
-
+The rendering pipeline generally includes :
 1. HTML parsing.
 2. DOM construction.
 3. CSS parsing.
@@ -1374,100 +1188,72 @@ The rendering pipeline generally includes:
 
 Although this occurs extremely quickly, many independent software components participate.
 
----
+### The User Sees the Webpage
 
-# The User Sees the Webpage
-
-Only after all previous stages have completed does the webpage appear.
-
-The complete journey has involved:
-
-- Browser processing.
-- DNS.
-- Routing.
-- Ethernet.
-- ARP.
-- TCP.
-- TLS.
-- HTTP.
-- Browser rendering.
+Only after all previous stages have completed does the webpage appear. The complete journey has involved :
+- Browser processing
+- DNS
+- Routing
+- Ethernet
+- ARP
+- TCP
+- TLS
+- HTTP
+- Browser rendering
 
 A single page load may involve hundreds of packets exchanged over multiple network connections.
 
----
-
-# Complete Journey Overview
+### Complete Journey Overview
 
 ```text
 User Types URL
         │
-        ▼
 Browser Processes URL
         │
-        ▼
 Browser Cache
         │
-        ▼
 DNS Cache
         │
-        ▼
 DNS Resolution
         │
-        ▼
 Destination IP Obtained
         │
-        ▼
 Default Gateway Selected
         │
-        ▼
 ARP Resolution
         │
-        ▼
 Ethernet Frame Created
         │
-        ▼
 Switch
         │
-        ▼
 Router
         │
-        ▼
 Internet
         │
-        ▼
 Destination Router
         │
-        ▼
 Destination Server
         │
-        ▼
 TCP Handshake
         │
-        ▼
 TLS Handshake
         │
-        ▼
 HTTP Request
         │
-        ▼
 HTTP Response
         │
-        ▼
 Browser Rendering
         │
-        ▼
 Webpage Displayed
 ```
 
----
+Here is a diagram to visualize it better : 
 
-# Why This Lesson Matters
+![[Pasted image 20260719153534.png]]
 
-Every major topic covered throughout this course fits somewhere within this communication process.
+### Why This Lesson Matters
 
-Later modules examine each stage individually.
-
-For example:
+Every major topic covered throughout this course fits somewhere within this communication process. Later modules examine each stage individually. For example :
 
 | Lesson | Stage of the Journey |
 |---------|----------------------|
@@ -1481,11 +1267,11 @@ For example:
 | HTTP | Application communication |
 | Security | TLS, firewalls, VPNs |
 
-By understanding the overall communication flow first, each future lesson becomes part of a larger, coherent picture rather than an isolated topic.
+By understanding the overall communication flow first, each future lesson becomes part of a larger, *coherent* picture rather than an isolated topic.
 
----
+![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Coherent|Terminology]]
 
-# Key Takeaways
+### Key Takeaways
 
 - TCP establishes a reliable communication channel before data transfer.
 - The TCP Three-Way Handshake synchronizes both endpoints.
@@ -1495,16 +1281,11 @@ By understanding the overall communication flow first, each future lesson become
 - HTTP requests are transmitted only after encryption has been established.
 - Modern webpages consist of many independent resources requiring multiple HTTP requests.
 - Browser rendering transforms downloaded resources into the visual webpage presented to the user.
-- A simple webpage request involves cooperation between multiple protocols operating across several layers of the TCP/IP stack.
+- A simple webpage request involves <u>cooperation between multiple protocols operating across several layers of the TCP/IP stack</u>.
 
-___
-___
+## Lesson 1.1 — The Journey of a Web Request (Part 4)
 
-# Lesson 1.1 — The Journey of a Web Request (Part 4)
-
----
-
-# Verifying the Journey with Wireshark
+### Verifying the Journey with Wireshark
 
 The communication process described throughout this lesson can be observed directly using Wireshark. Rather than treating networking protocols as abstract concepts, packet analysis allows engineers to verify exactly what occurs on the network.
 

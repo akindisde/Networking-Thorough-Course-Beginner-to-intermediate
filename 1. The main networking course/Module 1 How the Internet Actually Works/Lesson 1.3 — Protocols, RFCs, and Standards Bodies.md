@@ -1,4 +1,4 @@
-## Module 1 — How the Internet Actually Works
+# Module 1 — How the Internet Actually Works
 
 ## Lesson 1.3 — Protocols, RFCs, and Standards Bodies (Part 1)
 
