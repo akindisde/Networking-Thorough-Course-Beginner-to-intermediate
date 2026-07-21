@@ -16,7 +16,7 @@ The purpose of this lesson is to establish the *scope* of the course, introduce 
 Upon completing this course, students should be able to:
 
 - Explain how communication occurs between devices on local and wide-area networks.
-- Understand the purpose and operation of networking protocols across all layers of the [[Transmission Control Protocol-Internet Protocol (TCP-IP)]] model.
+- Understand the purpose and operation of networking protocols across all layers of the [[Transmission Control Protocol-Internet Protocol (TCP-IP) model]] model.
 - Design and configure small to medium-sized *enterprise networks*. (of course learning by doing is the best way of learning)
 
 ![[Cybersecurity journey/1. Networking/Definitions#🧠 - Enterprise network|Definitions]]

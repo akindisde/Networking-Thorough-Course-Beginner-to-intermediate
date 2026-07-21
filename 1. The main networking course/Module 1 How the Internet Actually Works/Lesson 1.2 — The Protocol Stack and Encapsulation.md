@@ -224,7 +224,7 @@ The webpage appears identically on all devices.
 
 This interoperability is possible because the protocol stack separates communication into independent layers.
 
-### *Interoperability*
+#### *Interoperability*
 
 ![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Interoperability|Terminology]]
 
@@ -315,9 +315,9 @@ Part 2 introduces the **Internet Five-Layer Model**, the protocol architecture u
 
 ### The Internet Protocol Stack
 
-Throughout this course, networking concepts will be organized using the Internet protocol stack, also known as the TCP/IP model or the Internet five-layer model.
+Throughout this course, networking concepts will be organized using the Internet protocol stack, also known as the [[Transmission Control Protocol-Internet Protocol (TCP-IP) model]] or the Internet five-layer model.
 
-This model divides network communication into five logical layers. Each layer performs a specific function while providing services to the layer above it and relying on the layer below it.
+This model divides network communication into five <u>logical</u> layers. Each layer performs a specific function while providing services to the layer above it and relying on the layer below it.
 
 ```text
 +-----------------------------+
@@ -341,14 +341,11 @@ This process is known as **encapsulation** and **decapsulation**, which will be 
 
 ### Layer 5 — Application
 
-The Application layer is the closest layer to the user.
+The Application layer is the closest layer to the user. It provides the interface between user applications and the underlying network.
 
-It provides the interface between user applications and the underlying network.
-
-Contrary to what the name suggests, this layer does not contain every application installed on a computer. Instead, it contains the networking services used by applications.
+Contrary to what the name suggests, this layer does not contain every application installed on a computer. Instead, it contains the networking services used by applications. it's named application layer because it provides service to application to get into the network.
 
 Examples include:
-
 - HTTP
 - HTTPS
 - DNS
@@ -363,21 +360,18 @@ Examples include:
 When a browser requests a webpage, it is communicating through HTTP or HTTPS.
 
 When a computer resolves a domain name, it uses DNS.
-
 When an email client sends a message, it typically uses SMTP.
 
 Each application protocol solves a different communication problem while remaining completely independent of the lower networking layers.
 
 The browser does not need to understand Ethernet.
-
 The DNS client does not need to understand electrical signals.
-
 Applications simply generate data and pass it to the Transport layer.
 
+In simple terms, even if the layer above doesn't do its work properly, the layer below still can do its job.
 ### Responsibilities of the Application Layer
 
-The Application layer is responsible for:
-
+The Application layer is responsible for :
 - Providing network services to user applications.
 - Defining application-specific message formats.
 - Managing application-level communication.
@@ -385,16 +379,14 @@ The Application layer is responsible for:
 - Exchanging application data.
 
 It is important to understand that this layer does **not** guarantee reliable delivery.
-
-It does **not** determine network paths.
-
+It does **not** determine network paths. 
 It does **not** perform routing.
 
 Those responsibilities belong to lower layers.
 
-### Real Example
+#### Real Example
 
-Suppose a browser requests:
+Suppose a browser requests :
 
 ```
 https://example.com/index.html
@@ -404,21 +396,17 @@ The browser creates an HTTP request.
 
 ```http
 GET /index.html HTTP/1.1
-
 Host: example.com
 ```
 
-At this stage, the browser knows nothing about:
-
+At this stage, the browser knows nothing about :
 - MAC addresses
 - IP addresses
 - Routers
 - Switches
 - Ethernet frames
 
-Its only responsibility is producing the HTTP request.
-
-The request is then handed to the Transport layer.
+Its only responsibility is producing the HTTP request. The request is then handed to the Transport layer as irrelevant data to its job; which is to prepare that data to be transferred.
 
 ### Layer 4 — Transport
 
@@ -426,8 +414,7 @@ The Transport layer provides communication between applications running on diffe
 
 Instead of thinking about computers communicating, it is more accurate to think of **applications** communicating.
 
-A single computer may simultaneously run:
-
+A single computer may simultaneously run :
 - A web browser
 - Spotify
 - Discord
@@ -435,53 +422,50 @@ A single computer may simultaneously run:
 - An SSH client
 - Microsoft Teams
 
-All of these applications share the same network interface.
+All of these applications share the same network interface; all the data coming in to each of those applications come in from the same entrance.
 
-The Transport layer ensures that incoming data reaches the correct application.
+The Transport layer ensures that incoming data reaches <mark style="background:#fff88f">the correct application.</mark> and that's done with port numbers as hinted before.
 
-The two primary Transport protocols are:
+The two primary Transport protocols are :
+- [[Transmission Control Protocol (TCP)]]
+- *[[User Datagram Protocol (UDP)]]*
 
-- TCP
-- UDP
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - User Datagram Protocol (UDP)|Definitions]]
 
 ### TCP
 
-Transmission Control Protocol (TCP) provides reliable communication.
+Transmission Control Protocol (TCP) provides reliable communication, if we want to summarize it.
 
-Its major features include:
-
-- Connection establishment.
-- Reliable delivery.
-- Packet sequencing.
-- Flow control.
-- Error recovery.
-- Congestion control.
+Its major features include :
+- Connection establishment
+- Reliable delivery
+- Packet sequencing
+- Flow control
+- Error recovery
+- Congestion control
 
 Applications that require accuracy generally use TCP.
 
 Examples include:
-
 - HTTP
 - HTTPS
 - SSH
 - FTP
 - SMTP
 
+Now, you have an idea of what is it like to have an application protocol needing the services of a transport protocol services.
+
 ### UDP
 
-User Datagram Protocol (UDP) provides lightweight communication.
+User Datagram Protocol (UDP) provides lightweight, non-reliable communication.
 
-Unlike TCP, UDP:
-
+Unlike TCP, UDP :
 - Does not establish a connection.
 - Does not retransmit lost packets.
 - Does not guarantee delivery.
 - Does not guarantee ordering.
 
-Its primary advantage is speed.
-
-Applications using UDP include:
-
+Its primary advantage is <u>speed</u>. Applications using UDP include :
 - DNS
 - VoIP
 - Video streaming
@@ -492,21 +476,19 @@ Later modules compare TCP and UDP in detail.
 
 ### Port Numbers
 
-The Transport layer introduces another important concept: **ports**.
-
+The Transport layer introduces another important concept : **ports**.
 An IP address identifies a host.
-
 A port identifies an application running on that host.
 
-Examples:
+Examples :
 
 | Service | Port |
-|----------|-----:|
-| HTTP | 80 |
-| HTTPS | 443 |
-| SSH | 22 |
-| DNS | 53 |
-| SMTP | 25 |
+| ------- | ---: |
+| HTTP    |   80 |
+| HTTPS   |  443 |
+| SSH     |   22 |
+| DNS     |   53 |
+| SMTP    |   25 |
 
 When a browser connects to a web server, it usually communicates with destination port 443.
 
@@ -523,38 +505,37 @@ This uniquely identifies each communication session.
 
 The Network layer is responsible for moving packets between different networks.
 
-Unlike the Link layer, which only communicates across a single local network, the Network layer enables global communication across the Internet.
+![[Cybersecurity journey/1. Networking/Q&A#❔ - What's the difference between when transport layer provide moving data service and when network layer provides it ?|Q&A]]
 
-The primary protocol operating at this layer is Internet Protocol (IP).
+Unlike the Link layer, which only communicates across a single local network, the Network layer enables global communication across the Internet; Meaning, the data link layer services are <u>programmed and built</u> to handle only local network communication, and the network layer services are <u>programmed and built</u> to handle more than that.
 
-Its responsibilities include:
+The primary protocol operating at this layer is [[Internet protocol (IP)]].
+Its responsibilities include :
+- Logical addressing
+- Routing
+- Packet forwarding
+- Network identification
+- *Fragmentation* (IPv4)
 
-- Logical addressing.
-- Routing.
-- Packet forwarding.
-- Network identification.
-- Fragmentation (IPv4).
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - IP Fragmentation|Definitions]]
 
-Every packet contains:
+![[Cybersecurity journey/1. Networking/Q&A#❔ - What's the difference between segmentation and fragmentation in networking ?|Q&A]]
 
-- Source IP address.
-- Destination IP address.
+Every packet contains :
+- Source IP address
+- Destination IP address
 
 Unlike MAC addresses, IP addresses remain largely unchanged from the sender to the receiver.
 
-Routers make forwarding decisions based entirely on these addresses.
-
-For example:
+Routers make forwarding decisions based entirely on these addresses. For example :
 
 ```
 Source
-
 192.168.1.10
 ```
 
 ```
 Destination
-
 142.250.190.78
 ```
 
@@ -564,40 +545,34 @@ The Network layer is therefore responsible for delivering packets across multipl
 
 ### Layer Relationships
 
-At this point, three layers are involved in communication.
+At this point, three layers are involved in communication :
 
 ```text
 Application
       │
 Creates HTTP Request
       │
-      ▼
 Transport
       │
 Adds TCP Information
       │
-      ▼
 Network
       │
 Adds IP Information
       │
-      ▼
 Lower Layers
 ```
 
-Notice that each layer performs exactly one category of work.
-
+Notice that each layer performs exactly one category of work :
 The browser still has no knowledge of IP routing.
-
 The IP protocol has no understanding of webpages.
-
 The Transport layer has no knowledge of HTML.
 
 Each protocol remains focused on its own responsibility, illustrating the principle of separation of concerns introduced earlier.
 
 ### Key Takeaways
 
-- The Internet protocol stack consists of five layers.
+- The Internet protocol stack consists of five layers (in one common model not all models) 
 - The Application layer provides services for user applications.
 - The Transport layer enables communication between applications using TCP or UDP.
 - Port numbers identify specific services on a host.
