@@ -296,7 +296,10 @@ Here is a diagram to best visualize what we learned this part of the chapter :
 
 ### Key Takeaways
 
-- Networking protocols define the rules governing communication between devices.
+- Networking protocols define the rules *governing* communication between devices.
+
+![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Govern|Terminology]]
+
 - A single protocol cannot efficiently solve every networking problem.
 - Protocol layering divides communication into specialized responsibilities.
 - Separation of concerns allows each layer to focus on a single task.
@@ -339,7 +342,7 @@ When the data reaches the destination, the process is reversed. Each layer remov
 
 This process is known as **encapsulation** and **decapsulation**, which will be examined later in this lesson.
 
-### Layer 5 — Application
+### Layer 5 — [[Application layer]]
 
 The Application layer is the closest layer to the user. It provides the interface between user applications and the underlying network.
 
@@ -408,7 +411,7 @@ At this stage, the browser knows nothing about :
 
 Its only responsibility is producing the HTTP request. The request is then handed to the Transport layer as irrelevant data to its job; which is to prepare that data to be transferred.
 
-### Layer 4 — Transport
+### Layer 4 — [[Transport layer]]
 
 The Transport layer provides communication between applications running on different devices.
 
@@ -501,7 +504,7 @@ The Transport layer combines:
 
 This uniquely identifies each communication session.
 
-### Layer 3 — Network
+### Layer 3 — [[Network layer]]
 
 The Network layer is responsible for moving packets between different networks.
 
@@ -586,29 +589,37 @@ The next part introduces the remaining two layers of the Internet protocol stack
 
 ## Lesson 1.2 — The Protocol Stack and Encapsulation (Part 3)
 
-### Layer 2 — Link
+### Layer 2 — [[Link layer]]
 
-The Link layer, sometimes called the **Network Access Layer** or **Data Link Layer**, is responsible for communication between devices connected to the same physical network.
+The Link layer, sometimes called the **Network Access Layer** or **Data Link Layer**, is responsible for communication between devices connected to <u>the same physical network</u>.
 
-Unlike the Network layer, which delivers packets across multiple interconnected networks, the Link layer operates only within a single local network.
+Unlike the Network layer, which delivers packets across multiple interconnected networks, the Link layer operates only within a single <u>local network</u>.
 
-For example, when a computer sends data to its default gateway, the communication occurs entirely at the Link layer.
+For example, when a computer sends data to its default gateway, the communication occurs entirely at the Link layer. Common technologies operating at this layer include :
 
-Common technologies operating at this layer include:
+- Ethernet (*IEEE 802.3*)
 
-- Ethernet (IEEE 802.3)
-- Wi-Fi (IEEE 802.11)
-- PPP
-- VLANs (IEEE 802.1Q)
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - IEEE 802.3|Definitions]]
 
-The Link layer is responsible for delivering data from one network interface to another within the same broadcast domain.
+- Wi-Fi (*IEEE 802.11*)
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - IEEE 802.11|Definitions]]
+
+- *[[Point-to-Point Protocol (PPP)]]*
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Point-to-Point Protocol (PPP)|Definitions]]
+
+- [[VLANs]] (*IEEE 802.1Q*)
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - IEEE 802.1Q|Definitions]]
+
+The Link layer is responsible for delivering data from one network interface to another within the same *broadcast domain*.
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Broadcast domain|Definitions]]
 
 ### Responsibilities of the Link Layer
 
-The Link layer performs several important functions.
-
-These include:
-
+The Link layer performs several important functions. These include :
 - Physical addressing using MAC addresses.
 - Frame construction.
 - Frame forwarding.
@@ -616,10 +627,7 @@ These include:
 - Access to the transmission medium.
 - Local delivery.
 
-Unlike IP addresses, which identify devices across the Internet, MAC addresses identify interfaces within a local network.
-
-Every Ethernet frame contains two MAC addresses:
-
+Unlike IP addresses, which identify devices across the Internet, MAC addresses identify interfaces within a local network. Every Ethernet frame contains two MAC addresses:
 - Source MAC Address
 - Destination MAC Address
 
@@ -627,9 +635,7 @@ These addresses change every time a packet passes through a router.
 
 ### MAC Addresses
 
-A MAC (Media Access Control) address is a unique hardware identifier assigned to a network interface.
-
-An example MAC address is:
+A MAC (Media Access Control) address is a <u>unique hardware identifier</u> assigned to a network interface. An example MAC address is :
 
 ```
 A8:5E:45:3B:91:7C
@@ -637,13 +643,10 @@ A8:5E:45:3B:91:7C
 
 Unlike IP addresses, MAC addresses are not used for routing across the Internet.
 
-Their purpose is local delivery.
-
-Consider the following network.
+Their purpose is local delivery. Consider the following network :
 
 ```text
                  Switch
-
         ┌────────┼────────┐
         │        │        │
        PC      Laptop   Printer
@@ -651,8 +654,7 @@ Consider the following network.
 
 When the PC sends a frame to the printer, the switch examines only the destination MAC address.
 
-It does not examine:
-
+It does not examine :
 - URLs
 - HTTP requests
 - TCP ports
@@ -662,9 +664,7 @@ Its responsibility is limited to forwarding frames within the local network.
 
 ### Ethernet Frames
 
-The Link layer packages Network layer packets into **frames**.
-
-A simplified Ethernet frame appears below.
+The Link layer packages Network layer packets into **frames**. A simplified Ethernet frame appears below :
 
 ```text
 +--------------------------------------+
@@ -680,21 +680,12 @@ A simplified Ethernet frame appears below.
 +--------------------------------------+
 ```
 
-Each field has a specific purpose.
-
+Each field has a specific purpose : 
 The **Destination MAC Address** tells the switch where the frame should be delivered.
-
 The **Source MAC Address** identifies the sender.
+The *EtherType* identifies the protocol contained within the payload.
 
-The **EtherType** identifies the protocol contained within the payload.
-
-Examples include:
-
-| EtherType | Protocol |
-|-----------|----------|
-| 0x0800 | IPv4 |
-| 0x86DD | IPv6 |
-| 0x0806 | ARP |
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - EtherType field|Definitions]]
 
 Finally, the **Frame Check Sequence (FCS)** allows the receiving device to detect transmission errors.
 
@@ -702,40 +693,30 @@ Finally, the **Frame Check Sequence (FCS)** allows the receiving device to detec
 
 Noise, interference, damaged cables, and hardware faults may corrupt transmitted data.
 
-Ethernet uses a **Cyclic Redundancy Check (CRC)** to detect these errors.
+Ethernet uses a *[[Cyclic Redundancy Check (CRC)]]* to detect these errors.
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Cyclic Redundancy Check (CRC)|Definitions]]
 
 The sender calculates a mathematical value over the transmitted frame and stores it in the Frame Check Sequence field.
-
 The receiver performs the same calculation.
-
 If the calculated value differs from the received value, the frame has been corrupted.
-
 The corrupted frame is discarded.
 
-Ethernet detects transmission errors but does not recover from them.
-
+<mark style="background:#fff88f">Ethernet detects transmission errors but does not recover from them.</mark>
 Reliable recovery is performed later by TCP.
 
-### Layer 1 — Physical
+### Layer 1 — [[Physical layer]]
 
-The Physical layer is the lowest layer of the protocol stack.
+The Physical layer is the lowest layer of the protocol stack. It has one primary responsibility :
 
-It has one primary responsibility:
-
-Transmit bits across a physical medium.
-
-Unlike every other layer, the Physical layer does not understand:
-
+Transmit bits across a physical medium. Unlike every other layer, the Physical layer does not understand :
 - Packets
 - Frames
 - Addresses
 - Ports
 - Protocols
 
-It only understands binary values represented as physical signals.
-
-Depending on the transmission medium, bits may be represented as:
-
+It only understands <u>binary values represented as physical signals</u>. Depending on the transmission medium, bits may be represented as :
 - Electrical voltages
 - Light pulses
 - Radio waves
@@ -744,16 +725,14 @@ The Physical layer converts digital information into signals suitable for transm
 
 ### Physical Media
 
-Different networks use different transmission media.
+Different networks use different transmission media. Common examples include :
 
-Common examples include:
-
-| Medium | Signal Type |
-|---------|-------------|
-| Twisted Pair Copper | Electrical |
-| Fiber Optic | Light |
-| Wi-Fi | Radio |
-| Cellular | Radio |
+| Medium              | Signal Type |
+| ------------------- | ----------- |
+| Twisted Pair Copper | Electrical  |
+| Fiber Optic         | Light       |
+| Wi-Fi               | Radio       |
+| Cellular            | Radio       |
 
 Regardless of the medium, the higher layers remain unchanged.
 
@@ -765,16 +744,22 @@ This is another example of protocol layering.
 
 Different networking devices primarily operate at different layers of the protocol stack.
 
-| Device | Primary Layer |
-|----------|---------------|
-| Hub | Physical |
-| Repeater | Physical |
-| Network Interface Card (NIC) | Link |
-| Switch | Link |
-| Wireless Access Point | Link |
-| Router | Network |
-| Firewall | Network / Transport / Application |
-| Load Balancer | Transport / Application |
+| Device                       | Primary Layer                     |
+| ---------------------------- | --------------------------------- |
+| *Hub*                        | Physical                          |
+| *Repeater*                   | Physical                          |
+| Network Interface Card (NIC) | Link                              |
+| Switch                       | Link                              |
+| Wireless Access Point        | Link                              |
+| Router                       | Network                           |
+| Firewall                     | Network / Transport / Application |
+| Load Balancer                | Transport / Application           |
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Hub|Definitions]]
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Repeater|Definitions]]
+
+![[Cybersecurity journey/1. Networking/Q&A#❔ - How does a signal "lose its strength" ?|Q&A]]
 
 Although modern devices often operate across multiple layers, this classification provides a useful conceptual model.
 
@@ -801,14 +786,11 @@ The complete protocol stack now appears as follows.
 +------------------------------------------------+
 ```
 
-Every protocol encountered throughout this course belongs somewhere within this model.
-
-Understanding where a protocol operates greatly simplifies learning its responsibilities.
+Every protocol encountered throughout this course belongs somewhere within this model. Understanding where a protocol operates greatly simplifies learning its responsibilities.
 
 ### Why Another Model Exists
 
-Students often encounter two different networking models:
-
+Students often encounter two different networking models :
 - Internet Five-Layer Model
 - OSI Seven-Layer Model
 
@@ -816,13 +798,11 @@ This frequently causes confusion.
 
 The Internet model describes the protocol stack actually used by modern computer networks.
 
-The OSI model is a conceptual reference model created to standardize discussions about networking systems.
+The OSI model is a conceptual reference model created to <u>standardize discussions about networking systems</u>.
 
-The Internet itself does not use the OSI protocol suite.
+The Internet itself does not use the OSI protocol suite. Instead, it uses the TCP/IP protocol suite.
 
-Instead, it uses the TCP/IP protocol suite.
-
-Nevertheless, networking professionals frequently refer to OSI layer numbers during troubleshooting.
+Nevertheless, <mark style="background:#fff88f">networking professionals frequently refer to OSI layer numbers during troubleshooting</mark>.
 
 Examples include:
 
@@ -836,7 +816,7 @@ Understanding these references requires familiarity with the OSI model.
 
 ### The OSI Seven-Layer Model
 
-The Open Systems Interconnection (OSI) model divides communication into seven layers instead of five.
+The [[Open Systems Interconnection (OSI) model]] divides communication into seven layers instead of five.
 
 ```text
 +---------------------------+
@@ -860,9 +840,7 @@ Although very few real-world protocols map perfectly to these layers, the model 
 
 ### Comparing the Models
 
-The Internet model combines several OSI layers.
-
-The relationship is shown below.
+The Internet model combines several OSI layers, the relationship is shown below.
 
 | Internet Model | OSI Model |
 |----------------|-----------|
@@ -882,8 +860,7 @@ This simplification more accurately reflects how Internet protocols are actually
 
 Although networking equipment implements the TCP/IP model, the OSI model remains extremely useful.
 
-Reasons include:
-
+Reasons include :
 - Standardized terminology.
 - Vendor-neutral discussions.
 - Structured troubleshooting.
@@ -894,13 +871,11 @@ For example, saying:
 
 > "The problem exists at Layer 3."
 
-immediately tells another engineer that the issue likely involves:
-
+immediately tells another engineer that the issue likely involves :
 - IP addressing.
 - Routing.
 - Subnetting.
 - Gateways.
-
 Without needing additional explanation.
 
 ### Key Takeaways
@@ -908,7 +883,7 @@ Without needing additional explanation.
 - The Link layer provides communication within a local network using MAC addresses.
 - Ethernet frames encapsulate IP packets.
 - The Physical layer transmits binary data as electrical, optical, or radio signals.
-- Switches primarily operate at the Link layer, while routers operate at the Network layer.
+- Switches <u>primarily</u> operate at the Link layer, while routers operate at the Network layer.
 - The Internet five-layer model reflects modern networking implementations.
 - The OSI seven-layer model remains a conceptual framework widely used for education, documentation, and troubleshooting.
 - Networking professionals frequently reference OSI layer numbers even though Internet communication uses the TCP/IP protocol suite.
