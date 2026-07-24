@@ -1,5 +1,3 @@
-# Module 1 — How the Internet Actually Works
-
 ## Lesson 1.3 — Protocols, RFCs, and Standards Bodies (Part 1)
 
 ### Introduction
@@ -14,78 +12,61 @@ This lesson introduces what a protocol is, why protocols are necessary, and how 
 
 ### Learning Objectives
 
-After completing this lesson, students should be able to:
-
-- Define a networking protocol.
-- Explain why protocols are required.
-- Describe the three fundamental components of a protocol.
-- Distinguish between protocols and implementations.
-- Understand how multiple protocols cooperate during communication.
-- Explain why standardization is essential for the Internet.
+After completing this lesson, students should be able to :
+- Define a networking protocol
+- Explain why protocols are required
+- Describe the three fundamental components of a protocol
+- Distinguish between protocols and implementations
+- Understand how multiple protocols cooperate during communication
+- Explain why standardization is essential for the Internet
 
 ### What Is a Protocol?
 
-A protocol is a formal set of rules that defines how devices exchange information across a network.
-
-These rules specify:
-
-- How data is structured.
-- When data should be transmitted.
-- How devices respond to received messages.
-- How errors are detected and handled.
-- How communication begins and ends.
+A protocol is a formal set of rules that defines how devices exchange information across a network. These rules specify :
+- How data is structured
+- When data should be transmitted
+- How devices respond to received messages
+- How errors are detected and handled
+- How communication begins and ends
 
 Without agreed-upon rules, communication cannot occur.
 
-A protocol acts as a common language understood by every participating device.
-
-For example, when a browser communicates with a web server, both devices already know:
-
-- Which messages should be sent.
-- The order in which they are sent.
-- The format of each message.
-- How failures should be handled.
+A protocol acts as a common language understood by every participating device. For example, when a browser communicates with a web server, both devices already know :
+- Which messages should be sent
+- The order in which they are sent
+- The format of each message
+- How failures should be handled
 
 Neither device needs prior knowledge of the other's manufacturer or operating system.
 
 As long as both correctly implement the protocol, communication succeeds.
 
-### A Real-World Analogy
+### A Real-World *Analogy*
+
+![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Analogy|Terminology]]
 
 Imagine two pilots communicating with an airport control tower.
-
 Their conversation follows strict procedures.
-
 The pilot cannot simply speak freely.
-
-Instead, communication follows standardized phrases and sequences.
-
-Example:
+Instead, communication follows standardized phrases and sequences. Example :
 
 ```text
 Pilot:
 Requesting permission to land.
-
 ↓
-
 Control Tower:
 Cleared to land on Runway 27.
-
 ↓
-
 Pilot:
 Cleared to land, Runway 27.
 ```
 
-Every message has:
+Every message has :
+- A defined structure
+- A specific meaning
+- An expected response
 
-- A defined structure.
-- A specific meaning.
-- An expected response.
-
-If either participant ignored these rules, communication would become unreliable and potentially dangerous.
-
-Networking protocols operate in exactly the same way.
+If either participant ignored these rules, communication would become unreliable and potentially dangerous. Networking protocols operate in exactly the same way.
 
 ### Why Protocols Are Necessary
 
@@ -95,9 +76,11 @@ A Windows computer might communicate differently from a Linux server.
 
 Cisco routers might require completely different packet formats than Juniper routers.
 
-A web browser developed by Mozilla might be incompatible with a server running Apache.
+A web browser developed by Mozilla might be incompatible with a server running *Apache*.
 
-The Internet would fragment into isolated networks unable to communicate.
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Apache|Definitions]]
+
+The Internet would fragment into <u>isolated</u> networks unable to communicate.
 
 Protocols prevent this fragmentation by defining universal communication rules.
 
@@ -105,21 +88,22 @@ Regardless of vendor, operating system, or hardware architecture, every complian
 
 ### The Three Components of Every Protocol
 
-Although networking protocols vary considerably in complexity, every protocol defines three fundamental aspects of communication:
+Although networking protocols vary considerably in complexity, every protocol defines three fundamental aspects of communication :
+- *Syntax*
 
-- Syntax
-- Semantics
+![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Syntax|Terminology]]
+
+- *Semantics*
+
+![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Semantics|Terminology]]
+
 - Timing
 
 Together, these describe **what** is transmitted, **what it means**, and **when it should occur**.
 
-### Syntax
+#### Syntax
 
-Syntax defines the format and structure of transmitted information.
-
-It specifies how messages are organized.
-
-For example, an IPv4 packet contains fields arranged in a specific order.
+Syntax defines the <u>format and structure</u> of transmitted information. It specifies how messages are <u>organized</u>. For example, an IPv4 packet contains fields arranged in a specific order :
 
 ```text
 +-----------------------------+
@@ -143,35 +127,27 @@ For example, an IPv4 packet contains fields arranged in a specific order.
 
 Every IPv4 packet follows this exact structure.
 
-If devices interpreted fields differently, communication would fail immediately.
+If devices interpreted fields differently, communication would fail immediately. Syntax therefore ensures that every implementation understands the physical layout of transmitted data.
 
-Syntax therefore ensures that every implementation understands the physical layout of transmitted data.
+#### Semantics
 
-### Semantics
+Semantics define the meaning of each field and message. Knowing where a field appears is not sufficient. Devices must also understand what that field represents.
 
-Semantics define the meaning of each field and message.
-
-Knowing where a field appears is not sufficient.
-
-Devices must also understand what that field represents.
-
-Consider the following HTTP request.
+Consider the following HTTP request :
 
 ```http
 GET /index.html HTTP/1.1
 ```
 
-The syntax specifies where each word appears.
+The syntax specifies where each word appears. The semantics define what the word **GET** actually means.
 
-The semantics define what the word **GET** actually means.
-
-In HTTP,
+In HTTP
 
 ```
 GET
 ```
 
-means:
+means :
 
 > Retrieve the requested resource.
 
@@ -181,114 +157,87 @@ Similarly,
 POST
 ```
 
-means:
+means :
 
 > Submit data to the server.
 
 Every protocol field has a precisely defined meaning.
 
-This prevents ambiguity between communicating devices.
+This prevents *ambiguity* between communicating devices.
 
-### Timing
+![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Ambiguity|Terminology]]
 
-Timing defines when communication occurs.
+#### Timing
 
-It specifies:
+Timing defines when communication occurs. It specifies :
+- Transmission order
+- Waiting periods
+- Retransmission behavior
+- Timeouts
+- Response expectations
 
-- Transmission order.
-- Waiting periods.
-- Retransmission behavior.
-- Timeouts.
-- Response expectations.
-
-For example, TCP requires a three-way handshake before application data may be exchanged.
-
-The sequence must always occur in the following order.
+For example, TCP requires a three-way handshake before application data may be exchanged. The sequence must always occur in the following order :
 
 ```text
 Client
-
 SYN
-
 ↓
-
 Server
-
 SYN-ACK
-
 ↓
-
 Client
-
 ACK
 ```
 
-Changing this order would violate the protocol specification.
+Changing this order would violate the protocol specification. Timing therefore ensures that devices remain *synchronized* throughout communication.
 
-Timing therefore ensures that devices remain synchronized throughout communication.
+![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Synchronized|Terminology]]
 
 ### Protocol State
 
-Many networking protocols are **stateful**, meaning that devices keep track of the current stage of communication.
-
-Consider a simplified TCP connection.
+Many networking protocols are <u>stateful</u>, meaning that devices keep track of the current stage of communication. Consider a simplified TCP connection :
 
 ```text
 Closed
-
 ↓
-
 SYN Sent
-
 ↓
-
 Established
-
 ↓
-
 Closing
-
 ↓
-
 Closed
 ```
 
 Each state determines which messages are valid.
 
-For example, application data cannot be transmitted before the connection reaches the **Established** state.
+For example, application data cannot be transmitted before the connection reaches the **<u>Established</u>** state.
 
-State machines are a common feature of networking protocols and help ensure predictable communication.
+*State machines* are a common feature of networking protocols and help ensure predictable communication.
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - State machines|Definitions]]
 
 ### Request–Response Protocols
 
-Many application-layer protocols follow a request–response model.
+Many application-layer protocols follow a *[[Request–Response model]]*. In this model, one device sends a request and the other returns a response. 
 
-In this model, one device sends a request and the other returns a response.
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Request-Response model|Definitions]]
 
-Example:
+Example :
 
 ```text
 Browser
-
 ↓
-
 HTTP Request
-
 ↓
-
 Web Server
-
 ↓
-
 HTTP Response
-
 ↓
-
 Browser
 ```
 
-Examples of request–response protocols include:
-
+Examples of request–response protocols include :
 - HTTP
 - DNS
 - DHCP
@@ -297,13 +246,11 @@ Each request expects a corresponding response defined by the protocol.
 
 ### Client–Server Communication
 
-Most Internet applications use the client–server model.
+Most Internet applications use the *[[Client–Server model]]*. A **client** initiates communication. A **server** provides a service.
 
-A **client** initiates communication.
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Client-Server model|Definitions]]
 
-A **server** provides a service.
-
-Examples include:
+Examples include :
 
 | Client | Server | Protocol |
 |----------|----------|----------|
@@ -312,9 +259,7 @@ Examples include:
 | SSH Client | Linux Server | SSH |
 | DNS Resolver | DNS Server | DNS |
 
-The protocol defines how both sides communicate.
-
-Neither side needs to know how the other is internally implemented.
+The protocol defines how both sides communicate. Neither side needs to know how the other is internally implemented.
 
 ### Protocol Independence
 

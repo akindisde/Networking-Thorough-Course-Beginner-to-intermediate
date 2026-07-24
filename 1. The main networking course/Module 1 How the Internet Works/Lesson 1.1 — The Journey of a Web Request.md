@@ -1,5 +1,3 @@
-# Module 1 — How the Internet Actually Works
-
 ## Lesson 1.1 — The Journey of a Web Request (Part 1)
 
 ### Introduction

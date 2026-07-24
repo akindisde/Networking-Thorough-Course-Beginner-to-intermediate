@@ -1,5 +1,3 @@
-# Module 1 — How the Internet Actually Works
-
 ## Lesson 1.4 — Packets, Frames, and Data Flow (Part 1)
 
 ### Introduction
