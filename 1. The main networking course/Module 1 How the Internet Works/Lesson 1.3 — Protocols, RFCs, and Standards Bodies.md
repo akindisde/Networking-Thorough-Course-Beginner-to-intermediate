@@ -263,161 +263,103 @@ The protocol defines how both sides communicate. Neither side needs to know how 
 
 ### Protocol Independence
 
-One of the most important characteristics of networking protocols is independence.
+One of the most important characteristics of networking protocols is independence. Each protocol performs one specialized task.
 
-Each protocol performs one specialized task.
-
-Consider a browser downloading a webpage.
-
-Several protocols cooperate.
+Consider a browser downloading a webpage. Several protocols cooperate :
 
 ```text
 HTTP
-
 ↓
-
 TLS
-
 ↓
-
 TCP
-
 ↓
-
 IP
-
 ↓
-
 Ethernet
 ```
 
 HTTP does not perform routing.
-
 TCP does not resolve domain names.
-
 IP does not establish encrypted sessions.
-
 Ethernet does not understand webpages.
 
-Each protocol focuses on one responsibility while relying on lower layers to perform theirs.
-
-This modular architecture greatly simplifies networking.
+Each protocol focuses on one responsibility while relying on lower layers to perform theirs. This modular architecture greatly simplifies networking.
 
 ### Protocol Layering
 
-Protocols rarely operate alone.
-
-Instead, they form a stack.
-
-Each protocol uses services provided by lower protocols.
-
-For example:
+Protocols rarely operate alone. Instead, they form a stack. Each protocol uses services provided by lower layer protocols. For example :
 
 ```text
 Application
-
 HTTP
-
 ↓
-
 Transport
-
 TCP
-
 ↓
-
 Network
-
 IPv4
-
 ↓
-
 Link
-
 Ethernet
-
 ↓
-
 Physical
-
 Copper Cable
 ```
 
 Each layer adds functionality without modifying the responsibilities of the others.
 
-This layered architecture allows protocols to evolve independently.
-
-For example:
+This layered architecture allows protocols to evolve independently. For example :
 
 ```
 HTTP
-
 ↓
-
 HTTPS
 ```
 
-Only the application layer changes.
+Only the application layer changes in this case.
 
-TCP, IP, and Ethernet continue functioning normally.
-
-Likewise,
+TCP, IP, and Ethernet continue functioning normally. Likewise,
 
 ```
 Ethernet
-
 ↓
-
 Wi-Fi
 ```
 
-changes only the lower layers.
-
-Applications remain completely unaware of the difference.
+changes only the lower layers. Applications remain completely unaware of the difference.
 
 ### Protocol vs Implementation
 
 Students often confuse a protocol with the software that implements it.
 
-A protocol is a specification.
+A protocol is a <u>specification</u>.
+An implementation is software that <u>follows that specification</u>.
 
-An implementation is software that follows that specification.
-
-For example:
-
-Protocol:
+For example, the protocol is:
 
 ```
 HTTP
 ```
 
-Implementations:
-
+Its implementations are :
 - Apache HTTP Server
 - Nginx
 - Microsoft IIS
 - Caddy
 
-Each server is written differently.
+Each server is written differently. Each contains different source code.
+Yet all communicate correctly because they implement the same HTTP specification. This distinction applies throughout networking.
 
-Each contains different source code.
+<mark style="background:#fff88f">Protocols define behavior. Implementations execute that behavior.</mark>
 
-Yet all communicate correctly because they implement the same HTTP specification.
+### *Proprietary* vs Open Protocols
 
-This distinction applies throughout networking.
+![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Proprietary|Terminology]]
 
-Protocols define behavior.
+Protocols can be categorized as either proprietary or open :
 
-Implementations execute that behavior.
-
-### Proprietary vs Open Protocols
-
-Protocols can be categorized as either proprietary or open.
-
-An **open protocol** is publicly documented and available for anyone to implement.
-
-Examples include:
-
+An **open protocol** is publicly documented and available for anyone to implement. Examples include :
 - TCP
 - IPv4
 - IPv6
@@ -427,9 +369,7 @@ Examples include:
 
 Because their specifications are public, thousands of vendors can develop compatible products.
 
-A **proprietary protocol** is controlled by a specific company.
-
-Its specification may be restricted or unavailable.
+A **proprietary protocol** is controlled by a specific company. Its specification may be restricted or unavailable.
 
 Examples include certain vendor-specific routing protocols and management protocols.
 
@@ -437,13 +377,12 @@ The modern Internet relies primarily on open standards because they encourage in
 
 ### Why Standardization Matters
 
-Without standardization:
-
-- Devices from different vendors could not communicate.
-- Software developers would need separate versions of every application.
-- Internet growth would be severely limited.
-- Competition would decrease.
-- Costs would increase.
+Without standardization :
+- Devices from different vendors could not communicate
+- Software developers would need separate versions of every application
+- Internet growth would be severely limited
+- Competition would decrease
+- Costs would increase
 
 Standardized protocols allow any compliant device to join the Internet.
 
