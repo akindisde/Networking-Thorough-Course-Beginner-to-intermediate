@@ -413,38 +413,32 @@ The Internet is not owned or operated by a single company or government. It is a
 
 Every day, billions of devices manufactured by thousands of vendors exchange data successfully because they implement the same protocol specifications.
 
-Someone must therefore define:
-
-- How an IPv4 packet is structured.
-- How a TCP connection is established.
-- How DNS queries are formatted.
-- How HTTP requests are transmitted.
-- How encryption is negotiated.
+Someone must therefore define :
+- How an IPv4 packet is structured
+- How a TCP connection is established
+- How DNS queries are formatted
+- How HTTP requests are transmitted
+- How encryption is negotiated
 
 Without official specifications, every vendor would create incompatible implementations, making worldwide interoperability impossible.
 
 This responsibility is carried out by organizations that develop and publish networking standards.
 
-The most influential of these organizations for Internet protocols is the **Internet Engineering Task Force (IETF)**.
+The most influential of these organizations for Internet protocols is the [[Internet Engineering Task Force (IETF)]].
 
 ### The Internet Engineering Task Force (IETF)
 
-The **Internet Engineering Task Force (IETF)** is an international organization responsible for developing and maintaining the technical standards that define the Internet.
+The **Internet Engineering Task Force (IETF)** is an international organization responsible for developing and maintaining the <u>technical</u> standards that define the Internet.
 
 Unlike many standards organizations, the IETF is an open community rather than a traditional membership-based institution. Engineers, researchers, vendors, network operators, academics, and individuals from around the world collaborate to improve Internet technologies.
 
-The IETF's primary goal is straightforward:
+The IETF's primary goal is straightforward :
 
 > Develop open, interoperable standards that allow the Internet to function reliably and evolve over time.
 
-The organization does not manufacture networking equipment or sell products.
+The organization does not manufacture networking equipment or sell products. Instead, it publishes technical specifications that vendors voluntarily implement.
 
-Instead, it publishes technical specifications that vendors voluntarily implement.
-
-Today, nearly every Internet protocol depends on specifications produced by the IETF.
-
-Examples include:
-
+Today, nearly every Internet protocol depends on specifications produced by the IETF. Examples include :
 - IPv4
 - IPv6
 - TCP
@@ -458,30 +452,23 @@ Examples include:
 - BGP
 - OSPF
 
-### Guiding Principles of the IETF
+#### Guiding Principles of the IETF
 
-The IETF has become known for several guiding principles that have shaped the development of the modern Internet.
+The IETF has become known for several guiding principles that have shaped the development of the modern Internet. One of its best-known philosophies is :
 
-One of its best-known philosophies is:
+> **"Rough *consensus* and running code."**
 
-> **"Rough consensus and running code."**
+![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Consensus|Terminology]]
 
-This phrase emphasizes two important ideas.
+This phrase emphasizes two important ideas :
 
-First, standards should emerge through technical agreement rather than authority.
-
-Second, protocols should be proven through working implementations instead of remaining purely theoretical.
+<u>First</u>, standards should emerge through technical agreement rather than authority. <u>Second</u>, protocols should be proven through working implementations instead of remaining purely theoretical.
 
 A protocol that functions successfully in real-world networks is generally considered more valuable than one that exists only as a design document.
 
-### Working Groups
+#### Working Groups
 
-The IETF organizes its work into specialized **Working Groups (WGs)**.
-
-Each working group focuses on a particular area of Internet technology.
-
-Examples include:
-
+The IETF organizes its work into specialized **Working Groups (WGs)**. Each working group focuses on a particular area of Internet technology. Examples include :
 - Routing
 - Security
 - Transport protocols
@@ -493,18 +480,15 @@ Examples include:
 
 Each group discusses technical problems, proposes solutions, reviews implementations, and develops protocol specifications.
 
-When consensus is reached, the resulting document may eventually become an RFC.
+When consensus is reached, the resulting document may eventually become an [[Request for Comments (RFC)]].
 
-### What Is an RFC?
+#### What Is an RFC ?
 
-The official documents published by the IETF are called **Requests for Comments**, commonly abbreviated as **RFCs**.
+The official documents published by the IETF are called **Requests for Comments**, commonly *abbreviated* as **RFCs**.
 
-Despite the name, RFCs are not simply requests for feedback.
+![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Abbreviated|Terminology]]
 
-They are the official publications that define many of the protocols used throughout the Internet.
-
-An RFC may contain:
-
+Despite the name, RFCs are not simply requests for feedback. They are the official publications that define many of the protocols used throughout the Internet. An RFC may contain :
 - A protocol specification.
 - An extension to an existing protocol.
 - Operational recommendations.
@@ -513,15 +497,13 @@ An RFC may contain:
 - Informational guidance.
 - Experimental technologies.
 
-Some RFCs eventually become Internet Standards.
+Some RFCs eventually become Internet Standards. Others remain informational or experimental. Regardless of category, every RFC receives a permanent identification number.
 
-Others remain informational or experimental.
+#### Why the Name "Request for Comments"?
 
-Regardless of category, every RFC receives a permanent identification number.
+The term dates back to the early days of the *ARPANET*.
 
-### Why the Name "Request for Comments"?
-
-The term dates back to the early days of the ARPANET.
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Advanced Research Projects Agency Network (ARPANET)|Definitions]]
 
 Researchers exchanged technical documents describing proposed networking ideas and invited comments from colleagues.
 
@@ -529,62 +511,46 @@ Although the Internet has changed dramatically since then, the historical name h
 
 Today, RFCs are carefully reviewed technical publications that often define globally deployed Internet standards.
 
-### RFC Numbering
+#### RFC Numbering
 
-Each RFC receives a unique number when published.
-
-For example:
-
+Each RFC receives a unique number when published. For example :
 - RFC 791
 - RFC 793
 - RFC 768
 - RFC 1035
 - RFC 8446
 
-Once assigned, an RFC number is **never reused**.
+Once assigned, an RFC number is **never reused**. If a specification is updated, the newer RFC receives a different number.
 
-If a specification is updated, the newer RFC receives a different number.
+This numbering system provides a permanent <u>historical record</u> of Internet development.
 
-This numbering system provides a permanent historical record of Internet development.
+#### RFC Categories
 
-### RFC Categories
+Not every RFC represents an Internet Standard. RFCs are published in several categories, each serving a different purpose.
 
-Not every RFC represents an Internet Standard.
+##### Standards Track
 
-RFCs are published in several categories, each serving a different purpose.
-
-#### Standards Track
-
-Standards Track RFCs define protocols intended for widespread deployment.
-
-Many of the protocols studied throughout this course belong to this category.
+Standards Track RFCs define protocols intended for widespread deployment. Many of the protocols studied throughout this course belong to this category.
 
 These documents undergo extensive technical review before publication.
 
-#### Best Current Practice (BCP)
+##### Best Current Practice (BCP)
 
-Best Current Practice documents describe recommended operational procedures.
+Best Current Practice documents describe recommended operational procedures. Rather than defining new protocols, they explain how existing technologies should be deployed and managed.
 
-Rather than defining new protocols, they explain how existing technologies should be deployed and managed.
+##### Informational
 
-#### Informational
+Informational RFCs provide technical information without establishing standards. They may describe architectures, implementation techniques, or historical background.
 
-Informational RFCs provide technical information without establishing standards.
+##### Experimental
 
-They may describe architectures, implementation techniques, or historical background.
+Experimental RFCs describe new ideas that require evaluation before potential standardization. These protocols may never become Internet Standards.
 
-#### Experimental
-
-Experimental RFCs describe new ideas that require evaluation before potential standardization.
-
-These protocols may never become Internet Standards.
-
-### Anatomy of an RFC
+#### Anatomy of an RFC
 
 Although RFCs vary in length and complexity, most follow a similar structure.
 
-A typical RFC includes:
-
+A typical RFC includes :
 - Title
 - Authors
 - Publication date
@@ -597,35 +563,26 @@ A typical RFC includes:
 - Security considerations
 - References
 
-Modern RFCs often exceed one hundred pages.
+Modern RFCs often exceed one hundred pages. Some protocol specifications *span* several related RFCs.
 
-Some protocol specifications span several related RFCs.
+![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Span|Terminology]]
 
-### Reading an RFC
+#### Reading an RFC
 
 RFCs are written as engineering specifications rather than textbooks.
-
-They define exactly how a protocol must behave.
-
-Consider the following simplified example:
+They define exactly how a protocol must behave. Consider the following simplified example :
 
 ```text
 The sender MUST acknowledge every received segment.
-
 The receiver SHOULD advertise its receive window.
-
 The client MAY terminate the connection.
 ```
 
-Notice the capitalization of the words **MUST**, **SHOULD**, and **MAY**.
+Notice the capitalization of the words **MUST**, **SHOULD**, and **MAY**. These words have precise meanings.
 
-These words have precise meanings.
+##### Requirement Levels
 
-### Requirement Levels
-
-Many RFCs use standardized requirement terminology defined by RFC 2119.
-
-The most common keywords include:
+Many RFCs use standardized requirement terminology defined by RFC 2119. The most common keywords include :
 
 | Keyword | Meaning |
 |----------|---------|
@@ -635,22 +592,17 @@ The most common keywords include:
 | SHOULD NOT | Generally discouraged |
 | MAY | Optional behavior |
 
-These words eliminate ambiguity.
-
-For example:
+These words eliminate ambiguity. For example :
 
 ```
 The client MUST verify the server certificate.
 ```
 
-This is not a suggestion.
+<u>This is not a suggestion</u>. Every compliant implementation is required to perform certificate verification.
 
-Every compliant implementation is required to perform certificate verification.
+#### Why RFCs Matter
 
-### Why RFCs Matter
-
-Networking professionals frequently consult RFCs when:
-
+Networking professionals frequently consult RFCs when :
 - Troubleshooting protocol behavior.
 - Developing networking software.
 - Implementing new protocols.
@@ -661,36 +613,28 @@ Although introductory networking courses rarely require reading RFCs directly, e
 
 RFCs represent the authoritative source for Internet protocol specifications.
 
-### RFC Updates and Obsolescence
+#### RFC Updates and *Obsolescence*
+
+![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Obsolescence|Terminology]]
 
 Protocols evolve over time.
-
 Security vulnerabilities are discovered.
-
 New technologies emerge.
-
 Performance improvements become possible.
 
 Rather than modifying existing RFCs, the IETF typically publishes new RFCs that:
-
-- Update previous specifications.
-- Extend existing protocols.
-- Replace obsolete technologies.
+- Update previous specifications
+- Extend existing protocols
+- Replace obsolete technologies
 
 Older RFCs remain available as part of the historical record.
+The newer RFC clearly indicates whether it updates or obsoletes earlier documents. This approach preserves the complete evolution of Internet technologies.
 
-The newer RFC clearly indicates whether it updates or obsoletes earlier documents.
-
-This approach preserves the complete evolution of Internet technologies.
-
-### RFC Example: Understanding a Protocol Specification
+#### RFC Example: Understanding a Protocol Specification
 
 Suppose an engineer wants to understand exactly how TCP establishes a connection.
 
-Rather than relying on third-party documentation, they can consult the official TCP specification.
-
-The RFC defines:
-
+Rather than relying on third-party documentation, they can consult the official TCP specification. The RFC defines :
 - TCP packet format.
 - Sequence numbers.
 - Acknowledgements.
@@ -702,40 +646,35 @@ The RFC defines:
 
 Because every compliant implementation follows the same specification, engineers worldwide share a common technical reference.
 
-### The Importance of Open Standards
+#### The Importance of Open Standards
 
-One of the greatest strengths of the Internet is that its core protocols are publicly documented.
-
-Anyone can:
-
+One of the greatest strengths of the Internet is that its core protocols are publicly documented. Anyone can :
 - Read the specifications.
 - Develop compatible software.
 - Build networking equipment.
 - Study protocol behavior.
 - Improve existing implementations.
 
-This openness has encouraged innovation for decades.
-
-Companies compete by building better implementations, not by hiding protocol specifications.
+<mark style="background:#fff88f">This openness has encouraged innovation for decades.</mark>, and companies compete by building better implementations, not by hiding protocol specifications.
 
 As a result, devices from different vendors can communicate seamlessly across the global Internet.
 
-### Key RFCs Every Network Engineer Should Recognize
+#### Key RFCs Every Network Engineer Should Recognize
 
-Although thousands of RFCs have been published, a small number form the foundation of modern networking.
+Although thousands of RFCs have been published, a small number form the foundation of modern networking. The following RFCs are among the most important :
 
-The following RFCs are among the most important.
-
-| RFC | Protocol | Purpose |
-|-----:|----------|---------|
-| 791 | IPv4 | Defines the Internet Protocol version 4 |
-| 793 | TCP | Defines the Transmission Control Protocol |
-| 768 | UDP | Defines the User Datagram Protocol |
-| 826 | ARP | Defines the Address Resolution Protocol |
-| 1035 | DNS | Defines the Domain Name System message format |
-| 8446 | TLS 1.3 | Defines the Transport Layer Security version 1.3 protocol |
+|  RFC | Protocol | Purpose                                                   |
+| ---: | -------- | --------------------------------------------------------- |
+|  791 | IPv4     | Defines the Internet Protocol version 4                   |
+|  793 | TCP      | Defines the Transmission Control Protocol                 |
+|  768 | UDP      | Defines the User Datagram Protocol                        |
+|  826 | ARP      | Defines the Address Resolution Protocol                   |
+| 1035 | DNS      | Defines the Domain Name System message format             |
+| 8446 | TLS 1.3  | Defines the Transport Layer Security version 1.3 protocol |
 
 These RFCs will appear repeatedly throughout this course as each protocol is studied in detail.
+
+![[Cybersecurity journey/1. Networking/Q&A#❔ - Are the protocols referred to by the first RFC created for them or the latest ?|Q&A]]
 
 ### Key Takeaways
 
