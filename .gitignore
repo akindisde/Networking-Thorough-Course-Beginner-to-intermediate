@@ -3,4 +3,6 @@
 !/1. The main networking course/
 !/1. The main networking course/**/*.md
 !/1. The main networking course/**/*.png
-
+!Definitions.md
+!Q&A.md
+!Terminology.md
