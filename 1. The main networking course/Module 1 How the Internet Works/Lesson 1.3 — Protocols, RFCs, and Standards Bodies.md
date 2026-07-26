@@ -698,8 +698,7 @@ While the IETF defines most Internet protocols, it is not the only organization 
 
 Modern computer networks rely on the work of several international organizations, each specializing in a different area of networking.
 
-Among the most important are:
-
+Among the most important are :
 - IEEE
 - IANA
 - ICANN
@@ -711,12 +710,9 @@ This section focuses on the IEEE and IANA, two organizations encountered frequen
 
 ### The Institute of Electrical and Electronics Engineers (IEEE)
 
-The **Institute of Electrical and Electronics Engineers (IEEE)** is one of the world's largest professional engineering organizations.
+[[The Institute of Electrical and Electronics Engineers (IEEE)]] is one of the world's largest professional engineering organizations.
 
-Unlike the IETF, which primarily develops Internet protocols such as TCP and IP, the IEEE develops standards for technologies operating closer to the physical network.
-
-Its standards cover areas such as:
-
+Unlike the IETF, which primarily develops Internet protocols such as TCP and IP, the IEEE develops standards for technologies operating closer to the physical network. Its standards cover areas such as :
 - Ethernet
 - Wi-Fi
 - Wireless communication
@@ -726,15 +722,15 @@ Its standards cover areas such as:
 
 Many of the technologies encountered in enterprise networks originate from IEEE working groups.
 
-### The IEEE 802 Project
+#### The IEEE 802 Project
 
-Networking standards developed by the IEEE are organized under the **IEEE 802** family.
+Networking standards developed by the IEEE are organized under the <u>IEEE 802 family</u>.
 
-The number **802** refers to the project responsible for Local Area Network (LAN) and Metropolitan Area Network (MAN) technologies.
+The number **802** refers to the project responsible for Local Area Network (LAN) and *[[Metropolitan Area Network (MAN)]]* technologies.
 
-Numerous networking standards belong to this family.
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Metropolitan Area Network (MAN)|Definitions]]
 
-Some of the most important include:
+Numerous networking standards belong to this family. Some of the most important include :
 
 | Standard | Technology |
 |----------|------------|
@@ -746,14 +742,13 @@ Some of the most important include:
 
 Whenever a network engineer refers to "802.3" or "802.11," they are referring to IEEE standards.
 
-### IEEE 802.3 — Ethernet
+#### IEEE 802.3 — Ethernet
 
-Ethernet is the dominant wired networking technology used throughout the world.
+[[Ethernet]] is the dominant wired networking technology used throughout the world.
 
 Originally developed in the 1970s, Ethernet has evolved through numerous revisions while maintaining backward compatibility.
 
-The IEEE 802.3 standard defines many aspects of Ethernet communication, including:
-
+The IEEE 802.3 standard defines many aspects of Ethernet communication, including :
 - Frame format
 - MAC addressing
 - Error detection
@@ -761,52 +756,40 @@ The IEEE 802.3 standard defines many aspects of Ethernet communication, includin
 - Speed specifications
 - Media types
 
-Common Ethernet speeds include:
+Common Ethernet speeds include :
 
-| Standard | Speed |
-|-----------|-------|
-| Fast Ethernet | 100 Mbps |
-| Gigabit Ethernet | 1 Gbps |
-| 10 Gigabit Ethernet | 10 Gbps |
-| 40 Gigabit Ethernet | 40 Gbps |
+| Standard             | Speed    |
+| -------------------- | -------- |
+| Fast Ethernet        | 100 Mbps |
+| Gigabit Ethernet     | 1 Gbps   |
+| 10 Gigabit Ethernet  | 10 Gbps  |
+| 40 Gigabit Ethernet  | 40 Gbps  |
 | 100 Gigabit Ethernet | 100 Gbps |
 | 400 Gigabit Ethernet | 400 Gbps |
 
 Although transmission speeds have increased dramatically over the decades, devices continue to communicate using the standardized Ethernet frame defined by IEEE 802.3.
 
-### Ethernet Frame Standardization
+#### Ethernet Frame Standardization
 
 Because every manufacturer follows the same Ethernet specification, a network may contain equipment from many vendors.
 
-For example:
+For example :
 
 ```text
 Dell PC
-
 ↓
-
 Cisco Switch
-
 ↓
-
 Juniper Router
-
 ↓
-
 HPE Server
 ```
 
-Although each device is manufactured by a different company, Ethernet frames remain compatible because every device follows the IEEE 802.3 specification.
+Although each device is manufactured by a different company, Ethernet frames remain compatible because every device follows the IEEE 802.3 specification. This interoperability is one of the primary goals of networking standards.
 
-This interoperability is one of the primary goals of networking standards.
+#### IEEE 802.11 — [[Wi-Fi]]
 
-### IEEE 802.11 — Wi-Fi
-
-The IEEE also develops standards for wireless networking.
-
-These standards belong to the **802.11** family.
-
-Examples include:
+The IEEE also develops standards for wireless networking IEEE 802.11. These standards belong to the **802.11** family. Examples include :
 
 | Standard | Marketing Name |
 |-----------|----------------|
@@ -818,82 +801,66 @@ Examples include:
 | 802.11ax | Wi-Fi 6 |
 | 802.11be | Wi-Fi 7 |
 
-Although users often refer simply to "Wi-Fi," each generation introduces improvements in:
+Although users often refer simply to "Wi-Fi," each generation introduces improvements in :
+- *Throughput*
 
-- Throughput
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Throughput|Definitions]]
+
 - Latency
 - Range
-- Spectral efficiency
+- *Spectral efficiency*
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Spectral efficiency|Definitions]]
+
 - Multi-user communication
 - Security
 
 Despite these improvements, all implementations follow the IEEE specifications.
 
-### Ethernet and Wi-Fi
+#### Ethernet and Wi-Fi
 
-Students often assume Ethernet and Wi-Fi are fundamentally different networking technologies.
-
-In reality, they perform similar functions.
-
-Both provide:
-
+Students often assume Ethernet and Wi-Fi are fundamentally different networking technologies. In reality, they perform similar functions. Both provide :
 - Local network communication.
 - MAC addressing.
 - Frame delivery.
 - Error detection.
 
-The primary difference lies in the transmission medium.
-
+The primary difference lies in the <u>transmission medium</u>.
 Ethernet transmits frames over cables.
-
 Wi-Fi transmits frames using radio waves.
 
 Higher-layer protocols such as IP and TCP remain unchanged.
-
 A browser behaves identically whether connected by Ethernet or Wi-Fi.
 
-### IEEE 802.1Q — VLANs
+#### IEEE 802.1Q — [[VLANs]]
 
 Large networks are often divided into multiple logical networks known as **Virtual Local Area Networks (VLANs)**.
 
-IEEE 802.1Q defines the method for inserting a VLAN identifier into an Ethernet frame.
-
-This allows multiple logical networks to share the same physical switching infrastructure.
-
-For example:
+IEEE 802.1Q defines the method for inserting a VLAN identifier into an Ethernet frame. This allows multiple logical networks to share <u>the same physical switching infrastructure</u>. For example :
 
 ```text
 Switch
-
 ├── VLAN 10 (Engineering)
-
 ├── VLAN 20 (Sales)
-
 └── VLAN 30 (Management)
 ```
 
-Although all devices may connect to the same switch, VLAN tagging keeps traffic logically separated.
+Although all devices may connect to the same switch, VLAN tagging keeps traffic <u>logically separated</u>.
 
 VLANs are covered in detail later in the course.
 
-### IEEE 802.1X — Network Authentication
+#### IEEE 802.1X — Network Authentication
 
-Modern enterprise networks often require users to authenticate before receiving network access.
+Modern enterprise networks often require users to authenticate before receiving network access. [[IEEE 802.1X]] defines **Port-Based Network Access Control**.
 
-IEEE 802.1X defines **Port-Based Network Access Control**.
-
-Instead of allowing every device immediate access, the switch or wireless access point requests authentication.
-
-Typical authentication methods include:
-
+Instead of allowing every device immediate access, the switch or wireless access point requests authentication. Typical authentication methods include :
 - Username and password
 - Digital certificates
 - Enterprise credentials
 
 Only after successful authentication is network access granted.
 
-802.1X is commonly deployed in:
-
+802.1X is commonly deployed in :
 - Corporate offices
 - Universities
 - Government agencies
@@ -903,10 +870,7 @@ It provides an important first line of defense against unauthorized network acce
 
 ### Internet Assigned Numbers Authority (IANA)
 
-Many networking values must remain globally unique.
-
-For example:
-
+Many networking values must remain globally unique. For example :
 - IP addresses
 - TCP port numbers
 - UDP port numbers
@@ -914,34 +878,26 @@ For example:
 
 If different organizations assigned these values independently, conflicts would quickly occur.
 
-The **Internet Assigned Numbers Authority (IANA)** maintains these global registries.
+The [[Internet Assigned Numbers Authority (IANA)]] maintains these global registries; IANA ensures that Internet numbering resources remain organized and unique.
 
-IANA ensures that Internet numbering resources remain organized and unique.
+#### Responsibilities of IANA
 
-### Responsibilities of IANA
+IANA maintains several important registries. These include :
+- TCP port numbers
+- UDP port numbers
+- IP protocol numbers
+- *Autonomous System Number registries*
 
-IANA maintains several important registries.
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Autonomous System Number (ASN) registry|Definitions]]
 
-These include:
+- DNS root zone management
+- IP address allocation to Regional Internet Registries
 
-- TCP port numbers.
-- UDP port numbers.
-- IP protocol numbers.
-- Autonomous System Number registries.
-- DNS root zone management.
-- IP address allocation to Regional Internet Registries.
+Although IANA manages these registries, it does not assign every address directly to end users. Instead, it coordinates global allocation through hierarchical management.
 
-Although IANA manages these registries, it does not assign every address directly to end users.
+#### Port Numbers
 
-Instead, it coordinates global allocation through hierarchical management.
-
-### Port Numbers
-
-Every TCP or UDP service uses a numerical identifier known as a **port number**.
-
-Rather than inventing new numbers independently, software developers use values assigned through IANA.
-
-Examples include:
+Every TCP or UDP service uses a numerical identifier known as a **port number**. Rather than inventing new numbers independently, software developers use values assigned through IANA. Examples include :
 
 | Service | Port |
 |----------|-----:|
@@ -955,13 +911,11 @@ Examples include:
 | IMAP | 143 |
 | HTTPS | 443 |
 
-Because these assignments are standardized, every browser knows that HTTPS servers normally listen on port 443.
+Because these assignments are standardized, every browser knows that HTTPS servers normally listen on port 443. Likewise, every SSH client expects SSH servers on port 22.
 
-Likewise, every SSH client expects SSH servers on port 22.
+##### Port Number Ranges
 
-### Port Number Ranges
-
-IANA divides port numbers into three categories.
+IANA divides port numbers into three categories :
 
 | Range | Name |
 |--------|------|
@@ -969,12 +923,9 @@ IANA divides port numbers into three categories.
 | 1024–49151 | Registered Ports |
 | 49152–65535 | Dynamic / Private Ports |
 
-#### Well-Known Ports
+###### Well-Known Ports
 
-These ports are reserved for widely deployed services.
-
-Examples include:
-
+These ports are reserved for widely deployed services. Examples include :
 - HTTP
 - HTTPS
 - DNS
@@ -982,21 +933,16 @@ Examples include:
 
 Most servers use these default assignments.
 
-#### Registered Ports
+###### Registered Ports
 
-Organizations may register port numbers for proprietary or specialized applications.
-
-Examples include:
-
+Organizations may register port numbers for proprietary or specialized applications. Examples include :
 - Database servers
 - Enterprise software
 - Vendor-specific services
 
-#### Dynamic Ports
+###### Dynamic Ports
 
-Dynamic ports are typically assigned temporarily by the operating system.
-
-When a browser connects to:
+Dynamic ports are typically assigned temporarily by the operating system. When a browser connects to :
 
 ```
 https://example.com
@@ -1008,71 +954,36 @@ the destination port is usually:
 443
 ```
 
-The source port, however, is automatically selected from the dynamic range.
-
-Example:
+The source port, however, is automatically selected from the dynamic range. Example :
 
 ```
 Source Port: 52481
-
 Destination Port: 443
 ```
 
 This temporary assignment allows thousands of simultaneous connections from the same computer.
 
-### IP Address Allocation
+#### IP Address Allocation
 
-Every public IP address on the Internet must be globally unique.
+Every public IP address on the Internet must be globally unique. IANA manages the global pool of IP addresses.
 
-IANA manages the global pool of IP addresses.
+Rather than assigning addresses directly to Internet users, IANA delegates large address blocks to ***Regional Internet Registries (RIRs)***.
 
-Rather than assigning addresses directly to Internet users, IANA delegates large address blocks to **Regional Internet Registries (RIRs)**.
-
-The five Regional Internet Registries are:
-
-| Registry | Region |
-|-----------|--------|
-| AFRINIC | Africa |
-| APNIC | Asia-Pacific |
-| ARIN | North America |
-| LACNIC | Latin America and Caribbean |
-| RIPE NCC | Europe, Middle East, Central Asia |
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Regional Internet Registries (RIRs)|Definitions]]
 
 These organizations then allocate addresses to Internet Service Providers (ISPs), businesses, governments, and other organizations.
 
-### Protocol Numbers
+#### Protocol Numbers
 
-IP packets contain a field called the **Protocol Number**.
+IP packets contain a field called the **Protocol Number**. This field tells the receiving device which Transport layer protocol is encapsulated inside the IP packet. IANA maintains the registry of *IP protocol numbers*. 
 
-This field tells the receiving device which Transport layer protocol is encapsulated inside the IP packet.
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - IP Protocol Number|Definitions]]
 
-IANA maintains the registry of protocol numbers.
+![[Cybersecurity journey/1. Networking/Q&A#❔ - Since every layer is independent, why should we have IP protocol numbers ?|Q&A]]
 
-Common examples include:
+#### Why Centralized Registries Matter
 
-| Number | Protocol |
-|---------|----------|
-| 1 | ICMP |
-| 6 | TCP |
-| 17 | UDP |
-| 50 | ESP |
-| 51 | AH |
-
-For example:
-
-If an IPv4 packet contains:
-
-```
-Protocol = 6
-```
-
-the operating system immediately knows that the payload contains a TCP segment.
-
-### Why Centralized Registries Matter
-
-Imagine two software companies independently deciding to use port 443 for unrelated services.
-
-Applications would conflict.
+Imagine two software companies independently deciding to use port 443 for unrelated services. Applications would conflict.
 
 Similarly, if two organizations used the same public IP address, Internet routing would fail.
 
