@@ -1016,18 +1016,17 @@ The purpose of memorizing these RFCs is not to remember every technical detail t
 
 ### RFC 791 — Internet Protocol Version 4 (IPv4)
 
-Published in 1981, **RFC 791** defines **Internet Protocol Version 4 (IPv4)**, the protocol responsible for logical addressing and routing across interconnected networks.
+Published in 1981, **RFC 791** defines **Internet Protocol Version 4 (IPv4)**, the protocol responsible for <u>logical addressing and routing</u> across interconnected networks.
 
-Nearly every packet transmitted across today's Internet contains an IPv4 header or its successor, IPv6.
+Every packet transmitted across today's Internet contains an IPv4 header or its successor, IPv6.
 
-RFC 791 specifies:
-
-- IPv4 packet format.
-- Header fields.
-- Fragmentation.
-- Time To Live (TTL).
-- Protocol identification.
-- Source and destination addressing.
+RFC 791 specifies :
+- IPv4 packet format
+- Header fields
+- Fragmentation
+- Time To Live (TTL)
+- Protocol identification
+- Source and destination addressing
 
 A simplified IPv4 packet appears below.
 
@@ -1039,7 +1038,7 @@ A simplified IPv4 packet appears below.
 +-------------------------------+
 ```
 
-Important fields defined by RFC 791 include:
+Important fields defined by RFC 791 include :
 
 | Field | Purpose |
 |--------|---------|
@@ -1051,50 +1050,50 @@ Important fields defined by RFC 791 include:
 | Source Address | Sender's IP address |
 | Destination Address | Receiver's IP address |
 
+And this is the real illustration of the RFC 791 header fields :
+
+![[Pasted image 20260727135336.png]]
+
 Every router on the Internet examines several of these fields while forwarding packets toward their destination.
 
 Although IPv6 has become increasingly common, IPv4 remains the dominant protocol on many networks.
+
+![[Cybersecurity journey/1. Networking/Q&A#❔ - How to read an RFC header representation and its sizes ?|Q&A]]
 
 ### RFC 793 — Transmission Control Protocol (TCP)
 
 **RFC 793** defines the **Transmission Control Protocol (TCP)**.
 
-TCP provides reliable, connection-oriented communication between applications.
+TCP provides reliable, connection-oriented communication between applications. Unlike IP, TCP ensures that data is delivered :
+- Reliably
+- In order
+- Without duplication
 
-Unlike IP, TCP ensures that data is delivered:
+RFC 793 defines :
+- Connection establishment
+- Sequence numbers
+- Acknowledgements
+- Flow control
+- Connection termination
+- Retransmission behavior
 
-- Reliably.
-- In order.
-- Without duplication.
+Here is the full RFC 793 header detailed : 
 
-RFC 793 defines:
+![[Pasted image 20260727140223.png]]
 
-- Connection establishment.
-- Sequence numbers.
-- Acknowledgements.
-- Flow control.
-- Connection termination.
-- Retransmission behavior.
-
-One of its best-known features is the **Three-Way Handshake**.
+One of its best-known features is the **Three-Way Handshake** :
 
 ```text
 Client                  Server
-
 SYN
 ----------------------->
-
           SYN-ACK
 <-----------------------
-
 ACK
 ----------------------->
 ```
 
-Only after this exchange can application data be transmitted.
-
-TCP is used by applications requiring reliable communication, including:
-
+Only after this exchange can application data be transmitted. TCP is used by applications requiring reliable communication, including :
 - HTTP
 - HTTPS
 - SSH
@@ -1107,31 +1106,21 @@ TCP is used by applications requiring reliable communication, including:
 
 UDP provides a lightweight alternative to TCP.
 
-Unlike TCP, UDP:
+Unlike TCP, UDP :
+- Does not establish a connection
+- Does not guarantee delivery
+- Does not retransmit lost packets
+- Does not guarantee packet ordering
 
-- Does not establish a connection.
-- Does not guarantee delivery.
-- Does not retransmit lost packets.
-- Does not guarantee packet ordering.
+Its header is intentionally simple : 
 
-Its header is intentionally simple.
+![[Pasted image 20260727140441.png]]
 
-```text
-+----------------------+
-| Source Port          |
-+----------------------+
-| Destination Port     |
-+----------------------+
-| Length               |
-+----------------------+
-| Checksum             |
-+----------------------+
-```
+Because of its simplicity, UDP introduces minimal *overhead* and latency.
 
-Because of its simplicity, UDP introduces minimal overhead and latency.
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Overhead|Definitions]]
 
-Applications commonly using UDP include:
-
+Applications commonly using UDP include :
 - DNS
 - DHCP
 - VoIP
@@ -1141,115 +1130,96 @@ Applications commonly using UDP include:
 
 The choice between TCP and UDP depends entirely on application requirements.
 
+![[Cybersecurity journey/1. Networking/Q&A#❔ - Why does some sensitive services like DNS use UDP even though we can't proceed without having the full lifecycle of their request and response ?|Q&A]]
+
 ### RFC 826 — Address Resolution Protocol (ARP)
 
 Before an Ethernet frame can be transmitted across a local network, the sender must determine the destination device's MAC address.
 
-**RFC 826** defines the **Address Resolution Protocol (ARP)**.
-
-ARP resolves an IPv4 address into its corresponding MAC address.
-
-The process follows a simple request-response pattern.
+**RFC 826** defines the **Address Resolution Protocol (ARP)**. ARP resolves an <u>IPv4 address</u> into its corresponding MAC address. The process follows a simple request-response pattern :
 
 ```text
 PC
-
 Who has 192.168.1.1?
-
 ---------------------------->
-
 Router
-
 192.168.1.1 is
 00:1B:63:84:45:E6
-
 <----------------------------
 ```
 
 After receiving the reply, the sender stores the mapping in its ARP cache.
 
-Subsequent communications typically use the cached entry without sending another ARP request.
+*Subsequent* communications typically use the cached entry without sending another ARP request.
 
-Although IPv6 replaces ARP with Neighbor Discovery Protocol (NDP), ARP remains fundamental to IPv4 networking.
+![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Subsequent|Terminology]]
+
+Although IPv6 replaces ARP with *[[Neighbor Discovery Protocol (NDP)]]*, ARP remains fundamental to IPv4 networking.
+
+Here is the full RFC 826 header fields :
+
+![[Pasted image 20260727141740.png]]
 
 ### RFC 1035 — Domain Name System (DNS)
 
-Humans prefer readable names.
-
-Computers communicate using IP addresses.
-
-**RFC 1035** defines much of the **Domain Name System (DNS)** used to translate between these two forms.
-
-Example:
+**RFC 1035** defines much of the **Domain Name System (DNS)** used to translate between domain names and their IP addresses. Example :
 
 ```
 example.com
-
 ↓
-
 93.184.216.34
 ```
 
-RFC 1035 specifies:
+RFC 1035 specifies :
+- DNS message format
+- Resource Records
+- Query structure
+- Response structure
+- Name compression
+- DNS packet fields
 
-- DNS message format.
-- Resource Records.
-- Query structure.
-- Response structure.
-- Name compression.
-- DNS packet fields.
+Here a better representation for them :
+
+![[Pasted image 20260727142318.png]]
 
 Without DNS, users would need to memorize numerical IP addresses for every website they visit.
 
 ### RFC 8446 — Transport Layer Security (TLS) 1.3
 
-Modern web traffic is almost always encrypted.
-
-**RFC 8446** defines **TLS 1.3**, the latest major version of the Transport Layer Security protocol.
-
-TLS provides:
-
-- Confidentiality.
-- Integrity.
-- Authentication.
+<mark style="background:#fff88f">Modern web traffic is almost always encrypted.</mark> **RFC 8446** defines **TLS 1.3**, the latest major version of the Transport Layer Security protocol. TLS provides :
+- Confidentiality
+- Integrity
+- Authentication
 
 It protects application data from interception and modification while it travels across untrusted networks.
 
-A simplified TLS handshake appears below.
+A simplified TLS handshake appears below :
 
 ```text
 Client
-
 Client Hello
-
 ---------------------->
-
 Server
-
 Server Hello
-
 Certificate
-
 Finished
-
 <----------------------
-
 Client
-
 Finished
-
 ---------------------->
 ```
 
-Once the handshake completes, application data is encrypted before transmission.
+Once the handshake completes, application data is encrypted before transmission. Today, nearly every HTTPS website depends on TLS.
 
-Today, nearly every HTTPS website depends on TLS.
+And to better visualize it, here its diagram : 
+
+![[Pasted image 20260727142923.png]]
+
+> A quick note, as stated before, this document provides lengthy information from time to time, when it does, you're not expected to understand it right away, but you must keep it in consideration and dig into it at some point in the future. Most of the time, all details are provided in the future lessons. 
 
 ### Recognizing RFC Numbers
 
-Network engineers are not expected to memorize every RFC.
-
-However, recognizing several foundational RFC numbers greatly improves technical communication.
+Network engineers are not expected to memorize every RFC. However, recognizing several foundational RFC numbers greatly improves technical communication.
 
 | RFC | Protocol | Layer |
 |-----:|----------|-------|
@@ -1264,165 +1234,29 @@ These RFCs represent technologies encountered daily in enterprise networks.
 
 ### How Vendors Use Standards
 
-Networking vendors rarely invent entirely new communication protocols.
-
-Instead, they implement existing standards.
-
-For example, consider a simple network.
+Networking vendors rarely invent entirely new communication protocols. Instead, they implement existing standards. For example, consider a simple network :
 
 ```text
 Windows Laptop
-
 ↓
-
 Cisco Switch
-
 ↓
-
 Juniper Router
-
 ↓
-
 Linux Server
 ```
 
 Although every device originates from a different manufacturer, communication succeeds because each implements the same standards.
 
 The browser generates an HTTP request.
-
 TCP establishes a connection according to RFC 793.
-
 IP forwards packets according to RFC 791.
-
 Ethernet frames follow IEEE 802.3.
-
 The switch forwards frames using Ethernet rules.
-
 The router forwards packets using IP.
-
 The web server interprets HTTP according to Internet standards.
 
-No vendor-specific translation is required.
-
-Standardization enables interoperability.
-
-### Reading Protocol Information in Wireshark
-
-Wireshark allows engineers to observe these standards directly.
-
-Open any captured packet.
-
-Expand the protocol tree.
-
-You may observe:
-
-```text
-Frame
-
-Ethernet II
-
-Internet Protocol Version 4
-
-Transmission Control Protocol
-
-Transport Layer Security
-```
-
-Each protocol shown corresponds to a published standard.
-
-The packet itself is a real implementation of the specifications defined by the IETF and IEEE.
-
-Understanding protocol standards allows engineers to interpret exactly what Wireshark displays.
-
-### Practical Laboratory
-
-#### Objective
-
-Identify protocols and their corresponding standards within a packet capture.
-
-#### Requirements
-
-- Wireshark
-- Internet connection
-- Web browser
-
-#### Procedure
-
-1. Start Wireshark.
-2. Begin capturing traffic.
-3. Visit a secure website.
-4. Stop the capture.
-5. Select a TCP packet.
-6. Expand every protocol layer.
-
-#### Tasks
-
-For each protocol displayed:
-
-- Identify its protocol name.
-- Identify its protocol layer.
-- Determine which standards organization defines it.
-- Determine whether it originates from an RFC or an IEEE standard.
-
-Complete the following table.
-
-| Protocol | Layer | Standards Organization | Standard |
-|-----------|-------|------------------------|----------|
-| Ethernet | Link | IEEE | IEEE 802.3 |
-| IPv4 | Network | IETF | RFC 791 |
-| TCP | Transport | IETF | RFC 793 |
-| TLS | Application | IETF | RFC 8446 |
-
-Repeat the exercise using a DNS query.
-
-Identify the protocol defined by RFC 1035.
-
-### Common Misconceptions
-
-#### Misconception 1
-
-> Every RFC is an Internet Standard.
-
-Incorrect.
-
-Many RFCs are informational, experimental, or describe operational practices rather than defining standards.
-
-Only some RFCs progress through the standards process.
-
-#### Misconception 2
-
-> The IEEE develops Internet protocols such as TCP and IP.
-
-Incorrect.
-
-TCP, IP, UDP, DNS, and TLS are developed primarily through the IETF.
-
-The IEEE develops technologies such as Ethernet, Wi-Fi, VLANs, and network access control.
-
-#### Misconception 3
-
-> IANA creates networking protocols.
-
-Incorrect.
-
-IANA does not define protocols.
-
-Instead, it manages global registries including:
-
-- Port numbers.
-- Protocol numbers.
-- IP address allocations.
-- DNS root zone information.
-
-#### Misconception 4
-
-> Standards limit innovation.
-
-In practice, the opposite is true.
-
-Open standards encourage innovation because manufacturers compete by improving implementations rather than inventing incompatible protocols.
-
-The existence of common standards has allowed thousands of vendors to develop interoperable networking equipment over several decades.
+No vendor-specific translation is required. Standardization enables interoperability.
 
 ### Summary
 

@@ -64,9 +64,15 @@ When referring to a protocol formally or implementing it in software, it is defi
 ###### ❔ - Since every layer is independent, why should we have IP protocol numbers ?
 While layer independence means that the Internet Protocol doesn't care <u>how</u> a transport protocol operates, a receiving host still needs to know <u>which</u> transport-layer engine should process an incoming packet's payload. IP protocol numbers act as a demultiplexing label at the boundary between Layer 3 and Layer 4: when the receiving operating system strips off the IP header, the protocol number tells the kernel whether to hand the enclosed data to the TCP handler, the UDP handler, ICMP, or another protocol. Without this indicator, encapsulation would preserve abstraction during transit, but the destination system would have no way of knowing which upper-layer software module is responsible for unpacking and reading the delivered payload.
 
-###### ❔ - 
+###### ❔ - How to read an RFC header representation and its sizes ?
+RFC documents represent network packet headers using simple text-based grid diagrams where each horizontal row represents a 32-bit (4-byte) slice of data, indexed from bit `0` to bit `31` across the top ruler. To figure out a field's size, look at its box horizontally: the width of the box corresponds directly to its length in bits. For example, a box spanning from column `0` to column `7` is 8 bits (1 byte) wide, while a box taking up an entire row spans all 32 bits (4 bytes). You read these diagrams just like a page of text—left-to-right, top-to-bottom—following the exact order bytes travel over the wire, allowing you to calculate any field's size and byte offset simply by counting the grid columns its box occupies.
 
-###### ❔ - 
+A diagram represents it best :
+
+![[Pasted image 20260727135749.png]]
+
+###### ❔ - Why does some sensitive services like DNS use UDP even though we can't proceed without having the full lifecycle of their request and response ?
+DNS uses UDP primarily for speed, low latency, and server scalability because a standard DNS query is a simple, stateless transaction—a single request followed by a single response. Establishing a TCP connection requires a three-way handshake and connection state tracking on the server, which would severely degrade performance and consume massive CPU and memory resources on servers handling millions of requests per second. To achieve reliability without transport-layer overhead, DNS shifts accountability to the application layer: the client's resolver runs its own timer and handles retransmissions or failovers if a UDP packet is lost. If a response is too large or truncated (indicated by the TC bit in the DNS header), DNS seamlessly falls back to TCP, allowing it to use lightweight UDP for the vast majority of lookups while retaining TCP as a safety net when guaranteed delivery is necessary.
 
 ###### ❔ - 
 

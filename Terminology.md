@@ -81,7 +81,8 @@ to extend, reach, or stretch across a certain distance, space, or period of time
 ###### 𝑨 - Obsolescence
 the state of becoming outdated, no longer useful, or superseded by newer innovations
 
-###### 𝑨 - 
+###### 𝑨 - Subsequent
+coming or happening after something else in time, order, or place
 
 ###### 𝑨 - 
 

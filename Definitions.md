@@ -235,9 +235,11 @@ An **Autonomous System Number (ASN) registry** is an official public directory t
 ###### 🧠 - IP Protocol Number
 **IP Protocol Numbers** are standardized numerical codes stored inside an IP packet's header (in the "Protocol" field for IPv4 or "Next Header" for IPv6) that tell a receiving computer which higher-layer protocol is being carried inside the packet payload. Because the Internet Protocol operates at Layer 3 to route data across networks, it needs a way to specify what type of data it is transporting; the protocol number acts like a package label directing the system's network stack to the right handler. For example, a value of 6 specifies TCP (used for web browsing and files), 17 specifies UDP (used for streaming and gaming), and 1 specifies ICMP (used for ping commands). Maintained globally by IANA, these numbers ensure that operating systems everywhere know exactly how to unpack and process incoming network traffic.
 
-###### 🧠 - 
+###### 🧠 - Overhead
+In networking, **overhead** is the extra control data—such as headers, trailers, and routing addresses—that must be attached to your actual payload (the real data you want to send) to ensure it reaches its destination safely. Think of sending a letter in the mail: the written message inside is your payload, while the envelope, stamp, and address label represent the overhead. Although overhead carries no useful content for the end user, it is essential because it tells switches and routers where to deliver the packet, checks for corrupted bits, and maintains proper ordering. Because every header takes up bandwidth, higher overhead means a smaller portion of each transmission is available for your actual data.
 
-###### 🧠 - 
+###### 🧠 - Neighbor Discovery Protocol (NDP)
+**Neighbor Discovery Protocol (NDP)** is the automatic helper tool that IPv6 devices use to find, identify, and talk to each other on a local network, replacing the older ARP system used in IPv4. When your computer or phone connects to an IPv6 network, NDP acts like a quiet meet-and-greet: it helps your device automatically discover local routers, sets up your IP address without manual configuration, matches IPv6 addresses to physical hardware (MAC) addresses, and double-checks that no two devices share the same address. Instead of shouting out loud to every single device on the entire network like older systems did, NDP uses targeted messages sent only to the specific devices involved, keeping local network traffic fast, organized, and efficient.
 
 ###### 🧠 - 
 
