@@ -84,11 +84,14 @@ the state of becoming outdated, no longer useful, or superseded by newer innovat
 ###### 𝑨 - Subsequent
 coming or happening after something else in time, order, or place
 
-###### 𝑨 - 
+###### 𝑨 - Scalable
+a system, business, or process can grow and handle increased demand or larger workloads without losing performance or drastically increasing costs
 
-###### 𝑨 - 
+###### 𝑨 - Idle
+not active, not in use, or doing nothing
 
-###### 𝑨 - 
+###### 𝑨 - Bursty
+something that occurs in short, sudden, and intense periods of activity or effort rather than at a steady, continuous pace
 
 ###### 𝑨 - 
 

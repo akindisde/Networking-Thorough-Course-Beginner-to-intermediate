@@ -241,6 +241,31 @@ In networking, **overhead** is the extra control data—such as headers, trailer
 ###### 🧠 - Neighbor Discovery Protocol (NDP)
 **Neighbor Discovery Protocol (NDP)** is the automatic helper tool that IPv6 devices use to find, identify, and talk to each other on a local network, replacing the older ARP system used in IPv4. When your computer or phone connects to an IPv6 network, NDP acts like a quiet meet-and-greet: it helps your device automatically discover local routers, sets up your IP address without manual configuration, matches IPv6 addresses to physical hardware (MAC) addresses, and double-checks that no two devices share the same address. Instead of shouting out loud to every single device on the entire network like older systems did, NDP uses targeted messages sent only to the specific devices involved, keeping local network traffic fast, organized, and efficient.
 
+###### 🧠 - Bandwidth
+In computer networking, **bandwidth** is the maximum rate of data transfer across a specific network path or communication link in a set period, typically measured in bits per second (such as Mbps or Gbps). Rather than measuring the physical speed at which data travels—which is governed by latency—bandwidth measures the total data capacity or volume that the channel can carry at any given moment. A helpful analogy is a multi-lane highway: increasing bandwidth adds more lanes so that more vehicles can travel side-by-side simultaneously, but it does not change the actual speed limit of the cars. As a result, higher bandwidth allows a network to process larger payloads and support more concurrent connections without causing severe queuing delays.
+
+###### 🧠 - Statistical multiplexing
+**Statistical multiplexing** is a smart way for a network to share bandwidth dynamically based on real-time demand, rather than assigning every user a fixed, dedicated channel. In legacy systems like Time Division Multiplexing (TDM), capacity is divided into rigid time slots assigned to specific users, meaning bandwidth sits completely wasted whenever a user stops sending data. Statistical multiplexing takes advantage of the fact that internet traffic is "bursty"—people download a webpage in a quick burst and then pause to read—by instantly giving available capacity to whichever device is actively sending data at that exact millisecond. Think of it like a single flexible line at a coffee shop: instead of reserving a dedicated cashier for each customer who might just be looking at the menu, the next available cashier serves whoever is ready to order right now, maximizing link efficiency and allowing networks to accommodate far more total users.
+
+###### 🧠 - 
+
+###### 🧠 - 
+
+###### 🧠 - 
+
+###### 🧠 - 
+
+###### 🧠 - 
+
+###### 🧠 - 
+
+###### 🧠 - 
+
+###### 🧠 - 
+
+###### 🧠 - 
+
+###### 🧠 - 
 ###### 🧠 - 
 
 ###### 🧠 - 

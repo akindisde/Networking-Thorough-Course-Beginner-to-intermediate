@@ -6,21 +6,22 @@ Every second, the Internet transports billions of pieces of information between 
 
 Despite this enormous scale, the Internet does not establish a dedicated physical connection between every pair of communicating devices. Instead, it divides data into small units called **packets**, which are forwarded independently across a shared network.
 
-This design is one of the fundamental reasons why the Internet is scalable, fault-tolerant, and capable of supporting billions of simultaneous users.
+This design is one of the fundamental reasons why the Internet is *scalable*, fault-tolerant, and capable of supporting billions of simultaneous users.
 
-In this lesson, we begin by examining two fundamentally different approaches to network communication: **circuit switching** and **packet switching**.
+![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Scalable|Terminology]]
+
+In this lesson, we begin by examining two fundamentally different approaches to network communication: **[[Circuit switching]]** and **[[Packet switching]]**.
 
 Understanding why the Internet adopted packet switching instead of circuit switching explains many behaviors observed in modern networks, including routing, congestion, latency, and bandwidth sharing.
 
 ### Learning Objectives
 
-After completing this lesson, students should be able to:
-
-- Explain the difference between circuit switching and packet switching.
-- Describe why the Internet uses packet switching.
-- Understand statistical multiplexing.
-- Explain why packet switching scales better than dedicated circuits.
-- Describe how packets travel independently through a network.
+After completing this lesson, students should be able to :
+- Explain the difference between circuit switching and packet switching
+- Describe why the Internet uses packet switching
+- Understand statistical multiplexing
+- Explain why packet switching scales better than dedicated circuits
+- Describe how packets travel independently through a network
 
 ### Two Ways to Build a Network
 
@@ -29,100 +30,74 @@ Historically, communication networks have been built using one of two approaches
 - Circuit Switching
 - Packet Switching
 
-Although both methods allow information to travel between two endpoints, they operate very differently.
-
-Understanding these differences helps explain why the Internet functions the way it does today.
+Although both methods allow information to travel between two endpoints, they operate <u>very differently</u>. Understanding these differences helps explain why the Internet functions the way it does today.
 
 ### Circuit Switching
 
 Circuit switching establishes a **dedicated communication path** between two devices before any information is transmitted.
 
-Once established, that path remains reserved exclusively for the duration of the communication session.
+Once established, that path remains reserved exclusively for the duration of the communication session. No other user may utilize the reserved resources, even if they are temporarily *idle*.
 
-No other user may utilize the reserved resources, even if they are temporarily idle.
+![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Idle|Terminology]]
 
-Traditional telephone networks are the classic example of circuit switching.
-
-Consider two telephones connected through several telephone exchanges.
+Traditional telephone networks are the classic example of circuit switching. Consider two telephones connected through several telephone exchanges:
 
 ```text
 Telephone A
-
 ↓
-
 Exchange 1
-
 ↓
-
 Exchange 2
-
 ↓
-
 Exchange 3
-
 ↓
-
 Telephone B
 ```
 
-Before either person can speak, the telephone network reserves a complete end-to-end path.
+Before either person can speak, the telephone network reserves a complete end-to-end path. Once the circuit is established:
 
-Once the circuit is established:
+- *Bandwidth* is reserved
 
-- Bandwidth is reserved.
-- Intermediate switches dedicate resources.
-- Communication proceeds continuously.
-- Other users cannot use that reserved capacity.
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Bandwidth|Definitions]]
+
+- Intermediate switches dedicate resources
+- Communication proceeds continuously
+- Other users cannot use that reserved capacity
 
 The circuit remains allocated until one party hangs up.
 
-### Characteristics of Circuit Switching
+#### Characteristics of Circuit Switching
 
-Circuit-switched networks possess several important characteristics.
+Circuit-switched networks possess several important characteristics:
 
-#### Dedicated Resources
+##### Dedicated Resources
 
-Every conversation reserves its own communication path.
-
-Even during periods of silence, the reserved bandwidth cannot be shared with other users.
-
-For example:
-
-```text
-Call Established
-
-Reserved Capacity
-
-████████████████
-```
+Every conversation reserves its own communication path. Even during periods of silence, the reserved bandwidth cannot be shared with other users.
 
 Whether the users are speaking or remaining silent, the network resources remain occupied.
 
-#### Predictable Performance
+##### Predictable Performance
 
-Because resources are reserved, communication quality remains relatively stable.
+Because resources are reserved, communication quality remains <u>relatively stable</u>.
 
 Latency is generally consistent.
-
 Bandwidth remains available throughout the connection.
 
 This predictability made circuit switching well suited for early voice communication.
 
-#### Limited Capacity
+##### Limited Capacity
 
-The greatest disadvantage of circuit switching is inefficiency.
+The greatest disadvantage of circuit switching is <u>inefficiency</u>.
 
 Suppose a network contains enough capacity for 100 simultaneous calls.
 
-If all 100 circuits are reserved, a new caller receives a busy signal.
+If all 100 circuits are reserved, a new caller receives a busy signal. Even if many existing callers are completely silent, their reserved bandwidth cannot be reassigned. The network therefore **wastes** considerable resources.
 
-Even if many existing callers are completely silent, their reserved bandwidth cannot be reassigned.
+#### The Problem with Circuit Switching
 
-The network therefore wastes considerable resources.
+Human communication is naturally *bursty*.
 
-### The Problem with Circuit Switching
-
-Human communication is naturally bursty.
+![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Bursty|Terminology]]
 
 During a conversation:
 
@@ -131,62 +106,40 @@ During a conversation:
 - Both remain silent briefly.
 - The conversation resumes.
 
-The communication channel is not used continuously.
-
-Data communication behaves similarly.
+The communication channel is not used continuously. Data communication behaves similarly:
 
 When loading a webpage, the browser sends a request.
-
 It then waits for the server.
-
 The server responds.
-
 The browser processes the response.
 
 Periods of activity alternate with periods of inactivity.
 
 If every Internet connection required a dedicated circuit, enormous amounts of bandwidth would remain unused most of the time.
 
+To help visualize it better, here a diagram about circuit switching:
+
+![[Pasted image 20260729210052.png]]
+
 ### Packet Switching
 
-Packet switching takes a fundamentally different approach.
-
-Instead of reserving an entire communication path, data is divided into small pieces called **packets**.
-
-Each packet is transmitted independently across a shared network.
+Packet switching takes a fundamentally different approach. Instead of reserving an entire communication path, data is divided into small pieces called **packets**. Each packet is transmitted independently across a shared network.
 
 Multiple users simultaneously share the same communication links.
-
 No permanent circuit exists.
-
-A packet-switched network appears conceptually as follows.
-
-```text
-        Router
-
-      /    |    \
-
-User A   User B   User C
-
-      \    |    /
-
-        Internet
-```
 
 Rather than dedicating one path per user, every communication link carries packets belonging to many different users.
 
-### What Is a Packet?
+#### What Is a Packet?
 
-A packet is a small unit of transmitted data.
-
-Each packet contains:
+A packet is a small unit of transmitted data. Each packet contains:
 
 - Control information.
 - Source address.
 - Destination address.
 - Payload.
 
-Conceptually:
+Conceptually, as discussed before:
 
 ```text
 +-----------------------+
@@ -196,150 +149,118 @@ Conceptually:
 +-----------------------+
 ```
 
-The header tells the network where the packet should travel.
+The header tells the network where the packet should travel. The payload contains the actual user data.
 
-The payload contains the actual user data.
+Large files are divided into many packets before transmission. The receiving device later reconstructs the original data.
 
-Large files are divided into many packets before transmission.
+#### An Example
 
-The receiving device later reconstructs the original data.
-
-### An Example
-
-Suppose a user downloads a 20 MB file.
-
-The file is not transmitted as one enormous block.
-
-Instead, it is divided into thousands of smaller packets.
+Suppose a user downloads a 20 MB file. The file is not transmitted as one enormous block. Instead, it is divided into thousands of smaller packets:
 
 ```text
 File
-
 ↓
-
 Packet 1
-
 Packet 2
-
 Packet 3
-
 Packet 4
-
 ...
-
 Packet N
 ```
 
-Each packet travels independently through the network.
-
+Each packet travels <mark style="background:#fff88f">independently</mark> through the network.
 Some packets may even take different routes before arriving at the destination.
-
 The receiving computer reassembles the packets into the original file.
 
-### Sharing the Network
+#### Sharing the Network
 
-One of packet switching's greatest advantages is resource sharing.
+One of packet switching's greatest advantages is <u>resource sharing</u>.
 
-Consider three users accessing the Internet simultaneously.
+Consider three users accessing the Internet simultaneously:
 
 ```text
 User A
-
 User B
-
 User C
-
 ↓
-
 Shared Router
-
 ↓
-
 Internet
 ```
 
-Rather than allocating dedicated bandwidth to each user, packets from all three users are transmitted whenever capacity becomes available.
+Rather than allocating dedicated bandwidth to each user, packets from all three users are transmitted <u>whenever capacity becomes available</u>.
 
 The communication link is therefore utilized much more efficiently.
 
-### Statistical Multiplexing
+#### Statistical Multiplexing
 
 Packet switching relies on a principle known as **statistical multiplexing**.
 
-Instead of permanently reserving bandwidth, the network dynamically shares available capacity among active users.
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Statistical multiplexing|Definitions]]
 
-Suppose ten users each possess a 10 Mbps connection.
+Instead of permanently reserving bandwidth, the network <u>dynamically</u> shares available capacity among active users.
 
-It is highly unlikely that every user will continuously transmit data at the maximum rate.
+Suppose ten users each possess a 10 Mbps connection. It is highly unlikely that every user will continuously transmit data at the maximum rate.
 
 Most users alternate between:
 
-- Reading.
-- Typing.
-- Waiting.
-- Downloading.
-- Watching videos.
-- Remaining idle.
+- Reading
+- Typing
+- Waiting
+- Downloading
+- Watching videos
+- Remaining idle
 
-Packet switching exploits this behavior.
-
-Whenever one user becomes inactive, another user's packets utilize the available bandwidth.
+Packet switching exploits this behavior. Whenever one user becomes inactive, another user's packets utilize the available bandwidth.
 
 This dynamic allocation dramatically improves overall network efficiency.
 
-### An Everyday Analogy
+#### An Everyday Analogy
 
 Imagine a supermarket with dedicated checkout lanes.
-
 Each customer permanently reserves one cashier.
-
 Even if the customer leaves temporarily to collect another item, the cashier remains unavailable.
-
 This resembles circuit switching.
 
 Now imagine a single queue.
-
 Whenever a cashier becomes available, the next customer proceeds.
-
 No cashier remains idle while customers are waiting.
-
 This resembles packet switching.
 
 The second approach generally serves more customers with fewer resources.
-
 Packet-switched networks operate according to the same principle.
 
 ### Why Statistical Multiplexing Works
 
-Computer traffic is extremely unpredictable.
+Computer traffic is extremely <u>unpredictable</u>.
 
-A user reading a webpage generates almost no network traffic.
-
-Moments later, they begin downloading a file.
-
+A user reading a webpage generates almost no network traffic. Moments later, they begin downloading a file.
 Another user finishes a video stream and becomes idle.
-
 A third user starts a video conference.
 
 Because usage constantly changes, permanently reserving bandwidth would waste enormous capacity.
 
-Packet switching allows bandwidth to be allocated only when it is actually needed.
+Packet switching allows bandwidth to be allocated only when it is actually needed. This significantly increases network utilization.
 
-This significantly increases network utilization.
+Visualize it better with this diagram:
+
+![[Pasted image 20260729211425.png]]
 
 ### Comparing Circuit Switching and Packet Switching
 
-The differences between the two approaches can be summarized as follows.
+The differences between the two approaches can be summarized as follows:
 
-| Feature | Circuit Switching | Packet Switching |
-|---------|-------------------|------------------|
-| Communication Path | Dedicated | Shared |
-| Resource Reservation | Required | Not Required |
-| Bandwidth Utilization | Fixed | Dynamic |
-| Scalability | Limited | Excellent |
-| Fault Tolerance | Lower | Higher |
-| Efficiency | Lower | Higher |
-| Typical Use | Traditional Telephone Networks | Internet |
+| Feature               | Circuit Switching              | Packet Switching |
+| --------------------- | ------------------------------ | ---------------- |
+| Communication Path    | Dedicated                      | Shared           |
+| Resource Reservation  | Required                       | Not Required     |
+| Bandwidth Utilization | Fixed                          | Dynamic          |
+| Scalability           | Limited                        | Excellent        |
+| Fault Tolerance       | Lower                          | Higher           |
+| Efficiency            | Lower                          | Higher           |
+| Typical Use           | Traditional Telephone Networks | Internet         |
+
+![[Cybersecurity journey/1. Networking/Q&A#❔ - Is Circuit switching still used nowadays ?|Q&A]]
 
 Circuit switching emphasizes predictable performance through dedicated resources.
 
@@ -347,19 +268,16 @@ Packet switching emphasizes efficient resource sharing and scalability.
 
 The rapid growth of the Internet would not have been possible using circuit-switched networking.
 
-### Why the Internet Uses Packet Switching
+#### Why the Internet Uses Packet Switching
 
 The Internet connects billions of devices that communicate unpredictably.
-
 Users continuously start and stop downloads, browse websites, stream media, send emails, and participate in video conferences.
 
 If every communication session required a dedicated circuit, the Internet would require vastly more physical infrastructure than exists today.
 
 Packet switching allows communication links to be shared among millions of simultaneous users.
 
-Only devices actively transmitting data consume bandwidth.
-
-Idle devices consume almost none.
+<mark style="background:#fff88f">Only devices actively transmitting data consume bandwidth.</mark> Idle devices consume almost none.
 
 This makes packet switching dramatically more efficient for general-purpose data communication.
 
