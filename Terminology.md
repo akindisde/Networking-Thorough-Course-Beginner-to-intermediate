@@ -96,7 +96,8 @@ something that occurs in short, sudden, and intense periods of activity or effor
 ###### 𝑨 - Onward
 moving forward in a physical direction or continuing to happen from a specific time onward
 
-###### 𝑨 - 
+###### 𝑨 - Monopolize
+to take or keep complete control of something so that other people have no share or chance
 
 ###### 𝑨 - 
 

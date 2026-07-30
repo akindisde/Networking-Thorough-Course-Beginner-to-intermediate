@@ -614,7 +614,7 @@ When an application sends data across a network, it cannot transmit an unlimited
 
 This limit is called the **Maximum Transmission Unit (MTU)**.
 
-The MTU specifies the maximum number of bytes that can be placed inside the payload of a Layer 2 frame.
+The MTU specifies the maximum number of <u>bytes</u> that can be placed inside the payload of a Layer 2 frame.
 
 For Ethernet, the standard MTU is:
 
@@ -622,35 +622,34 @@ For Ethernet, the standard MTU is:
 1500 bytes
 ```
 
-This means an Ethernet frame can carry an IP packet whose maximum payload is 1500 bytes.
-
-Anything larger must be handled differently.
+This means an Ethernet frame can carry an IP packet whose maximum payload is 1500 bytes. Anything larger must be handled differently.
 
 ### Why Does an MTU Exist?
 
-Every physical networking technology has practical limitations.
+<u>Every physical networking technology has practical limitations.</u>
 
 Network devices must:
 
-- Allocate memory for buffers.
-- Process frames efficiently.
-- Detect transmission errors.
-- Share the communication medium fairly.
+- Allocate memory for buffers
+- Process frames efficiently
+- Detect transmission errors
+- Share the communication medium fairly
 
 If frames were allowed to become arbitrarily large:
 
-- One transmission could monopolize the communication medium.
-- Error recovery would become expensive.
-- Latency would increase.
-- Memory requirements would grow significantly.
+- One transmission could *monopolize* the communication medium
+
+![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Monopolize|Terminology]]
+
+- Error recovery would become expensive
+- Latency would increase
+- Memory requirements would grow significantly
 
 By limiting frame size, networks maintain predictable performance while reducing the cost of retransmitting damaged data.
 
 ### Ethernet's 1500-Byte MTU
 
-The standard Ethernet frame contains several fields in addition to the payload.
-
-A simplified Ethernet frame is shown below.
+The standard Ethernet frame contains several fields in addition to the payload. A simplified Ethernet frame is shown below:
 
 ```text
 +----------------------------------------+
@@ -662,9 +661,7 @@ A simplified Ethernet frame is shown below.
 +----------------------------------------+
 ```
 
-Notice that the MTU applies only to the payload carried inside the Ethernet frame.
-
-The Ethernet header and trailer are **not included** in the MTU value.
+Notice that the MTU applies only to the payload carried inside the Ethernet frame. The Ethernet header and trailer are **not included** in the MTU value.
 
 ### Total Ethernet Frame Size
 
@@ -682,24 +679,24 @@ Total frame size:
 14 + 1500 + 4 = 1518 Bytes
 ```
 
-Additional technologies such as VLAN tagging increase the total frame size slightly by inserting extra fields.
+Additional technologies such as [[VLANs]] tagging increase the total frame size slightly by inserting extra fields.
 
 ### MTU at Different Layers
 
-The MTU is a **Layer 2 property**.
+The MTU is a **Layer 2 property**. Different network technologies define different MTU values. Examples include:
 
-Different network technologies define different MTU values.
+| Technology                                          |          Typical MTU |
+| --------------------------------------------------- | -------------------: |
+| Ethernet                                            |           1500 Bytes |
+| *[[Point-to-Point Protocol over Ethernet (PPPoE)]]* |           1492 Bytes |
+| IPv6 Minimum MTU                                    |           1280 Bytes |
+| *Jumbo Ethernet Frames*                             | 9000 Bytes (Typical) |
 
-Examples include:
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Point-to-Point Protocol over Ethernet (PPPoE)|Definitions]]
 
-| Technology | Typical MTU |
-|------------|------------:|
-| Ethernet | 1500 Bytes |
-| PPPoE | 1492 Bytes |
-| IPv6 Minimum MTU | 1280 Bytes |
-| Jumbo Ethernet Frames | 9000 Bytes (Typical) |
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Jumbo frame|Definitions]]
 
-Whenever packets move between different network technologies, the smallest MTU along the path becomes the limiting factor.
+Whenever packets move between different network technologies, <mark style="background:#fff88f">the smallest MTU along the path becomes the limiting factor.</mark>
 
 ### Sending a Large File
 
@@ -715,21 +712,14 @@ Since Ethernet allows only:
 1500 Bytes
 ```
 
-per packet payload, the operating system divides the data into multiple packets.
-
-Conceptually:
+per packet payload, the operating system divides the data into multiple packets. Conceptually:
 
 ```text
 5000 Bytes
-
 ↓
-
 Packet 1 (1500)
-
 Packet 2 (1500)
-
 Packet 3 (1500)
-
 Packet 4 (500)
 ```
 
@@ -739,47 +729,31 @@ The receiving device later reconstructs the original file using information prov
 
 ### What Happens When a Packet Is Too Large?
 
-Suppose a host creates an IP packet larger than the MTU supported by the outgoing network.
-
-Two different outcomes are possible.
+Suppose a host creates an IP packet larger than the MTU supported by the outgoing network. Two different outcomes are possible:
 
 #### Fragmentation
 
-In IPv4, routers may divide an oversized packet into multiple smaller packets.
-
-This process is called **fragmentation**.
-
-Example:
+In IPv4, routers may divide an oversized packet into multiple smaller packets. This process is called **fragmentation**. Example:
 
 ```text
 Original Packet
-
 3000 Bytes
-
 ↓
-
 Fragment 1
-
 1500 Bytes
-
 ↓
-
 Fragment 2
-
 1500 Bytes
 ```
 
 Each fragment receives its own IP header.
-
 The receiving host reassembles the fragments into the original packet.
 
 Although fragmentation allows communication to continue, it introduces several disadvantages.
 
-### Problems with Fragmentation
+##### Problems with Fragmentation
 
-Fragmentation increases network overhead.
-
-Instead of forwarding one packet, the network forwards several.
+Fragmentation increases network overhead. Instead of forwarding one packet, the network forwards several.
 
 Each fragment requires:
 
@@ -788,9 +762,7 @@ Each fragment requires:
 - Separate buffering.
 - Separate processing.
 
-If even one fragment is lost, the receiving host cannot reconstruct the original packet.
-
-This often requires retransmission of the entire Transport-layer segment.
+If even one fragment is lost, the receiving host cannot reconstruct the original packet. <mark style="background:#fff88f">This often requires retransmission of the entire Transport-layer segment.</mark>
 
 Because fragmentation reduces efficiency, modern networks attempt to avoid it whenever possible.
 
@@ -798,47 +770,33 @@ Because fragmentation reduces efficiency, modern networks attempt to avoid it wh
 
 Instead of allowing routers to fragment packets repeatedly, modern operating systems attempt to determine the largest packet size that can traverse the complete path.
 
-This process is called **Path MTU Discovery (PMTUD)**.
+This process is called *Path MTU Discovery (PMTUD)*.
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Path MTU Discovery (PMTUD)|Definitions]]
 
 The sender initially assumes a large packet size.
 
-If a router encounters a packet that exceeds the next network's MTU and fragmentation is not permitted, it returns an ICMP error indicating that the packet is too large.
+If a router encounters a packet that exceeds the next network's MTU and fragmentation is not permitted, it returns an *[[Internet Control Message Protocol (ICMP)]]* error indicating that the packet is too large.
 
-The sender then reduces its packet size.
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Internet Control Message Protocol (ICMP)|Definitions]]
 
-Eventually, the sender discovers the maximum packet size supported along the entire path.
-
-Example:
+The sender then reduces its packet size. Eventually, the sender discovers the maximum packet size supported along the entire path. Example:
 
 ```text
 Host
-
 ↓
-
 1500 Bytes
-
 ↓
-
 Router
-
 ↓
-
 MTU Too Large
-
 ↓
-
 ICMP Error
-
 ↓
-
 Host
-
 ↓
-
 1400 Bytes
-
 ↓
-
 Successful Delivery
 ```
 
