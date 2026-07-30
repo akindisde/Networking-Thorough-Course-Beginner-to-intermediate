@@ -93,7 +93,8 @@ not active, not in use, or doing nothing
 ###### 𝑨 - Bursty
 something that occurs in short, sudden, and intense periods of activity or effort rather than at a steady, continuous pace
 
-###### 𝑨 - 
+###### 𝑨 - Onward
+moving forward in a physical direction or continuing to happen from a specific time onward
 
 ###### 𝑨 - 
 

@@ -300,74 +300,56 @@ In the next part, we will examine how packets actually move through the Internet
 
 In the previous lesson, data was shown moving through the protocol stack using encapsulation. An application generates data, the Transport layer creates a segment, the Network layer creates a packet, and the Link layer creates a frame before the Physical layer transmits the bits across the communication medium.
 
-Understanding encapsulation is only the first step. Equally important is understanding **how those packets actually travel across the Internet**.
+Understanding encapsulation is only the first step. Equally important is understanding **how those packets travel across the Internet**.
 
-One common misconception is that the exact Ethernet frame created by the sender travels unchanged all the way to the destination.
-
-This is not true.
+One common misconception is that the exact Ethernet frame created by the sender travels unchanged all the way to the destination. This is not true.
 
 Only the **IP packet** is intended to travel from the source host to the destination host. Ethernet frames exist only for communication across a **single physical link**.
 
+![[Cybersecurity journey/1. Networking/Q&A#❔ - What does a "single physical link" mean in the context of Ethernet frames ?|Q&A]]
+
 This distinction is one of the most important concepts in networking.
 
-### End-to-End Communication
+### *End-to-End Communication*
 
-Suppose a computer in Paris communicates with a web server in Tokyo.
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - End-To-End communication|Definitions]]
 
-The communication path might look like this:
+Suppose a computer in Paris communicates with a web server in Tokyo. The communication path might look like this:
 
 ```text
 PC
-
 ↓
-
 Home Router
-
 ↓
-
 ISP Router
-
 ↓
-
 Core Router
-
 ↓
-
 International Gateway
-
 ↓
-
 ISP Router
-
 ↓
-
 Server
 ```
 
 Although this appears to be one continuous journey, it is actually composed of many smaller communications.
 
 Each communication occurs only between neighboring devices.
-
 The computer sends a frame to the home router.
-
 The home router sends another frame to the ISP router.
-
 The ISP router builds another frame for the next router.
-
 This process repeats until the packet finally reaches the destination.
 
 ### The Difference Between a Packet and a Frame
 
-Students often use the terms **packet** and **frame** interchangeably.
+Students often use the terms **packet** and **frame** interchangeably. In networking, they refer to different Protocol Data Units operating at different layers.
 
-In networking, they refer to different Protocol Data Units operating at different layers.
+| Layer   | Protocol Data Unit |
+| ------- | ------------------ |
+| Network | Packet             |
+| Link    | Frame              |
 
-| Layer | Protocol Data Unit |
-|--------|--------------------|
-| Network | Packet |
-| Link | Frame |
-
-Although a frame contains a packet, they are not the same thing.
+<mark style="background:#fff88f">Although a frame contains a packet, they are not the same thing.</mark>
 
 Think of the relationship like this:
 
@@ -395,194 +377,120 @@ Each frame carries exactly one Network-layer packet.
 The IP packet represents the logical communication between the sender and the receiver.
 
 The source IP address remains the sender.
-
 The destination IP address remains the receiver.
-
 For example:
 
 ```text
 Source IP
-
 192.168.1.10
-
 ↓
-
 Destination IP
-
 93.184.216.34
 ```
 
 These addresses identify the two endpoints of communication.
 
-Every router examines the destination IP address to determine where the packet should be forwarded next.
+<u>Every router</u> examines the destination IP address to determine where the packet should be forwarded next. The IP packet continues toward the destination until it finally arrives.
 
-The IP packet continues toward the destination until it finally arrives.
+### Frames Are *Hop-by-Hop*
 
-### Frames Are Hop-by-Hop
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Hop-by-Hop Communication|Definitions]]
 
-Unlike packets, Ethernet frames never travel across the entire Internet.
-
-A frame exists only between two directly connected devices.
-
-Consider the following network.
+Unlike packets, Ethernet frames never travel across the entire Internet. A frame exists only between two <u>directly connected devices</u>. Consider the following network:
 
 ```text
 PC
-
 ↓
-
 Switch
-
 ↓
-
 Router
-
 ↓
-
 Router
-
 ↓
-
 Server
 ```
 
 The PC creates an Ethernet frame for the first router.
-
 When the router receives the frame, it removes the Ethernet header and trailer.
-
 The original frame is destroyed.
-
 The router then creates a completely new Ethernet frame addressed to the next router.
-
 This process repeats at every hop.
 
 ### Visualizing Frame Replacement
 
-Suppose a packet travels through three routers.
-
-The communication can be represented as follows.
+Suppose a packet travels through three routers. The communication can be represented as follows:
 
 ```text
 PC
-
 Frame A
-
 ↓
-
 Router 1
-
 Frame B
-
 ↓
-
-Router 2
-
+Router 
 Frame C
-
 ↓
-
 Router 3
-
 Frame D
-
 ↓
-
 Server
 ```
 
 Notice that the IP packet remains logically the same.
-
 Only the surrounding Ethernet frame changes.
-
 Each network segment has its own frame.
 
 ### Why Routers Replace Frames
 
 Each physical network has different devices connected to it.
-
 Every network interface possesses its own MAC address.
 
 Suppose Router 1 forwards a packet to Router 2.
-
 The destination MAC address cannot remain the web server's MAC address because the server is not directly connected.
-
 Instead, Router 1 creates a frame addressed to Router 2.
-
-For example:
-
-First network:
+For example: First network:
 
 ```text
-Destination MAC
-
+Destination MAC 1
 Router 1
 ```
 
 Second network:
 
 ```text
-Destination MAC
-
+Destination MAC 2
 Router 2
 ```
 
 Third network:
 
 ```text
-Destination MAC
-
+Destination MAC 3
 Server
 ```
 
 The destination MAC address changes at every hop.
-
 The destination IP address does not.
+
+![[Cybersecurity journey/1. Networking/Q&A#❔ - Why do we have routing and switching, why not just one of them ?|Q&A]]
 
 ### Encapsulation at Every Hop
 
-Each router performs the same sequence of operations.
+Each router performs the same sequence of operations:
 
-1. Receive a frame.
-2. Verify the Frame Check Sequence (FCS).
-3. Remove the Link-layer header and trailer.
-4. Examine the IP packet.
-5. Determine the next hop.
-6. Build a new Ethernet frame.
-7. Transmit the frame.
-
-Conceptually:
-
-```text
-Receive Frame
-
-↓
-
-Remove Ethernet Header
-
-↓
-
-Read IP Packet
-
-↓
-
-Lookup Destination
-
-↓
-
-Build New Ethernet Frame
-
-↓
-
-Transmit
-```
+1. Receive a frame
+2. Verify the Frame Check Sequence (FCS)
+3. Remove the Link-layer header and trailer
+4. Examine the IP packet
+5. Determine the next hop
+6. Build a new Ethernet frame (in case the next hop is determined)
+7. Transmit the frame
 
 This process occurs millions of times every second across the Internet.
 
 ### The Router Does Not Modify the Application Data
 
-An important observation is that routers do **not** inspect the application payload during normal forwarding.
-
-For example, suppose a packet contains:
+An important observation is that routers do **not** inspect the application payload during normal forwarding. For example, suppose a packet contains:
 
 ```http
 GET /index.html HTTP/1.1
@@ -596,9 +504,7 @@ The router does not read:
 - JavaScript
 - HTTP requests
 
-Instead, it focuses almost entirely on the Network layer.
-
-Its primary responsibilities are:
+Instead, it focuses almost entirely on the Network layer. Its <u>primary responsibilities</u> are:
 
 - Reading the destination IP address.
 - Selecting the next hop.
@@ -614,48 +520,30 @@ Example:
 
 ```text
 PC
-
 ↓
-
 Router A
-
 ↓
-
 Router B
-
 ↓
-
 Router C
-
 ↓
-
 Server
 ```
 
-The packet travels through four hops.
-
-Each hop consists of a separate Link-layer communication.
-
-Network engineers frequently use the term when troubleshooting.
-
-For example:
+The packet travels through four hops. Each hop consists of a separate Link-layer communication. Network engineers frequently use the term when troubleshooting. For example:
 
 > "The packet is lost after the third hop."
 
-Utilities such as **traceroute** display each hop that a packet traverses on its path to the destination.
+Utilities such as [[traceroute]] display each hop that a packet traverses on its path to the destination.
 
 ### Switching vs Routing
 
-Another common source of confusion is the difference between switches and routers.
-
-Although both forward traffic, they make forwarding decisions differently.
+Another common source of confusion is the difference between switches and routers. Although <u>both forward traffic</u>, they make forwarding decisions differently.
 
 A switch examines:
-
 - Destination MAC address.
 
 A router examines:
-
 - Destination IP address.
 
 This distinction reflects the layers at which they primarily operate.
@@ -666,82 +554,21 @@ This distinction reflects the layers at which they primarily operate.
 | Router | Network | IP addresses |
 
 Switches move frames within a local network.
-
 Routers move packets between different networks.
-
-### Example Journey
-
-Consider a browser requesting a webpage.
-
-```text
-Browser
-
-↓
-
-TCP Segment
-
-↓
-
-IP Packet
-
-↓
-
-Ethernet Frame
-```
-
-The frame reaches the first router.
-
-The router removes the Ethernet frame.
-
-```text
-Ethernet Removed
-
-↓
-
-IP Packet
-```
-
-The router determines the next destination.
-
-It then creates a new frame.
-
-```text
-New Ethernet Frame
-
-↓
-
-IP Packet
-```
-
-The packet continues toward the destination.
-
-This process repeats until the web server receives the packet.
 
 ### Why This Design Is Important
 
-Separating packets from frames provides enormous flexibility.
-
-The same IP packet can travel across many different technologies.
-
-For example:
+Separating packets from frames provides enormous flexibility. The same IP packet can travel across many different technologies. For example:
 
 ```text
 Ethernet
-
 ↓
-
 Fiber
-
 ↓
-
 Wi-Fi
-
 ↓
-
 MPLS
-
 ↓
-
 Ethernet
 ```
 
@@ -753,31 +580,11 @@ This layered architecture allows different networking technologies to coexist wh
 
 When capturing packets with Wireshark, the software displays the frame that exists on your local network interface.
 
-For example:
+Notice that Wireshark begins with the Ethernet frame because that is what your computer receives.
 
-```text
-Frame
+If the packet is forwarded by a router, that router constructs a different Ethernet frame before sending it *onward*.
 
-↓
-
-Ethernet II
-
-↓
-
-Internet Protocol Version 4
-
-↓
-
-Transmission Control Protocol
-
-↓
-
-Hypertext Transfer Protocol
-```
-
-Notice that Wireshark begins with the Ethernet frame because that is what your computer actually receives.
-
-If the packet is forwarded by a router, that router constructs a different Ethernet frame before sending it onward.
+![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Onward|Terminology]]
 
 You only observe the frame present on your own network segment.
 
@@ -787,8 +594,13 @@ You only observe the frame present on your own network segment.
 - An Ethernet frame provides hop-by-hop communication between directly connected devices.
 - Routers remove the incoming Link-layer frame and construct a new frame for the next network segment.
 - The destination IP address usually remains unchanged throughout the journey, while the destination MAC address changes at every hop.
+
+![[Cybersecurity journey/1. Networking/Q&A#❔ - What are the situations where the IP packet is altered in a safe transmission of data before reaching the final destination ?|Q&A]]
+
 - Switches forward frames using MAC addresses, whereas routers forward packets using IP addresses.
 - The separation between packets and frames allows IP traffic to traverse many different physical network technologies without modification.
+
+> Note: the base case of an IP addresses to not change in the transmission between A and B, but, for many technical and security reasons, those addresses are modified, but never altering the fact that the data is going from A to B.
 
 ### Preview
 

@@ -77,6 +77,35 @@ DNS uses UDP primarily for speed, low latency, and server scalability because a 
 ###### ❔ - Is Circuit switching still used nowadays ?
 Yes, while traditional circuit switching in public voice networks (like landline PSTN) has been almost entirely replaced by IP-based packet switching, modern specialized forms of circuit switching remain essential at the core of high-performance infrastructure. Major cloud providers and AI data centers heavily rely on **Optical Circuit Switching (OCS)** using technologies like micro-electromechanical mirrors (MEMS) and Wavelength Division Multiplexing (WDM) to dynamically route massive streams of light directly between GPU/TPU clusters and core backbone routers without converting signals between optical and electrical formats at every hop. Additionally, legacy circuit-switched frameworks like T1/E1 lines still persist in specialized industrial, railway, and aviation safety infrastructure where deterministic, isolated, and ultra-reliable transmission is strictly required.
 
+###### ❔ - What does a "single physical link" mean in the context of Ethernet frames ?
+a **single physical link** (or Layer 2 segment) refers to the direct, <u>unrouted</u> path between two adjacent network interfaces—such as a host connected to a local switch port, or two routers wired directly to each other. Within this segment, communication relies exclusively on hardware MAC addresses without any Layer 3 routing intervention. Even if an intermediate Layer 2 switch forwards the frame across physical ports, the data remains inside the same collision/broadcast segment. The link officially ends the moment the frame hits a Layer 3 boundary (like a router gateway), which terminates the original frame, strips the Ethernet header, and rebuilds a brand-new frame to cross the next link.
+
+###### ❔ - Why do we have routing and switching, why not just one of them ?
+Routing and switching exist separately because they solve fundamental communication problems at completely different architectural scales. **Switching** operates at Layer 2 using flat hardware MAC addresses to move data at wire speed between devices within the _same_ local network segment with minimal latency and processing overhead; however, it cannot scale globally because a purely switched Internet would collapse under gigantic MAC address tables and uncontrollable broadcast storms. **Routing** operates at Layer 3 using hierarchical, logical IP addresses to interconnect completely different networks, enabling packets to traverse complex global paths while isolating local broadcast traffic. We need both because switching provides high-speed, low-cost local transfers inside a single network, while routing provides the scalable, structured organization required to stitch millions of isolated local networks together into a global Internet.
+
+###### ❔ - What are the situations where the IP packet is altered in a safe transmission of data before reaching the final destination ?
+During legitimate network transmission, an IP packet's header is routinely modified by intermediate routers and security appliances to handle routing mechanics, resource management, and path constraints. At every single Layer 3 hop, routers decrement the **Time-To-Live (TTL)** field (or IPv6 Hop Limit) to prevent infinite looping and recompute the **IPv4 Header Checksum**. Across edge networks, **Network Address Translation (NAT)** modifies the source or destination IP addresses (and TCP/UDP port numbers) to route traffic between private and public IP spaces seamlessly. If a packet exceeds a downstream link's Maximum Transmission Unit (MTU), intermediate routers perform **IP Fragmentation**, altering the Total Length, Flags, and Fragment Offset fields to split the payload safely across smaller frames. Furthermore, intermediate devices may update **DSCP/ECN bits** in the IPv4 Type of Service (or IPv6 Traffic Class) field to enforce Quality of Service (QoS) priorities and congestion notifications, or modify headers during **IPsec VPN** tunneling to encapsulate and encrypt data without disrupting safe end-to-end delivery.
+
+###### ❔ - 
+
+###### ❔ - 
+
+###### ❔ - 
+
+###### ❔ - 
+
+###### ❔ - 
+
+###### ❔ - 
+
+###### ❔ - 
+
+###### ❔ - 
+
+###### ❔ - 
+
+###### ❔ - 
+
 ###### ❔ - 
 
 ###### ❔ - 
