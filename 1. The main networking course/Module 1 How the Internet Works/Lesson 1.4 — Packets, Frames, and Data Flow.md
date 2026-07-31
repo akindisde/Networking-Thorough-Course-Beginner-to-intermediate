@@ -806,14 +806,9 @@ This allows communication without fragmentation.
 
 IPv4 and IPv6 handle fragmentation differently.
 
-IPv4 allows routers to fragment packets during forwarding.
+IPv4 allows routers to fragment packets during forwarding. IPv6 does **not**.
 
-IPv6 does **not**.
-
-If an IPv6 packet is too large for a network, the router discards it and informs the sender.
-
-The sender must reduce the packet size before retransmission.
-
+If an IPv6 packet is too large for a network, the router discards it and informs the sender. The sender **must** reduce the packet size before retransmission.
 This design simplifies routers and improves forwarding performance.
 
 ### Jumbo Frames
@@ -832,26 +827,18 @@ they may support MTUs around:
 9000 Bytes
 ```
 
-Larger frames reduce protocol overhead because more application data is carried within each frame.
+Larger frames reduce protocol overhead because more application data is carried within each frame. Advantages include:
 
-Advantages include:
+- Fewer packets
+- Lower CPU utilization
+- Reduced protocol overhead
+- Improved throughput for large data transfers
 
-- Fewer packets.
-- Lower CPU utilization.
-- Reduced protocol overhead.
-- Improved throughput for large data transfers.
-
-However, every device along the communication path must support the larger MTU.
-
-Otherwise, communication problems occur.
+However, <mark style="background:#fff88f">every device along the communication path must support the larger MTU</mark>. Otherwise, communication problems occur.
 
 ### Bandwidth
 
-Another commonly misunderstood concept is **bandwidth**.
-
-Bandwidth describes the **maximum theoretical capacity** of a communication link.
-
-It is usually measured in:
+Another commonly misunderstood concept is **bandwidth**. Bandwidth describes the **maximum <u>theoretical</u> capacity** of a communication link. It is usually measured in:
 
 - bits per second (bps)
 - kilobits per second (Kbps)
@@ -866,47 +853,32 @@ Examples:
 | Gigabit Ethernet | 1 Gbps |
 | Fiber Connection | 10 Gbps |
 
-Bandwidth represents the largest amount of data that could be transmitted under ideal conditions.
+Bandwidth represents the largest amount of data that could be transmitted under ideal conditions. It does **not** describe the amount of data actually delivered.
 
-It does **not** describe the amount of data actually delivered.
+![[Cybersecurity journey/1. Networking/Q&A#❔ - What is the difference between theoretical speed and practical capacity ?|Q&A]]
 
 ### Water Pipe Analogy
 
-Bandwidth is often compared to the diameter of a water pipe.
-
-Imagine two pipes.
+Bandwidth is often compared to the diameter of a water pipe. Imagine two pipes:
 
 ```text
 Small Pipe
-
 |
-
 |
-
 |
-
 Large Pipe
-
 ||||||
 ||||||
 ||||||
 ```
 
-The larger pipe can transport more water each second.
+The larger pipe can transport more water each second. Similarly, a higher-bandwidth network link can carry more data each second.
 
-Similarly, a higher-bandwidth network link can carry more data each second.
-
-However, the actual amount of water flowing depends on many additional factors.
-
-The same principle applies to computer networks.
+However, the actual amount of water flowing depends on many additional factors. The same principle applies to computer networks.
 
 ### Throughput
 
-**Throughput** is the actual amount of useful data successfully transmitted across the network during a given period.
-
-Unlike bandwidth, throughput reflects real-world conditions.
-
-Factors affecting throughput include:
+**Throughput** is the actual amount of useful data successfully transmitted across the network during a given period. Unlike bandwidth, throughput reflects real-world conditions. Factors affecting throughput include:
 
 - Congestion.
 - Packet loss.
@@ -915,13 +887,10 @@ Factors affecting throughput include:
 - Retransmissions.
 - Protocol overhead.
 
-For example:
-
-A network may have:
+For example, a network may have:
 
 ```text
 Bandwidth
-
 1 Gbps
 ```
 
@@ -929,7 +898,6 @@ but achieve only:
 
 ```text
 Throughput
-
 820 Mbps
 ```
 
@@ -937,28 +905,22 @@ The remaining capacity may be consumed by overhead, congestion, or retransmissio
 
 ### Goodput
 
-An even more precise measurement is **goodput**.
-
-Goodput measures only the useful application data delivered to the receiving application.
-
-It excludes:
+An even more precise measurement is **goodput**. Goodput measures only <u>the useful application data delivered to the receiving application</u>. It excludes:
 
 - Protocol headers.
 - Retransmissions.
 - Duplicate packets.
 - Control messages.
 
+![[Cybersecurity journey/1. Networking/Q&A#❔ - What does "useful application data received" mean when defining goodput ?|Q&A]]
+
 Relationship:
 
 ```text
 Bandwidth
-
 ↓
-
 Throughput
-
 ↓
-
 Goodput
 ```
 
@@ -980,18 +942,16 @@ Several factors prevent throughput from reaching the theoretical bandwidth.
 
 Examples include:
 
-- Ethernet headers.
-- IP headers.
-- TCP headers.
-- Encryption overhead.
-- Packet retransmissions.
-- Congestion.
-- Flow control.
-- Processing limitations.
+- Ethernet headers
+- IP headers
+- TCP headers
+- Encryption overhead
+- Packet retransmissions
+- Congestion
+- Flow control
+- Processing limitations
 
-Even on an ideal Gigabit Ethernet network, actual throughput is typically somewhat below 1 Gbps.
-
-This difference is completely normal.
+Even on an ideal Gigabit Ethernet network, actual throughput is typically somewhat below 1 Gbps. This difference is completely normal.
 
 ### Practical Example
 
@@ -999,7 +959,6 @@ Suppose you purchase:
 
 ```text
 Internet Connection
-
 500 Mbps
 ```
 
@@ -1009,14 +968,12 @@ Running a speed test reports:
 470 Mbps
 ```
 
-This does **not** necessarily indicate a problem.
+This does **not** necessarily indicate a problem. The difference is usually explained by:
 
-The difference is usually explained by:
-
-- Protocol overhead.
-- Network conditions.
-- ISP infrastructure.
-- Measurement methodology.
+- Protocol overhead
+- Network conditions
+- ISP infrastructure
+- Measurement methodology
 
 Only significant deviations below expected performance suggest congestion or network faults.
 
@@ -1028,6 +985,9 @@ Only significant deviations below expected performance suggest congestion or net
 - IPv4 supports fragmentation, while IPv6 requires the sender to reduce packet size instead of allowing routers to fragment packets.
 - Path MTU Discovery determines the largest packet size that can successfully traverse a network path without fragmentation.
 - Jumbo Frames increase efficiency on high-speed networks but require end-to-end support.
+
+![[Cybersecurity journey/1. Networking/Q&A#❔ - What end-to-end support does jumbo frames need ?|Q&A]]
+
 - **Bandwidth** is the theoretical capacity of a communication link.
 - **Throughput** is the actual rate of successful data transfer.
 - **Goodput** measures only the useful application data delivered to the receiving application.
