@@ -240,13 +240,13 @@ Users would need to remember addresses such as :
 - Every website would require memorizing one or more IP addresses.
 - Furthermore, if a company changed servers, every user would need to learn the new address.
 
+>**Note**: You can search for the website with its IP address directly if you want.
+
 DNS solves this problem by separating names from addresses. Users remember names. Computers communicate using IP addresses. DNS acts as the translator between these two worlds.
 
 ### What Is DNS?
 
-The Domain Name System (DNS) is a distributed database responsible for translating domain names into IP addresses, it is often compared to a telephone directory, instead of looking up telephone numbers by name, DNS looks up IP addresses by domain name.
-
-Example:
+The Domain Name System (DNS) is a distributed database responsible for translating domain names into IP addresses, it is often compared to a telephone directory, instead of looking up telephone numbers by name, DNS looks up IP addresses by domain name. Example:
 
 ```
 google.com
@@ -279,44 +279,22 @@ This server is usually operated by:
 - Quad9
 - OpenDNS
 
-Example:
-
-```
-Computer
-↓
-DNS Server
-↓
-Returns IP Address
-```
-
 The computer does not contact Google immediately, instead, it first asks another server:
 
 > "What is the IP address of google.com?"
 
-The DNS server responds with the requested address, <u>Only</u> after receiving this response can communication with Google's servers begin.
+The DNS server responds with the requested address, <u>Only</u> after receiving this response can communication with Google's servers be established.
 
 ### Recursive DNS Resolution
 
-Most computers communicate with a recursive DNS resolver. The resolver performs the difficult work of locating the correct server. 
+Most computers communicate with a recursive DNS resolver. The resolver performs the difficult work of locating the correct server; The IP address you asked for. 
 
 ![[Cybersecurity journey/1. Networking/Q&A#❔ - Why is it called "recursive" DNS resolution ?|Q&A]]
 
 
-The process is simplified below :
+The process is simplified in the following diagram:
 
-```text
-Computer
-     │
-Recursive DNS Resolver
-     │
-Root DNS Server
-     │
-.com DNS Server
-     │
-google.com Authoritative DNS Server
-     │
-IP Address Returned
-```
+![[Pasted image 20260822182729.png]]
 
 Although several servers may participate in the lookup, the client typically communicates only with the recursive resolver, the resolver performs the remaining steps on behalf of the client.
 
@@ -360,7 +338,7 @@ Several important questions remain unanswered.
 
 - How does the computer send data across the local network?
 - How does it discover the router?
-- How does it determine the destination MAC address?
+- How does it determine the destination MAC address and why does it need it?
 - How do switches forward the packet?
 - How do routers deliver the packet across the Internet?
 
@@ -370,7 +348,7 @@ The next part of this lesson begins at the moment the operating system has obtai
 
 ### Key Takeaways
 
-- Browsers perform significant processing before any network communication begins.
+- Browsers perform significant processing <u>before any network communication begins</u>.
 - URLs contain multiple components, including the protocol, hostname, path, and query string.
 - Browser and DNS caches reduce unnecessary network traffic.
 - Computers communicate using IP addresses rather than domain names.
@@ -420,7 +398,11 @@ Every device connected to a network belongs to an IP network, sometimes called a
 
 ![[Cybersecurity journey/1. Networking/Definitions#🧠 - Subnet mask|Definitions]]
 
-Consider the following example.
+![[Pasted image 20260822183753.png]]
+
+> **Note**: diagrams like this can be read to have a general idea about concepts, and can be revisited to deepen understanding.
+
+Consider the following example:
 
 ```
 PC
