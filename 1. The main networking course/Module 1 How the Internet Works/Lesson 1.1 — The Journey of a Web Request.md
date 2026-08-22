@@ -37,7 +37,7 @@ Although this appears to be a single action, the *[[Operating system]]* performs
 
 ![[Cybersecurity journey/1. Networking/Definitions#🧠 - Operating system (OS)|Definitions]]
 
-A simplified overview is shown below.
+A simplified overview is shown below:
 
 ```text
 User types URL and hit enter
@@ -72,9 +72,7 @@ Humans and computers communicate differently; Humans prefer names because they a
 - openai.com
 - wikipedia.org
 
-Computers, however, communicate using <u><mark style="background:#fff88f">numerical addresses known as IP addresses.</mark></u>
-
-For example:
+Computers, however, communicate using <mark style="background:#fff88f">numerical addresses known as IP addresses.</mark> For example:
 
 ```
 142.250.190.78
@@ -102,14 +100,14 @@ Before contacting any remote server, the browser analyzes the address entered by
 https://www.google.com/search?q=networking
 ```
 
-This address consists of several components :
+This address consists of several components:
 
-| Component | Value          | Purpose                |
-| --------- | -------------- | ---------------------- |
-| Protocol  | https          | Communication protocol |
-| Hostname  | www.google.com | Target server          |
-| Path      | /search        | Requested resource     |
-| Query     | q=networking   | Additional parameters  |
+| Component | Value          | Purpose                           |
+| --------- | -------------- | --------------------------------- |
+| Protocol  | https          | Communication protocol            |
+| Hostname  | www.google.com | Target server hosting the website |
+| Path      | /search        | Requested resource                |
+| Query     | q=networking   | Additional parameters             |
 
 The browser *interprets* each component independently.
 
@@ -117,10 +115,10 @@ The browser *interprets* each component independently.
 
 The hostname identifies the server.
 The protocol determines how communication should occur.
-The path specifies which resource is requested.
+The path specifies which resource, in the identified server, is requested.
 The query string supplies additional information to the server.
-At this stage, no network communication has occurred.
-The browser is simply interpreting the information supplied by the user.
+
+At this stage, no network communication has occurred. <u>The browser is simply interpreting the information supplied by the user</u>.
 
 ### Browser Processing
 
@@ -128,7 +126,7 @@ A modern *[[Web browser]]* performs significantly more work than displaying web 
 
 ![[Cybersecurity journey/1. Networking/Definitions#🧠 - Web browser|Definitions]]
 
-It functions as <u>sophisticated</u> networking applications responsible for managing multiple communication tasks simultaneously.
+It functions like a group of <u>sophisticated</u> networking applications responsible for managing multiple communication tasks simultaneously.
 
 Immediately after the URL is entered, the browser begins several checks, these include:
 
@@ -152,7 +150,9 @@ Immediately after the URL is entered, the browser begins several checks, these i
 - Applying browser security policies
 - Determining whether HTTPS is required
 
-Some of these checks may eliminate unnecessary network communication. For example, if the requested webpage is already stored in the browser cache and remains valid, downloading the page again may not be necessary.
+> **Note**: At this point, you must keep in mind the idea of caching visited data for quicker use, and the fact you need to establish a connection before any data exchange is possible, obviously.
+
+Some of these checks may eliminate unnecessary network communication. For example, if the requested webpage is already stored in the browser cache <u>and remains valid</u> (validity conditions are discussed in upcoming modules), downloading the page again may not be necessary.
 
 Similarly, if the IP address of the website is already stored in the local DNS cache, a new DNS lookup can be avoided.
 
@@ -190,9 +190,8 @@ Browser
 Read Logo.png from Local Cache
 ```
 
-No Internet communication is required, because the resource needed is, now, local (in your machine).
+No Internet communication is required, because the resource needed is, now, local (in your machine). Caching improves:
 
-Caching improves :
 - Page loading speed
 - User experience
 - Server performance
@@ -209,16 +208,14 @@ Operating systems also maintain a DNS cache; suppose a computer recently visited
 ```
 google.com
 ↓
-142.250.x.x
+142.250.x.x (the x here is a placeholder for a positive number below 256)
 ```
 
 If the cached *DNS record* has not expired, the operating system immediately returns the stored IP address.
 
 ![[Cybersecurity journey/1. Networking/Definitions#🧠 - DNS record|Definitions]]
 
-This avoids another DNS request.
-
-Every DNS record contains a value known as the ***Time To Live (TTL)***.
+This avoids another DNS request. Every DNS record contains a value known as the ***Time To Live (TTL)***.
 
 ![[Cybersecurity journey/1. Networking/Definitions#🧠 - Time-To-Live (TTL)|Definitions]]
 
