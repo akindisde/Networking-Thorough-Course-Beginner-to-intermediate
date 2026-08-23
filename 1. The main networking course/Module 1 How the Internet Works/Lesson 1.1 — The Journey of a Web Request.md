@@ -720,9 +720,9 @@ If the destination is unknown, the frame is temporarily flooded to every port ex
 
 #### The Frame Reaches the Router
 
-Eventually the frame reaches the default gateway, The router receives the Ethernet frame and performs several actions :
+Eventually the frame reaches the default gateway, The router receives the Ethernet frame and performs several actions:
 1. Verifies the frame integrity.
-2. Removes the Ethernet header.
+2. Removes the Ethernet header. (unpacking the data)
 3. Reads the destination IP address.
 4. Searches the *routing table*.
 
@@ -730,13 +730,13 @@ Eventually the frame reaches the default gateway, The router receives the Ethern
 
 5. Determines the next hop (next router).
 
-Notice that the original Ethernet frame no longer exists. <mark style="background:#fff88f">Routers do not forward Ethernet frames</mark>, they remove the original ones and build entirely new ones.
+Notice that the original Ethernet frame no longer exists, because the receiving router removed it. <mark style="background:#fff88f">Routers do not forward Ethernet frames</mark>, they remove the original ones and build entirely new ones.
 
 ![[Cybersecurity journey/1. Networking/Definitions#🧠 - Forwarding data|Definitions]]
 
 #### Routing Decisions
 
-Every router maintains a routing table. The routing table tells the router where packets should be sent. Conceptually :
+Every router maintains a routing table. The routing table tells the router where packets should be sent. Conceptually:
 
 ```
 Destination
@@ -754,8 +754,8 @@ Each router repeats this process independently. The router does not know the com
 
 After selecting the outgoing interface, the router <u>constructs an entirely new Ethernet frame.</u> This new frame contains different MAC addresses.
 
-For example :
-Original frame :
+For example:
+Original frame:
 
 ```
 Source MAC
@@ -785,9 +785,11 @@ next router
 
 The IP packet inside the frame remains almost unchanged. Only a few fields, such as the Time To Live (TTL), are modified.
 
+![[Pasted image 20260823190427.png]]
+
 ### Hop-by-Hop Communication
 
-Communication across the Internet occurs one hop at a time, a hop is simply a router. Each router performs the same sequence :
+Communication across the Internet occurs one hop at a time, a hop is simply a router. Each router performs the same sequence:
 
 ```
 Receive Frame
@@ -807,11 +809,11 @@ This process repeats until the destination network is reached. The Internet is t
 
 ![[Pasted image 20260718235613.png]]
 
-> This diagram is built using what you now know, but the internet and networks in general are very complex, you're learning networking layer by layer and piece by piece, until you have the big picture.
+> This diagram is built using what you now know, but the internet and networks in general are very complex, you're learning networking layer by layer and piece by piece, until you have the detailed picture.
 
 ### Key Concepts Introduced
 
-This section introduced several concepts that become major topics later in the course :
+This section introduced several concepts that become major topics later in the course:
 
 | Concept | Future Module |
 |----------|---------------|
