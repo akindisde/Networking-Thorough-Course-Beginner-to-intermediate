@@ -859,7 +859,7 @@ Part 3 begins when the packet finally reaches Google's server. The following top
 
 After traversing multiple routers across the Internet, the packet eventually reaches the network that contains Google's servers.
 
-The final router performs the same forwarding process as every previous router. It examines the destination IP address, consults its routing table, determines that the destination is directly connected, constructs a new Ethernet frame, and forwards the packet to the destination server.
+<u>The final router</u> performs the same forwarding process as every previous router. It examines the destination IP address, consults its routing table, determines that the destination is <u>directly connected</u> (no router between it and the destination), constructs a new Ethernet frame, and forwards the packet to the destination server.
 
 At this point, the packet has successfully completed its journey across the Internet. However, communication between the client and the server has not yet begun.
 
@@ -867,24 +867,26 @@ The server has received a packet, but before any webpage can be exchanged, both 
 
 ### Why a Connection Is Needed
 
-Sending a webpage is different from broadcasting a radio signal. The browser expects :
-- Every packet to arrive.
-- Packets to arrive in the correct order.
-- Missing packets to be retransmitted.
-- Corrupted packets to be discarded.
-- Communication to continue until the transfer is complete.
+Sending a webpage is different from broadcasting a radio signal. The browser expects:
+- Every packet to arrive
+- Packets to arrive in the correct order
+- Missing packets to be retransmitted
+- Corrupted packets to be discarded
+- Communication to continue until the transfer is complete
 
-The Internet itself provides none of these guarantees. *[[Internet protocol (IP)]]* simply delivers packets on a best-effort basis. To provide reliability, another protocol is required; That protocol is the **[[Transmission Control Protocol (TCP)]].**
+The Internet itself provides none of these guarantees. *[[Internet protocol (IP)]]*, the responsible for routing between hops, simply delivers packets on a best-effort basis. To provide reliability, another protocol is required; That protocol is the **[[Transmission Control Protocol (TCP)]].**
 
 ![[Cybersecurity journey/1. Networking/Definitions#🧠 - Internet protocol (IP)|Definitions]]
 
-### Transmission Control Protocol (TCP)
+> **Note**: From now on, we will mention a bunch protocols, because things happen in networks following them and some standards, when a network process is running, it's a ruled by a protocol following networking conventions.
+
+## Transmission Control Protocol (TCP)
 
 TCP is a *connection-oriented* transport protocol operating at Layer 4 of the OSI model.
 
 ![[Cybersecurity journey/1. Networking/Definitions#🧠 - Connection-oriented|Definitions]]
 
-Its primary responsibilities include :
+Its primary responsibilities include:
 - Establishing connections
 - Reliable delivery
 - Packet sequencing
@@ -893,7 +895,7 @@ Its primary responsibilities include :
 - Retransmission of lost segments
 - Connection termination
 
-Most web applications use TCP because reliability is more important than speed.
+Most web applications use TCP because reliability is very important.
 
 ### Before Any Data Is Sent
 
@@ -905,7 +907,7 @@ The handshake establishes communication between two devices. It synchronizes *se
 
 ![[Cybersecurity journey/1. Networking/Definitions#🧠 - Sequence number|Definitions]]
 
-The process consists of three packets :
+The process consists of three packets:
 
 ```text
 Client                     Server
@@ -918,9 +920,9 @@ Only after these three packets have been exchanged can application data be trans
 
 #### Step 1 — SYN
 
-The browser (the client) requests a new connection. The client sends a packet with the SYN (Synchronize) flag (a field in the TCP header) set.
+The browser (the client), or any application needing to connect, requests a new connection. The client sends a packet with the SYN (Synchronize) flag (a field in the TCP header) set. Remember, this is a protocol with headers like we discussed before, headers are like packaging stamps and information associated with the sent data, for a reason.
 
-Conceptually, the message says :
+Conceptually, the message says:
 
 > "I would like to establish a TCP connection."
 
@@ -930,7 +932,7 @@ No webpage data is transmitted during this step.
 
 #### Step 2 — SYN-ACK
 
-The server receives the SYN packet. <mark style="background:#fff88f">If the requested service</mark> is available, the server responds with :
+The server receives the SYN packet. <mark style="background:#fff88f">If the requested service is available</mark>, the server responds with:
 - SYN
 - ACK
 
@@ -957,11 +959,13 @@ A common question is why TCP requires three packets instead of one. The answer i
 
 Without this confirmation, neither side can safely begin transferring data.
 
+More on [[Sequence numbers]], to understand how they are worked with.
+
 ### Port Numbers
 
 TCP connections are identified using **port numbers**. An IP address identifies a computer. A port identifies a specific application running on that computer.
 
-Example :
+Example:
 
 ```
 142.250.190.78
@@ -974,7 +978,7 @@ Port 443
 ```
 
 This identifies the HTTPS service on that server.
-Together they form :
+Together they form:
 
 ```
 142.250.190.78:443
@@ -984,13 +988,13 @@ Likewise, the client selects a <u>temporary source port</u>.
 
 ![[Cybersecurity journey/1. Networking/Q&A#❔ - How are the temporary port number allocated to the applications by the OS ?|Q&A]]
 
-Example :
+Example:
 
 ```
 192.168.1.10:52318
 ```
 
-A complete TCP connection therefore consists of :
+A complete TCP connection therefore consists of:
 
 ```
 Client IP
@@ -1000,28 +1004,28 @@ Server IP
 Server Port
 ```
 
-This combination uniquely identifies the communication session.
+This combination uniquely identifies the communication session, and this goes for the server too because a server can have many services.
 
 ### Why HTTPS?
 
 Most modern websites use HTTPS instead of HTTP.
-HTTPS provides :
+HTTPS provides:
 - Confidentiality
 - Integrity
 - Authentication
 
-Without HTTPS :
-- Passwords could be intercepted.
-- Cookies could be stolen.
+Without HTTPS:
+- Passwords could be intercepted
+- Cookies could be stolen
 
 ![[Cybersecurity journey/1. Networking/Definitions#🧠 - Cookie|Definitions]]
 
-- Data could be modified in transit.
-- Users could unknowingly communicate with fraudulent servers.
+- Data could be modified in transit
+- Users could unknowingly communicate with fraudulent servers
 
 Before HTTP communication begins, encryption must first be established.
 
-![[Cybersecurity journey/1. Networking/Q&A#❔ - What's the difference between http and https for a beginner|Q&A]]
+![[Cybersecurity journey/1. Networking/Q&A#❔ - What's the difference between HTTP and HTTPS ?|Q&A]]
 
 ### The TLS Handshake
 
@@ -1029,7 +1033,7 @@ HTTPS uses *[[Transport Layer Security (TLS)]]*.
 
 TLS establishes an encrypted communication channel before any webpage data is exchanged.
 
-The handshake performs several tasks. It :
+The handshake performs several tasks. It:
 - Negotiates encryption algorithms
 - Verifies the server's identity
 - Exchanges encryption keys
@@ -1037,6 +1041,9 @@ The handshake performs several tasks. It :
 
 Only after this process completes does encrypted communication begin.
 
+![[Pasted image 20260823235507.png]]
+
+Essentially, TCP comes before TLS, because if there is not connection, TLS can't perform its handshake, and there is no connection to secure.
 ### Server Certificate
 
 One of the server's first responses during the TLS handshake is its [[Digital certificate]].
