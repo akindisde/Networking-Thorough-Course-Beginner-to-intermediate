@@ -423,15 +423,15 @@ to
 ```
 
 <u>belongs to the same local network</u>.
-Suppose the destination is :
+Suppose the destination is:
 
 ```
 192.168.1.50
 ```
 
-Because both devices belong to the same subnet, communication can occur directly; in simple words, they won't need to much work to talk to each other since they're so close in terms of "do I need to deal with <u>routing</u> and other things to get to the other device", these are concept that will covered in the future parts.
+Because both devices belong to the same subnet, communication can occur directly; in simple words, they won't need too much work to talk to each other since they're so close in terms of "do I need to deal with <u>routing</u> and other things to get to the other device", these are concept that will covered in the future parts.
 
-Now consider a different destination.
+Now consider a different destination:
 
 ```
 142.250.190.78
@@ -443,7 +443,7 @@ The computer cannot send packets directly to Google because Google is not connec
 
 ![[Cybersecurity journey/1. Networking/Definitions#🧠 - Ethernet network|Definitions]]
 
-> Just a note, Networking concepts can get from 0 to 100 very fast in terms of density and complexity, but you should not worry about some terms that you don't understand yet, just know they exist and they won't affect your understanding of the current material that you're reading, at the end of the lessons and whole chapters, labs will be a great tool to visualize and really stabilize what you've learned so far.
+> Another reminder, Networking concepts can get from 0 to 100 very fast in terms of density and complexity, but you should not worry about some terms that you don't understand yet, just know they exist and they won't affect your understanding of the current material that you're reading, at the end of the lessons and whole chapters, labs will be a great tool to visualize and really stabilize what you've learned so far.
 
 Instead, the packet must first be delivered to another device known as the **default gateway**.
 
@@ -465,9 +465,9 @@ Default Gateway:
 
 Whenever the destination exists outside the local subnet, packets are transmitted to the default gateway.
 
-The router then determines the next hop toward the destination.
+The router then determines the next hop (next station for the message) toward the destination.
 
-A simplified network appears below :
+A simplified local network appears below :
 
 ![[Pasted image 20260718185048.png]]
 
@@ -482,6 +482,10 @@ For now, the WAN, which means wide area network, just means the internet.
 The computer now knows that the router should receive the packet. However, Ethernet networks do not deliver *frames* using IP addresses. Ethernet uses **MAC addresses** for that.
 
 ![[Cybersecurity journey/1. Networking/Definitions#🧠 - Ethernet frame|Definitions]]
+
+For local networks, we use MAC addresses to communicate, outside the local networks we use IP addresses to communicate. But, we use IP addresses to know the MAC addresses through ARP, discussed in the next section.
+
+Why we use MAC addresses in the LANs ? Simply, they're faster to work with. This doesn't mean that we don't need to use the IP addresses even with MAC addresses know.
 
 ![[Cybersecurity journey/1. Networking/Q&A#❔ - Why not just call it data, why should we call it a frame or another name ?|Q&A]]
 
@@ -505,7 +509,7 @@ Destination MAC
 ??
 ```
 
-Without the router's MAC address, the computer cannot <u>build</u> an Ethernet frame.
+Without the router's MAC address, the computer cannot <u>build</u> an Ethernet frame, following the previous analogy, the MAC address is needed to build a layer of packaging of the message, if we don't have it, the message doesn't leave the sender's station.
 
 Another protocol is required, a protocol that specializes in getting the destination MAC address knowing the IP address.
 
@@ -515,7 +519,7 @@ The *Address Resolution Protocol (ARP)* maps IP addresses to MAC addresses <mark
 
 ![[Cybersecurity journey/1. Networking/Definitions#🧠 - Address Resolution Protocol (ARP)|Definitions]]
 
-Its purpose is simple :
+Its purpose is simple:
 
 ```
 Known:
@@ -528,7 +532,7 @@ ARP performs this translation <u>automatically</u>.
 
 #### The ARP Request
 
-Suppose the computer wants to reach :
+Suppose the computer wants to reach:
 
 ```
 192.168.1.1
@@ -542,6 +546,8 @@ Because the computer does not know which device owns this address, the request i
 
 ![[Cybersecurity journey/1. Networking/Definitions#🧠 - Broadcast|Definitions]]
 
+By definition, broadcasting is a general concept that's not specific to ARP, it's used in many cases.
+
 ```text
 PC
 ↓
@@ -554,7 +560,7 @@ Every connected device receives the request.
 
 #### The ARP Reply
 
-Each device examines the requested IP address. Only the router recognizes the address as its own (because in the example we set its address as 192.168.1.1). The router replies :
+Each device examines the requested IP address. Only the router recognizes the address as its own (because in the example we set its address as 192.168.1.1). The router replies:
 
 ```
 192.168.1.1
@@ -577,6 +583,16 @@ To avoid repeating this process for every packet, operating systems store ARP re
 
 Future packets destined for the same router reuse this cached information until the entry expires. This significantly reduces unnecessary broadcast traffic.
 
+Here is a visualization of the ARP cycle:
+
+![[Pasted image 20260823123623.png]]
+
+We said that any message will never leave the sender's station without a MAC address, an ARP request is a message, the MAC address associated with it is the known `FF:FF:FF:FF:FF:FF`, when the switch (who does the broadcasting in this case) receives a frame with that MAC address, it just knows it should send that ARP request on all its interfaces (except the one that received the ARP request), so all connected devices can "hear" the ARP request.
+
+Any device which doesn't have the corresponding IP address with ignore the ARP request.
+
+Now we know the Mac address of  the LAN default gateway (our gateway to the internet)
+
 ### Building the Packet
 
 The application has produced data that must be transmitted across the network. Before transmission, the operating system adds *protocol headers*.
@@ -587,20 +603,22 @@ Here's a quick illustration of protocols and their headers (information related)
 
 ![[Pasted image 20260718230825.png]]
 
+Again, this is just the stamps and information needed for packaging the data, another insights for you now is that every protocol has its own data to package with, that's why you see different types of headers.
+
 Protocols add information so they control many aspects of the process of sending and receiving, that information is the headers, and adding headers to data is called *[[Encapsulation]]*.
 
 ![[Cybersecurity journey/1. Networking/Definitions#🧠 - Encapsulation|Definitions]]
 
 Mind that a protocol can add a header and the whole result now is still called data, so when another protocol receives that data, it can add headers on top of the headers already their. More on this in the future.
 
-At a high level :
+At a high level:
 
 ```
 Application Data
 ↓
-TCP Segment
+TCP Segment (another protocol stuff)
 ↓
-IP Packet
+IP Packet (another protocol stuff)
 ↓
 Ethernet Frame
 ↓
@@ -611,7 +629,7 @@ Bits
 
 ### Ethernet Frame Construction
 
-The Ethernet header contains information <u>used only on the local network.</u> A simplified Ethernet frame appears below :
+The Ethernet header contains information <u>used only on the local network.</u> A simplified Ethernet frame appears below:
 
 ```text
 +----------------------------------------------+
@@ -627,11 +645,11 @@ The Ethernet header contains information <u>used only on the local network.</u> 
 +----------------------------------------------+
 ```
 
-Notice that the destination is **the router's MAC address**, not Google's MAC address. Google's MAC address is unknown and <u>irrelevant</u> because MAC addresses matter only within a local Ethernet network.
+Notice that the destination is **the router's MAC address**, not Google's MAC address. Google's MAC address is unknown and <u>irrelevant</u> because MAC addresses matter only within a local Ethernet network communication.
 
 ### IP Packet Construction
 
-Inside the Ethernet frame is an IP packet. A simplified packet appears below :
+Inside the Ethernet frame is an IP packet. A simplified packet appears below:
 
 ```text
 +--------------------------------+
@@ -659,43 +677,44 @@ The IP address remains unchanged while the packet travels across the Internet.
 
 ### Ethernet vs IP
 
-Students often confuse these two addressing systems. Their responsibilities are completely different :
+Students often confuse these two addressing systems. Their responsibilities are completely different:
 
-| Ethernet | IP |
-|-----------|----|
+| Ethernet            | IP                       |
+| ------------------- | ------------------------ |
 | Local communication | End-to-end communication |
-| Uses MAC addresses | Uses IP addresses |
-| Changes every hop | Remains constant |
-| Layer 2 | Layer 3 |
+| Uses MAC addresses  | Uses IP addresses        |
+| Changes every hop   | Remains constant         |
+| Layer 2             | Layer 3                  |
 
 This distinction is one of the most important concepts in networking.
 
 ### The First Transmission
 
-The computer converts the Ethernet frame into electrical, optical, or radio signals depending on the physical medium. The signals travel to the first networking device. In most networks, this device is an Ethernet [[Switch]].
+The computer converts the Ethernet frame into electrical, optical, or radio signals depending on the physical medium (cables, Wi-Fi...). The signals travel to the first networking device. In most networks, this device is an Ethernet [[Switch]].
 
 #### What the Switch Does
 
-Switches operate at Layer 2 of the OSI model. Unlike hubs, switches examine only the Ethernet header.
+Switches operate at Layer 2 of the OSI model. Unlike hubs, switches examine the Ethernet header.
 
 ![[Cybersecurity journey/1. Networking/Q&A#❔ - What do we mean when we say a device operates at a certain layer ?|Q&A]]
 
-The switch reads :
+The switch reads:
 
 ```
-Destination MAC Address
+Destination MAC Address, and other stuff
 ```
 
 It <u>can not</u> examine :
 - IP addresses
 - TCP ports
-- HTTP requests
+- HTTP requests 
+because they're encapsulated at a deeper level for a switch to "unpack".
 
 The switch simply determines which port leads to the destination MAC address. If the destination is already known, the frame is forwarded only through the appropriate *physical port*.
 
 ![[Cybersecurity journey/1. Networking/Definitions#🧠 - Physical port|Definitions]]
 
-If the destination is unknown, the frame is temporarily flooded (sent through) to every port except the incoming one.
+If the destination is unknown, the frame is temporarily flooded to every port except the incoming one.
 
 ![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Flooded|Terminology]]
 
