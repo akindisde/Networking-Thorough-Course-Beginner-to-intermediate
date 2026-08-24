@@ -1048,14 +1048,14 @@ Essentially, TCP comes before TLS, because if there is not connection, TLS can't
 
 One of the server's first responses during the TLS handshake is its [[Digital certificate]].
 
-The certificate contains information including :
+The certificate contains information including:
 - Server name.
 - Public key.
 - Certificate issuer.
 - Expiration date.
 - Digital signature.
 
-The browser verifies that the certificate :
+The browser verifies that the certificate:
 - Matches the requested domain.
 - Has not expired.
 - Was issued by a trusted *Certificate Authority (CA)*.
@@ -1066,23 +1066,23 @@ If verification fails, the browser displays a security warning.
 
 ### Encryption Begins
 
-After successful certificate validation, both client and server derive identical *session keys*.
+After successful certificate validation (making sure the domain is legit), both client and server derive identical *session keys*.
 
 ![[Cybersecurity journey/1. Networking/Definitions#🧠 - Session key|Definitions]]
 
-From this point onward :
+From this point onward:
 - HTTP requests become encrypted.
 - HTTP responses become encrypted.
 - Cookies become encrypted.
 - Authentication credentials become encrypted.
 
-Anyone *intercepting* packets can still observe IP addresses and packet sizes, but the application data itself is unreadable.
+Anyone *intercepting* packets can still observe IP addresses and packet sizes, but the application data itself is unreadable, because the encrypted part is "packaged" with those pieces of information, the data inside the "package" is not readable for an interceptor but the encapsulation data, in this case, is. 
 
 ![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Intercept|Terminology]]
 
 ### The HTTP Request
 
-With TCP established and TLS completed, the browser finally sends the first HTTP request. A simplified request appears below :
+With TCP established and TLS completed, the browser finally sends the first HTTP request. A simplified request appears below:
 
 ```http
 GET / HTTP/1.1
@@ -1096,7 +1096,7 @@ Although shown in plain text here, HTTPS encrypts this request before transmissi
 
 ### The Server Processes the Request
 
-The web server receives the request. Several internal operations may occur, For example :
+The web server receives the request. Several internal operations may occur, For example:
 - Authentication (who are you)
 - Authorization (what you're authorized to do after you're authenticated)
 - Database queries
@@ -1110,7 +1110,7 @@ The complexity of this processing depends entirely on the application.
 
 ### The HTTP Response
 
-Once processing is complete, the server returns an HTTP response. Example :
+Once processing is complete, the server returns an HTTP response. Example:
 
 ```http
 HTTP/1.1 200 OK
@@ -1118,16 +1118,16 @@ Content-Type: text/html
 Content-Length: 12546
 ```
 
-The response contains :
-- Status code (what happened while processing your request ?)
+The response contains:
+- Status code (the result of processing your request in short)
 - Response headers
 - HTML document
 
-Again, this information is encrypted by TLS before leaving the server.
+Again, this information is encrypted by TLS before leaving the server, because the whole connection is secured.
 
 ### HTTP Status Codes
 
-Servers use status codes to describe the result of a request. Some common examples include :
+Servers use status codes to describe the result of a request. Some common examples include:
 
 | Code | Meaning               |
 | ---- | --------------------- |
@@ -1163,7 +1163,7 @@ Each resource requires additional HTTP requests, and the cycle restarts, in the 
 
 ### Additional Resource Requests
 
-Modern webpages rarely consist of a single file. Instead, browsers request :
+Modern webpages rarely consist of a single file. Instead, browsers request:
 - HTML
 - CSS
 - JavaScript
@@ -1180,33 +1180,35 @@ Once sufficient resources have been downloaded, the browser begins *rendering* t
 
 ![[Cybersecurity journey/1. Networking/Definitions#🧠 - Page rendering|Definitions]]
 
-The rendering pipeline generally includes :
-1. HTML parsing.
-2. DOM construction.
-3. CSS parsing.
-4. CSSOM construction.
-5. JavaScript execution.
-6. Layout calculation.
-7. Painting.
-8. Compositing.
-9. Displaying pixels on the screen.
+The rendering pipeline generally includes:
+1. HTML parsing
+2. DOM construction
+3. CSS parsing
+4. CSSOM construction
+5. JavaScript execution
+6. Layout calculation
+7. Painting
+8. Compositing
+9. Displaying pixels on the screen
 
 Although this occurs extremely quickly, many independent software components participate.
 
 ### The User Sees the Webpage
 
-Only after all previous stages have completed does the webpage appear. The complete journey has involved :
+Only after all previous stages have completed does the webpage appear. The complete journey has involved:
 - Browser processing
 - DNS
-- Routing
 - Ethernet
 - ARP
+- Routing
 - TCP
 - TLS
 - HTTP
 - Browser rendering
 
 A single page load may involve hundreds of packets exchanged over multiple network connections.
+
+Domain name resolution is a client server-interaction too, so it also Ethernet and routing we focused on the web server request having the Ethernet and routing part just not to be redundant, But each communication process involves at least the Ethernet part (local network communication using MAC addresses aka switching).
 
 ### Complete Journey Overview
 
@@ -1252,13 +1254,13 @@ Browser Rendering
 Webpage Displayed
 ```
 
-Here is a diagram to visualize it better : 
+Here is a diagram to visualize it better: 
 
 ![[Pasted image 20260719153534.png]]
 
 ### Why This Lesson Matters
 
-Every major topic covered throughout this course fits somewhere within this communication process. Later modules examine each stage individually. For example :
+Every major topic covered throughout this course fits somewhere within this communication process. Later modules examine each stage individually. For example:
 
 | Lesson | Stage of the Journey |
 |---------|----------------------|
@@ -1288,596 +1290,8 @@ By understanding the overall communication flow first, each future lesson become
 - Browser rendering transforms downloaded resources into the visual webpage presented to the user.
 - A simple webpage request involves <u>cooperation between multiple protocols operating across several layers of the TCP/IP stack</u>.
 
-## Lesson 1.1 — The Journey of a Web Request (Part 4)
-
-### Verifying the Journey with Wireshark
-
-The communication process described throughout this lesson can be observed directly using Wireshark. Rather than treating networking protocols as abstract concepts, packet analysis allows engineers to verify exactly what occurs on the network.
-
-Capturing packets while loading a website reveals nearly every protocol involved in the communication process.
-
-A typical capture may include:
-
-- ARP
-- DNS
-- TCP
-- TLS
-- HTTP or HTTPS
-- ICMP (occasionally)
-
-Observing these packets provides insight into protocol behavior and greatly simplifies troubleshooting.
-
 ---
-
-# Preparing a Packet Capture
-
-Before capturing traffic, ensure that:
-
-- Wireshark is installed.
-- The correct network interface is selected.
-- Internet connectivity is available.
-
-Start packet capture before opening the browser.
-
-Once capture has started:
-
-1. Open a browser.
-2. Navigate to a website that has not recently been visited.
-3. Wait until the page fully loads.
-4. Stop packet capture.
-
-The capture now contains every packet exchanged during the communication process.
-
----
-
-# Identifying ARP Packets
-
-If the ARP cache is empty, one of the first packets visible should be an ARP request.
-
-Example:
-
-```
-Who has 192.168.1.1?
-
-Tell 192.168.1.10
-```
-
-The router replies:
-
-```
-192.168.1.1
-
-is at
-
-AA:BB:CC:DD:EE:FF
-```
-
-This confirms that the operating system successfully resolved the router's MAC address before transmitting IP packets.
-
-If no ARP packets appear, the MAC address was likely already present in the ARP cache.
-
----
-
-# Identifying DNS Packets
-
-Next, locate DNS packets.
-
-Apply the following display filter.
-
-```
-dns
-```
-
-A typical sequence appears as:
-
-```
-Standard Query
-
-↓
-
-Standard Response
-```
-
-The query asks:
-
-```
-google.com
-```
-
-The response contains:
-
-```
-142.250.x.x
-```
-
-The DNS exchange confirms that the browser successfully translated the hostname into an IP address.
-
----
-
-# Identifying TCP Packets
-
-Apply the filter:
-
-```
-tcp
-```
-
-Near the beginning of the connection, the following sequence should appear.
-
-```
-SYN
-
-↓
-
-SYN, ACK
-
-↓
-
-ACK
-```
-
-This is the TCP Three-Way Handshake discussed earlier.
-
-Selecting each packet reveals:
-
-- Source Port
-- Destination Port
-- Sequence Number
-- Acknowledgement Number
-- TCP Flags
-- Window Size
-
-These fields become increasingly important during later troubleshooting exercises.
-
----
-
-# Identifying TLS Packets
-
-Because nearly every modern website uses HTTPS, TLS packets should appear immediately after the TCP handshake.
-
-Filter:
-
-```
-tls
-```
-
-Common packets include:
-
-- Client Hello
-- Server Hello
-- Certificate
-- Change Cipher Spec
-- Application Data
-
-The certificate packet contains information identifying the remote server.
-
-Later security modules examine these packets in greater detail.
-
----
-
-# Identifying HTTP Traffic
-
-If HTTPS is disabled or a non-encrypted website is used, HTTP packets become visible.
-
-Filter:
-
-```
-http
-```
-
-Example request:
-
-```
-GET /
-
-Host: example.com
-```
-
-Example response:
-
-```
-HTTP/1.1 200 OK
-```
-
-With HTTPS, the HTTP payload is encrypted and no longer readable.
-
-This demonstrates one of the primary benefits of TLS.
-
----
-
-# Following a TCP Stream
-
-One of Wireshark's most useful features is **Follow TCP Stream**.
-
-Right-click any TCP packet.
-
-Select:
-
-```
-Follow
-
-↓
-
-TCP Stream
-```
-
-Wireshark reconstructs the entire application conversation.
-
-For unencrypted HTTP traffic, this reveals:
-
-- Complete requests.
-- Complete responses.
-- HTML pages.
-- Cookies.
-- Headers.
-
-When HTTPS is used, only encrypted data is visible.
-
----
-
-# Timeline of a Typical Web Request
-
-Although exact timings differ depending on network conditions, the sequence generally follows this order.
-
-```text
-User Types URL
-        │
-        ▼
-Browser Checks Cache
-        │
-        ▼
-DNS Lookup
-        │
-        ▼
-ARP Request
-        │
-        ▼
-TCP Handshake
-        │
-        ▼
-TLS Handshake
-        │
-        ▼
-HTTP Request
-        │
-        ▼
-HTTP Response
-        │
-        ▼
-Additional Requests
-        │
-        ▼
-Browser Rendering
-```
-
-This timeline represents the communication flow examined throughout this lesson.
-
----
-
-# Common Failure Points
-
-A webpage may fail to load for many reasons.
-
-Understanding where communication stops greatly simplifies troubleshooting.
-
----
-
-## Failure 1 — DNS Resolution
-
-Symptoms:
-
-- Browser reports server cannot be found.
-- IP connectivity exists.
-- Websites cannot be accessed by name.
-
-Possible causes:
-
-- DNS server unavailable.
-- Incorrect DNS configuration.
-- Firewall blocking DNS.
-
-Verification:
-
-```
-nslookup google.com
-```
-
----
-
-## Failure 2 — ARP
-
-Symptoms:
-
-- Unable to communicate with the default gateway.
-- Local devices unreachable.
-
-Possible causes:
-
-- Duplicate IP addresses.
-- Incorrect subnet mask.
-- ARP cache corruption.
-- Switch issues.
-
-Verification:
-
-Windows:
-
-```
-arp -a
-```
-
-Linux:
-
-```
-ip neigh
-```
-
----
-
-## Failure 3 — Routing
-
-Symptoms:
-
-- Local communication works.
-- Internet inaccessible.
-
-Possible causes:
-
-- Missing default gateway.
-- Incorrect routing table.
-- ISP outage.
-
-Verification:
-
-```
-traceroute
-
-or
-
-tracert
-```
-
----
-
-## Failure 4 — TCP
-
-Symptoms:
-
-- Packets arrive.
-- Connection never establishes.
-
-Possible causes:
-
-- Firewall blocking TCP.
-- Closed server port.
-- Server unavailable.
-
-Verification:
-
-Wireshark:
-
-```
-SYN
-
-↓
-
-No SYN-ACK
-```
-
----
-
-## Failure 5 — TLS
-
-Symptoms:
-
-- Browser security warnings.
-- HTTPS connection refused.
-
-Possible causes:
-
-- Expired certificate.
-- Invalid certificate.
-- Incorrect server configuration.
-
-Verification:
-
-Inspect browser certificate information.
-
----
-
-## Failure 6 — HTTP
-
-Symptoms:
-
-- Connection established.
-- Server responds with errors.
-
-Examples:
-
-```
-404 Not Found
-```
-
-```
-500 Internal Server Error
-```
-
-```
-403 Forbidden
-```
-
-The network functions correctly.
-
-The problem exists within the web application.
-
----
-
-# Layer-by-Layer Troubleshooting
-
-Professional network engineers troubleshoot from the bottom upward.
-
-```text
-Layer 1
-
-↓
-
-Layer 2
-
-↓
-
-Layer 3
-
-↓
-
-Layer 4
-
-↓
-
-Layer 7
-```
-
-Questions asked at each layer include:
-
-**Layer 1**
-
-Is the cable connected?
-
-Is Wi-Fi connected?
-
-Are interfaces up?
-
----
-
-**Layer 2**
-
-Can ARP resolve?
-
-Are switches forwarding frames?
-
-Is the correct VLAN configured?
-
----
-
-**Layer 3**
-
-Can the destination IP be reached?
-
-Is the routing table correct?
-
-Does the default gateway respond?
-
----
-
-**Layer 4**
-
-Does TCP establish?
-
-Are ports open?
-
-Is a firewall blocking traffic?
-
----
-
-**Layer 7**
-
-Does the application respond?
-
-Are HTTP requests successful?
-
-Is authentication required?
-
-This structured methodology prevents random guessing during troubleshooting.
-
----
-
-# Security Considerations
-
-Every stage of communication introduces potential security risks.
-
-Understanding these risks is essential for secure network design.
-
-| Stage   | Possible Attack     |
-| ------- | ------------------- |
-| DNS     | DNS Spoofing        |
-| ARP     | ARP Poisoning       |
-| TCP     | SYN Flood           |
-| HTTP    | Session Hijacking   |
-| TLS     | Certificate Forgery |
-| Routing | Route Hijacking     |
-
-Future modules explore these attacks together with the defensive technologies used to mitigate them.
-
----
-
-# Practical Laboratory
-
-## Objective
-
-Observe the complete communication process while accessing a website.
-
----
-
-## Requirements
-
-- Internet connection
-- Wireshark
-- Modern web browser
-
----
-
-## Procedure
-
-1. Open Wireshark.
-2. Select the active network interface.
-3. Start packet capture.
-4. Clear the browser cache (optional).
-5. Visit a website.
-6. Wait until loading completes.
-7. Stop packet capture.
-
----
-
-## Tasks
-
-Identify:
-
-- ARP Request
-- DNS Query
-- DNS Response
-- TCP Handshake
-- TLS Handshake
-- HTTP Request (if visible)
-- HTTP Response (if visible)
-
-Record:
-
-- Source IP
-- Destination IP
-- Source Port
-- Destination Port
-
----
-
-## Challenge
-
-Repeat the experiment.
-
-Visit the same website again.
-
-Compare both captures.
-
-Questions:
-
-- Did another DNS query occur?
-- Was another ARP request required?
-- Did TCP establish again?
-- Were fewer packets transmitted?
-
-Explain the differences using browser, DNS, and ARP caching.
-
----
-
-# Summary
+## Summary
 
 Typing a web address into a browser initiates a complex sequence of events involving numerous protocols and networking devices.
 
@@ -1888,27 +1302,22 @@ Once the packet arrives, TCP establishes a reliable connection, TLS negotiates e
 Every networking technology covered throughout the remainder of this course represents one component of this communication process. Understanding the complete journey provides the context necessary for studying individual protocols in greater depth.
 
 ---
+## Key Terms
 
-# Key Terms
+| Term            | Definition                                          |
+| --------------- | --------------------------------------------------- |
+| URL             | Uniform Resource Locator identifying a web resource |
+| DNS             | Resolves domain names into IP addresses             |
+| ARP             | Resolves IP addresses into MAC addresses            |
+| MAC Address     | Physical Layer 2 hardware address                   |
+| IP Address      | Logical Layer 3 network address                     |
+| Default Gateway | Router used to reach remote networks                |
+| Ethernet Frame  | Layer 2 data unit                                   |
+| IP Packet       | Layer 3 data unit                                   |
+| TCP Segment     | Layer 4 data unit                                   |
+| TLS             | Encryption protocol used by HTTPS                   |
+| HTTP            | Protocol used to transfer web resources             |
+| Browser Cache   | Locally stored web resources                        |
+| DNS Cache       | Locally stored DNS records                          |
 
-| Term | Definition |
-|------|------------|
-| URL | Uniform Resource Locator identifying a web resource |
-| DNS | Resolves domain names into IP addresses |
-| ARP | Resolves IP addresses into MAC addresses |
-| MAC Address | Physical Layer 2 hardware address |
-| IP Address | Logical Layer 3 network address |
-| Default Gateway | Router used to reach remote networks |
-| Ethernet Frame | Layer 2 data unit |
-| IP Packet | Layer 3 data unit |
-| TCP Segment | Layer 4 data unit |
-| TLS | Encryption protocol used by HTTPS |
-| HTTP | Protocol used to transfer web resources |
-| Browser Cache | Locally stored web resources |
-| DNS Cache | Locally stored DNS records |
-
----
-
-# Looking Ahead
-
-The next lesson begins with the physical foundation of networking. Before packets, IP addresses, or routing can exist, data must travel across a physical medium. The following module examines how information is represented electrically, optically, and wirelessly, introducing signals, transmission media, bandwidth, latency, and the devices that form the physical layer of modern computer networks.
+You're ready now for [[Lesson 1.1 - Lab]].
