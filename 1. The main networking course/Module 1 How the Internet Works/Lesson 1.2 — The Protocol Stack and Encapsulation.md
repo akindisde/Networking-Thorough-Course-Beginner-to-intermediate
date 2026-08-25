@@ -6,15 +6,20 @@ Modern computer networks consist of billions of interconnected devices manufactu
 
 A single protocol, however, cannot solve every communication problem. Delivering data across a network involves numerous independent tasks, including identifying applications, ensuring reliable delivery, selecting network paths, transmitting data over physical media, and detecting transmission errors. Combining all of these responsibilities into one protocol would create an extremely complex and inflexible system.
 
-To address this challenge, computer networking uses a layered architecture known as the *protocol stack*. Each layer performs a specific set of functions while <u>relying</u> on the services provided by the layer below it. This modular approach allows technologies to <mark style="background:#fff88f">evolve independently without affecting the entire networking system</mark>.
+To address this challenge, computer networking uses a layered architecture known as the *protocol stack*. Each layer performs a specific set of functions while <u>relying</u> on the services provided by the layer below it to carry on the next steps. This modular approach allows technologies to <mark style="background:#fff88f">evolve independently without affecting the entire networking system</mark>.
 
 ![[Cybersecurity journey/1. Networking/Definitions#🧠 - Protocol stack|Definitions]]
 
 Understanding protocol layering is one of the most important concepts in networking. Every protocol discussed throughout this course belongs to one of these layers, and nearly every troubleshooting process follows the same layered approach.
 
+The more you advance in this course, you'll have a clearer image of this collection of layers and their protocols and standards in action:
+
+![[Pasted image 20260825125358.png]]
+
+> **Note**: the protocol stack as many versions like the TCP/IP model or the OSI model (the one above with 7 layers), and you're not expected to understand it whole in one take, we study it layer by layer, protocol by protocol, and step by step, otherwise it's blurry, chaotic set of irrelevant information in your head. And of course, the practical side of this course is the best way to learn the protocol stack, and you must learn it, since it, realistically, defines what happens in every networks around the world. 
 ### Learning Objectives
 
-After completing this lesson, students should be able to :
+After completing this lesson, students should be able to:
 
 - Explain why networking protocols are organized into layers.
 - Define the concepts of separation of concerns, modularity, and interoperability.
@@ -37,7 +42,7 @@ Without standardized communication rules, these systems could never exchange inf
 
 ![[Cybersecurity journey/1. Networking/Q&A#❔ - What does it mean to standardize communication ?|Q&A]]
 
-This is crucial to keep in mind your whole journey of learning networking, protocol defines :
+This is crucial to keep in mind your whole journey of learning networking, protocol defines:
 - The *format* of transmitted data
 
 ![[Cybersecurity journey/1. Networking/Definitions#🧠 - Data format|Definitions]]
@@ -53,7 +58,7 @@ Every protocol serves a <u>specific purpose</u> within the communication process
 
 ### Why One Protocol Is Not Enough
 
-Suppose a user downloads a webpage. Several independent problems must be solved before the webpage appears, some examples include :
+Suppose a user downloads a webpage. Several independent problems must be solved before the webpage appears, some examples include:
 - How does the browser ==request== the webpage?
 - How does the server know ==which application should receive the request==?
 - How is ==reliable delivery== guaranteed?
@@ -68,7 +73,7 @@ Each protocol performs one task well and cooperates with the others. This princi
 
 ### The Concept of Layering
 
-Layering divides a complex system into multiple <u>independent components</u>. Each layer focuses on a single responsibility and communicates only with adjacent layers. A simplified representation appears below :
+Layering divides a complex system into multiple <u>independent components</u>. Each layer focuses on a single responsibility and communicates only with adjacent layers. A simplified representation appears below:
 
 ```text
 +---------------------------+
@@ -84,9 +89,9 @@ Layering divides a complex system into multiple <u>independent components</u>. E
 +---------------------------+
 ```
 
-> Please note that this is a way of formalizing the concept of networking, which means when we talk about layering models that are numerous, not this one above, we're trying to give a theoretical structure to networks and how they operate so we can understand them better, separation of tasks and events and many other things into separate layers are required so you know exactly what "zone" are you talking about in networking, and this way of looking at this topic is beneficial among students and professionals, structured communication is always better.
+> Please note that this is a way of formalizing the concepts of networking, which means when we talk about layering models that are numerous, not this one above, we're trying to give a theoretical structure to networks and how they operate so we can understand them better, separation of tasks and events and many other things into separate layers are required so you know exactly what "zone" are you talking about in networking, and this way of looking at this topic is beneficial among students and professionals, structured communication is always better.
 
-The application layer (its protocols and responsibilities) does not concern itself with electrical signals (the responsibility of the physical layer). The physical layer does not understand webpages.
+The application layer (its protocols and responsibilities) does not concern itself with electrical signals (the responsibility of the physical layer). The physical layer does not understand webpages because it's not built to do so.
 
 Each layer performs only the tasks assigned to it.
 
@@ -96,7 +101,7 @@ One of the primary reasons for layering is **separation of concerns**.
 
 Separation of concerns means that each layer focuses exclusively on a well-defined responsibility without needing to understand the internal operation of other layers.
 
-Consider a postal delivery service. Writing a letter involves several independent activities :
+Consider a postal delivery service. Writing a letter involves several independent activities:
 - Writing the message
 - Placing it inside an envelope
 - Printing the address
@@ -106,11 +111,11 @@ Consider a postal delivery service. Writing a letter involves several independen
 
 The delivery driver does not need to understand the contents of the letter. Likewise, the person writing the letter does not need to understand how trucks are routed across the country.
 
-Each participant performs a specialized role. Computer networking follows the same design philosophy.
+Each participant performs a specialized role. Computer networking follows the same design mindset.
 
 ### Separation of Responsibilities
 
-The responsibilities of the networking layers can be summarized as follows.
+The responsibilities of the networking layers can be summarized as follows:
 
 | Layer       | Primary Responsibility                                |
 | ----------- | ----------------------------------------------------- |
@@ -124,7 +129,7 @@ Notice that each responsibility is distinct. No layer attempts to perform anothe
 
 ### Advantages of Separation of Concerns
 
-Separating responsibilities provides several important benefits :
+Separating responsibilities provides several important benefits:
 
 #### Simplicity
 
@@ -146,22 +151,13 @@ This independence greatly simplifies technological evolution.
 
 #### Easier Troubleshooting
 
-Professional network engineers isolate problems by layer. Examples include :
+Professional network engineers isolate problems by layer. Examples include:
 
-Application problem :
-- Incorrect HTTP response.
-
-Transport problem :
-- TCP connection failure.
-
-Network problem :
-- Missing route.
-
-Link problem :
-- VLAN mismatch.
-
-Physical problem :
-- Damaged cable.
+Application problem: Incorrect HTTP response.
+Transport problem: TCP connection failure.
+Network problem: Missing route.
+Link problem: VLAN mismatch.
+Physical problem: Damaged cable.
 
 Rather than investigating every protocol simultaneously, engineers narrow the problem to a specific layer. This methodology significantly reduces troubleshooting time.
 
@@ -171,7 +167,7 @@ Rather than investigating every protocol simultaneously, engineers narrow the pr
 
 A modular system consists of independent components that can be modified or replaced without redesigning the entire system. Networking protocols behave like interchangeable building blocks.
 
-For example :
+For example:
 
 ```
 HTTP
@@ -183,7 +179,7 @@ The application protocol changes.
 TCP continues operating normally.
 IP continues routing packets.
 Ethernet continues forwarding frames.
-Nothing else requires modification. Similarly :
+Nothing else requires modification. Similarly:
 
 ```
 Ethernet
@@ -198,24 +194,22 @@ The modular architecture isolates changes to the appropriate layer.
 
 ##### Real-World Example of Modularity
 
-Consider three users :
+Consider three users:
 
 User A : Desktop computer connected using Ethernet.
 User B : Laptop connected using Wi-Fi.
 User C : Smartphone connected using 5G.
 
-All three users access :
+All three users access:
 
 ```
 https://www.openai.com
 ```
 
-Although the lower layers (responsible for how bits are transmitted) differ significantly :
+Although the lower layers (responsible for how bits are transmitted) differ significantly:
 - Ethernet
 - Wi-Fi
 - Cellular
-
-![[Cybersecurity journey/1. Networking/Q&A#❔ - What's the difference between Ethernet, Wi-Fi and cellular ?|Q&A]]
 
 the application layer remains identical.
 The browser issues the same HTTPS request.
@@ -224,13 +218,15 @@ The webpage appears identically on all devices.
 
 This interoperability is possible because the protocol stack separates communication into independent layers.
 
+![[Cybersecurity journey/1. Networking/Q&A#❔ - What's the difference between Ethernet, Wi-Fi and cellular ?|Q&A]]
+
 #### *Interoperability*
 
 ![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Interoperability|Terminology]]
 
 Perhaps the greatest achievement of protocol layering is interoperability. Interoperability refers to the ability of systems developed by different vendors to communicate correctly.
 
-Consider the following network :
+Consider the following network:
 
 ```text
 Windows PC
@@ -272,25 +268,23 @@ Manufacturers implement these standards within their products. As long as device
 
 ### The Need for a Protocol Stack
 
-Combining every networking responsibility into one protocol would create software that is :
-- Extremely difficult to develop.
-- Nearly impossible to maintain.
-- Challenging to troubleshoot.
-- Difficult to extend.
-- Vendor dependent.
+Combining every networking responsibility into one protocol would create software that is:
+- Extremely difficult to develop
+- Nearly impossible to maintain
+- Challenging to troubleshoot
+- Difficult to extend
+- Vendor dependent
 
-Instead, the networking industry adopted a layered architecture where :
+Instead, the networking industry adopted a layered architecture where:
 
-- Each layer solves one category of problems.
-- Layers cooperate through clearly defined interfaces.
-- Individual protocols can evolve independently.
-- Hardware and software from different vendors remain compatible.
-
-This layered architecture is known as the **protocol stack**.
+- Each layer solves one category of problems
+- Layers cooperate through clearly defined interfaces
+- Individual protocols can evolve independently
+- Hardware and software from different vendors remain compatible
 
 The remainder of this lesson examines the structure of the Internet protocol stack and the responsibilities assigned to each layer.
 
-Here is a diagram to best visualize what we learned this part of the chapter : 
+Here is another look at the protocol stack to best visualize what we learned this part of the chapter, getting you more familiar with it: 
 
 ![[Pasted image 20260720184038.png]]
 
@@ -307,8 +301,6 @@ Here is a diagram to best visualize what we learned this part of the chapter :
 - Interoperability allows devices from different manufacturers to communicate using common standards.
 - Layered architectures simplify implementation, maintenance, troubleshooting, and future development.
 - Modern Internet communication depends on standardized protocol stacks rather than proprietary communication systems.
-
-> We will go through the protocol stack in the labs as well, if you still have some hardship understanding it fully, it'll go away.
 
 ### Preview
 
