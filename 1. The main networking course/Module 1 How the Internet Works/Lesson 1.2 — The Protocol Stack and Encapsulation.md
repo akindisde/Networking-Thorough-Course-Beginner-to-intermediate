@@ -312,7 +312,7 @@ Part 2 introduces the **Internet Five-Layer Model**, the protocol architecture u
 
 Throughout this course, networking concepts will be organized using the Internet protocol stack, also known as the [[Transmission Control Protocol-Internet Protocol (TCP-IP) model]] or the Internet five-layer model.
 
-This model divides network communication into five <u>logical</u> layers. Each layer performs a specific function while providing services to the layer above it and relying on the layer below it.
+This model divides network communication into five layers. Each layer performs a specific function while providing services to the layer above it and relying on the layer below it.
 
 ```text
 +-----------------------------+
@@ -363,15 +363,14 @@ The browser does not need to understand Ethernet.
 The DNS client does not need to understand electrical signals.
 Applications simply generate data and pass it to the Transport layer.
 
-In simple terms, even if the layer above doesn't do its work properly, the layer below still can do its job.
 #### Responsibilities of the Application Layer
 
-The Application layer is responsible for :
-- Providing network services to user applications.
-- Defining application-specific message formats.
-- Managing application-level communication.
-- Supporting authentication and user interaction.
-- Exchanging application data.
+The Application layer is responsible for:
+- Providing network services to user applications
+- Defining application-specific message formats
+- Managing application-level communication
+- Supporting authentication and user interaction
+- Exchanging application data
 
 It is important to understand that this layer does **not** guarantee reliable delivery.
 It does **not** determine network paths. 
@@ -379,9 +378,11 @@ It does **not** perform routing.
 
 Those responsibilities belong to lower layers.
 
+![[Cybersecurity journey/1. Networking/Q&A#❔ - If a protocol layer didn't do its job for some reason, do the other layers fulfill their jobs regardless ?|Q&A]]
+
 #### Real Example
 
-Suppose a browser requests :
+Suppose a browser requests:
 
 ```
 https://example.com/index.html
@@ -394,7 +395,7 @@ GET /index.html HTTP/1.1
 Host: example.com
 ```
 
-At this stage, the browser knows nothing about :
+At this stage, the browser knows nothing about:
 - MAC addresses
 - IP addresses
 - Routers
@@ -405,11 +406,11 @@ Its only responsibility is producing the HTTP request. The request is then hande
 
 ### Layer 4 — [[Transport layer]]
 
-The Transport layer provides communication between applications running on different devices.
+The Transport layer provides communication <u>between applications</u> running on different devices.
 
 Instead of thinking about computers communicating, it is more accurate to think of **applications** communicating.
 
-A single computer may simultaneously run :
+A single computer may simultaneously run:
 - A web browser
 - Spotify
 - Discord
@@ -421,7 +422,7 @@ All of these applications share the same network interface; all the data coming 
 
 The Transport layer ensures that incoming data reaches <mark style="background:#fff88f">the correct application.</mark> and that's done with port numbers as hinted before.
 
-The two primary Transport protocols are :
+The two primary Transport protocols are:
 - [[Transmission Control Protocol (TCP)]]
 - *[[User Datagram Protocol (UDP)]]*
 
@@ -431,7 +432,7 @@ The two primary Transport protocols are :
 
 Transmission Control Protocol (TCP) provides reliable communication, if we want to summarize it.
 
-Its major features include :
+Its major features include:
 - Connection establishment
 - Reliable delivery
 - Packet sequencing
@@ -441,7 +442,7 @@ Its major features include :
 
 Applications that require accuracy generally use TCP.
 
-Examples include:
+Examples of TCP associated application layer protocols include:
 - HTTP
 - HTTPS
 - SSH
@@ -460,7 +461,7 @@ Unlike TCP, UDP :
 - Does not guarantee delivery.
 - Does not guarantee ordering.
 
-Its primary advantage is <u>speed</u>. Applications using UDP include :
+Its primary advantage is <u>speed</u>. Applications using UDP include:
 - DNS
 - VoIP
 - Video streaming
@@ -471,11 +472,11 @@ Later modules compare TCP and UDP in detail.
 
 #### Port Numbers
 
-The Transport layer introduces another important concept : **ports**.
+The Transport layer introduces another important concept: **ports**.
 An IP address identifies a host.
 A port identifies an application running on that host.
 
-Examples :
+Examples:
 
 | Service | Port |
 | ------- | ---: |
@@ -505,7 +506,7 @@ The Network layer is responsible for moving packets between different networks.
 Unlike the Link layer, which only communicates across a single local network, the Network layer enables global communication across the Internet; Meaning, the data link layer services are <u>programmed and built</u> to handle only local network communication, and the network layer services are <u>programmed and built</u> to handle more than that.
 
 The primary protocol operating at this layer is [[Internet protocol (IP)]].
-Its responsibilities include :
+Its responsibilities include:
 - Logical addressing
 - Routing
 - Packet forwarding
@@ -516,13 +517,13 @@ Its responsibilities include :
 
 ![[Cybersecurity journey/1. Networking/Q&A#❔ - What's the difference between segmentation and fragmentation in networking ?|Q&A]]
 
-Every packet contains :
+Every packet contains:
 - Source IP address
 - Destination IP address
 
 Unlike MAC addresses, IP addresses remain largely unchanged from the sender to the receiver.
 
-Routers make forwarding decisions based entirely on these addresses. For example :
+Routers make forwarding decisions based entirely on these addresses. For example:
 
 ```
 Source
@@ -540,7 +541,7 @@ The Network layer is therefore responsible for delivering packets across multipl
 
 ### Layer Relationships
 
-At this point, three layers are involved in communication :
+At this point, three layers are involved in communication:
 
 ```text
 Application
@@ -558,18 +559,18 @@ Adds IP Information
 Lower Layers
 ```
 
-Notice that each layer performs exactly one category of work :
-The browser still has no knowledge of IP routing.
-The IP protocol has no understanding of webpages.
-The Transport layer has no knowledge of HTML.
+Notice that each layer performs exactly one category of work:
+The browser still has no knowledge of IP routing
+The IP protocol has no understanding of webpages
+The Transport layer has no knowledge of HTML
 
 Each protocol remains focused on its own responsibility, illustrating the principle of separation of concerns introduced earlier.
 
 ### Key Takeaways
 
-- The Internet protocol stack consists of five layers (in one common model not all models) 
-- The Application layer provides services for user applications.
-- The Transport layer enables communication between applications using TCP or UDP.
+- The Internet protocol stack consists of five layers in the TCP/IP model (one common practical model not all models) 
+- The Application layer provides services for user applications. Again, it's not called the application layer because it hosts the apps used by the user, but rather because <u>it provides service enabling those apps to access networks</u>.
+- The Transport layer enables communication <u>between applications</u> using TCP or UDP.
 - Port numbers identify specific services on a host.
 - The Network layer provides logical addressing and routing using IP.
 - Each layer provides services to the layer above while relying on services from the layer below.
@@ -583,11 +584,11 @@ The next part introduces the remaining two layers of the Internet protocol stack
 
 ### Layer 2 — [[Link layer]]
 
-The Link layer, sometimes called the **Network Access Layer** or **Data Link Layer**, is responsible for communication between devices connected to <u>the same physical network</u>.
+The Link layer, sometimes called the **Network Access Layer** or **Data Link Layer**, handles communication only between <u>directly connected nodes on the same local physical network</u>.
 
 Unlike the Network layer, which delivers packets across multiple interconnected networks, the Link layer operates only within a single <u>local network</u>.
 
-For example, when a computer sends data to its default gateway, the communication occurs entirely at the Link layer. Common technologies operating at this layer include :
+For example, when a computer sends data to its default gateway, the communication occurs entirely at the Link layer. Common technologies operating at this layer include:
 
 - Ethernet (*IEEE 802.3*)
 
@@ -609,15 +610,22 @@ The Link layer is responsible for delivering data from one network interface to 
 
 ![[Cybersecurity journey/1. Networking/Definitions#🧠 - Broadcast domain|Definitions]]
 
+Since the broadcast domain is a must-understand topic, here is a simple illustration to grasp on it:
+
+![[Pasted image 20260827133442.png]]
+
 #### Responsibilities of the Link Layer
 
-The Link layer performs several important functions. These include :
-- Physical addressing using MAC addresses.
-- Frame construction.
-- Frame forwarding.
-- Error detection.
-- Access to the transmission medium.
-- Local delivery.
+The Link layer performs several important functions. These include:
+- Physical addressing using MAC addresses
+- Frame construction
+- Frame forwarding
+
+![[Cybersecurity journey/1. Networking/Q&A#❔ - When we say packet or frame forwarding, does that mean there is no decapsulation ?|Q&A]]
+
+- Error detection
+- Access to the transmission medium
+- Local delivery
 
 Unlike IP addresses, which identify devices across the Internet, MAC addresses identify interfaces within a local network. Every Ethernet frame contains two MAC addresses:
 - Source MAC Address
@@ -627,7 +635,7 @@ These addresses change every time a packet passes through a router.
 
 #### MAC Addresses
 
-A MAC (Media Access Control) address is a <u>unique hardware identifier</u> assigned to a network interface. An example MAC address is :
+A MAC (Media Access Control) address is a <u>unique hardware identifier</u> assigned to a network interface. An example MAC address is:
 
 ```
 A8:5E:45:3B:91:7C
@@ -635,7 +643,7 @@ A8:5E:45:3B:91:7C
 
 Unlike IP addresses, MAC addresses are not used for routing across the Internet.
 
-Their purpose is local delivery. Consider the following network :
+Their purpose is local delivery. Consider the following network:
 
 ```text
                  Switch
@@ -646,7 +654,7 @@ Their purpose is local delivery. Consider the following network :
 
 When the PC sends a frame to the printer, the switch examines only the destination MAC address.
 
-It does not examine :
+It does not examine:
 - URLs
 - HTTP requests
 - TCP ports
@@ -656,7 +664,7 @@ Its responsibility is limited to forwarding frames within the local network.
 
 #### Ethernet Frames
 
-The Link layer packages Network layer packets into **frames**. A simplified Ethernet frame appears below :
+The Link layer packages Network layer packets into **frames**. A simplified Ethernet frame appears below:
 
 ```text
 +--------------------------------------+
@@ -672,7 +680,7 @@ The Link layer packages Network layer packets into **frames**. A simplified Ethe
 +--------------------------------------+
 ```
 
-Each field has a specific purpose : 
+Each field has a specific purpose:
 The **Destination MAC Address** tells the switch where the frame should be delivered.
 The **Source MAC Address** identifies the sender.
 The *EtherType* identifies the protocol contained within the payload.
@@ -692,23 +700,23 @@ Ethernet uses a *[[Cyclic Redundancy Check (CRC)]]* to detect these errors.
 The sender calculates a mathematical value over the transmitted frame and stores it in the Frame Check Sequence field.
 The receiver performs the same calculation.
 If the calculated value differs from the received value, the frame has been corrupted.
-The corrupted frame is discarded.
+<u>The corrupted frame is discarded.</u>
 
 <mark style="background:#fff88f">Ethernet detects transmission errors but does not recover from them.</mark>
 Reliable recovery is performed later by TCP.
 
 ### Layer 1 — [[Physical layer]]
 
-The Physical layer is the lowest layer of the protocol stack. It has one primary responsibility :
+The Physical layer is the lowest layer of the protocol stack. It has one primary responsibility:
 
-Transmit bits across a physical medium. Unlike every other layer, the Physical layer does not understand :
+Transmit bits across a physical medium. Unlike every other layer, the Physical layer does not understand:
 - Packets
 - Frames
 - Addresses
 - Ports
 - Protocols
 
-It only understands <u>binary values represented as physical signals</u>. Depending on the transmission medium, bits may be represented as :
+It only understands <u>binary values represented as physical signals</u>. Depending on the transmission medium, bits may be represented as:
 - Electrical voltages
 - Light pulses
 - Radio waves
@@ -717,7 +725,7 @@ The Physical layer converts digital information into signals suitable for transm
 
 #### Physical Media
 
-Different networks use different transmission media. Common examples include :
+Different networks use different transmission media. Common examples include:
 
 | Medium              | Signal Type |
 | ------------------- | ----------- |
@@ -738,8 +746,8 @@ Different networking devices primarily operate at different layers of the protoc
 
 | Device                       | Primary Layer                     |
 | ---------------------------- | --------------------------------- |
-| *Hub*                        | Physical                          |
-| *Repeater*                   | Physical                          |
+| *[[Hub]]*                    | Physical                          |
+| *[[Repeater]]*               | Physical                          |
 | Network Interface Card (NIC) | Link                              |
 | Switch                       | Link                              |
 | Wireless Access Point        | Link                              |
@@ -782,7 +790,7 @@ Every protocol encountered throughout this course belongs somewhere within this 
 
 #### Why Another Model Exists
 
-Students often encounter two different networking models :
+Students often encounter two different networking models:
 - Internet Five-Layer Model
 - OSI Seven-Layer Model
 
@@ -852,18 +860,18 @@ This simplification more accurately reflects how Internet protocols are actually
 
 Although networking equipment implements the TCP/IP model, the OSI model remains extremely useful.
 
-Reasons include :
-- Standardized terminology.
-- Vendor-neutral discussions.
-- Structured troubleshooting.
-- Educational simplicity.
-- Certification objectives.
+Reasons include:
+- Standardized terminology
+- Vendor-neutral discussions
+- Structured troubleshooting
+- Educational simplicity
+- Certification objectives
 
 For example, saying:
 
 > "The problem exists at Layer 3."
 
-immediately tells another engineer that the issue likely involves :
+immediately tells another engineer that the issue likely involves:
 - IP addressing.
 - Routing.
 - Subnetting.
@@ -875,7 +883,7 @@ Without needing additional explanation.
 - The Link layer provides communication within a local network using MAC addresses.
 - Ethernet frames encapsulate IP packets.
 - The Physical layer transmits binary data as electrical, optical, or radio signals.
-- Switches <u>primarily</u> operate at the Link layer, while routers operate at the Network layer.
+- Switches operate at the Link layer, while routers operate at the Network layer.
 - The Internet five-layer model reflects modern networking implementations.
 - The OSI seven-layer model remains a conceptual framework widely used for education, documentation, and troubleshooting.
 - Networking professionals frequently reference OSI layer numbers even though Internet communication uses the TCP/IP protocol suite.
