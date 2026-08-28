@@ -898,9 +898,9 @@ The next part introduces one of the most fundamental concepts in networking: **e
 
 The layered architecture of modern networks would not function unless each layer could exchange information in a standardized way. This is accomplished through a process known as **encapsulation**.
 
-Encapsulation is the process of wrapping data with protocol-specific information as it moves down the protocol stack. Every layer receives data from the layer above, attaches its own header (and sometimes a trailer), and passes the resulting data unit to the next layer.
+Encapsulation is the process of wrapping data with protocol-specific information as it moves down the protocol stack. Every layer receives data from the layer above, attaches its own header, and passes the resulting data unit to the next layer.
 
-Each header contains information required for that specific layer to perform its responsibilities. For example :
+Each header contains information required for that specific layer to perform its responsibilities. For example:
 - The Transport layer needs port numbers
 - The Network layer needs IP addresses
 - The Link layer needs MAC addresses
@@ -909,7 +909,7 @@ Each header contains information required for that specific layer to perform its
 
 ### An Everyday Analogy
 
-Imagine sending a physical letter First, the message is written.
+Imagine sending a physical letter First, the message is written:
 
 ```text
 Hello, how are you?
@@ -938,7 +938,7 @@ As data moves through the protocol stack, it is referred to by different names. 
 
 A PDU is not the original data's name, it's the name of the encapsulation process and decapsulation process at each layer (data + layer header = PDU of that layer)
 
-Understanding these terms is important because network engineers use them constantly during troubleshooting and documentation. For example :
+Understanding these terms is important because network engineers use them constantly during troubleshooting and documentation. For example:
 
 > "The router forwarded the packet."
 
@@ -950,14 +950,14 @@ Each statement refers to a different protocol layer.
 
 ### Following a Web Request
 
-Consider the browser requesting :
+Consider the browser requesting:
 
 ```http
 GET / HTTP/1.1
 Host: example.com
 ```
 
-At the Application layer, this request is simply data :
+At the Application layer, this request is simply data:
 
 ```text
 GET / HTTP/1.1
@@ -971,7 +971,6 @@ The browser passes this data to TCP.
 TCP receives the application data.
 
 It adds a TCP header containing information such as:
-
 - Source Port
 - Destination Port
 - Sequence Number
@@ -982,7 +981,7 @@ It adds a TCP header containing information such as:
 
 - Flags
 
-Conceptually :
+Conceptually:
 
 ```text
 +------------------------+
@@ -999,14 +998,15 @@ Notice that the HTTP request itself has not changed, TCP simply added informatio
 
 The TCP segment is passed to the Network layer.
 IP adds another header.
-The IP header contains information including :
+
+The IP header contains information including:
 - Source IP Address
 - Destination IP Address
 - Time To Live (TTL)
 - Protocol Number
 - Header Checksum (IPv4)
 
-The <u>packet</u> now appears conceptually as :
+The <u>packet</u> now appears conceptually as:
 
 ```text
 +------------------------+
@@ -1040,7 +1040,7 @@ Ethernet adds another header <mark style="background:#fff88f">and a trailer.</ma
 +------------------------+
 ```
 
-The Ethernet header contains :
+The Ethernet header contains:
 - Source MAC Address
 - Destination MAC Address
 - EtherType
@@ -1061,15 +1061,15 @@ The frame is passed to the Physical layer. Unlike the upper layers, <mark style=
 ```
 
 These bits are represented as:
-- Electrical voltages.
-- Light pulses.
-- Radio waves.
+- Electrical voltages
+- Light pulses
+- Radio waves
 
 The signals travel across the transmission medium to the next device.
 
 ### Complete Encapsulation Process
 
-The complete process can be visualized as follows :
+The complete process can be visualized as follows:
 
 ![[Pasted image 20260724102832.png]]
 
@@ -1077,7 +1077,7 @@ The complete process can be visualized as follows :
 
 When the frame reaches the destination computer, the process occurs in reverse; This reverse process is known as **decapsulation**.
 
-Each layer removes only its own information before passing the remaining data upward. The process appears as :
+Each layer removes only its own information before passing the remaining data upward. The process appears as:
 
 ```text
 Bits
@@ -1097,24 +1097,24 @@ The destination browser eventually receives exactly the same HTTP request that t
 
 ### Layer Independence
 
-An important property of encapsulation is that each layer <u>understands</u> only its own header. For example :
+An important property of encapsulation is that each layer <u>understands</u> only its own header. For example:
 
-The Ethernet layer processes :
+The Ethernet layer processes:
 - Source MAC
 - Destination MAC
 - EtherType
 
-It <u>cannot (physically or logically)</u> understand  :
+It <u>cannot</u> understand:
 - TCP ports
 - HTTP headers
 - DNS messages
 
-Likewise, the IP layer processes :
+Likewise, the IP layer processes:
 - Source IP
 - Destination IP
 - TTL
 
-It does not examine :
+It does not examine:
 - HTML
 - CSS
 - Images
@@ -1126,7 +1126,7 @@ This strict separation keeps protocols simple and allows each layer to evolve in
 
 A common misconception is that routers forward Ethernet frames across the Internet. This is incorrect.
 
-Suppose a packet travels through three routers :
+Suppose a packet travels through three routers:
 
 ```text
 PC
@@ -1140,7 +1140,7 @@ Router C
 Server
 ```
 
-Each router performs the following operations :
+Each router performs the following operations:
 1. Receives an Ethernet frame
 2. Removes the Ethernet header and trailer
 3. Reads the IP packet
@@ -1152,133 +1152,6 @@ The IP packet continues its journey.
 The Ethernet frame exists only on a single network segment.
 This distinction becomes essential when studying routing.
 
-### Encapsulation in Wireshark
-
-Wireshark displays protocol headers exactly as they appear during encapsulation.
-
-Expand any captured packet. A typical packet appears similar to :
-
-```text
-Frame
-└── Ethernet II
-    └── Internet Protocol Version 4
-        └── Transmission Control Protocol
-            └── Hypertext Transfer Protocol
-```
-
-Notice that the packet structure mirrors the protocol stack (reverses it)
-Each protocol is nested inside the protocol below it.
-
-Wireshark simply displays the encapsulated headers in the order they appear within the frame.
-
-### Practical Example
-
-Suppose a browser requests:
-
-```
-https://example.com
-```
-
-The browser generates an HTTP request:
-
-TCP adds :
-- Source Port: 52314 or other
-- Destination Port: 443
-
-IP adds :
-- Source IP: 192.168.1.10 or other
-- Destination IP: 93.184.216.34
-
-Ethernet adds :
-- Source MAC: A8:5E:45:3B:91:7C or other
-- Destination MAC: 20:47:47:11:82:5A
-
-Finally, the Physical layer transmits the resulting frame as electrical signals.
-
-At the receiving host, each layer removes its corresponding header until the web server receives the original HTTP request.
-
-### Laboratory Exercise — Identifying the Protocol Stack
-
-#### Objective
-
-Observe encapsulation within a real network packet using Wireshark.
-
-#### Requirements
-
-- Wireshark
-- Internet connection
-- Modern web browser
-
-#### Procedure
-
-1. Open Wireshark
-2. Select the active network interface
-3. Start packet capture
-4. Visit `https://example.com`
-5. Stop the capture
-6. Locate a TCP packet carrying HTTPS traffic
-7. Expand the protocol tree
-
-#### Expected Packet Structure
-
-The packet should resemble:
-
-```text
-Frame
-Ethernet II
-Internet Protocol Version 4
-Transmission Control Protocol
-Transport Layer Security
-```
-
-If HTTP traffic is captured instead of HTTPS, the final protocol becomes :
-
-```text
-Hypertext Transfer Protocol
-```
-
-#### Student Tasks
-
-Identify :
-
-- The Link layer protocol.
-- The Network layer protocol.
-- The Transport layer protocol.
-- The Application layer protocol.
-- The corresponding Physical medium used during transmission.
-
-Record :
-
-- Source MAC Address
-- Destination MAC Address
-- Source IP Address
-- Destination IP Address
-- Source Port
-- Destination Port
-
-Determine which protocol belongs to each layer of the Internet protocol stack.
-
-### Common Misconceptions
-
-**Misconception 1**
-
-> Routers forward Ethernet frames across the Internet.
-
-Incorrect. Routers forward IP packets. Ethernet frames are rebuilt at every hop.
-
-**Misconception 2**
-
-> IP addresses and MAC addresses serve the same purpose.
-
-Incorrect. MAC addresses provide local delivery. IP addresses provide end-to-end logical addressing.
-
-**Misconception 3**
-
-> Applications communicate directly using IP.
-
-Incorrect. Application protocols rely on the Transport layer, which relies on the Network layer, which relies on the Link and Physical layers.
-Every layer participates in the communication process.
-
 ### Summary
 
 Protocol layering divides network communication into manageable components, each responsible for a specific aspect of data transmission. Encapsulation allows these layers to cooperate by progressively adding protocol information as data moves downward through the stack.
@@ -1289,17 +1162,17 @@ This layered architecture enables modularity, interoperability, and efficient tr
 
 ### Key Terms
 
-| Term | Definition |
-|------|------------|
-| Protocol Stack | Layered architecture used for network communication |
-| Encapsulation | Adding protocol headers as data moves down the stack |
-| Decapsulation | Removing protocol headers as data moves up the stack |
-| PDU | Protocol Data Unit used by a specific layer |
-| Segment | Transport layer PDU for TCP |
-| Datagram | Transport layer PDU for UDP or Network layer (context-dependent) |
-| Packet | Network layer PDU |
-| Frame | Link layer PDU |
-| Bits | Physical layer representation of data |
-| Header | Control information added by a protocol |
-| Trailer | Information appended after the payload, such as the Ethernet FCS |
-| Payload | Data carried by a protocol from the layer above |
+| Term           | Definition                                                       |
+| -------------- | ---------------------------------------------------------------- |
+| Protocol Stack | Layered architecture used for network communication              |
+| Encapsulation  | Adding protocol headers as data moves down the stack             |
+| Decapsulation  | Removing protocol headers as data moves up the stack             |
+| PDU            | Protocol Data Unit used by a specific layer                      |
+| Segment        | Transport layer PDU for TCP                                      |
+| Datagram       | Transport layer PDU for UDP or Network layer (context-dependent) |
+| Packet         | Network layer PDU                                                |
+| Frame          | Link layer PDU                                                   |
+| Bits           | Physical layer representation of data                            |
+| Header         | Control information added by a protocol                          |
+| Trailer        | Information appended after the payload, such as the Ethernet FCS |
+| Payload        | Data carried by a protocol from the layer above                  |
