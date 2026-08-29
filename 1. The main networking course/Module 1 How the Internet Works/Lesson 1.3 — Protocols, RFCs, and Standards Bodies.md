@@ -12,7 +12,7 @@ This lesson introduces what a protocol is, why protocols are necessary, and how 
 
 ### Learning Objectives
 
-After completing this lesson, students should be able to :
+After completing this lesson, students should be able to:
 - Define a networking protocol
 - Explain why protocols are required
 - Describe the three fundamental components of a protocol
@@ -22,7 +22,7 @@ After completing this lesson, students should be able to :
 
 ### What Is a Protocol?
 
-A protocol is a formal set of rules that defines how devices exchange information across a network. These rules specify :
+A protocol is a formal set of rules that defines how devices exchange information across a network. These rules specify:
 - How data is structured
 - When data should be transmitted
 - How devices respond to received messages
@@ -31,7 +31,7 @@ A protocol is a formal set of rules that defines how devices exchange informatio
 
 Without agreed-upon rules, communication cannot occur.
 
-A protocol acts as a common language understood by every participating device. For example, when a browser communicates with a web server, both devices already know :
+A protocol acts as a common language understood by every participating device. For example, when a browser communicates with a web server, both devices already know:
 - Which messages should be sent
 - The order in which they are sent
 - The format of each message
@@ -48,7 +48,7 @@ As long as both correctly implement the protocol, communication succeeds.
 Imagine two pilots communicating with an airport control tower.
 Their conversation follows strict procedures.
 The pilot cannot simply speak freely.
-Instead, communication follows standardized phrases and sequences. Example :
+Instead, communication follows standardized phrases and sequences. Example:
 
 ```text
 Pilot:
@@ -61,7 +61,7 @@ Pilot:
 Cleared to land, Runway 27.
 ```
 
-Every message has :
+Every message has:
 - A defined structure
 - A specific meaning
 - An expected response
@@ -71,11 +71,8 @@ If either participant ignored these rules, communication would become unreliable
 ### Why Protocols Are Necessary
 
 Suppose every company designed its own proprietary networking language.
-
 A Windows computer might communicate differently from a Linux server.
-
 Cisco routers might require completely different packet formats than Juniper routers.
-
 A web browser developed by Mozilla might be incompatible with a server running *Apache*.
 
 ![[Cybersecurity journey/1. Networking/Definitions#🧠 - Apache|Definitions]]
@@ -88,7 +85,7 @@ Regardless of vendor, operating system, or hardware architecture, every complian
 
 ### The Three Components of Every Protocol
 
-Although networking protocols vary considerably in complexity, every protocol defines three fundamental aspects of communication :
+Although networking protocols vary considerably in complexity, every protocol defines three fundamental aspects of communication:
 - *Syntax*
 
 ![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Syntax|Terminology]]
@@ -103,7 +100,7 @@ Together, these describe **what** is transmitted, **what it means**, and **when 
 
 #### Syntax
 
-Syntax defines the <u>format and structure</u> of transmitted information. It specifies how messages are <u>organized</u>. For example, an IPv4 packet contains fields arranged in a specific order :
+Syntax defines the <u>format and structure</u> of transmitted information. It specifies how messages are <u>organized</u>. For example, an IPv4 packet contains fields arranged in a specific order:
 
 ```text
 +-----------------------------+
@@ -133,7 +130,7 @@ If devices interpreted fields differently, communication would fail immediately.
 
 Semantics define the meaning of each field and message. Knowing where a field appears is not sufficient. Devices must also understand what that field represents.
 
-Consider the following HTTP request :
+Consider the following HTTP request:
 
 ```http
 GET /index.html HTTP/1.1
@@ -147,7 +144,7 @@ In HTTP
 GET
 ```
 
-means :
+means:
 
 > Retrieve the requested resource.
 
@@ -157,7 +154,7 @@ Similarly,
 POST
 ```
 
-means :
+means:
 
 > Submit data to the server.
 
@@ -169,14 +166,14 @@ This prevents *ambiguity* between communicating devices.
 
 #### Timing
 
-Timing defines when communication occurs. It specifies :
+Timing defines when communication occurs. It specifies:
 - Transmission order
 - Waiting periods
 - Retransmission behavior
 - Timeouts
 - Response expectations
 
-For example, TCP requires a three-way handshake before application data may be exchanged. The sequence must always occur in the following order :
+For example, TCP requires a three-way handshake before application data may be exchanged. The sequence must always occur in the following order:
 
 ```text
 Client
@@ -195,7 +192,7 @@ Changing this order would violate the protocol specification. Timing therefore e
 
 ### Protocol State
 
-Many networking protocols are <u>stateful</u>, meaning that devices keep track of the current stage of communication. Consider a simplified TCP connection :
+Many networking protocols are <u>stateful</u>, meaning that devices keep track of <mark style="background:#fff88f">the current stage of communication</mark>. Consider a simplified TCP connection:
 
 ```text
 Closed
@@ -223,7 +220,7 @@ Many application-layer protocols follow a *[[Request–Response model]]*. In thi
 
 ![[Cybersecurity journey/1. Networking/Definitions#🧠 - Request-Response model|Definitions]]
 
-Example :
+Example:
 
 ```text
 Browser
@@ -237,7 +234,7 @@ HTTP Response
 Browser
 ```
 
-Examples of request–response protocols include :
+Examples of request–response protocols include:
 - HTTP
 - DNS
 - DHCP
@@ -250,7 +247,7 @@ Most Internet applications use the *[[Client–Server model]]*. A **client** ini
 
 ![[Cybersecurity journey/1. Networking/Definitions#🧠 - Client-Server model|Definitions]]
 
-Examples include :
+Examples include:
 
 | Client | Server | Protocol |
 |----------|----------|----------|
@@ -265,14 +262,14 @@ The protocol defines how both sides communicate. Neither side needs to know how 
 
 One of the most important characteristics of networking protocols is independence. Each protocol performs one specialized task.
 
-Consider a browser downloading a webpage. Several protocols cooperate :
+Consider a browser downloading a webpage. Several protocols cooperate:
 
 ```text
+TCP
+↓
 HTTP
 ↓
 TLS
-↓
-TCP
 ↓
 IP
 ↓
@@ -288,7 +285,7 @@ Each protocol focuses on one responsibility while relying on lower layers to per
 
 ### Protocol Layering
 
-Protocols rarely operate alone. Instead, they form a stack. Each protocol uses services provided by lower layer protocols. For example :
+Protocols rarely operate alone. Instead, they form a stack. Each protocol uses services provided by lower layer protocols. For example:
 
 ```text
 Application
@@ -309,7 +306,7 @@ Copper Cable
 
 Each layer adds functionality without modifying the responsibilities of the others.
 
-This layered architecture allows protocols to evolve independently. For example :
+This layered architecture allows protocols to evolve independently. For example:
 
 ```
 HTTP
@@ -342,7 +339,7 @@ For example, the protocol is:
 HTTP
 ```
 
-Its implementations are :
+Its implementations are:
 - Apache HTTP Server
 - Nginx
 - Microsoft IIS
@@ -357,9 +354,9 @@ Yet all communicate correctly because they implement the same HTTP specification
 
 ![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Proprietary|Terminology]]
 
-Protocols can be categorized as either proprietary or open :
+Protocols can be categorized as either proprietary or open:
 
-An **open protocol** is publicly documented and available for anyone to implement. Examples include :
+An **open protocol** is publicly documented and available for anyone to implement. Examples include:
 - TCP
 - IPv4
 - IPv6
@@ -377,7 +374,7 @@ The modern Internet relies primarily on open standards because they encourage in
 
 ### Why Standardization Matters
 
-Without standardization :
+Without standardization:
 - Devices from different vendors could not communicate
 - Software developers would need separate versions of every application
 - Internet growth would be severely limited

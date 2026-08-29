@@ -1176,3 +1176,5 @@ This layered architecture enables modularity, interoperability, and efficient tr
 | Header         | Control information added by a protocol                          |
 | Trailer        | Information appended after the payload, such as the Ethernet FCS |
 | Payload        | Data carried by a protocol from the layer above                  |
+
+You're ready now for [[Lesson 1.2 - Lab]]
