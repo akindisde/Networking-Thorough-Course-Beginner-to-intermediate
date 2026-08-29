@@ -695,7 +695,7 @@ While the IETF defines most Internet protocols, it is not the only organization 
 
 Modern computer networks rely on the work of several international organizations, each specializing in a different area of networking.
 
-Among the most important are :
+Among the most important are:
 - IEEE
 - IANA
 - ICANN
@@ -709,7 +709,7 @@ This section focuses on the IEEE and IANA, two organizations encountered frequen
 
 [[The Institute of Electrical and Electronics Engineers (IEEE)]] is one of the world's largest professional engineering organizations.
 
-Unlike the IETF, which primarily develops Internet protocols such as TCP and IP, the IEEE develops standards for technologies operating closer to the physical network. Its standards cover areas such as :
+Unlike the IETF, which primarily develops Internet protocols such as TCP and IP, the IEEE develops standards for technologies operating closer to the physical network. Its standards cover areas such as:
 - Ethernet
 - Wi-Fi
 - Wireless communication
@@ -727,7 +727,7 @@ The number **802** refers to the project responsible for Local Area Network (LAN
 
 ![[Cybersecurity journey/1. Networking/Definitions#🧠 - Metropolitan Area Network (MAN)|Definitions]]
 
-Numerous networking standards belong to this family. Some of the most important include :
+Numerous networking standards belong to this family. Some of the most important include:
 
 | Standard | Technology |
 |----------|------------|
@@ -745,7 +745,7 @@ Whenever a network engineer refers to "802.3" or "802.11," they are referring to
 
 Originally developed in the 1970s, Ethernet has evolved through numerous revisions while maintaining backward compatibility.
 
-The IEEE 802.3 standard defines many aspects of Ethernet communication, including :
+The IEEE 802.3 standard defines many aspects of Ethernet communication, including:
 - Frame format
 - MAC addressing
 - Error detection
@@ -753,7 +753,7 @@ The IEEE 802.3 standard defines many aspects of Ethernet communication, includin
 - Speed specifications
 - Media types
 
-Common Ethernet speeds include :
+Common Ethernet speeds include:
 
 | Standard             | Speed    |
 | -------------------- | -------- |
@@ -770,7 +770,7 @@ Although transmission speeds have increased dramatically over the decades, devic
 
 Because every manufacturer follows the same Ethernet specification, a network may contain equipment from many vendors.
 
-For example :
+For example:
 
 ```text
 Dell PC
@@ -786,19 +786,19 @@ Although each device is manufactured by a different company, Ethernet frames rem
 
 #### IEEE 802.11 — [[Wi-Fi]]
 
-The IEEE also develops standards for wireless networking IEEE 802.11. These standards belong to the **802.11** family. Examples include :
+The IEEE also develops standards for wireless networking IEEE 802.11. These standards belong to the **802.11** family. Examples include:
 
 | Standard | Marketing Name |
-|-----------|----------------|
-| 802.11a | Wi-Fi |
-| 802.11b | Wi-Fi |
-| 802.11g | Wi-Fi |
-| 802.11n | Wi-Fi 4 |
-| 802.11ac | Wi-Fi 5 |
-| 802.11ax | Wi-Fi 6 |
-| 802.11be | Wi-Fi 7 |
+| -------- | -------------- |
+| 802.11a  | Wi-Fi          |
+| 802.11b  | Wi-Fi          |
+| 802.11g  | Wi-Fi          |
+| 802.11n  | Wi-Fi 4        |
+| 802.11ac | Wi-Fi 5        |
+| 802.11ax | Wi-Fi 6        |
+| 802.11be | Wi-Fi 7        |
 
-Although users often refer simply to "Wi-Fi," each generation introduces improvements in :
+Although users often refer simply to "Wi-Fi," each generation introduces improvements in:
 - *Throughput*
 
 ![[Cybersecurity journey/1. Networking/Definitions#🧠 - Throughput|Definitions]]
@@ -816,11 +816,11 @@ Despite these improvements, all implementations follow the IEEE specifications.
 
 #### Ethernet and Wi-Fi
 
-Students often assume Ethernet and Wi-Fi are fundamentally different networking technologies. In reality, they perform similar functions. Both provide :
-- Local network communication.
-- MAC addressing.
-- Frame delivery.
-- Error detection.
+Students often assume Ethernet and Wi-Fi are fundamentally different networking technologies. In reality, they perform similar functions. Both provide:
+- Local network communication
+- MAC addressing
+- Frame delivery
+- Error detection
 
 The primary difference lies in the <u>transmission medium</u>.
 Ethernet transmits frames over cables.
@@ -833,7 +833,7 @@ A browser behaves identically whether connected by Ethernet or Wi-Fi.
 
 Large networks are often divided into multiple logical networks known as **Virtual Local Area Networks (VLANs)**.
 
-IEEE 802.1Q defines the method for inserting a VLAN identifier into an Ethernet frame. This allows multiple logical networks to share <u>the same physical switching infrastructure</u>. For example :
+IEEE 802.1Q defines the method for inserting a VLAN identifier into an Ethernet frame. This allows multiple logical networks to share <u>the same physical switching infrastructure</u>. For example:
 
 ```text
 Switch
@@ -850,14 +850,14 @@ VLANs are covered in detail later in the course.
 
 Modern enterprise networks often require users to authenticate before receiving network access. [[IEEE 802.1X]] defines **Port-Based Network Access Control**.
 
-Instead of allowing every device immediate access, the switch or wireless access point requests authentication. Typical authentication methods include :
+Instead of allowing every device immediate access, the switch or wireless access point requests authentication. Typical authentication methods include:
 - Username and password
 - Digital certificates
 - Enterprise credentials
 
 Only after successful authentication is network access granted.
 
-802.1X is commonly deployed in :
+802.1X is commonly deployed in:
 - Corporate offices
 - Universities
 - Government agencies
@@ -867,7 +867,7 @@ It provides an important first line of defense against unauthorized network acce
 
 ### Internet Assigned Numbers Authority (IANA)
 
-Many networking values must remain globally unique. For example :
+Many networking values must remain globally unique. For example:
 - IP addresses
 - TCP port numbers
 - UDP port numbers
@@ -879,7 +879,7 @@ The [[Internet Assigned Numbers Authority (IANA)]] maintains these global regist
 
 #### Responsibilities of IANA
 
-IANA maintains several important registries. These include :
+IANA maintains several important registries. These include:
 - TCP port numbers
 - UDP port numbers
 - IP protocol numbers
@@ -894,7 +894,7 @@ Although IANA manages these registries, it does not assign every address directl
 
 #### Port Numbers
 
-Every TCP or UDP service uses a numerical identifier known as a **port number**. Rather than inventing new numbers independently, software developers use values assigned through IANA. Examples include :
+Every TCP or UDP service uses a numerical identifier known as a **port number**. Rather than inventing new numbers independently, software developers use values assigned through IANA. Examples include:
 
 | Service | Port |
 |----------|-----:|
@@ -912,7 +912,7 @@ Because these assignments are standardized, every browser knows that HTTPS serve
 
 ##### Port Number Ranges
 
-IANA divides port numbers into three categories :
+IANA divides port numbers into three categories:
 
 | Range | Name |
 |--------|------|
@@ -922,7 +922,7 @@ IANA divides port numbers into three categories :
 
 ###### Well-Known Ports
 
-These ports are reserved for widely deployed services. Examples include :
+These ports are reserved for widely deployed services. Examples include:
 - HTTP
 - HTTPS
 - DNS
@@ -932,14 +932,14 @@ Most servers use these default assignments.
 
 ###### Registered Ports
 
-Organizations may register port numbers for proprietary or specialized applications. Examples include :
+Organizations may register port numbers for proprietary or specialized applications. Examples include:
 - Database servers
 - Enterprise software
 - Vendor-specific services
 
 ###### Dynamic Ports
 
-Dynamic ports are typically assigned temporarily by the operating system. When a browser connects to :
+Dynamic ports are typically assigned temporarily by the operating system. When a browser connects to:
 
 ```
 https://example.com
@@ -951,7 +951,7 @@ the destination port is usually:
 443
 ```
 
-The source port, however, is automatically selected from the dynamic range. Example :
+The source port, however, is automatically selected from the dynamic range. Example:
 
 ```
 Source Port: 52481
@@ -967,8 +967,6 @@ Every public IP address on the Internet must be globally unique. IANA manages th
 Rather than assigning addresses directly to Internet users, IANA delegates large address blocks to ***Regional Internet Registries (RIRs)***.
 
 ![[Cybersecurity journey/1. Networking/Definitions#🧠 - Regional Internet Registries (RIRs)|Definitions]]
-
-These organizations then allocate addresses to Internet Service Providers (ISPs), businesses, governments, and other organizations.
 
 #### Protocol Numbers
 
@@ -999,7 +997,7 @@ Every compliant networking device therefore interprets addresses, protocol numbe
 
 ### Preview
 
-The final part of this lesson examines several RFCs that every network engineer should recognize, explains why these documents became foundational Internet standards, and concludes with a practical exercise exploring RFCs, protocol registries, and Wireshark observations.
+The final part of this lesson examines several RFCs that every network engineer should recognize, explains why these documents became foundational Internet standards.
 
 ## Lesson 1.3 — Protocols, RFCs, and Standards Bodies (Part 4)
 
