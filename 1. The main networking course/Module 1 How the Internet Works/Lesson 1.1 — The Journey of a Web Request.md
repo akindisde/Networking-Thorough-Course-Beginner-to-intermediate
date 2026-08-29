@@ -1301,6 +1301,8 @@ Once the packet arrives, TCP establishes a reliable connection, TLS negotiates e
 
 Every networking technology covered throughout the remainder of this course represents one component of this communication process. Understanding the complete journey provides the context necessary for studying individual protocols in greater depth.
 
+Check the illustrated summary of this lesson here [[Lesson 1.1 - Enter_to_Render.pdf]], it's highly recommended t reinforcing perspective.
+
 ---
 ## Key Terms
 
