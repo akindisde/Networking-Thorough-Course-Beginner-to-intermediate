@@ -410,7 +410,7 @@ The Internet is not owned or operated by a single company or government. It is a
 
 Every day, billions of devices manufactured by thousands of vendors exchange data successfully because they implement the same protocol specifications.
 
-Someone must therefore define :
+Someone must therefore define:
 - How an IPv4 packet is structured
 - How a TCP connection is established
 - How DNS queries are formatted
@@ -429,13 +429,13 @@ The **Internet Engineering Task Force (IETF)** is an international organization 
 
 Unlike many standards organizations, the IETF is an open community rather than a traditional membership-based institution. Engineers, researchers, vendors, network operators, academics, and individuals from around the world collaborate to improve Internet technologies.
 
-The IETF's primary goal is straightforward :
+The IETF's primary goal is straightforward:
 
 > Develop open, interoperable standards that allow the Internet to function reliably and evolve over time.
 
 The organization does not manufacture networking equipment or sell products. Instead, it publishes technical specifications that vendors voluntarily implement.
 
-Today, nearly every Internet protocol depends on specifications produced by the IETF. Examples include :
+Today, nearly every Internet protocol depends on specifications produced by the IETF. Examples include:
 - IPv4
 - IPv6
 - TCP
@@ -451,13 +451,13 @@ Today, nearly every Internet protocol depends on specifications produced by the 
 
 #### Guiding Principles of the IETF
 
-The IETF has become known for several guiding principles that have shaped the development of the modern Internet. One of its best-known philosophies is :
+The IETF has become known for several guiding principles that have shaped the development of the modern Internet. One of its best-known philosophies is:
 
 > **"Rough *consensus* and running code."**
 
 ![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Consensus|Terminology]]
 
-This phrase emphasizes two important ideas :
+This phrase emphasizes two important ideas:
 
 <u>First</u>, standards should emerge through technical agreement rather than authority. <u>Second</u>, protocols should be proven through working implementations instead of remaining purely theoretical.
 
@@ -465,7 +465,7 @@ A protocol that functions successfully in real-world networks is generally consi
 
 #### Working Groups
 
-The IETF organizes its work into specialized **Working Groups (WGs)**. Each working group focuses on a particular area of Internet technology. Examples include :
+The IETF organizes its work into specialized **Working Groups (WGs)**. Each working group focuses on a particular area of Internet technology. Examples include:
 - Routing
 - Security
 - Transport protocols
@@ -479,20 +479,20 @@ Each group discusses technical problems, proposes solutions, reviews implementat
 
 When consensus is reached, the resulting document may eventually become an [[Request for Comments (RFC)]].
 
-#### What Is an RFC ?
+#### What Is an RFC?
 
 The official documents published by the IETF are called **Requests for Comments**, commonly *abbreviated* as **RFCs**.
 
 ![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Abbreviated|Terminology]]
 
-Despite the name, RFCs are not simply requests for feedback. They are the official publications that define many of the protocols used throughout the Internet. An RFC may contain :
-- A protocol specification.
-- An extension to an existing protocol.
-- Operational recommendations.
-- Security considerations.
-- Best practices.
-- Informational guidance.
-- Experimental technologies.
+Despite the name, RFCs are not simply requests for feedback. They are the official publications that define many of the protocols used throughout the Internet. An RFC may contain:
+- A protocol specification
+- An extension to an existing protocol
+- Operational recommendations
+- Security considerations
+- Best practices
+- Informational guidance
+- Experimental technologies
 
 Some RFCs eventually become Internet Standards. Others remain informational or experimental. Regardless of category, every RFC receives a permanent identification number.
 
@@ -510,7 +510,7 @@ Today, RFCs are carefully reviewed technical publications that often define glob
 
 #### RFC Numbering
 
-Each RFC receives a unique number when published. For example :
+Each RFC receives a <u>unique number</u> when published. For example:
 - RFC 791
 - RFC 793
 - RFC 768
@@ -523,7 +523,7 @@ This numbering system provides a permanent <u>historical record</u> of Internet 
 
 #### RFC Categories
 
-Not every RFC represents an Internet Standard. RFCs are published in several categories, each serving a different purpose.
+Not every RFC represents an Internet Standard. RFCs are published in several categories, each serving a different purpose:
 
 ##### Standards Track
 
@@ -547,7 +547,7 @@ Experimental RFCs describe new ideas that require evaluation before potential st
 
 Although RFCs vary in length and complexity, most follow a similar structure.
 
-A typical RFC includes :
+A typical RFC includes:
 - Title
 - Authors
 - Publication date
@@ -567,7 +567,7 @@ Modern RFCs often exceed one hundred pages. Some protocol specifications *span* 
 #### Reading an RFC
 
 RFCs are written as engineering specifications rather than textbooks.
-They define exactly how a protocol must behave. Consider the following simplified example :
+They define <mark style="background:#fff88f">exactly how a protocol must behave</mark>. Consider the following simplified example:
 
 ```text
 The sender MUST acknowledge every received segment.
@@ -579,7 +579,7 @@ Notice the capitalization of the words **MUST**, **SHOULD**, and **MAY**. These 
 
 ##### Requirement Levels
 
-Many RFCs use standardized requirement terminology defined by RFC 2119. The most common keywords include :
+Many RFCs use standardized requirement terminology defined by RFC 2119. The most common keywords include:
 
 | Keyword | Meaning |
 |----------|---------|
@@ -589,7 +589,7 @@ Many RFCs use standardized requirement terminology defined by RFC 2119. The most
 | SHOULD NOT | Generally discouraged |
 | MAY | Optional behavior |
 
-These words eliminate ambiguity. For example :
+These words eliminate ambiguity. For example:
 
 ```
 The client MUST verify the server certificate.
@@ -599,12 +599,12 @@ The client MUST verify the server certificate.
 
 #### Why RFCs Matter
 
-Networking professionals frequently consult RFCs when :
-- Troubleshooting protocol behavior.
-- Developing networking software.
-- Implementing new protocols.
-- Verifying standards compliance.
-- Understanding protocol details.
+Networking professionals frequently consult RFCs when:
+- Troubleshooting protocol behavior
+- Developing networking software
+- Implementing new protocols
+- Verifying standards compliance
+- Understanding protocol details
 
 Although introductory networking courses rarely require reading RFCs directly, experienced engineers often refer to them when resolving complex technical issues.
 
@@ -631,26 +631,26 @@ The newer RFC clearly indicates whether it updates or obsoletes earlier document
 
 Suppose an engineer wants to understand exactly how TCP establishes a connection.
 
-Rather than relying on third-party documentation, they can consult the official TCP specification. The RFC defines :
-- TCP packet format.
-- Sequence numbers.
-- Acknowledgements.
-- State transitions.
-- Timeout behavior.
-- Connection establishment.
-- Connection termination.
-- Error handling.
+Rather than relying on third-party documentation, they can consult the official TCP specification. The RFC defines:
+- TCP packet format
+- Sequence numbers
+- Acknowledgements
+- State transitions
+- Timeout behavior
+- Connection establishment
+- Connection termination
+- Error handling
 
 Because every compliant implementation follows the same specification, engineers worldwide share a common technical reference.
 
 #### The Importance of Open Standards
 
-One of the greatest strengths of the Internet is that its core protocols are publicly documented. Anyone can :
-- Read the specifications.
-- Develop compatible software.
-- Build networking equipment.
-- Study protocol behavior.
-- Improve existing implementations.
+One of the greatest strengths of the Internet is that its core protocols are publicly documented. Anyone can:
+- Read the specifications
+- Develop compatible software
+- Build networking equipment
+- Study protocol behavior
+- Improve existing implementations
 
 <mark style="background:#fff88f">This openness has encouraged innovation for decades.</mark>, and companies compete by building better implementations, not by hiding protocol specifications.
 
@@ -658,7 +658,7 @@ As a result, devices from different vendors can communicate seamlessly across th
 
 #### Key RFCs Every Network Engineer Should Recognize
 
-Although thousands of RFCs have been published, a small number form the foundation of modern networking. The following RFCs are among the most important :
+Although thousands of RFCs have been published, a small number form the foundation of modern networking. The following RFCs are among the most important:
 
 |  RFC | Protocol | Purpose                                                   |
 | ---: | -------- | --------------------------------------------------------- |
