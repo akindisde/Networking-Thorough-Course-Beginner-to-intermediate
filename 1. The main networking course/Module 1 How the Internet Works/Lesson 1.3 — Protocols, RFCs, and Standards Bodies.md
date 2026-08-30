@@ -1015,7 +1015,7 @@ Published in 1981, **RFC 791** defines **Internet Protocol Version 4 (IPv4)**, t
 
 Every packet transmitted across today's Internet contains an IPv4 header or its successor, IPv6.
 
-RFC 791 specifies :
+RFC 791 specifies:
 - IPv4 packet format
 - Header fields
 - Fragmentation
@@ -1033,7 +1033,7 @@ A simplified IPv4 packet appears below.
 +-------------------------------+
 ```
 
-Important fields defined by RFC 791 include :
+Important fields defined by RFC 791 include:
 
 | Field | Purpose |
 |--------|---------|
@@ -1045,7 +1045,7 @@ Important fields defined by RFC 791 include :
 | Source Address | Sender's IP address |
 | Destination Address | Receiver's IP address |
 
-And this is the real illustration of the RFC 791 header fields :
+And this is the real illustration of the RFC 791 header fields:
 
 ![[Pasted image 20260727135336.png]]
 
@@ -1059,12 +1059,12 @@ Although IPv6 has become increasingly common, IPv4 remains the dominant protocol
 
 **RFC 793** defines the **Transmission Control Protocol (TCP)**.
 
-TCP provides reliable, connection-oriented communication between applications. Unlike IP, TCP ensures that data is delivered :
+TCP provides reliable, connection-oriented communication between applications. Unlike IP, TCP ensures that data is delivered:
 - Reliably
 - In order
 - Without duplication
 
-RFC 793 defines :
+RFC 793 defines:
 - Connection establishment
 - Sequence numbers
 - Acknowledgements
@@ -1072,11 +1072,11 @@ RFC 793 defines :
 - Connection termination
 - Retransmission behavior
 
-Here is the full RFC 793 header detailed : 
+Here is the full RFC 793 header detailed: 
 
 ![[Pasted image 20260727140223.png]]
 
-One of its best-known features is the **Three-Way Handshake** :
+One of its best-known features is the **Three-Way Handshake**:
 
 ```text
 Client                  Server
@@ -1088,7 +1088,7 @@ ACK
 ----------------------->
 ```
 
-Only after this exchange can application data be transmitted. TCP is used by applications requiring reliable communication, including :
+Only after this exchange can application data be transmitted. TCP is used by applications requiring reliable communication, including:
 - HTTP
 - HTTPS
 - SSH
@@ -1101,13 +1101,13 @@ Only after this exchange can application data be transmitted. TCP is used by app
 
 UDP provides a lightweight alternative to TCP.
 
-Unlike TCP, UDP :
+Unlike TCP, UDP:
 - Does not establish a connection
 - Does not guarantee delivery
 - Does not retransmit lost packets
 - Does not guarantee packet ordering
 
-Its header is intentionally simple : 
+Its header is intentionally simple: 
 
 ![[Pasted image 20260727140441.png]]
 
@@ -1115,7 +1115,7 @@ Because of its simplicity, UDP introduces minimal *overhead* and latency.
 
 ![[Cybersecurity journey/1. Networking/Definitions#🧠 - Overhead|Definitions]]
 
-Applications commonly using UDP include :
+Applications commonly using UDP include:
 - DNS
 - DHCP
 - VoIP
@@ -1131,7 +1131,7 @@ The choice between TCP and UDP depends entirely on application requirements.
 
 Before an Ethernet frame can be transmitted across a local network, the sender must determine the destination device's MAC address.
 
-**RFC 826** defines the **Address Resolution Protocol (ARP)**. ARP resolves an <u>IPv4 address</u> into its corresponding MAC address. The process follows a simple request-response pattern :
+**RFC 826** defines the **Address Resolution Protocol (ARP)**. ARP resolves an <u>IPv4 address</u> into its corresponding MAC address. The process follows a simple request-response pattern:
 
 ```text
 PC
@@ -1151,13 +1151,15 @@ After receiving the reply, the sender stores the mapping in its ARP cache.
 
 Although IPv6 replaces ARP with *[[Neighbor Discovery Protocol (NDP)]]*, ARP remains fundamental to IPv4 networking.
 
-Here is the full RFC 826 header fields :
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Neighbor Discovery Protocol (NDP)|Definitions]]
+
+Here is the full RFC 826 header fields:
 
 ![[Pasted image 20260727141740.png]]
 
 ### RFC 1035 — Domain Name System (DNS)
 
-**RFC 1035** defines much of the **Domain Name System (DNS)** used to translate between domain names and their IP addresses. Example :
+**RFC 1035** defines much of the **Domain Name System (DNS)** used to translate between domain names and their IP addresses. Example:
 
 ```
 example.com
@@ -1165,7 +1167,7 @@ example.com
 93.184.216.34
 ```
 
-RFC 1035 specifies :
+RFC 1035 specifies:
 - DNS message format
 - Resource Records
 - Query structure
@@ -1173,7 +1175,7 @@ RFC 1035 specifies :
 - Name compression
 - DNS packet fields
 
-Here a better representation for them :
+Here a better representation for them:
 
 ![[Pasted image 20260727142318.png]]
 
@@ -1181,14 +1183,14 @@ Without DNS, users would need to memorize numerical IP addresses for every websi
 
 ### RFC 8446 — Transport Layer Security (TLS) 1.3
 
-<mark style="background:#fff88f">Modern web traffic is almost always encrypted.</mark> **RFC 8446** defines **TLS 1.3**, the latest major version of the Transport Layer Security protocol. TLS provides :
+<mark style="background:#fff88f">Modern web traffic is almost always encrypted.</mark> **RFC 8446** defines **TLS 1.3**, the latest major version of the Transport Layer Security protocol. TLS provides:
 - Confidentiality
 - Integrity
 - Authentication
 
 It protects application data from interception and modification while it travels across untrusted networks.
 
-A simplified TLS handshake appears below :
+A simplified TLS handshake appears below:
 
 ```text
 Client
@@ -1206,11 +1208,11 @@ Finished
 
 Once the handshake completes, application data is encrypted before transmission. Today, nearly every HTTPS website depends on TLS.
 
-And to better visualize it, here its diagram : 
+And to better visualize it, here its diagram: 
 
 ![[Pasted image 20260727142923.png]]
 
-> A quick note, as stated before, this document provides lengthy information from time to time, when it does, you're not expected to understand it right away, but you must keep it in consideration and dig into it at some point in the future. Most of the time, all details are provided in the future lessons. 
+> A quick note, as stated before, this document provides lengthy information from time to time, when it does, you're not expected to understand it right away, but you must keep it in consideration and dig into it at some point in the future. Anyways, all the needed details are provided in the future lessons. 
 
 ### Recognizing RFC Numbers
 
@@ -1229,7 +1231,7 @@ These RFCs represent technologies encountered daily in enterprise networks.
 
 ### How Vendors Use Standards
 
-Networking vendors rarely invent entirely new communication protocols. Instead, they implement existing standards. For example, consider a simple network :
+Networking vendors rarely invent entirely new communication protocols. Instead, they implement existing standards. For example, consider a simple network:
 
 ```text
 Windows Laptop
@@ -1265,6 +1267,8 @@ Understanding the responsibilities of these organizations helps explain why equi
 
 Throughout the remainder of this course, nearly every protocol introduced will trace back to one of the standards discussed in this lesson.
 
+Check the illustrated summary of this lesson for a better experience 
+
 ### Key Terms
 
 | Term        | Definition                                                                     |
@@ -1285,3 +1289,4 @@ Throughout the remainder of this course, nearly every protocol introduced will t
 | IEEE 802.11 | Wi-Fi standard                                                                 |
 | IEEE 802.1Q | VLAN tagging standard                                                          |
 | IEEE 802.1X | Port-based network access control standard                                     |
+You're now ready for [[Lesson 1.3 - Lab]].
