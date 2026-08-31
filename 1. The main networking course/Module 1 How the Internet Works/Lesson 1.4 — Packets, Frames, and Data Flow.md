@@ -16,7 +16,7 @@ Understanding why the Internet adopted packet switching instead of circuit switc
 
 ### Learning Objectives
 
-After completing this lesson, students should be able to :
+After completing this lesson, students should be able to:
 - Explain the difference between circuit switching and packet switching
 - Describe why the Internet uses packet switching
 - Understand statistical multiplexing
@@ -79,7 +79,6 @@ Whether the users are speaking or remaining silent, the network resources remain
 ##### Predictable Performance
 
 Because resources are reserved, communication quality remains <u>relatively stable</u>.
-
 Latency is generally consistent.
 Bandwidth remains available throughout the connection.
 
@@ -133,11 +132,10 @@ Rather than dedicating one path per user, every communication link carries packe
 #### What Is a Packet?
 
 A packet is a small unit of transmitted data. Each packet contains:
-
-- Control information.
-- Source address.
-- Destination address.
-- Payload.
+- Control information
+- Source address
+- Destination address
+- Payload
 
 Conceptually, as discussed before:
 
@@ -203,7 +201,6 @@ Instead of permanently reserving bandwidth, the network <u>dynamically</u> share
 Suppose ten users each possess a 10 Mbps connection. It is highly unlikely that every user will continuously transmit data at the maximum rate.
 
 Most users alternate between:
-
 - Reading
 - Typing
 - Waiting
@@ -244,7 +241,7 @@ Packet switching allows bandwidth to be allocated only when it is actually neede
 
 Visualize it better with this diagram:
 
-![[Pasted image 20260729211425.png]]
+![[Pasted image 20260831121707.png]]
 
 ### Comparing Circuit Switching and Packet Switching
 
@@ -497,7 +494,6 @@ GET /index.html HTTP/1.1
 ```
 
 The router does not read:
-
 - HTML
 - CSS
 - Images
@@ -514,7 +510,7 @@ This separation allows routers to forward enormous amounts of traffic efficientl
 
 ### Hop-by-Hop Communication
 
-The phrase **hop** refers to one movement of a packet between two neighboring Layer 3 devices.
+The phrase **hop** refers to one movement of a packet between two neighboring Layer 3 devices, now we didn't say router, because in the future lessons you'll learn there is a layer 3 switch, not a concern now, but advancing towards it properly.
 
 Example:
 
@@ -600,7 +596,7 @@ You only observe the frame present on your own network segment.
 - Switches forward frames using MAC addresses, whereas routers forward packets using IP addresses.
 - The separation between packets and frames allows IP traffic to traverse many different physical network technologies without modification.
 
-> Note: the base case of an IP addresses to not change in the transmission between A and B, but, for many technical and security reasons, those addresses are modified, but never altering the fact that the data is going from A to B.
+> **Note**: the base case of an IP addresses to not change in the transmission between A and B, but, for many technical and security reasons, those addresses are modified, but never altering the fact that the data is going from A to B.
 
 ### Preview
 
