@@ -1267,7 +1267,7 @@ Understanding the responsibilities of these organizations helps explain why equi
 
 Throughout the remainder of this course, nearly every protocol introduced will trace back to one of the standards discussed in this lesson.
 
-Check the illustrated summary of this lesson for a better experience 
+Check the illustrated summary of this lesson for a better experience [[Lesson 1.3 - The_Internet_Blueprint.pdf]]
 
 ### Key Terms
 
