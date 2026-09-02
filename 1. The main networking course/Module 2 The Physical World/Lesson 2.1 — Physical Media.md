@@ -567,7 +567,7 @@ The actual installation consists of:
 - Connectors
 - Wall outlets
 
------- visual needed here
+----- visual needed here
 
 All of these contribute to the total channel.
 
@@ -855,33 +855,27 @@ Copper is only one way to move information through a network.
 
 Instead of using electrical signals, fiber optic networking uses **light**.
 
-A fiber optic cable contains extremely thin strands of glass or plastic designed to guide light from one endpoint to another.
+A fiber optic cable contains extremely thin *strands* of glass or plastic designed to guide light from one endpoint to another.
+
+![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Strand|Terminology]]
 
 The basic concept is:
 
 ```text
 Electrical Data
-
 ↓
-
 Optical Transmitter
-
 ↓
-
 Light Pulses
-
 ↓
-
 Optical Fiber
-
 ↓
-
 Optical Receiver
-
 ↓
-
 Electrical Data
 ````
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Optical transceiver|Definitions]]
 
 The networking equipment converts electrical information into optical signals at the transmitting end.
 
@@ -894,17 +888,11 @@ At the receiving end, an optical receiver detects the incoming light and convert
 Using light instead of electrical signaling provides several important advantages.
 
 Fiber is generally:
-
-- Resistant to electromagnetic interference.
-    
-- Capable of very high bandwidth.
-    
-- Capable of much longer distances than ordinary copper Ethernet.
-    
-- Electrically non-conductive.
-    
-- Useful for connections between buildings and across large geographic areas.
-    
+- Resistant to electromagnetic interference
+- Capable of very high bandwidth
+- Capable of much longer distances than ordinary copper Ethernet
+- Electrically non-conductive
+- Useful for connections between buildings and across large geographic areas
 
 Copper carries electrical energy.
 
@@ -914,36 +902,18 @@ This difference has major consequences for network engineering.
 
 ### Basic Fiber Structure
 
-A simplified fiber optic cable contains several layers.
+A simplified fiber optic cable contains several layers:
 
-```text
-+---------------------------------------+
-| Outer Jacket                          |
-|                                       |
-|  Protective Layer                     |
-|                                       |
-|    Cladding                           |
-|    ┌─────────────────────────────┐    |
-|    │ Core                        │    |
-|    │                             │    |
-|    │      Light                 │    |
-|    │        → → → → →           │    |
-|    │                             │    |
-|    └─────────────────────────────┘    |
-|                                       |
-+---------------------------------------+
-```
+![[Pasted image 20260902172008.png]]
 
 The most important components are:
-
 - Core
-    
-- Cladding
-    
+- *Cladding*
+
+![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Cladding|Terminology]]
+
 - Coating
-    
 - Protective jacket
-    
 
 ### The Core
 
@@ -953,13 +923,18 @@ The core is made from glass or another suitable optical material.
 
 Its diameter depends on the type of fiber.
 
-This distinction becomes important when comparing single-mode and multimode fiber.
+This distinction becomes important when comparing *[[Single-mode fiber]]* and *[[Multimode fiber]]*.
 
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Single-mode fiber|Definitions]]
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Multimode fiber|Definitions]]
 ### The Cladding
 
 Surrounding the core is the **cladding**.
 
-The cladding has a different refractive index from the core.
+The cladding has a different *refractive* index from the core.
+
+![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Refractive|Terminology]]
 
 This allows light to remain guided within the fiber.
 
@@ -967,7 +942,9 @@ The fundamental optical principle involved is **total internal reflection**.
 
 ### Total Internal Reflection
 
-Light normally changes direction when it moves between materials with different refractive indices.
+Light normally changes direction when it moves between materials with different *refractive indices*.
+
+![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Refractive index|Terminology]]
 
 Under the appropriate conditions, however, light hitting the boundary between the core and cladding is reflected back into the core.
 
@@ -1011,7 +988,9 @@ A common specification is:
 
 The small core allows light to propagate primarily through a single mode.
 
-This greatly reduces **modal dispersion**.
+This greatly reduces *modal dispersion*.
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Modal dispersion|Definitions]]
 
 As a result, single-mode fiber is capable of supporting extremely long distances and very high data rates.
 
@@ -1021,7 +1000,9 @@ One of the major limitations of multimode fiber is modal dispersion.
 
 Different light paths can arrive at different times.
 
-In single-mode fiber, the small core dramatically restricts the number of propagation modes.
+In single-mode fiber, the small core dramatically restricts the number of *propagation modes*.
+
+![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Propagation mode|Terminology]]
 
 This produces much less modal dispersion.
 
@@ -1029,53 +1010,35 @@ The result is:
 
 ```text
 Less Modal Dispersion
-
 ↓
-
 Cleaner Signal Over Distance
-
 ↓
-
 Longer Reach
 ```
 
 Single-mode fiber is therefore widely used for:
-
-- ISP backbone networks.
-    
-- Metropolitan networks.
-    
-- Long-distance telecommunications.
-    
-- Data center interconnects.
-    
-- Building-to-building connections.
-    
-- Submarine fiber systems.
-    
+- ISP backbone networks
+- Metropolitan networks
+- Long-distance telecommunications
+- Data center interconnects
+- Building-to-building connections
+- Submarine fiber systems
 
 With appropriate optical equipment, single-mode systems can operate over distances of tens or even hundreds of kilometers without electrical regeneration.
 
 The exact achievable distance depends heavily on:
+- Fiber type
+- Optical transceiver
+- Wavelength
+- Transmit power
+- Receiver sensitivity
+- *Splice losses*
 
-- Fiber type.
-    
-- Optical transceiver.
-    
-- Wavelength.
-    
-- Transmit power.
-    
-- Receiver sensitivity.
-    
-- Splice losses.
-    
-- Connector losses.
-    
-- Dispersion.
-    
-- Optical budget.
-    
+![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Splice loss|Terminology]]
+
+- Connector losses
+- Dispersion
+- Optical budget
 
 Therefore, "100+ km" should be understood as a possible system capability, not a universal physical limit of every single-mode link.
 
@@ -1096,12 +1059,9 @@ Conceptually:
 
 ```text
 Single-Mode
-
 →────────────────────────→
 
-
 Multimode
-
 ↗───────────────↘
 →────────────────→
 ↘───────────────↗
@@ -1115,20 +1075,16 @@ As the distance increases, the optical pulses can spread out and become harder t
 
 Therefore, multimode fiber is generally used for shorter distances.
 
+![[Cybersecurity journey/1. Networking/Q&A#❔ - Are both SMF and MMF capable of full duplexing ?|Q&A]]
+
 ### Typical Multimode Distance
 
 The exact maximum distance depends on:
-
-- Fiber grade.
-    
-- Optical wavelength.
-    
-- Ethernet standard.
-    
-- Transceiver type.
-    
-- Required data rate.
-    
+- Fiber grade
+- Optical wavelength
+- Ethernet standard
+- Transceiver type
+- Required data rate
 
 For example, some common multimode Ethernet implementations can reach approximately:
 
@@ -1165,17 +1121,11 @@ The deeper explanation is:
 
 ```text
 Core Geometry
-
 ↓
-
 Propagation Modes
-
 ↓
-
 Dispersion
-
 ↓
-
 Reach
 ```
 
@@ -1188,27 +1138,23 @@ This is an oversimplification.
 Fiber has enormous potential bandwidth, but the actual network capacity depends on the complete optical system.
 
 Factors include:
+- Optical transceiver capability
+- Wavelength
+- *Modulation*
 
-- Optical transceiver capability.
-    
-- Wavelength.
-    
-- Modulation.
-    
-- Fiber type.
-    
-- Dispersion.
-    
-- Optical power.
-    
-- Receiver sensitivity.
-    
-- Network architecture.
-    
+![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Modulation|Terminology]]
+
+- Fiber type
+- Dispersion
+- Optical power
+- Receiver sensitivity
+- Network architecture
 
 A fiber strand does not automatically provide a specific Ethernet speed.
 
 For example, the same physical fiber infrastructure may support different speeds depending on the optics connected to it.
+
+![[Cybersecurity journey/1. Networking/Q&A#❔ - How does fiber have such great bandwidth ?|Q&A]]
 
 ### Wavelength
 

@@ -289,18 +289,22 @@ A **data center** is a dedicated physical facility housing an enterprise's centr
 ###### 🧠 - Patch cord
 A **patch cord** (or patch cable) is a short, flexible electrical or optical cable terminated with standardized connectors (such as RJ45 for copper Ethernet or LC/SC for fiber) on both ends, used to link network devices within a structured cabling system. Operating at Layer 1 (Physical Layer) of the OSI model, patch cords bridge short physical distances—such as connecting a host or server to a wall jack, or interconnecting ports between patch panels and network switches inside telecommunications closets and data center racks. Unlike rigid, solid-core copper cables installed for permanent horizontal runs inside walls or conduit, patch cords are constructed with stranded conductors to endure frequent flexing, bending, and plugging without breaking or causing signal degradation.
 
-![[Pasted image 20260902083514.png]]
+![[Pasted image 20260902171201.png]]
 
 ###### 🧠 - Fluorescent lighting
 Fluorescent lighting is an electric gas-discharge lamp that excites mercury vapor to produce ultraviolet light, which causes an internal phosphor coating to glow visible light while generating electromagnetic interference (EMI) that can impact nearby copper cabling.
 
-###### 🧠 - 
+###### 🧠 - Single-mode fiber
+**Single-mode fiber (SMF)** is an optical transmission medium engineered with a narrow glass core—typically 8.3 to 10 microns in diameter—that permits only a single spatial mode of light to propagate along its central axis. Driven by precision laser diodes emitting at wavelengths like 1310 nm and 1550 nm, SMF virtually eliminates **modal dispersion** (the pulse spreading caused by multiple light paths traveling at different angles and arriving at different times), enabling exceptionally low signal attenuation and extremely high bandwidth over distances reaching tens or hundreds of kilometers without repeaters. This high-performance profile makes single-mode fiber the definitive physical-layer standard for long-haul telecommunication backbones, enterprise campus interconnects, subsea cables, and high-speed data center links.
 
-###### 🧠 - 
+###### 🧠 - Multimode fiber
+**Multimode fiber (MMF)** is an optical transmission medium engineered with a relatively wide glass core—typically 50 or 62.5 microns in diameter—that allows multiple spatial modes of light to propagate simultaneously from cost-effective LED or VCSEL (Vertical-Cavity Surface-Emitting Laser) light sources operating at 850 nm and 1300 nm wavelengths. Because light rays travel along different reflection paths through the larger core, MMF experiences **modal dispersion**, where light signals spread out over time and limit maximum bandwidth-distance products compared to single-mode fiber. Standardized into performance tiers ranging from legacy OM1 up to laser-optimized OM4 and OM5, multimode fiber provides a cost-effective physical-layer solution for high-density, short-reach applications—such as enterprise Local Area Networks (LANs), server racks, and intra-data-center switch interconnects—where lower transceiver optics costs outweigh long-distance reach requirements.
 
-###### 🧠 - 
+###### 🧠 - Optical transceiver 
+An **optical transmitter/receiver (transceiver)** is a physical-layer hardware component that performs bidirectional electro-optical conversion, converting electrical bitstreams from networking hardware into light signals for fiber transmission and back again. The **transmitter** converts incoming electrical signals into optical pulses using a modulated semiconductor light source—such as a cost-effective 850 nm VCSEL for multimode fiber or a high-precision 1310/1550 nm Distributed Feedback (DFB) laser for single-mode fiber—driven by specialized transmitter integrated circuits. Conversely, the **receiver** uses a semiconductor photodetector (such as a PIN or Avalanche Photodiode) to capture incoming photons, converting them into minute electrical currents that a Transimpedance Amplifier (TIA) and limiting amplifier clean up and boost into standard digital logic voltages. Standardized into hot-swappable form factors (such as SFP+, QSFP28, and OSFP) through Multi-Source Agreements (MSAs), modern optical transceivers also integrate Digital Optical Monitoring (DOM) to provide real-time diagnostic telemetry on parameters like transmit/receive optical power, laser bias current, and internal operating temperature.
 
-###### 🧠 - 
+###### 🧠 - Modal dispersion
+**Modal dispersion** is a signal distortion effect in multimode optical fiber where light pulses spread out and blur as they travel down the cable. Because multimode fiber has a relatively wide core, light rays enter at different angles and take multiple distinct paths (or "modes") to reach the far end—some travel straight down the middle on a short path, while others bounce repeatedly off the edges on a longer path. Because these light rays travel different total distances, they arrive at the receiver at slightly different times, causing a sharp light pulse representing a binary bit to widen over distance. If the cable is too long or data is transmitted too fast, these spreading pulses overlap into one another, making it impossible for the receiving equipment to accurately distinguish between separate 1s and 0s.
 
 ###### 🧠 - 
 

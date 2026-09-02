@@ -108,19 +108,26 @@ protected by a barrier that stops heat, sound, electricity, or outside influence
 ###### 𝑨 - Conductor
 a material that allows electric current or charge to flow through it easily
 
-###### 𝑨 - 
+###### 𝑨 - Strand
+a single thin piece of a material like hair, thread, or wire, or a part of a complex idea or story
 
-###### 𝑨 - 
+###### 𝑨 - Cladding
+an outer layer of material applied to a building, pipe, or structure to act as a protective skin and improve its appearance
 
-###### 𝑨 - 
+###### 𝑨 - Refractive
+having the power to bend light or other waves as they pass from one medium into another
 
-###### 𝑨 - 
+###### 𝑨 - Refractive index
+a number that shows how much a material slows down and bends light
 
-###### 𝑨 - 
+###### 𝑨 - Propagation mode
+a specific path, pattern, or stable field configuration that an electromagnetic wave or light signal takes as it travels through a medium or waveguide
 
-###### 𝑨 - 
+###### 𝑨 - Splice loss
+the reduction of optical signal power that occurs when two fiber optic cable ends are permanently joined
 
-###### 𝑨 - 
+###### 𝑨 - Modulation
+the process of changing, regulating, or adapting the properties of a signal, sound, or system to achieve a specific effect or transmit information
 
 ###### 𝑨 - 
 
