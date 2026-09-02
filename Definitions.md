@@ -267,6 +267,37 @@ A **jumbo frame** is an Ethernet frame that carries a data payload significantly
 ###### 🧠 - Internet Control Message Protocol (ICMP)
 The **Internet Control Message Protocol (ICMP)** is a supporting Layer 3 protocol that network devices use to send operational feedback and error messages to one another. Unlike TCP or UDP, ICMP is not used to transmit actual user data like web pages or files; instead, it serves as the network's internal status and maintenance mechanism. When a router cannot deliver a packet, when a packet's Time-To-Live expires, or when a link requires a smaller packet size, ICMP sends notification messages back to the source host so it can adapt. Additionally, ICMP powers everyday diagnostic tools like `ping` (via Echo Request and Reply) and plays a key role in `traceroute`, making it essential for detecting network issues and verifying active connectivity.
 
+###### 🧠 - Transmission medium
+A **transmission medium** is the physical or wireless pathway that carries data signals from a transmitter to a receiver across a telecommunications network. Operating at Layer 1 (Physical Layer) of the OSI model, it converts digital bits into electrical voltages, light pulses, or electromagnetic waves to transport information through space. Transmission media are broadly classified into two categories: **guided (wired)** media, which physically constrain and direct signals along a solid path using copper cables (such as twisted-pair or coaxial) or glass fiber-optic strands; and **unguided (wireless)** media, which broadcast signals through the air, vacuum, or water using radio waves, microwaves, or infrared frequencies. The specific characteristics of the chosen medium directly govern key network performance parameters, including data throughput, signal attenuation, propagation delay, and resistance to external electromagnetic interference.
+
+###### 🧠 - Twisted-pair cable
+A **twisted-pair cable** is a guided copper transmission medium consisting of insulated wire pairs twisted together to carry electrical data signals across Local Area Networks (LANs). By employing differential signaling—transmitting data as equal and opposite voltages across two wires—and tight twisting geometry, any external electromagnetic interference (EMI) or crosstalk induces identical noise in both conductors, allowing the receiving network interface to mathematically cancel out the unwanted noise. Available in unshielded (UTP) and shielded (STP) variants, twisted-pair cables are categorized into performance tiers ranging from Cat5e up to Cat8 and are terminated with standard RJ45 connectors following T568A or T568B pinout specifications, serving as the primary physical-layer medium for modern Ethernet runs up to a maximum distance of 100 meters.
+
+![[Pasted image 20260902063713.png]]
+
+###### 🧠 - Electromagnetic field
+An **electromagnetic field (EMF)** is a fundamental physical field produced by electrically charged particles, consisting of interdependent electric and magnetic fields that propagate through space as electromagnetic waves at the speed of light. Stationary charges generate an electric field that exerts force on surrounding charges, whereas moving charges (electrical currents) create a magnetic field that interacts with moving charges and magnetic dipoles. In telecommunications, electromagnetic fields form the physical foundation for all data transmission—whether as guided electrical voltage variations in copper cables, light pulses in optical fibers, or unguided radio waves in wireless media—while also governing physical-layer engineering challenges such as signal attenuation, electromagnetic interference (EMI), and crosstalk.
+
+![[Pasted image 20260902064723.png]]
+
+###### 🧠 - Cable insulation
+**Cable insulation** is a non-conductive protective layer—typically made of durable plastics like PVC, polyethylene, or Teflon—wrapped directly around a cable's internal copper or optical conductors. Its primary job is to contain electrical current within the wire, preventing short circuits, signal degradation, and electric shock by keeping conductive wires from touching one another or surrounding surfaces. Beyond electrical containment, insulation serves as a physical barrier that shields the delicate inner core against moisture, heat, physical abrasion, and chemical exposure, while maintaining the precise physical spacing needed between twisted wire pairs to preserve networking signal quality.
+
+###### 🧠 - Data center
+A **data center** is a dedicated physical facility housing an enterprise's centralized IT infrastructure—including high-density servers, storage area networks (SANs), and high-speed networking hardware like routers, switches, and firewalls—designed to process, store, and route massive volumes of digital data. Functioning as the core backbone for modern cloud computing, web hosting, and enterprise applications, data centers utilize high-performance network architectures (such as spine-leaf topologies and top-of-rack switches) alongside critical environmental and physical support systems. These include redundant power distribution (uninterruptible power supplies and backup generators), industrial precision cooling/HVAC systems to manage high thermal density, strict physical security controls, and high-capacity fiber-optic links that ensure continuous uptime, high throughput, and low-latency global connectivity.
+
+###### 🧠 - Patch cord
+A **patch cord** (or patch cable) is a short, flexible electrical or optical cable terminated with standardized connectors (such as RJ45 for copper Ethernet or LC/SC for fiber) on both ends, used to link network devices within a structured cabling system. Operating at Layer 1 (Physical Layer) of the OSI model, patch cords bridge short physical distances—such as connecting a host or server to a wall jack, or interconnecting ports between patch panels and network switches inside telecommunications closets and data center racks. Unlike rigid, solid-core copper cables installed for permanent horizontal runs inside walls or conduit, patch cords are constructed with stranded conductors to endure frequent flexing, bending, and plugging without breaking or causing signal degradation.
+
+![[Pasted image 20260902083514.png]]
+
+###### 🧠 - Fluorescent lighting
+Fluorescent lighting is an electric gas-discharge lamp that excites mercury vapor to produce ultraviolet light, which causes an internal phosphor coating to glow visible light while generating electromagnetic interference (EMI) that can impact nearby copper cabling.
+
+###### 🧠 - 
+
+###### 🧠 - 
+
 ###### 🧠 - 
 
 ###### 🧠 - 
@@ -274,6 +305,20 @@ The **Internet Control Message Protocol (ICMP)** is a supporting Layer 3 protoco
 ###### 🧠 - 
 
 ###### 🧠 - 
+
 ###### 🧠 - 
 
 ###### 🧠 - 
+
+###### 🧠 - 
+
+###### 🧠 - 
+
+###### 🧠 - 
+
+###### 🧠 - 
+
+###### 🧠 - 
+
+###### 🧠 - 
+

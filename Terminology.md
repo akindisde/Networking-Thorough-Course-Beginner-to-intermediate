@@ -99,5 +99,30 @@ moving forward in a physical direction or continuing to happen from a specific t
 ###### 𝑨 - Monopolize
 to take or keep complete control of something so that other people have no share or chance
 
+###### 𝑨 - Spectrum
+a continuous range or a broad series of related ideas, objects, or values that stretch from one extreme to another
+
+###### 𝑨 - Insulated
+protected by a barrier that stops heat, sound, electricity, or outside influences from passing through
+
+###### 𝑨 - Conductor
+a material that allows electric current or charge to flow through it easily
+
+###### 𝑨 - 
+
+###### 𝑨 - 
+
+###### 𝑨 - 
+
+###### 𝑨 - 
+
+###### 𝑨 - 
+
+###### 𝑨 - 
+
+###### 𝑨 - 
+
+###### 𝑨 - 
+
 ###### 𝑨 - 
 
