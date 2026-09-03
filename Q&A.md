@@ -124,3 +124,40 @@ The core difference between CWDM (Coarse Wavelength Division Multiplexing) and D
 
 ###### ❔ - Can Copper and optical cables be a shared medium ?
 Yes, both copper and optical cables can function as a shared medium depending on the physical layer topology and access control mechanisms employed. In copper infrastructure, legacy coaxial networks (such as 10BASE2/10BASE5 bus topologies) and hub-connected twisted-pair links operate as physically shared media where multiple stations share a single collision domain using CSMA/CD to manage access. In optical infrastructure, Passive Optical Networks (PON)—such as GPON or XGS-PON—utilize passive optical splitters to connect multiple subscriber endpoints (ONUs) to a single shared feeder fiber strand, relying on downstream broadcasting and upstream Time Division Multiple Access (TDMA) to coordinate airtime/light-time sharing. Furthermore, Wavelength Division Multiplexing (WDM) enables multiple independent communication channels to share the physical glass core concurrently across distinct light frequencies.
+
+###### ❔ - What does "RF distribution and cable broadband" mean ?
+**RF distribution and cable broadband** refers to the technology used to deliver television signals and high-speed internet access across a neighborhood or building through a network of copper coaxial cables using radio frequency (RF) waves. "RF distribution" is the physical system of cables, splitters, and signal amplifiers that takes radio signals—the same type of electromagnetic waves sent through the air—and routes them through shielded wires so they can travel long distances without losing strength or picking up interference. "Cable broadband" leverages this exact same wired infrastructure by assigning internet data and TV channels to different frequency "lanes" on the cable, allowing a single coaxial wire to deliver television broadcasts and high-speed internet to multiple devices and homes at the same time.
+
+###### ❔ - What's the relationship between RJ-45 and 8P8C ?
+**8P8C** (8 Position, 8 Contact) is the actual physical connector—the clear plastic plug with eight metal pins used on standard Ethernet cables—while **RJ-45** is the popular colloquial name everyone uses for it. Technically, RJ-45 (Registered Jack 45) was an older telecommunications wiring standard that used a similar 8-pin connector with a small physical key for telephone data lines. Over time, the networking industry informally adopted "RJ-45" as the universal label for the unkeyed 8P8C modular plugs used in modern twisted-pair Ethernet networks. In practice, while 8P8C is the precise engineering specification for the plug and RJ-45 was originally a wiring standard, the two terms are used interchangeably today to describe standard computer network connectors.
+
+
+![[Pasted image 20260903173438.png]]
+
+
+###### ❔ - 
+
+###### ❔ - 
+
+###### ❔ - 
+
+###### ❔ - 
+
+###### ❔ - 
+
+###### ❔ - 
+
+###### ❔ - 
+
+###### ❔ - 
+
+###### ❔ - 
+
+###### ❔ - 
+
+###### ❔ - 
+
+###### ❔ - 
+
+###### ❔ - 
+

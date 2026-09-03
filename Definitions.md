@@ -324,6 +324,30 @@ The wireless **spectrum** is the invisible highway in the air that radio waves t
 ###### 🧠 - Signal-to-Noise Ratio (SNR)
 **Signal-to-Noise Ratio (SNR)** is a physical layer metric that measures the power of a desired communication signal relative to the background thermal noise and electromagnetic interference (the noise floor) on a transmission channel. Expressed in decibels ($\text{dB}$) as the logarithmic difference between signal strength and noise level ($\text{SNR}_{\text{dB}} = P_{\text{signal, dBm}} - P_{\text{noise, dBm}}$), SNR directly dictates a channel's Bit Error Rate (BER) and theoretical maximum data capacity under the Shannon-Hartley theorem. A high SNR yields a clean optical or radio path, enabling networking hardware to deploy dense, higher-order modulation schemes (such as 256-QAM or 1024-QAM) to maximize throughput, whereas a low SNR forces adaptive systems to drop down to resilient, lower-order modulations (like BPSK) to prevent frame corruption and retransmissions.
 
+###### 🧠 - **Data Over Cable Service Interface Specification (DOCSIS)**
+**Data Over Cable Service Interface Specification (DOCSIS)** is an international physical- and data-link layer standard that enables high-speed IP data transport over existing Hybrid Fiber-Coaxial (HFC) cable television infrastructure. Operating as a shared, point-to-multipoint medium, DOCSIS connects multiple subscriber Cable Modems (CMs) to a central Cable Modem Termination System (CMTS) located at the provider headend. It relies on Frequency Division Multiplexing (FDM) to segregate asymmetric downstream and upstream frequency bands, utilizing high-order modulation—such as 256-QAM or multi-carrier OFDM/OFDMA in DOCSIS 3.1 and 4.0—to maximize spectral efficiency across the copper plant. Because the local coaxial bus is physically shared among endpoints, the CMTS coordinates upstream access by issuing precise Time Division Multiple Access (TDMA) or OFDMA time-slot allocations to prevent frame collisions among customer modems.
+
+###### 🧠 - Closed-Circuit Television (CCTV)
+**Closed-Circuit Television (CCTV)** is a dedicated, non-broadcast video surveillance framework that transmits video signals over a private physical or logical network topology to restricted monitoring and recording endpoints. Legacy analog CCTV operates over $75\ \Omega$ coaxial cabling (such as RG59 or RG6) using point-to-point analog composite or HD-analog variants (HD-TVI, HD-CVI) terminated at a central Digital Video Recorder (DVR). Modern IP-based CCTV replaces dedicated point-to-point analog links with structured Ethernet cabling (Cat5e/Cat6) or fiber optics, using Power over Ethernet (PoE, IEEE 802.3af/at/bt) to deliver power and data over a single cable to a Network Video Recorder (NVR). These IP camera architectures leverage high-efficiency compression codecs (H.264, H.265) alongside network protocols like RTSP, RTP, and the ONVIF specification to route unicast or multicast video streams across segregated local VLANs.
+
+###### 🧠 - Cable termination
+**Cable termination** is the physical process of attaching a specialized connector, plug, or jack to the bare end of a transmission cable so it can plug into networking devices like routers, switches, or patch panels. Whether working with copper Ethernet lines, coaxial television wires, or glass optical fibers, termination involves stripping back the outer protective jacket, arranging the internal conductors or glass strands, and permanently securing them into a connector using specialized tools via crimping, punching down, or fusion splicing. Performing a precise termination is critical for network performance; it ensures electrical or light signals pass through cleanly with minimal signal loss, reflection, or interference, while providing physical strain relief to keep the delicate internal wires from breaking or pulling loose.
+
+###### 🧠 - Straight-Through Cable
+A **straight-through cable** is a twisted-pair Ethernet cable where both 8P8C (RJ-45) connectors are terminated using the exact same wiring standard—either T568A or T568B on both ends—resulting in a direct 1-to-1 pin mapping from one connector to the other (pin 1 to pin 1, pin 2 to pin 2, and so on). It is engineered to connect dissimilar networking devices by joining Medium Dependent Interface (MDI) endpoints—such as computers, servers, or routers—to Medium Dependent Interface Crossover (MDI-X) ports on switches or hubs, where the switch internally crosses the transmit (Tx) lines of one node with the receive (Rx) lines of the other. While historically required for host-to-switch connections, modern network interfaces equipped with **Auto-MDIX** (Automatic Medium-Dependent Interface Crossover) can automatically sense and reconfigure Tx/Rx pin pairs, allowing straight-through cables to work universally across virtually all modern copper Ethernet links.
+
+###### 🧠 - Ethernet cable tester
+An **Ethernet cable tester** is a portable diagnostic device used to verify that a copper network cable is properly wired, intact, and ready to carry data. It usually consists of a main testing unit and a detachable remote receiver, allowing a user to test cables already routed through walls or ceilings. By plugging both ends of an Ethernet cable into the tester, the device sends a low-voltage electrical signal down each of the eight internal wires sequentially. Step-by-step indicator lights on the display reveal if all eight conductors are connected in the correct order, instantly identifying physical faults like open circuits (broken wires), short circuits (wires touching each other), or miswired pin positions (crossed or split pairs). Using a cable tester saves troubleshooting time by confirming that custom-terminated RJ-45 connectors and cables are electrically sound before connecting them to active routers or switches.
+
+###### 🧠 - 
+
+###### 🧠 - 
+
+###### 🧠 - 
+
+###### 🧠 - 
+
+###### 🧠 - 
 ###### 🧠 - 
 
 ###### 🧠 - 
@@ -332,3 +356,8 @@ The wireless **spectrum** is the invisible highway in the air that radio waves t
 
 ###### 🧠 - 
 
+###### 🧠 - 
+
+###### 🧠 - 
+
+###### 🧠 - 

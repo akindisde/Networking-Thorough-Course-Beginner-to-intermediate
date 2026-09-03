@@ -132,5 +132,29 @@ the process of changing, regulating, or adapting the properties of a signal, sou
 ###### 𝑨 - Coarse
 rough to the touch, made of large pieces or particles, or lacking refinement, manners, and polish
 
+###### 𝑨 - Braided
+made by intertwining three or more strands, threads, or flexible pieces of material together
+
+###### 𝑨 - Susceptible
+likely to be influenced, harmed, or affected by something
+
+###### 𝑨 - Crimping
+Crimping means pressing, bending, or deforming a material to squeeze, fold, or lock it into place
+
 ###### 𝑨 - 
 
+###### 𝑨 - 
+
+###### 𝑨 - 
+
+###### 𝑨 - 
+
+###### 𝑨 - 
+
+###### 𝑨 - 
+
+###### 𝑨 - 
+
+###### 𝑨 - 
+
+###### 𝑨 - 

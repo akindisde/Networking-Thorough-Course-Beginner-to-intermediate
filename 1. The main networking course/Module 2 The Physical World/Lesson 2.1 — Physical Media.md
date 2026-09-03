@@ -1766,41 +1766,30 @@ Twisted-pair copper and fiber optic cable are not the only physical media used i
 Another important medium is **coaxial cable**, commonly called **coax**.
 
 Coaxial cable has been used extensively in:
+- Cable television networks
+- Broadband Internet access
+- *DOCSIS* networks
 
-- Cable television networks.
-- Broadband Internet access.
-- DOCSIS networks.
-- CCTV systems.
-- Radio-frequency systems.
-- Antenna systems.
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - **Data Over Cable Service Interface Specification (DOCSIS)**|Definitions]]
+
+- *CCTV* systems
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Closed-Circuit Television (CCTV)|Definitions]]
+
+- Radio-frequency systems
+- Antenna systems
 
 Unlike twisted-pair Ethernet, coaxial cable has a very different internal structure.
 
 A simplified cross-section looks like this:
 
-```text
-        Outer Jacket
-    ┌───────────────────┐
-    │   Shield          │
-    │ ┌───────────────┐ │
-    │ │ Dielectric    │ │
-    │ │   ┌───────┐   │ │
-    │ │   │ Core  │   │ │
-    │ │   └───────┘   │ │
-    │ └───────────────┘ │
-    └───────────────────┘
-````
+![[Pasted image 20260903145728.png]]
 
 The main components are:
-
-- Central conductor.
-    
-- Dielectric insulator.
-    
-- Metallic shield.
-    
-- Outer jacket.
-    
+- Central conductor
+- Dielectric insulator
+- Metallic shield
+- Outer jacket
 
 ### The Central Conductor
 
@@ -1823,13 +1812,12 @@ It also contributes to the electrical characteristics of the cable.
 Around the dielectric is a conductive shield.
 
 The shield can consist of:
+- *Braided* metal
 
-- Braided metal.
-    
-- Foil.
-    
-- A combination of foil and braid.
-    
+![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Braided|Terminology]]
+
+- Foil
+- A combination of foil and braid
 
 The shield helps contain the electromagnetic field and protects the signal from external interference.
 
@@ -1840,17 +1828,11 @@ This is one of the fundamental differences between coaxial cable and ordinary un
 The outer jacket protects the internal components from the physical environment.
 
 Depending on the cable's intended installation, the jacket may be designed to resist:
-
-- Moisture.
-    
-- Physical abrasion.
-    
-- Temperature changes.
-    
-- Chemicals.
-    
-- Fire.
-    
+- Moisture
+- Physical abrasion
+- Temperature changes
+- Chemicals
+- Fire
 
 The exact jacket construction depends on the cable type and installation environment.
 
@@ -1859,17 +1841,11 @@ The exact jacket construction depends on the cable type and installation environ
 Coaxial cable carries electrical signals.
 
 Therefore, like twisted-pair copper, it is affected by physical phenomena such as:
-
-- Attenuation.
-    
-- Noise.
-    
-- Electromagnetic interference.
-    
-- Signal reflections.
-    
-- Cable length.
-    
+- Attenuation
+- Noise
+- Electromagnetic interference
+- Signal reflections
+- Cable length
 
 The shielding provides significant protection against external electromagnetic interference, but coaxial cable is not immune to signal degradation.
 
@@ -1938,23 +1914,20 @@ A simplified architecture is:
 ```text
 Internet
    |
-   |
 Cable Operator Network
-   |
    |
 CMTS
    |
-   |
 Coaxial Access Network
    |
-   |
 Cable Modem
-   |
    |
 Customer Network
 ```
 
-The customer typically has a **cable modem** or gateway.
+The customer typically has a **cable modem** or gateway:
+
+![[Pasted image 20260903150658.png]]
 
 The cable modem communicates with the provider's infrastructure over the coaxial access network.
 
@@ -1987,19 +1960,12 @@ Modern architectures can also use newer distributed architectures, but the funda
 The shared nature of cable networks has important implications.
 
 A network engineer needs to understand:
-
-- Multiple customers may use the same physical infrastructure.
-    
-- The medium has finite capacity.
-    
-- Traffic must be coordinated.
-    
-- The provider must manage the available spectrum.
-    
-- The network must separate customers logically.
-    
-- Physical infrastructure can affect many customers simultaneously.
-    
+- Multiple customers may use the same physical infrastructure
+- The medium has finite capacity
+- Traffic must be coordinated
+- The provider must manage the available spectrum
+- The network must separate customers logically
+- Physical infrastructure can affect many customers simultaneously
 
 This is another example of why the physical layer influences higher-layer network behavior.
 
@@ -2017,9 +1983,7 @@ The important distinction is:
 
 ```text
 Shared Physical Infrastructure
-
 ≠
-
 Shared Access to Private Data
 ```
 
@@ -2031,15 +1995,12 @@ Both are copper-based media, but their construction is very different.
 
 ```text
 Twisted Pair:
-
 Pair A → twisted conductors
 Pair B → twisted conductors
 Pair C → twisted conductors
 Pair D → twisted conductors
 
-
 Coax:
-
 Central conductor
        ↓
 Dielectric
@@ -2049,9 +2010,11 @@ Metallic shield
 Outer jacket
 ```
 
-Twisted-pair Ethernet is heavily associated with local Ethernet access.
+Twisted-pair Ethernet is heavily associated with <u>local Ethernet access</u>.
 
-Coaxial cable is heavily associated with RF distribution and cable broadband.
+Coaxial cable is heavily associated with <u>RF distribution and cable broadband</u>.
+
+![[Cybersecurity journey/1. Networking/Q&A#❔ - What does "RF distribution and cable broadband" mean ?|Q&A]]
 
 ### Physical Security of Coax
 
@@ -2062,17 +2025,11 @@ Because it carries electrical signals, an attacker with physical access to the c
 This means physical security matters.
 
 Examples include:
-
-- Securing cable distribution points.
-    
-- Protecting exposed cable.
-    
-- Restricting access to network cabinets.
-    
-- Protecting provider infrastructure.
-    
-- Monitoring unauthorized physical modifications.
-    
+- Securing cable distribution points
+- Protecting exposed cable
+- Restricting access to network cabinets
+- Protecting provider infrastructure
+- Monitoring unauthorized physical modifications
 
 As with other physical media, encryption provides an additional layer of protection.
 
@@ -2098,6 +2055,8 @@ The goal is to observe the communication while minimizing changes to the origina
 
 Copper-based media can be susceptible to physical interception because the signal is electrical.
 
+![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Susceptible|Terminology]]
+
 However, whether a particular tapping technique works depends on the cable, signaling system, equipment, and physical access available to the attacker.
 
 ### Physical Access Is a Security Boundary
@@ -2107,38 +2066,25 @@ This leads to an important networking security principle:
 > Physical access can undermine logical security.
 
 Imagine an organization has:
+- Strong passwords
+- Firewalls
+- Network segmentation
+- Authentication
+- Encryption
 
-- Strong passwords.
-    
-- Firewalls.
-    
-- Network segmentation.
-    
-- Authentication.
-    
-- Encryption.
-    
-
-An attacker who gains unauthorized physical access to network infrastructure may still be able to create serious problems.
+An attacker who gains <u>unauthorized physical access</u> to network infrastructure may still be able to create serious problems.
 
 They could potentially:
-
-- Disconnect cables.
-    
-- Replace equipment.
-    
-- Insert unauthorized devices.
-    
-- Attempt signal interception.
-    
-- Damage infrastructure.
-    
-- Introduce rogue networking equipment.
-    
+- Disconnect cables
+- Replace equipment
+- Insert unauthorized devices
+- Attempt signal interception
+- Damage infrastructure
+- Introduce rogue networking equipment
 
 Network security therefore begins below the application layer.
 
-It begins with the physical environment.
+It begins with the physical environment, that's why we started studying the physical layer before the other layers.
 
 ### Comparing Physical Interception
 
@@ -2154,19 +2100,12 @@ The four media introduced in this lesson can now be compared from a physical-sec
 None of these should be interpreted as "secure" or "insecure" by themselves.
 
 Security depends on:
-
-- Physical access.
-    
-- Signal propagation.
-    
-- Encryption.
-    
-- Authentication.
-    
-- Network architecture.
-    
-- Monitoring.
-    
+- Physical access
+- Signal propagation
+- Encryption
+- Authentication
+- Network architecture
+- Monitoring
 
 ### Ethernet Cable Construction
 
@@ -2176,9 +2115,7 @@ A standard Ethernet twisted-pair cable contains:
 
 ```text
 8 conductors
-
 4 twisted pairs
-
 2 conductors per pair
 ```
 
@@ -2192,7 +2129,7 @@ The complete assembly is placed inside an outer jacket.
 
 ### Cable Anatomy
 
-A simplified representation:
+A simplified representation for what has already been illustrated:
 
 ```text
 +---------------------------------------+
@@ -2210,11 +2147,8 @@ A simplified representation:
 The twisting is carefully engineered.
 
 It helps reduce:
-
-- External interference.
-    
-- Pair-to-pair crosstalk.
-    
+- External interference
+- Pair-to-pair crosstalk
 
 Different pairs may have different twist rates.
 
@@ -2222,35 +2156,14 @@ This helps reduce the likelihood that repeated electrical patterns from one pair
 
 ### Shielded vs Unshielded Cable
 
-Twisted-pair Ethernet cable can also be constructed with different levels of shielding.
-
-Common terminology includes:
-
-- UTP — Unshielded Twisted Pair.
-    
-- FTP — Foiled Twisted Pair.
-    
-- STP — Shielded Twisted Pair.
-    
+Twisted-pair Ethernet cable can also be constructed with different levels of shielding. Common terminology includes:
+- UTP — Unshielded Twisted Pair
+- FTP — Foiled Twisted Pair
+- STP — Shielded Twisted Pair
 
 Terminology varies between standards and manufacturers, so cable markings should be interpreted carefully.
 
-The important concept is:
-
-```text
-UTP
-
-No overall metallic shield
-
-
-Shielded Cable
-
-Additional conductive shielding
-
-↓
-
-Greater protection against external interference
-```
+![[Pasted image 20260903174345.png]]
 
 Shielding does not automatically make a cable better for every installation.
 
@@ -2262,13 +2175,14 @@ Poorly implemented shielding can create problems rather than solving them.
 
 The connector commonly associated with twisted-pair Ethernet is often called an **RJ-45 connector**.
 
-Strictly speaking, the modular connector used for Ethernet is generally an **8P8C connector**.
+Strictly speaking, the modular connector used for Ethernet is generally an **8P8C connector**
+
+![[Cybersecurity journey/1. Networking/Q&A#❔ - What's the relationship between RJ-45 and 8P8C ?|Q&A]]
 
 The distinction is useful for a networking professional.
 
 ```text
 8P8C
-
 8 Positions
 8 Contacts
 ```
@@ -2277,7 +2191,9 @@ The connector provides eight contacts corresponding to the eight conductors in t
 
 ### T-568B
 
-The conductors must be terminated in a defined order.
+The conductors must be *terminated* in a defined order.
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Cable termination|Definitions]]
 
 One commonly used wiring arrangement is **T-568B**.
 
@@ -2294,20 +2210,14 @@ Pin 7 — White/Brown
 Pin 8 — Brown
 ```
 
-Memorize this order.
+<mark style="background:#fff88f">Memorize this order.</mark>
 
 It is useful when:
-
-- Building patch cables.
-    
-- Troubleshooting cable faults.
-    
-- Testing wall outlets.
-    
-- Examining patch panels.
-    
-- Diagnosing incorrect terminations.
-    
+- Building patch cables
+- Troubleshooting cable faults
+- Testing wall outlets
+- Examining patch panels
+- Diagnosing incorrect terminations
 
 ### T-568B Visualized
 
@@ -2360,7 +2270,6 @@ T-568A
 7 W/Brown
 8 Brown
 
-
 T-568B
 
 1 W/Orange
@@ -2377,7 +2286,11 @@ Both are standardized wiring arrangements.
 
 The important thing is consistency.
 
-### Straight-Through Cable
+![[Pasted image 20260903174906.png]]
+
+### *Straight-Through Cable*
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Straight-Through Cable|Definitions]]
 
 If both ends use the same wiring standard:
 
@@ -2413,19 +2326,16 @@ If one end uses T-568A and the other uses T-568B:
 T-568A ─────────────── T-568B
 ```
 
-the transmit and receive pairs are crossed.
+the transmit and receive pairs are <u>crossed</u>.
 
-Historically, this was important when directly connecting similar Ethernet devices.
-
-For example:
+Historically, this was important when directly connecting similar Ethernet devices. For example:
 
 ```text
 Computer ↔ Computer
-
 Switch ↔ Switch
 ```
 
-Modern Ethernet equipment commonly supports **Auto-MDI/MDI-X**, which allows interfaces to automatically detect and compensate for the required pair configuration.
+Modern Ethernet equipment commonly supports **Auto-MDI/MDI-X**, which allows interfaces to automatically detect and compensate for the required pair configuration when pairs are crossed.
 
 As a result, manually building crossover cables is far less important in modern networks than it once was.
 
@@ -2445,19 +2355,19 @@ Possible results include:
 
 ```text
 No Link
-
 Intermittent Link
-
 Reduced Speed
-
 Packet Errors
-
 Link Negotiation Problems
 ```
 
 This is why cable testing is a fundamental networking skill.
 
-### Cable Tester
+![[Pasted image 20260903180514.png]]
+
+### *Ethernet Cable Tester*
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Ethernet cable tester|Definitions]]
 
 A basic Ethernet cable tester can verify whether the conductors are connected correctly.
 
@@ -2465,9 +2375,7 @@ A typical tester has:
 
 ```text
 Main Unit
-
 +
-
 Remote Unit
 ```
 
@@ -2514,15 +2422,12 @@ This lets the technician identify wiring problems without relying solely on whet
 An **open circuit** means that a conductor does not provide a continuous electrical path.
 
 Possible causes include:
+- Broken conductor
+- Poor termination
+- Damaged connector
+- Incorrect *crimping*
 
-- Broken conductor.
-    
-- Poor termination.
-    
-- Damaged connector.
-    
-- Incorrect crimping.
-    
+![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Crimping|Terminology]]
 
 The tester may report:
 
@@ -2530,22 +2435,17 @@ The tester may report:
 Pin 3 → Open
 ```
 
-This indicates that the expected electrical path is not continuous.
+<u>This indicates that the expected electrical path is not continuous.</u>
 
 ### Short Circuit
 
 A **short circuit** occurs when conductors that should remain electrically separate become connected.
 
 This can occur because of:
-
-- Damaged insulation.
-    
-- Incorrect termination.
-    
-- Connector problems.
-    
-- Physical cable damage.
-    
+- Damaged insulation
+- Incorrect termination
+- Connector problems
+- Physical cable damage
 
 The result can prevent the Ethernet interface from operating correctly.
 
