@@ -1347,25 +1347,15 @@ The simplified process is:
 
 ```text
 Digital Data
-
 ↓
-
 Radio Transmitter
-
 ↓
-
 Electromagnetic Signal
-
 ↓
-
 Free Space
-
 ↓
-
 Radio Receiver
-
 ↓
-
 Digital Data
 ```
 
@@ -1381,9 +1371,7 @@ A copper cable physically confines most of its signal to the cable.
 
 A fiber cable confines light within the optical medium.
 
-Radio is fundamentally different.
-
-A radio transmission propagates through space.
+Radio is fundamentally different; A radio transmission propagates through space.
 
 Other devices within the appropriate reception area may be capable of receiving the signal.
 
@@ -1418,13 +1406,9 @@ But from a physical-layer security perspective, the important point is:
 
 ```text
 Radio signals leave the intended device
-
 ↓
-
 They propagate through physical space
-
 ↓
-
 Other receivers may detect them
 ```
 
@@ -1441,29 +1425,20 @@ Even if the attacker cannot actively join the network, they may still collect th
 Encryption protects the confidentiality of the information contained in those frames.
 
 Modern Wi-Fi security mechanisms include:
+- [[WPA2]]
+- [[WPA3]]
 
-- WPA2.
-    
-- WPA3.
-    
-
-Older systems such as WEP are obsolete and should not be used.
+Older systems such as [[WEP]] are obsolete and should not be used.
 
 The critical principle is:
 
 ```text
 Wireless visibility
-
 +
-
 Radio reception
-
 ↓
-
 Potential interception
-
 ↓
-
 Encryption required
 ```
 
@@ -1473,26 +1448,19 @@ Encryption should not be treated as an optional feature for serious wireless net
 
 The correct engineering statement is more precise.
 
-Wireless has a different physical security model.
+<mark style="background:#fff88f">Wireless has a different physical security model.</mark>
 
 With a wired network, an attacker typically needs some form of physical access to the network infrastructure or cable.
 
 With wireless, the transmission itself propagates through an environment that may be accessible to unintended receivers.
 
 This increases the importance of:
-
-- Strong encryption.
-    
-- Strong authentication.
-    
-- Secure credentials.
-    
-- Proper access-point configuration.
-    
-- Radio-frequency planning.
-    
-- Monitoring.
-    
+- Strong encryption
+- Strong authentication
+- Secure credentials
+- Proper access-point configuration
+- Radio-frequency planning
+- Monitoring
 
 ### 2.4 GHz vs 5 GHz
 
@@ -1512,48 +1480,32 @@ They have different propagation characteristics and practical trade-offs.
 The 2.4 GHz band generally provides better propagation through walls and longer practical range than 5 GHz under similar conditions.
 
 Advantages include:
-
-- Better penetration through obstacles.
-    
-- Longer practical range.
-    
-- Broad device compatibility.
-    
+- Better penetration through obstacles
+- Longer practical range
+- Broad device compatibility
 
 Disadvantages include:
+- Less available *spectrum*
 
-- Less available spectrum.
-    
-- More congestion.
-    
-- Greater interference from other devices.
-    
-- Fewer non-overlapping channels in many regulatory domains.
-    
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Radio spectrum|Definitions]]
+
+- More congestion
+- Greater interference from other devices
+- Fewer non-overlapping channels in many regulatory domains
 
 Devices such as:
-
-- Bluetooth equipment.
-    
-- Microwave ovens.
-    
-- Wireless peripherals.
-    
-
+- Bluetooth equipment
+- Microwave ovens
+- Wireless peripherals
 can also operate in or around the 2.4 GHz spectrum and contribute to interference.
 
 ### 5 GHz
 
 The 5 GHz band generally provides:
-
-- More available spectrum.
-    
-- More channels.
-    
-- Higher potential throughput.
-    
-- Less congestion in many environments.
-    
+- More available spectrum
+- More channels
+- Higher potential throughput
+- Less congestion in many environments
 
 However, higher frequency radio signals generally experience greater attenuation through walls and other obstacles than lower-frequency signals.
 
@@ -1561,28 +1513,18 @@ Therefore, 5 GHz often provides:
 
 ```text
 Higher Potential Throughput
-
 but
-
 Shorter Practical Range
 ```
 
 The actual result depends heavily on:
-
-- Transmit power.
-    
-- Antenna characteristics.
-    
-- Building materials.
-    
-- Channel width.
-    
-- Interference.
-    
-- Regulatory restrictions.
-    
-- Client capabilities.
-    
+- Transmit power
+- Antenna characteristics
+- Building materials
+- Channel width
+- Interference
+- Regulatory restrictions
+- Client capabilities
 
 ### Comparing 2.4 GHz and 5 GHz
 
@@ -1610,25 +1552,15 @@ This is incorrect.
 The frequency is not directly the network speed.
 
 Actual Wi-Fi throughput depends on factors such as:
-
-- Channel width.
-    
-- Modulation.
-    
-- Coding rate.
-    
-- Number of spatial streams.
-    
-- Signal-to-noise ratio.
-    
-- Wi-Fi generation.
-    
-- Client capabilities.
-    
-- Access-point capabilities.
-    
-- Interference.
-    
+- Channel width
+- Modulation
+- Coding rate
+- Number of spatial streams
+- Signal-to-noise ratio
+- Wi-Fi generation
+- Client capabilities
+- Access-point capabilities
+- Interference
 
 A 5 GHz network can often provide higher throughput because it generally has more usable spectrum and can support wider channels, but frequency alone does not determine speed.
 
@@ -1636,54 +1568,38 @@ A 5 GHz network can often provide higher throughput because it generally has mor
 
 Wireless signals also weaken over distance.
 
-This is called attenuation.
-
-A simplified model is:
+This is called attenuation, a simplified model is:
 
 ```text
 Access Point
-
 ██████████
-
 ↓
-
 Distance
-
 ↓
-
 ██████
-
 ↓
-
 Further Distance
-
 ↓
-
 ██
 ```
 
 Obstacles can increase attenuation significantly.
 
 Examples include:
-
-- Concrete.
-    
-- Brick.
-    
-- Metal.
-    
-- Glass with certain coatings.
-    
-- Furniture.
-    
-- Human bodies.
-    
+- Concrete
+- Brick
+- Metal
+- Glass with certain coatings
+- Furniture
+- Human bodies
 
 The resulting signal strength influences whether a wireless client can maintain a reliable connection.
 
 ### Signal-to-Noise Ratio
 
-One of the most important concepts in wireless networking is **Signal-to-Noise Ratio (SNR)**.
+One of the most important concepts in wireless networking is *[[Signal-to-Noise Ratio (SNR)]]*.
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Signal-to-Noise Ratio (SNR)|Definitions]]
 
 SNR describes the strength of the desired signal relative to background noise.
 
@@ -1715,17 +1631,11 @@ This can produce an important real-world effect:
 
 ```text
 Distance Increases
-
 ↓
-
 Signal Quality Decreases
-
 ↓
-
 Lower Modulation/Coding
-
 ↓
-
 Lower Throughput
 ```
 
@@ -1733,7 +1643,7 @@ A client can therefore remain connected while experiencing dramatically lower pe
 
 ### Copper vs Fiber vs Wireless
 
-We can now compare the three media.
+We can now compare the three media:
 
 |Property|Copper|Fiber|Wireless|
 |---|---|---|---|
@@ -1746,6 +1656,8 @@ We can now compare the three media.
 |Encryption|Depends on protocol/use|Still required|Essential|
 |Mobility|Low|Low|High|
 
+![[Cybersecurity journey/1. Networking/Q&A#❔ - Can Copper and optical cables be a shared medium ?|Q&A]]
+
 There is no universally "best" medium.
 
 The correct choice depends on the network requirements.
@@ -1756,33 +1668,19 @@ A network engineer should consider:
 
 ```text
 Distance
-
 +
-
 Bandwidth
-
 +
-
 Environment
-
 +
-
 Interference
-
 +
-
 Security
-
 +
-
 Cost
-
 +
-
 Installation Requirements
-
 +
-
 Future Expansion
 ```
 
@@ -1817,108 +1715,45 @@ The physical medium should be selected based on engineering requirements rather 
 ### Key Takeaways
 
 - Fiber optic networks transmit information using light rather than electrical signals.
-    
 - Fiber consists of a core surrounded by cladding and protective layers.
-    
 - The core and cladding have different optical properties that allow the signal to remain guided through the fiber.
-    
 - Single-mode fiber has a very small core and supports extremely long-distance communication.
-    
 - Multimode fiber has a larger core and allows multiple propagation modes, resulting in greater modal dispersion and shorter typical reach.
-    
 - A 550-meter reach is a common example for certain multimode Ethernet implementations, not a universal maximum for all multimode systems.
-    
 - WDM allows multiple optical wavelengths to share the same fiber.
-    
 - CWDM and DWDM provide different levels of wavelength multiplexing density.
-    
 - Fiber is resistant to electromagnetic interference and is difficult to passively tap compared with copper, but it is not impossible to tap.
-    
 - Wireless networks transmit information through radio waves.
-    
 - Wireless is inherently a shared medium because radio signals propagate through physical space.
-    
 - Wireless encryption is essential because unintended receivers may be able to detect radio transmissions.
-    
 - 2.4 GHz generally provides better range and penetration, while 5 GHz generally provides more spectrum and higher potential throughput.
-    
 - Frequency alone does not determine wireless speed.
-    
 - Signal quality, interference, channel width, modulation, coding, and device capabilities all influence Wi-Fi performance.
-    
 - The correct physical medium depends on distance, bandwidth, environment, security, cost, and deployment requirements.
-    
 
 ### Practical Questions
 
 1. What physical phenomenon carries information through an optical fiber?
-    
 2. What are the core and cladding, and why are they both necessary?
-    
 3. Why does single-mode fiber generally support longer distances than multimode fiber?
-    
 4. What is modal dispersion?
-    
 5. Why is the 550-meter figure for multimode fiber not a universal maximum?
-    
 6. What problem does WDM solve?
-    
 7. What is the difference between CWDM and DWDM?
-    
 8. Why is fiber generally more resistant to electromagnetic interference than copper?
-    
 9. Why does fiber still require encryption even though it is difficult to tap?
-    
 10. Why is wireless considered a shared medium?
-    
 11. Why can a nearby attacker potentially detect Wi-Fi transmissions without being physically connected to the network?
-    
 12. Why does 5 GHz generally provide higher potential throughput than 2.4 GHz?
-    
 13. Why does 2.4 GHz generally provide better range than 5 GHz?
-    
 14. Why is it incorrect to say that "5 GHz is twice as fast as 2.4 GHz"?
-    
 15. What is SNR, and why does it affect Wi-Fi throughput?
-    
 
 ### Mental Model
 
 Remember the three physical media using this model:
 
-```text
-COPPER
-
-Electrical Signal
-        ↓
-Shorter Reach
-        ↓
-EMI / Crosstalk Considerations
-
-
-FIBER
-
-Light
-        ↓
-Very Long Reach
-        ↓
-High Bandwidth
-        ↓
-WDM Can Multiply Capacity
-
-
-WIRELESS
-
-Radio Waves
-        ↓
-Shared Physical Space
-        ↓
-Mobility
-        ↓
-Interference + Interception Risk
-        ↓
-Encryption Essential
-```
+![[Pasted image 20260903122222.png]]
 
 The Physical layer determines what can physically happen to the signal before any higher-layer protocol can do anything about it.
 

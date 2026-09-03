@@ -318,9 +318,11 @@ An **optical wavelength** in fiber optics is the physical distance between two c
 ###### 🧠 - Fusion splicing
 **Fusion splicing** is a permanent, high-precision method of joining two optical fiber strands end-to-end by welding them together with an electric arc. After stripping protective plastic coatings and cleaving the glass ends perfectly flat, a technician places the fibers into a fusion splicer, which uses camera-based sensors and microscopic motors to align the tiny glass cores. The machine then generates a localized electric arc that briefly melts the glass tips, fusing them into a single continuous optical strand. Because the fused joint allows light to pass through virtually uninterrupted, fusion splicing delivers the lowest possible optical signal loss (typically under 0.02 dB) and lowest back-reflection of any connection method, making it the industry standard for installing long-haul infrastructure and repairing cut cables.
 
-###### 🧠 - 
+###### 🧠 - Radio spectrum
+The wireless **spectrum** is the invisible highway in the air that radio waves travel on to carry your data. It represents a specific range of radio frequencies set aside for wireless technology, much like the different stations on an FM car radio dial. Because everyone is sharing the same airwaves, the spectrum is divided into specific frequency neighborhoods—like 2.4 GHz and 5 GHz—and further sliced into individual lanes called channels, allowing your phone, laptop, and router to transmit data at the same time without crashing into each other's signals.
 
-###### 🧠 - 
+###### 🧠 - Signal-to-Noise Ratio (SNR)
+**Signal-to-Noise Ratio (SNR)** is a physical layer metric that measures the power of a desired communication signal relative to the background thermal noise and electromagnetic interference (the noise floor) on a transmission channel. Expressed in decibels ($\text{dB}$) as the logarithmic difference between signal strength and noise level ($\text{SNR}_{\text{dB}} = P_{\text{signal, dBm}} - P_{\text{noise, dBm}}$), SNR directly dictates a channel's Bit Error Rate (BER) and theoretical maximum data capacity under the Shannon-Hartley theorem. A high SNR yields a clean optical or radio path, enabling networking hardware to deploy dense, higher-order modulation schemes (such as 256-QAM or 1024-QAM) to maximize throughput, whereas a low SNR forces adaptive systems to drop down to resilient, lower-order modulations (like BPSK) to prevent frame corruption and retransmissions.
 
 ###### 🧠 - 
 
