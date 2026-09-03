@@ -567,7 +567,7 @@ The actual installation consists of:
 - Connectors
 - Wall outlets
 
------ visual needed here
+![[Pasted image 20260903064859.png]]
 
 All of these contribute to the total channel.
 
@@ -1156,7 +1156,9 @@ For example, the same physical fiber infrastructure may support different speeds
 
 ![[Cybersecurity journey/1. Networking/Q&A#❔ - How does fiber have such great bandwidth ?|Q&A]]
 
-### Wavelength
+### *Wavelength*
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Optical wavelength|Definitions]]
 
 Optical networking commonly uses specific wavelengths of light rather than arbitrary visible colors.
 
@@ -1169,17 +1171,11 @@ Common telecommunications windows include regions around:
 ```
 
 The wavelength affects:
-
-- Fiber attenuation.
-    
-- Dispersion.
-    
-- Optical component design.
-    
-- Maximum reach.
-    
-- Transceiver cost.
-    
+- Fiber attenuation
+- Dispersion
+- Optical component design
+- Maximum reach
+- Transceiver cost
 
 Multimode Ethernet frequently uses approximately 850 nm optics.
 
@@ -1189,7 +1185,9 @@ Single-mode systems commonly use 1310 nm or 1550 nm regions depending on the app
 
 One of the most powerful characteristics of fiber is that a single strand can carry multiple optical signals simultaneously using different wavelengths.
 
-This is called **Wavelength Division Multiplexing (WDM)**.
+This is called *[[Wavelength Division Multiplexing (WDM)]]*.
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Wavelength Division Multiplexing (WDM)|Definitions]]
 
 The basic idea is:
 
@@ -1224,11 +1222,9 @@ This allows network operators to dramatically increase the capacity of existing 
 
 Two important WDM technologies are:
 
-**CWDM — Coarse Wavelength Division Multiplexing**
+**CWDM — *Coarse* Wavelength Division Multiplexing** and **DWDM — Dense Wavelength Division Multiplexing**
 
-and
-
-**DWDM — Dense Wavelength Division Multiplexing**
+![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Coarse|Terminology]]
 
 CWDM uses wavelengths spaced farther apart.
 
@@ -1238,13 +1234,14 @@ DWDM can therefore support a much larger number of optical channels on the same 
 
 This technology is extensively used in telecommunications and high-capacity backbone networks.
 
+![[Cybersecurity journey/1. Networking/Q&A#❔ - What's the difference between CWDM and DWDM ?|Q&A]]
+
 ### Fiber Pairs
 
 A fiber Ethernet connection may use:
 
 ```text
 Fiber A → Transmit
-
 Fiber B → Receive
 ```
 
@@ -1252,15 +1249,15 @@ This is a common duplex configuration.
 
 Some optical technologies can transmit and receive using different wavelengths over the same physical fiber.
 
-This is often called **BiDi** or bidirectional optics.
+This is often called **BiDi** or *bidirectional optics*.
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Bidirectional optics|Definitions]]
 
 For example:
 
 ```text
 Fiber
-
 → λ1
-
 ← λ2
 ```
 
@@ -1269,15 +1266,12 @@ The two directions share the same physical strand while using different waveleng
 ### Fiber Connectors
 
 Common fiber connector types include:
-
 - LC
-    
 - SC
-    
 - ST
-    
 - MPO/MTP
-    
+
+![[Pasted image 20260903070816.png]]
 
 The connector is only the physical interface.
 
@@ -1289,43 +1283,37 @@ For example, LC connectors are widely used with both single-mode and multimode s
 
 Long fiber links often contain splices.
 
-A splice joins two optical fibers together.
+<u>A splice joins two optical fibers together.</u>
 
 The two major categories are:
+- Mechanical splicing
+- Fusion splicing
 
-- Mechanical splicing.
-    
-- Fusion splicing.
-    
+![[Pasted image 20260903071503.png]]
 
-**Fusion splicing** uses heat to permanently join the fibers.
+*Fusion splicing* uses heat to permanently join the fibers.
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Fusion splicing|Definitions]]
 
 A properly executed fusion splice can have very low optical loss.
 
 Splicing becomes particularly important in:
-
-- Long-distance networks.
-    
-- ISP infrastructure.
-    
-- Outside-plant fiber.
-    
-- Backbone deployments.
-    
+- Long-distance networks
+- ISP infrastructure
+- Outside-plant fiber
+- Backbone deployments
 
 ### Fiber Security
 
 Fiber is often considered more secure against passive interception than copper.
 
-The reason is straightforward.
-
-Copper carries electrical signals that can often be monitored by making electrical contact with the conductor.
+The reason is straightforward; Copper carries electrical signals that can often be monitored by making electrical contact with the conductor.
 
 Fiber carries light inside glass.
 
 An attacker cannot simply attach a conventional electrical probe to the fiber and read the signal.
 
-However, fiber is **not impossible to tap**.
+However, <mark style="background:#fff88f">fiber is not impossible to tap.</mark>
 
 Specialized optical tapping techniques can extract a portion of the optical signal.
 
@@ -1335,9 +1323,7 @@ Therefore:
 
 ```text
 Fiber
-
 ≠
-
 Perfectly Secure
 ```
 
@@ -1345,9 +1331,7 @@ The correct security conclusion is:
 
 ```text
 Fiber is more resistant to passive interception
-
 but
-
 Fiber does not eliminate the need for encryption.
 ```
 

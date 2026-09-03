@@ -129,7 +129,8 @@ the reduction of optical signal power that occurs when two fiber optic cable end
 ###### 𝑨 - Modulation
 the process of changing, regulating, or adapting the properties of a signal, sound, or system to achieve a specific effect or transmit information
 
-###### 𝑨 - 
+###### 𝑨 - Coarse
+rough to the touch, made of large pieces or particles, or lacking refinement, manners, and polish
 
 ###### 𝑨 - 
 
