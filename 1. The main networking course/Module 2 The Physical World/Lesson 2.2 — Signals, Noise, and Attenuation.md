@@ -8,7 +8,7 @@ In networking, we often talk about data as bits:
 1011010010110100
 ```
 
-But a physical network cannot literally send an abstract `1` or `0 through a cable or through the air.
+But a physical network cannot literally send an abstract 1 or 0 through a cable or through the air.
 
 At some point, those bits have to be represented as a physical phenomenon that can travel from one device to another.
 
