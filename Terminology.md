@@ -141,7 +141,8 @@ likely to be influenced, harmed, or affected by something
 ###### 𝑨 - Crimping
 Crimping means pressing, bending, or deforming a material to squeeze, fold, or lock it into place
 
-###### 𝑨 - 
+###### 𝑨 - Miswire
+to connect electrical wires, cables, or circuit pins incorrectly
 
 ###### 𝑨 - 
 
