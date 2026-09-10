@@ -1,4 +1,4 @@
-### Part 1 — VLAN Fundamentals and 802.1Q
+## Part 1 — VLAN Fundamentals and 802.1Q
 
 ### 1. The Problem VLANs Solve
 
@@ -830,7 +830,7 @@ VLANs provide Layer 2 separation, but communication between different VLANs requ
     
 - Communication between different VLANs requires **inter-VLAN routing**.
 
-### Part 2 — Enterprise VLAN Design and Inter-VLAN Routing
+## Part 2 — Enterprise VLAN Design and Inter-VLAN Routing
 
 ### 1. Why Enterprise Networks Use Multiple VLANs
 
@@ -1702,3 +1702,461 @@ The key design principle is that VLANs should be created for meaningful architec
     
 - VLAN design should create meaningful boundaries rather than unnecessary complexity.
 
+## Part 3 — VLAN Security: VLAN Hopping and Trunk Hardening
+
+### 1. Why VLANs Need Security Controls
+
+VLANs provide Layer 2 segmentation by separating broadcast domains. This is useful for organizing users, servers, guests, voice devices, management systems, and other network functions.
+
+However, VLANs are not a complete security boundary. If a router or Layer 3 switch provides inter-VLAN routing, traffic can move between VLANs according to the configured policy.
+
+A secure VLAN design therefore combines segmentation with controls such as:
+
+- ACLs and firewalls
+    
+- 802.1X authentication
+    
+- Port security
+    
+- Secure trunk configuration
+    
+- Disabled unused ports
+    
+- Network monitoring
+    
+
+The objective is to control which devices and traffic can cross the logical boundaries created by VLANs.
+
+## 2. VLAN Hopping
+
+VLAN hopping is a class of Layer 2 attacks in which an attacker attempts to access traffic belonging to a VLAN that should not normally be accessible from the attacker's port.
+
+Two classic techniques are:
+
+1. Switch spoofing
+    
+2. Double tagging
+    
+
+They exploit different aspects of VLAN operation.
+
+Switch spoofing targets trunk negotiation.
+
+Double tagging targets 802.1Q tag processing and native VLAN behavior.
+
+Their feasibility depends on switch configuration, topology, protocol behavior, and which VLANs are permitted on trunks.
+
+## 3. Switch Spoofing and DTP
+
+### 3.1 What Is Switch Spoofing?
+
+A switch spoofing attack attempts to make an attacker-controlled device negotiate a trunk with a legitimate switch.
+
+If an endpoint-facing interface is allowed to dynamically become a trunk, the attacker may gain access to multiple VLANs carried by that trunk instead of being restricted to one access VLAN.
+
+An access port normally connects an endpoint to one VLAN.
+
+A trunk can carry multiple VLANs.
+
+Therefore, allowing an untrusted endpoint to negotiate trunking can significantly increase its Layer 2 access.
+
+### 3.2 Dynamic Trunking Protocol
+
+In some Cisco environments, Dynamic Trunking Protocol (DTP) can negotiate trunking between switches.
+
+Dynamic negotiation can be operationally useful, but it can also increase the attack surface when enabled on ports connected to untrusted devices.
+
+The security principle is:
+
+> Do not allow an endpoint port to become a trunk unless that behavior is explicitly required.
+
+### 3.3 Defense
+
+Endpoint-facing interfaces should normally be explicitly configured as access ports.
+
+Cisco IOS-style example:
+
+```
+interface GigabitEthernet0/10
+ switchport mode access
+ switchport access vlan 30
+```
+
+Where appropriate and supported, DTP negotiation can also be disabled:
+
+```
+switchport nonegotiate
+```
+
+Exact command behavior depends on the platform and interface mode.
+
+The important principle is to explicitly define the intended Layer 2 role of each interface.
+
+## 4. Double-Tagging VLAN Hopping
+
+### 4.1 Basic Concept
+
+Double tagging involves an Ethernet frame containing two 802.1Q VLAN tags:
+
+```
+[Outer VLAN Tag] [Inner VLAN Tag] [Ethernet Payload]
+```
+
+The technique relies on how switches process VLAN tags, particularly when the native VLAN is involved.
+
+### 4.2 Why the Native VLAN Matters
+
+On an 802.1Q trunk, native-VLAN traffic is normally transmitted without an 802.1Q tag.
+
+A classic double-tagging scenario can exploit a topology in which attacker traffic enters through the native VLAN and then crosses a trunk.
+
+Under suitable conditions, the first switch processes the outer tag while the inner tag remains available for a downstream switch to interpret.
+
+Conceptually:
+
+```
+Attacker
+   |
+   | Double-tagged frame
+   v
+First switch
+   |
+   | Outer tag processed
+   | Inner tag remains
+   v
+Trunk
+   |
+   v
+Second switch
+   |
+   | Inner tag interpreted
+   v
+Target VLAN
+```
+
+This is not a universal attack. It depends on the native VLAN arrangement, topology, switch behavior, and attacker location.
+
+It is also generally a one-way technique: successful injection toward another VLAN does not automatically provide normal two-way communication.
+
+### 4.3 Defense
+
+A common hardening measure is to use a dedicated native VLAN that is not assigned to ordinary endpoints.
+
+For example:
+
+```
+vlan 999
+ name NATIVE-BLACKHOLE
+```
+
+The native VLAN should not be used as a normal user-access VLAN.
+
+The principle is:
+
+> Make the native VLAN an isolated infrastructure choice rather than a normal endpoint network.
+
+## 5. VLAN 1 and Default Configuration
+
+VLAN 1 is the default VLAN on many switches and has historically been associated with default Layer 2 behavior and control protocols.
+
+VLAN 1 is not inherently insecure.
+
+The concern is unnecessary dependence on default configuration.
+
+A common hardening approach is to:
+
+- Avoid using VLAN 1 as the normal user VLAN.
+    
+- Avoid using VLAN 1 as the native VLAN where practical.
+    
+- Explicitly configure VLAN membership.
+    
+- Restrict VLANs permitted across trunks.
+    
+- Disable unused interfaces.
+    
+- Avoid relying on default switch behavior.
+    
+
+Changing the native VLAN from VLAN 1 is useful hardening, but it is not a complete security control by itself.
+
+## 6. Trunk Hardening
+
+A trunk should carry only the VLANs required by the topology.
+
+If a trunk needs VLANs 10, 20, and 30, there is normally no reason to permit unrelated VLANs.
+
+### 6.1 Explicitly Configure Trunks
+
+When a link is known to be a trunk, configure it explicitly rather than relying on dynamic negotiation.
+
+Cisco IOS-style example:
+
+```
+interface GigabitEthernet0/1
+ switchport mode trunk
+```
+
+### 6.2 Restrict Allowed VLANs
+
+Limit the VLANs carried by the trunk:
+
+```
+switchport trunk allowed vlan 10,20,30,40,50,60
+```
+
+This follows the principle of least privilege:
+
+> A network link should carry only the traffic it actually needs.
+
+If VLAN 70 is not required on the link, it should not be unnecessarily permitted.
+
+### 6.3 Use a Dedicated Native VLAN
+
+For example:
+
+```
+switchport trunk native vlan 999
+```
+
+The same native VLAN must be configured consistently on both ends of the trunk.
+
+A native VLAN mismatch can cause unexpected traffic placement, connectivity problems, and security issues.
+
+### 6.4 Disable Unnecessary Negotiation
+
+Where appropriate:
+
+```
+switchport nonegotiate
+```
+
+The exact syntax and support vary by platform.
+
+The objective is to eliminate unnecessary dynamic behavior when the intended interface role is already known.
+
+### 6.5 Secure Endpoint Ports
+
+Endpoint-facing ports should normally be access ports:
+
+```
+interface GigabitEthernet0/10
+ switchport mode access
+ switchport access vlan 30
+```
+
+Unused ports should be disabled or otherwise placed into a controlled state according to organizational policy.
+
+## 7. Hardened Trunk Example
+
+A simplified Cisco IOS-style configuration could be:
+
+```
+vlan 999
+ name NATIVE-BLACKHOLE
+
+interface GigabitEthernet0/1
+ switchport mode trunk
+ switchport trunk native vlan 999
+ switchport trunk allowed vlan 10,20,30,40,50,60
+ switchport nonegotiate
+```
+
+This configuration communicates four important security decisions:
+
+- The interface is explicitly a trunk.
+    
+- A dedicated native VLAN is used.
+    
+- Only required VLANs are permitted.
+    
+- Dynamic trunk negotiation is disabled where appropriate.
+    
+
+These commands are representative Cisco IOS-style examples; exact syntax varies by platform.
+
+## 8. VLAN Segmentation Is Not a Firewall
+
+Consider:
+
+```
+VLAN 10 — Management
+VLAN 20 — Servers
+VLAN 30 — Users
+VLAN 50 — Guest
+```
+
+These VLANs create separate Layer 2 broadcast domains.
+
+But if a Layer 3 switch routes between VLAN 30 and VLAN 20, users may be able to reach servers.
+
+The actual security policy must determine whether that communication is permitted.
+
+For example:
+
+```
+User VLAN
+   |
+   | Layer 3 routing
+   v
+ACL / Firewall Policy
+   |
+   v
+Server VLAN
+```
+
+A secure architecture may allow users to reach specific application servers while denying access to management interfaces.
+
+Guest networks may be allowed to reach the Internet while being denied access to internal VLANs.
+
+Therefore:
+
+> VLANs define segmentation; Layer 3 security controls enforce many of the communication policies across that segmentation.
+
+## 9. Layered VLAN Security
+
+A mature security design uses multiple controls.
+
+### Layer 1 — Physical Security
+
+Control who can physically access switches, patch panels, wall ports, and network equipment.
+
+### Layer 2 — Switch Security
+
+Use:
+
+- VLAN segmentation
+    
+- 802.1X
+    
+- Port security
+    
+- Secure access and trunk configuration
+    
+- Appropriate MAC limiting
+    
+- BPDU-related protections where applicable
+    
+- Disabled unused ports
+    
+
+### Layer 3 — Traffic Filtering
+
+Use:
+
+- ACLs
+    
+- Firewalls
+    
+- Routing policies
+    
+
+These controls determine which traffic can move between network segments.
+
+### Monitoring
+
+Use:
+
+- Switch logs
+    
+- Authentication logs
+    
+- Network monitoring
+    
+- IDS/IPS
+    
+- Alerts for unusual Layer 2 behavior
+    
+
+Layered controls are more resilient than relying on a single security feature.
+
+## 10. Attack Preconditions and Limitations
+
+### Switch Spoofing
+
+Classic switch spoofing requires an opportunity for the endpoint-facing port to negotiate trunking.
+
+If the port is explicitly configured as an access port and cannot negotiate a trunk, this attack becomes significantly harder or ineffective.
+
+### Double Tagging
+
+Double tagging depends on native VLAN conditions, topology, switch behavior, and the attacker's VLAN.
+
+Using an isolated native VLAN that is not assigned to ordinary endpoints reduces the classic attack conditions.
+
+### Trunk Restrictions
+
+Restricting the VLANs allowed on trunks limits the VLANs that can cross those links.
+
+### Modern Defenses
+
+Modern switches provide multiple security mechanisms that can reduce the effectiveness of classic Layer 2 attacks.
+
+The key lesson is not simply to memorize attacks. Understand the design weakness they exploit:
+
+> Unnecessary Layer 2 trust creates unnecessary attack surface.
+
+## 11. Security Design Principles
+
+Use these principles when designing VLAN infrastructure:
+
+1. Explicitly configure endpoint ports as access ports.
+    
+2. Explicitly configure legitimate trunks.
+    
+3. Avoid unnecessary dynamic trunk negotiation.
+    
+4. Restrict the VLANs allowed on every trunk.
+    
+5. Use a dedicated unused native VLAN where appropriate.
+    
+6. Keep native VLAN configuration consistent on both ends of a trunk.
+    
+7. Avoid unnecessary reliance on default VLAN behavior.
+    
+8. Disable or control unused switch ports.
+    
+9. Do not treat VLANs as a replacement for ACLs or firewalls.
+    
+10. Combine Layer 2 segmentation with authentication, access control, and monitoring.
+    
+
+## Summary
+
+VLANs provide important Layer 2 segmentation, but they are not a complete security boundary.
+
+VLAN hopping attempts to cross VLAN boundaries without legitimate assignment. The two classic techniques are switch spoofing and double tagging.
+
+Switch spoofing targets dynamic trunk negotiation. The primary defense is to explicitly configure endpoint-facing interfaces as access ports and avoid unnecessary trunk negotiation.
+
+Double tagging exploits 802.1Q tag processing and native VLAN behavior. A dedicated native VLAN that is not assigned to ordinary endpoints reduces the conditions required for the classic attack.
+
+Trunk hardening should include explicit trunk configuration, restricted allowed VLANs, a controlled native VLAN, and elimination of unnecessary dynamic behavior.
+
+Finally, VLAN segmentation should be combined with Layer 3 security controls. ACLs and firewalls are needed when the design requires precise control over communication between VLANs.
+
+## Key Takeaways
+
+- VLANs separate Layer 2 broadcast domains but do not automatically provide complete security.
+    
+- VLAN hopping attempts to access traffic belonging to another VLAN.
+    
+- Switch spoofing abuses dynamic trunk negotiation.
+    
+- Explicit access-port configuration is a primary defense against switch spoofing.
+    
+- Double tagging uses two 802.1Q tags and depends heavily on native VLAN behavior and topology.
+    
+- A dedicated unused native VLAN reduces the conditions required for classic double-tagging attacks.
+    
+- VLAN 1 is not inherently insecure, but reducing unnecessary reliance on default VLAN behavior is common hardening practice.
+    
+- Trunks should carry only the VLANs they actually need.
+    
+- Native VLAN configuration must be consistent on both ends of a trunk.
+    
+- VLANs provide segmentation, not firewall-level traffic filtering.
+    
+- ACLs and firewalls can enforce communication policy between routed VLANs.
+    
+- Strong Layer 2 security comes from layered controls rather than a single feature.

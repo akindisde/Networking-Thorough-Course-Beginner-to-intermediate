@@ -669,7 +669,7 @@ Receive
     
 - The next important question is what happens when the destination **is known versus unknown**—this leads directly into **forwarding and flooding**.
 
-### Part 2 — Flooding and Forwarding
+## Part 2 — Flooding and Forwarding
 
 ### 1. What Happens When a Frame Arrives?
 
@@ -1340,7 +1340,7 @@ CAM entries are dynamic and can age out. When an entry disappears, traffic desti
     
 - A switch may flood some traffic, but unlike a hub, it uses a **MAC address table to make selective forwarding decisions**.
 
-### Part 3 — MAC Flooding and Port Security
+## Part 3 — MAC Flooding and Port Security
 
 ### 1. Why the CAM Table Matters for Security
 
