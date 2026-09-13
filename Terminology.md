@@ -144,9 +144,11 @@ Crimping means pressing, bending, or deforming a material to squeeze, fold, or l
 ###### 𝑨 - Miswire
 to connect electrical wires, cables, or circuit pins incorrectly
 
-###### 𝑨 - 
+###### 𝑨 - Absorption
+the process where one substance takes in, soaks up, or captures another substance, energy, or group
 
-###### 𝑨 - 
+###### 𝑨 - Scattering
+moving or spreading in different directions, or a small, random group of things
 
 ###### 𝑨 - 
 

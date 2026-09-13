@@ -353,7 +353,8 @@ An **Ethernet cable tester** is a portable diagnostic device used to verify that
 
 ![[Pasted image 20260913075354.png]]
 
-###### 🧠 - 
+###### 🧠 - Noise rejection
+**Noise rejection** is the ability of a physical transmission medium, receiver circuit, or signal processing architecture to preserve the integrity of a data signal by suppressing or canceling unwanted background noise and external electromagnetic interference (EMI). At the physical cabling layer, this is commonly achieved through **differential signaling** across balanced twisted wire pairs—where external noise affects both conductors identically and is canceled out at the receiver via Common-Mode Rejection (CMR)—or through metallic shielding (braid or foil) in STP and coaxial cables. At higher performance tiers, noise rejection is realized either by using fiber optics, which offer complete immunity to electrical noise by transmitting light rather than electric current, or through active Digital Signal Processing (DSP) algorithms and bandpass filters inside the transceiver that strip out stray frequency components before decoding the payload.
 ###### 🧠 - 
 
 ###### 🧠 - 

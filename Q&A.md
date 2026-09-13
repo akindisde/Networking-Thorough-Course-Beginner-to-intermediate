@@ -137,7 +137,8 @@ Yes, both copper and optical cables can function as a shared medium depending on
 ###### ❔ - What are the properties of an optical signal ?
 An **optical signal** is a light wave—typically in the invisible infrared spectrum—used to transmit binary data through glass fiber-optic cables or open air. Its primary physical properties include **wavelength** (the precise frequency/color of the light pulse, commonly measured in nanometers such as 850 nm, 1310 nm, or 1550 nm), **optical power** (the brightness or intensity of the signal, measured in dBm), **phase** (the timing position of the light wave's crests), and **polarization** (the spatial orientation of the light wave's electric field). As the signal travels through a fiber strand, its overall performance is governed by **attenuation** (the gradual loss of signal power over distance) and **dispersion** (the spreading out of light pulses over time), both of which determine how far and fast data can travel before requiring optical amplification or re-timing.
 
-###### ❔ - 
+###### ❔ - What is the difference between noise and interference?
+In physical layer networking, **noise** is random, naturally occurring, and unstructured background energy inherent to physical media and electronic components—such as thermal noise (Johnson-Nyquist noise) caused by atomic motion—that continuously elevates the signal floor. **Interference**, by contrast, is unwanted electromagnetic energy originating from distinct, structured external sources—such as adjacent wire pairs (crosstalk), overlapping wireless channels (Co-Channel Interference), or electrical machinery (EMI)—that actively competes with and corrupts the intended transmission. While noise is an inescapable thermodynamic baseline property of all physical channels, interference is a situational environmental factor that can be mitigated or eliminated through shielding, frequency coordination, filtering, or physical separation.
 
 ###### ❔ - 
 

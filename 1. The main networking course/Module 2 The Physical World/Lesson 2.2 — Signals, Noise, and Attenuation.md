@@ -555,7 +555,15 @@ Distance increases
 Signal strength decreases
 ```
 
-In copper, electrical resistance and other transmission-line characteristics contribute to signal loss. In fiber, optical power is lost through physical mechanisms such as absorption and scattering. In wireless communication, electromagnetic energy spreads through the environment and is affected by distance and propagation conditions.
+In copper, electrical resistance and other transmission-line characteristics contribute to signal loss. 
+
+In fiber, optical power is lost through physical mechanisms such as *absorption* and *scattering*.
+
+![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Absorption|Terminology]]
+
+![[Cybersecurity journey/1. Networking/Terminology#𝑨 - Scattering|Terminology]]
+
+In wireless communication, electromagnetic energy spreads through the environment and is affected by distance and propagation conditions.
 
 The mechanisms differ, but the engineering problem is similar:
 
@@ -617,7 +625,7 @@ Receiver Limitations
 Physical Medium Constraints
 ```
 
-Increasing power can also create additional interference or violate the specifications of the physical-layer system.
+<mark style="background:#ff4d4f">Increasing power can also create additional interference or violate the specifications of the physical-layer system.</mark>
 
 The real objective is:
 
@@ -628,7 +636,7 @@ from unwanted energy at the receiver.
 
 ### Noise
 
-**Noise** is unwanted energy or variation that interferes with the desired signal.
+**Noise** is <u>unwanted energy</u> or variation that interferes with the desired signal.
 
 The basic model is:
 
@@ -642,7 +650,7 @@ Received Signal
 
 The receiver wants to recover the intended signal, but noise makes that task more difficult.
 
-Possible sources include:
+Possible sources of noise include:
 
 ```
 Electrical equipment
@@ -677,13 +685,11 @@ Electronic equipment
 
 The desired transmission must therefore be distinguished from other energy present in the physical environment.
 
+![[Cybersecurity journey/1. Networking/Q&A#❔ - What is the difference between noise and interference ?|Q&A]]
+
 ### Signal-to-Noise Ratio
 
-A central measurement is **Signal-to-Noise Ratio**, commonly abbreviated:
-
-```
-SNR
-```
+A central measurement is **[[Signal-to-Noise Ratio (SNR)]]**.
 
 SNR describes the relationship between the desired signal and the noise.
 
@@ -827,22 +833,12 @@ Signals traveling through one pair generate electromagnetic fields. Because the 
 Conceptually:
 
 ```
-Pair A
-
-Signal ───────────────────────→
-
-
+Pair A's Signal ───────────────────────→
         )))))))))))))))
-
-
-Pair B
-
-Signal ───────────────────────→
+Pair B's Signal ───────────────────────→
 ```
 
-The unwanted energy from Pair A has affected Pair B.
-
-That is crosstalk.
+The unwanted energy from Pair A has affected Pair B, and the other way around. That is crosstalk.
 
 ### Why Twisted Pairs Reduce Crosstalk
 
@@ -862,7 +858,9 @@ This helps reduce unwanted coupling and improves signal integrity.
 
 The twisting is therefore an important part of the cable's engineering.
 
-### Differential Signaling and Noise Rejection
+### Differential Signaling and *Noise Rejection*
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Noise rejection|Definitions]]
 
 Twisted-pair Ethernet commonly uses differential signaling.
 
@@ -882,39 +880,13 @@ Much of the common noise can be rejected
 
 The cable geometry and signaling method work together to improve resistance to interference.
 
-### Crosstalk Between Pairs
-
-The four pairs in an Ethernet cable are physically close to each other.
-
-This creates the possibility of interaction between them.
-
-The cable is engineered to control that interaction. Different pairs can use different twist rates, changing the physical relationship between pairs and helping reduce predictable coupling.
-
-The result is improved transmission performance.
-
-A useful mental model is:
-
-```
-Multiple Electrical Signals
-        ↓
-Same Physical Cable
-        ↓
-Potential Electromagnetic Coupling
-        ↓
-Cable Design + Twisting + Differential Signaling
-        ↓
-Reduced Interference
-```
-
 ### Cable Category and Crosstalk
 
 As Ethernet technologies increase in speed, physical-layer requirements become more demanding.
 
-Higher data rates generally require tighter signal-integrity requirements.
+<u>Higher data rates generally require tighter signal-integrity requirements.</u>
 
-Cabling categories therefore specify electrical performance characteristics.
-
-For example:
+Cabling categories therefore specify electrical performance characteristics. For example:
 
 ```
 Cat5e
@@ -937,13 +909,7 @@ As signaling frequencies and performance requirements increase, controlling unwa
 
 ### NEXT
 
-One important measurement is:
-
-```
-NEXT
-```
-
-NEXT means:
+NEXT means
 
 ```
 Near-End Crosstalk
@@ -951,13 +917,7 @@ Near-End Crosstalk
 
 It describes unwanted coupling between pairs measured at the end of the cable near the transmitting source.
 
-A related concept is:
-
-```
-FEXT
-```
-
-which means:
+A related concept is FEXT which means
 
 ```
 Far-End Crosstalk
@@ -973,35 +933,7 @@ FEXT
 → Crosstalk observed at the far end
 ```
 
-### Signal Quality Is a System Problem
-
-A receiver does not simply receive the original signal unchanged.
-
-A more realistic model is:
-
-```
-Transmitted Signal
-        ↓
-Physical Medium
-        ↓
-Attenuation
-        +
-Noise
-        +
-Interference
-        +
-Crosstalk
-        ↓
-Received Signal
-        ↓
-Receiver
-        ↓
-Recovered Information
-```
-
-The receiver has to determine what was actually transmitted despite these physical effects.
-
-This is the fundamental challenge of physical-layer communication.
+**Signal Quality Is a System Problem**.
 
 ### What Happens When Signal Quality Gets Worse?
 
@@ -1030,93 +962,6 @@ Potential Retransmissions / Reduced Performance
 ```
 
 The exact behavior depends on the physical-layer technology.
-
-### Practical Example — A Long Copper Cable
-
-Imagine an Ethernet link using a copper cable that approaches the maximum supported channel length.
-
-The transmitter sends a signal.
-
-As the signal travels:
-
-```
-Signal
- ↓
-Attenuation
- ↓
-Weaker Signal
-```
-
-At the same time, the cable may experience:
-
-```
-External Noise
-+
-Crosstalk
-+
-Other Electrical Effects
-```
-
-The receiver therefore sees a signal that is both weaker and potentially contaminated.
-
-The receiver must still determine what was transmitted.
-
-This is why Ethernet cabling specifications define strict physical requirements.
-
-### Practical Example — Damaged Cable
-
-Imagine a cable has been physically damaged.
-
-The cable might still maintain some level of electrical connectivity.
-
-However, the physical characteristics of the cable may have changed.
-
-For example:
-
-```
-Damaged Geometry
-        ↓
-Changed Electrical Characteristics
-        ↓
-Potentially Increased Signal Loss
-        ↓
-Potentially Increased Crosstalk
-        ↓
-Reduced Signal Quality
-```
-
-A simple continuity test might not reveal every possible physical-performance problem.
-
-This is why professional cable certification involves much more than checking whether every conductor has continuity.
-
-### Practical Example — Poor Cable Installation
-
-Imagine several Ethernet cables are installed incorrectly.
-
-They may be:
-
-```
-Overly bent
-Compressed
-Poorly terminated
-Installed near sources of interference
-Incorrectly paired
-Excessively long
-```
-
-Even if the network initially appears to work, the physical layer may have reduced performance margins.
-
-A network engineer therefore needs to understand:
-
-```
-"Link works"
-
-does not necessarily mean:
-
-"The physical installation is optimal."
-```
-
-Physical-layer quality can affect reliability and performance even when a connection remains operational.
 
 ### Why Physical Layer Knowledge Matters
 
@@ -1148,34 +993,18 @@ A strong network engineer considers the entire communication path instead of imm
 
 ### Key Takeaways
 
-```
-Attenuation is signal loss over distance.
-
-Longer physical paths generally produce more attenuation.
-
-Ethernet twisted-pair channels are commonly limited to
-100 meters under the relevant structured-cabling model.
-
-The 100-meter limit is a performance specification,
-not a point where the signal suddenly disappears.
-
-Noise is unwanted energy that interferes with the desired signal.
-
-Interference can originate from external sources or other signals.
-
-Crosstalk is unwanted coupling between communication channels.
-
-Twisting the conductors helps control electromagnetic coupling.
-
-Differential signaling helps reject common-mode interference.
-
-SNR describes the relationship between signal and noise.
-
-Higher SNR generally means better signal quality.
-
-As signal strength decreases relative to noise,
-signal recovery becomes more difficult.
-```
+1. Attenuation is signal loss over distance
+2. Longer physical paths generally produce more attenuation
+3. Ethernet twisted-pair channels are commonly limited to 100 meters under the relevant structured-cabling model
+4. The 100-meter limit is a performance specification, not a point where the signal suddenly disappears
+5. Noise is unwanted energy that interferes with the desired signal
+6. Interference can originate from external sources or other signals
+7. Crosstalk is unwanted coupling between communication channels
+8. Twisting the conductors helps control electromagnetic coupling
+9. Differential signaling helps reject common-mode interference
+10. SNR describes the relationship between signal and noise
+11. Higher SNR generally means better signal quality
+12. As signal strength decreases relative to noise,signal recovery becomes more difficult
 
 ### Final Mental Model
 
