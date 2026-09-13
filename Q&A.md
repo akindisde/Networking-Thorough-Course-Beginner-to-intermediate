@@ -134,8 +134,8 @@ Yes, both copper and optical cables can function as a shared medium depending on
 
 ![[Pasted image 20260903173438.png]]
 
-
-###### ❔ - 
+###### ❔ - What are the properties of an optical signal ?
+An **optical signal** is a light wave—typically in the invisible infrared spectrum—used to transmit binary data through glass fiber-optic cables or open air. Its primary physical properties include **wavelength** (the precise frequency/color of the light pulse, commonly measured in nanometers such as 850 nm, 1310 nm, or 1550 nm), **optical power** (the brightness or intensity of the signal, measured in dBm), **phase** (the timing position of the light wave's crests), and **polarization** (the spatial orientation of the light wave's electric field). As the signal travels through a fiber strand, its overall performance is governed by **attenuation** (the gradual loss of signal power over distance) and **dispersion** (the spreading out of light pulses over time), both of which determine how far and fast data can travel before requiring optical amplification or re-timing.
 
 ###### ❔ - 
 

@@ -348,7 +348,10 @@ An **Ethernet cable tester** is a portable diagnostic device used to verify that
 ###### 🧠 - Auto-MDI/MDI-X
 **Auto-MDI/MDI-X** (or **Auto-MDIX**, short for Automatic Medium Dependent Interface Crossover) is a smart Ethernet port technology that automatically detects the type of cable connected and dynamically configures the port's internal transmit and receive lines. Traditionally, Ethernet devices used two distinct port types: **MDI** on end devices like computers and routers (where specific pins transmit data and others receive), and **MDI-X** on switch ports (which swapped those pins internally so transmit matched receive). Connecting two identical ports, like switch-to-switch or PC-to-PC, required a special crossover cable to align the transmit and receive lines properly. Auto-MDIX eliminates this requirement entirely by electronically detecting whether the connected device is sending or receiving signals on specific wire pairs and instantly flipping its internal circuits to match, allowing standard straight-through cables to work seamlessly across virtually any network connection.
 
-###### 🧠 - 
+###### 🧠 - Physical layer encoding
+**Physical layer encoding** is the process of translating digital binary data (1s and 0s) into physical line signals—such as discrete electrical voltage levels, light pulses, or radio frequency phase shifts—suitable for transmission across a physical medium. Rather than transmitting raw bits directly, physical layer encoding schemes (such as Manchester, NRZ, 8b/10b, or PAM4) convert groups of bits into specific symbol patterns engineered to overcome real-world physical transmission limitations. This encoding embeds clock synchronization timing directly into the signal so receivers can lock onto bit transitions without needing a separate clock line, maintains DC balance to prevent transformer voltage drift (baseline wander), and optimizes spectral efficiency to maximize data throughput over a given physical bandwidth.
+
+![[Pasted image 20260913075354.png]]
 
 ###### 🧠 - 
 ###### 🧠 - 

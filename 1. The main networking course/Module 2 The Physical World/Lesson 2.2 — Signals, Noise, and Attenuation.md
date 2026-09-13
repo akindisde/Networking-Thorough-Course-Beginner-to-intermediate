@@ -32,7 +32,9 @@ Receiver
 Recovered Information
 ```
 
-The physical signal depends on the medium being used.
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Physical layer encoding|Definitions]]
+
+<u>The physical signal depends on the medium being used.</u>
 
 The three important cases in this lesson are:
 
@@ -127,7 +129,7 @@ Copper
 
 At the other end, the receiving interface observes the electrical signal and uses the appropriate physical-layer technology to recover the transmitted information.
 
-### Differential Signaling
+### [[Differential Signaling]]
 
 Twisted-pair Ethernet commonly uses **differential signaling**.
 
@@ -137,9 +139,7 @@ Conceptually:
 
 ```
 Wire A:  +V
-
 Wire B:  -V
-
 Difference between A and B
           ↓
         Signal
@@ -155,15 +155,15 @@ If unwanted electrical energy is introduced similarly onto both conductors, the 
 
 This property contributes to the ability of twisted-pair Ethernet to operate reliably in environments containing electrical noise.
 
+![[Pasted image 20260913074111.png]]
+
 ### Why the Cable Has Pairs
 
 An Ethernet twisted-pair cable contains:
 
 ```
 8 conductors
-
 ↓
-
 4 twisted pairs
 ```
 
@@ -183,7 +183,7 @@ Conductor B ╱╲╱╲╱╲╱╲
 
 The twisting is not decorative.
 
-It is part of the electrical engineering of the cable.
+It is part of the <u>electrical engineering of the cable.</u>
 
 The physical geometry of the conductors affects how signals interact with each other and with external electromagnetic fields.
 
@@ -242,6 +242,8 @@ It provides a physical path through which the optical signal travels.
 
 The information is represented by properties of an optical signal.
 
+![[Cybersecurity journey/1. Networking/Q&A#❔ - What are the properties of an optical signal ?|Q&A]]
+
 The physical medium is typically a glass fiber consisting of structures such as:
 
 ```
@@ -256,7 +258,6 @@ The important distinction for this lesson is:
 
 ```
 Copper → Electrical energy
-
 Fiber → Optical energy
 ```
 
@@ -307,9 +308,7 @@ With a cable:
 ```
 Device A
    |
-   |
 Cable
-   |
    |
 Device B
 ```
@@ -351,9 +350,7 @@ For example, an application may send data through TCP/IP without caring whether 
 
 ```
 Ethernet over copper
-
 Ethernet over fiber
-
 Wi-Fi over radio
 ```
 
@@ -435,7 +432,7 @@ The transmitter knows what it sent.
 
 The receiver only observes what arrives.
 
-Those are not necessarily identical.
+<mark style="background:#fff88f">Those are not necessarily identical.</mark>
 
 A simplified model is:
 
@@ -498,7 +495,7 @@ Other energy may interfere with it.
 
 The receiver must still reconstruct the intended information.
 
-That means networking is constrained by physical signal quality.
+That means <u>networking is constrained by physical signal quality.</u>
 
 The protocols we study later can provide mechanisms for detection, retransmission, error handling, congestion control, and recovery.
 
@@ -506,30 +503,15 @@ But those mechanisms operate on top of a physical system that has fundamental li
 
 ### Key Takeaways
 
-```
-Bits are logical representations.
-
-Bits must be encoded into physical signals
-before they can travel through a network.
-
-Copper carries electrical signals.
-
-Fiber carries optical signals.
-
-Wireless uses electromagnetic radio signals.
-
-The physical layer connects logical networking
-to the real physical world.
-
-Twisted-pair Ethernet uses pairs of conductors
-and differential signaling.
-
-The receiver must recover the intended signal
-from an imperfect physical environment.
-
-Distance, noise, interference, and the properties
-of the medium all affect signal quality.
-```
+1. Bits are logical representations
+2. Bits must be encoded into physical signals before they can travel through a network
+3. Copper carries electrical signals
+4. Fiber carries optical signals
+5. Wireless uses electromagnetic radio signals
+6. The physical layer connects logical networking to the real physical world
+7. Twisted-pair Ethernet uses pairs of conductors  and differential signaling
+8. The receiver must recover the intended signal from an imperfect physical environment
+9. Distance, noise, interference, and the properties of the medium all affect signal quality
 
 The central mental model for this part is:
 
