@@ -1065,7 +1065,7 @@ This is the problem of **latency**.
 
 Latency is the time required for information to travel from one point to another.
 
-In networking, latency is often discussed in terms of:
+In networking, latency is often discussed in terms of
 
 ```
 Milliseconds (ms)
@@ -1086,11 +1086,13 @@ The important point is that latency is not purely a software problem.
 
 A significant portion of latency comes from physics.
 
+![[Cybersecurity journey/1. Networking/Q&A#❔ - Does low latency always mean less time from A to B?|Q&A]]
+
 ### The Speed of Light
 
 Electromagnetic signals propagate extremely quickly.
 
-In a vacuum, the speed of light is approximately:
+In a vacuum (where there is no friction), the speed of light is approximately:
 
 ```
 299,792,458 meters per second
@@ -1106,7 +1108,7 @@ That sounds effectively instantaneous.
 
 It is not.
 
-The distances involved in modern networks are large enough that propagation time becomes measurable.
+The distances involved in modern networks are l<u>arge enough that propagation time becomes measurable.</u>
 
 A signal traveling across a continent or an ocean cannot arrive before the signal physically has time to traverse that distance.
 
@@ -1144,9 +1146,7 @@ then:
 
 ```
 Delay = 1,000,000 / 200,000,000
-
 Delay = 0.005 seconds
-
 Delay = 5 ms
 ```
 
@@ -1171,10 +1171,8 @@ For example:
 ```
 Vacuum
 ≈ 3 × 10^8 m/s
-
 Fiber
 < 3 × 10^8 m/s
-
 Copper
 < 3 × 10^8 m/s
 ```
@@ -1184,6 +1182,8 @@ The refractive properties of fiber and the electrical properties of transmission
 This means that the physical path matters.
 
 The signal cannot simply move at the maximum possible speed regardless of what carries it.
+
+![[Pasted image 20260913123646.png]]
 
 ### Fiber and Long-Distance Networking
 
@@ -1200,7 +1200,9 @@ Oceans
 
 But fiber does not eliminate propagation delay.
 
-A transatlantic fiber cable may span thousands of kilometers.
+A *transatlantic fiber* cable may span thousands of kilometers.
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Transatlantic fiber|Definitions]]
 
 The signal therefore needs a finite amount of time to travel from one side of the ocean to the other.
 
@@ -1219,11 +1221,13 @@ None of these can make the physical distance disappear.
 
 Consider communication between Algeria and a destination in the United States.
 
-The exact RTT depends on the endpoints and routing path, but an RTT around:
+The exact *Round-Trip Time (RTT)* depends on the endpoints and routing path, but an RTT around:
 
 ```
 45 ms
 ```
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Round-Trip Time (RTT)|Definitions]]
 
 is a useful conceptual example for understanding the physical constraint.
 
@@ -1233,9 +1237,7 @@ The important lesson is:
 
 ```
 The endpoints are geographically separated.
-
 The signal must physically travel between them.
-
 That distance creates unavoidable propagation delay.
 ```
 
@@ -1263,9 +1265,7 @@ This gives us an important principle:
 
 ```
 Some networking problems are caused by configuration.
-
 Some networking problems are caused by technology.
-
 Some networking problems are caused by physics.
 ```
 
@@ -1273,13 +1273,7 @@ Latency caused by physical distance belongs primarily to the third category.
 
 ### RTT — Round-Trip Time
 
-When you use a tool such as:
-
-```
-ping
-```
-
-you commonly observe a value called **round-trip time**, or:
+When you use a tool such as [[ping]], you commonly observe a value called **round-trip time**, or:
 
 ```
 RTT
@@ -1291,23 +1285,19 @@ Conceptually:
 
 ```
 Your Computer
-     |
      | Request
      ↓
   Network
-     |
      ↓
 Destination
-     |
      | Response
      ↓
   Network
-     |
      ↓
 Your Computer
 ```
 
-The measurement covers the round trip.
+The measurement covers the <u>round trip</u>.
 
 Therefore:
 
@@ -1359,7 +1349,7 @@ Queuing
 Return-path delays
 ```
 
-The exact behavior depends on the network.
+<mark style="background:#fff88f">The exact behavior depends on the network.</mark>
 
 ### Propagation Delay vs Transmission Delay
 
@@ -1407,6 +1397,8 @@ Transmission delay can be approximated as:
 Transmission Delay = Packet Size / Link Rate
 ```
 
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Link rate|Definitions]]
+
 For example, suppose a packet is:
 
 ```
@@ -1445,14 +1437,11 @@ Consider two separate questions:
 ```
 Question 1:
 How long does it take to put all the bits onto the link?
-
 → Transmission delay
-
 
 Question 2:
 How long does it take the signal to physically travel
 from one end of the link to the other?
-
 → Propagation delay
 ```
 
