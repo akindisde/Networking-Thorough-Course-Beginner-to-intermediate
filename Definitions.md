@@ -365,7 +365,8 @@ An **Ethernet cable tester** is a portable diagnostic device used to verify that
 ###### 🧠 - Link rate
 **Link rate** is the maximum theoretical speed your network connection can physically handle, similar to a posted speed limit on a highway. When you plug an Ethernet cable into your computer or connect to Wi-Fi, your device and router automatically negotiate a top hardware speed—such as 1,000 Mbps (1 Gigabit)—based on the quality of the cable, ports, or wireless signal. This number represents the absolute maximum capacity of the physical wire or radio wave, including all the background control signals needed to maintain the connection. Because link rate only measures raw hardware potential, your actual file download speed (**throughput**) will almost always be lower due to real-world factors like network congestion, data overhead, and internet plan limits.
 
-###### 🧠 - 
+###### 🧠 - Bandwidth-Delay Product (BDP)
+**Bandwidth-Delay Product (BDP)** is a measurement that determines the maximum amount of unacknowledged data that can be "in flight" across a network path at any single instant, calculated by multiplying a link's bandwidth (capacity) by its round-trip time (latency). Think of a network connection as a long water pipe: bandwidth represents the width of the pipe, delay represents its length, and BDP is the total volume of water required to fill the entire pipe from end to end. If a sending device transmits less data than the connection's BDP while waiting for an acknowledgment packet from the receiver, the "pipe" empties, causing the high-speed link to sit idle and wasting available capacity. Properly calculating BDP is essential for tuning transport protocol settings—such as TCP buffer and window sizes—so that long-distance, high-speed routes like transcontinental fiber or satellite links can operate at full speed.
 
 ###### 🧠 - 
 
