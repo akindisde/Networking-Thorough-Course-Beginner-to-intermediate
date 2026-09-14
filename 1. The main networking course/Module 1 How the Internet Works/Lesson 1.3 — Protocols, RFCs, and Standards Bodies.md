@@ -1289,4 +1289,6 @@ Check the illustrated summary of this lesson for a better experience [[Lesson 1.
 | IEEE 802.11 | Wi-Fi standard                                                                 |
 | IEEE 802.1Q | VLAN tagging standard                                                          |
 | IEEE 802.1X | Port-based network access control standard                                     |
+
 You're now ready for [[Lesson 1.3 - Lab]].
+
