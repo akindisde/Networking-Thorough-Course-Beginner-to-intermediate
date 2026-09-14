@@ -1,3 +1,4 @@
+## Module 2 — The Physical World
 ## Lesson 2.2 — Signals, Noise, and Attenuation — Part 1
 
 ### From Bits to Physical Signals
@@ -1918,3 +1919,5 @@ Why can increasing bandwidth fail to reduce latency?
 If you can answer those questions without memorizing the wording, you have the physical foundation needed for the next networking topics.
 
 Now you're ready for [[Lesson 2.2 - Lab]].
+
+![[Pasted image 20260914204052.png]]
