@@ -2680,3 +2680,5 @@ A network connection can fail because of a broken conductor, poor termination, e
 20. If a workstation has no network connectivity, why should the physical cable and termination be checked before investigating DNS or routing?
 
 You're ready now for [[Lesson 2.1 - Lab]].
+
+![[Pasted image 20260914211759.png]]

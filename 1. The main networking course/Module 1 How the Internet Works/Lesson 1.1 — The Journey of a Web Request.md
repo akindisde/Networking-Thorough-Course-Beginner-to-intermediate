@@ -1323,3 +1323,5 @@ Check the illustrated summary of this lesson here [[Lesson 1.1 - Enter_to_Render
 | DNS Cache       | Locally stored DNS records                          |
 
 You're ready now for [[Lesson 1.1 - Lab]].
+
+![[Pasted image 20260914212034.png]]
