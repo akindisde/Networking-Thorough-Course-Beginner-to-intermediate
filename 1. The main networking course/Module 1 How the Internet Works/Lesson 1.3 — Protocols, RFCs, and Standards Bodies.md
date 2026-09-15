@@ -1292,3 +1292,4 @@ Check the illustrated summary of this lesson for a better experience [[Lesson 1.
 
 You're now ready for [[Lesson 1.3 - Lab]].
 
+![[Pasted image 20260915125858.png]]

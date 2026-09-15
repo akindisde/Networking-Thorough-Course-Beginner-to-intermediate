@@ -1015,3 +1015,5 @@ Take a look at the illustrated summary [[Lesson 1.4 - The_Anatomy_of_Data_Flow.p
 
 You're now ready for [[Lesson 1.4 - Lab]].
 Only after you've finished the Labs of this module, tackle [[Module 1 - Packet tracer Lab]].
+
+![[Pasted image 20260915130126.png]]
