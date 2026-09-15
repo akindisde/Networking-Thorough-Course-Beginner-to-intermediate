@@ -5,7 +5,7 @@
 
 Network devices exist because different problems have to be solved at different points in a network.
 
-A physical medium gives us a way to carry signals, but a network needs devices that can receive those signals, interpret information, and decide what to do with traffic.
+A physical medium gives us a way to carry signals, but a network needs devices that <u>can receive those signals, interpret information, and decide what to do with traffic.</u>
 
 In this lesson, we begin with two important devices:
 
@@ -30,7 +30,7 @@ Switch
 
 Understanding this difference is one of the foundations of Ethernet networking.
 
-### Hub
+### [[Hub]]
 
 A **hub** is a Layer 1 networking device.
 
@@ -46,7 +46,7 @@ UDP
 HTTP
 ```
 
-It operates on the physical signal.
+<mark style="background:#fff88f">It operates on the physical signal only</mark>.
 
 Its basic job is:
 
@@ -60,18 +60,20 @@ Send it out other ports
 
 A hub does not make an intelligent forwarding decision.
 
+![[Cybersecurity journey/1. Networking/Q&A#❔ - Can we say that the the layer 1 devices are electrically programmed ?|Q&A]]
+
 ### How a Hub Behaves
 
 Imagine four computers connected to a hub:
 
 ```
-PC-A
-  |
-  |
+	  PC-A
+	    |
+	    |
 PC-B — HUB — PC-C
-  |
-  |
-PC-D
+	    |
+	    |
+	  PC-D
 ```
 
 Suppose PC-A sends an Ethernet frame.
@@ -90,8 +92,8 @@ Conceptually:
 
 ```
 PC-A
-  ↓
-HUB
+   ↓
+  HUB
  / | \
 ↓  ↓  ↓
 B  C  D
@@ -131,21 +133,11 @@ A switch solves this problem by making forwarding decisions.
 
 A hub creates a shared Ethernet environment.
 
-All devices connected through the hub effectively participate in the same shared collision domain.
+<u>All devices connected through the hub effectively participate in the same shared collision domain.</u>
 
 This matters because Ethernet originally used mechanisms designed to allow multiple devices to share a common medium.
 
-The classic mechanism is:
-
-```
-CSMA/CD
-```
-
-which stands for:
-
-```
-Carrier Sense Multiple Access with Collision Detection
-```
+The classic mechanism is [[Carrier Sense Multiple Access with Collision Detection (CSMA-CD)]]
 
 The basic idea was:
 
@@ -156,12 +148,14 @@ Transmit if the medium appears available
         ↓
 Detect collisions
         ↓
-Wait
+	   Wait
         ↓
-Retry
+      Retry
 ```
 
-Modern switched full-duplex Ethernet does not operate this way in normal operation.
+Modern switched *full-duplex* Ethernet does not operate this way in normal operation.
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Full-duplex communication|Definitions]]
 
 Understanding the historical model is still useful because it explains why collision domains are important.
 
@@ -187,7 +181,7 @@ PC-A →→→
 PC-B →→→
 ```
 
-their transmissions collide.
+<u>their transmissions collide.</u>
 
 The resulting signal cannot be correctly interpreted as the original two transmissions.
 
@@ -237,7 +231,9 @@ It increases the number of devices sharing the same collision domain.
 
 This can increase contention and reduce efficiency.
 
-### Switch
+![[Cybersecurity journey/1. Networking/Q&A#❔ - Are hubs still being used?|Q&A]]
+
+### [[Switch]]
 
 A **switch** is fundamentally different.
 
@@ -294,13 +290,14 @@ AA:BB:CC:DD:EE:FF
 
 A switch can examine these addresses and use them to make a forwarding decision.
 
-### Switch Forwarding
+### *Switch Forwarding*
+
+![[Cybersecurity journey/1. Networking/Definitions#🧠 - Switch Forwarding|Definitions]]
 
 Imagine this network:
 
 ```
 PC-A
-  |
   |
 SWITCH
  /    \
@@ -369,6 +366,8 @@ Forward
 The hub repeats.
 
 The switch makes a forwarding decision.
+
+![[Cybersecurity journey/1. Networking/Q&A#❔ - Why for a hub we say "incoming signal" but for a switch we say "incoming frame"?|Q&A]]
 
 ### The CAM Table
 
@@ -450,6 +449,8 @@ Store in MAC/CAM Table
 
 This process is called **MAC address learning**.
 
+![[Pasted image 20260915183427.png]]
+
 ### Why the Source MAC Is Important
 
 When a frame arrives, the switch can learn from the source.
@@ -526,12 +527,12 @@ Once the switch knows the destination MAC:
 ```
 Destination MAC
         ↓
-CAM Table
+	CAM Table
         ↓
-Port 2
+	  Port 2
 ```
 
-the switch can forward the frame specifically to Port 2.
+the switch can forward the frame <u>specifically</u> to Port 2.
 
 ```
 PC-A
@@ -600,9 +601,11 @@ FF:FF:FF:FF:FF:FF
 
 The resulting forwarding behavior can look similar, but the reasons are different.
 
+Just know that these two cases require flooding all the ports, don't mind the difference and resemblance between the two causes, future lessons cover that.
+
 ### Switches and Collision Domains
 
-One of the major advantages of a switch is that each switch port can form a separate collision domain.
+One of the major advantages of a switch is that <mark style="background:#fff88f">each switch port can form a separate collision domain.</mark>
 
 Consider:
 
@@ -653,7 +656,7 @@ Modern switched Ethernet commonly operates in:
 Full-duplex
 ```
 
-Full-duplex communication means a link can transmit and receive simultaneously.
+Full-duplex communication means a link can transmit and receive simultaneously, in other words, <mark style="background:#fff88f">it's a link with no collisions.</mark>
 
 Conceptually:
 
@@ -666,101 +669,6 @@ Both directions can operate at the same time.
 Because the devices are not competing for a shared half-duplex medium in the traditional sense, collisions are not expected on normal full-duplex Ethernet links.
 
 This is another reason modern switched Ethernet is fundamentally different from the old hub-based shared-medium model.
-
-### Hub vs Switch
-
-The comparison should be memorized conceptually, not merely as a table.
-
-|   |   |   |
-|---|---|---|
-|Property|Hub|Switch|
-|Primary Layer|Layer 1|Layer 2|
-|Main Operation|Repeats signal|Forwards frames|
-|Understands MAC addresses|No|Yes|
-|Uses MAC/CAM table|No|Yes|
-|Normal forwarding decision|None|Yes|
-|Shared collision domain|Yes|Ports are separated|
-|Typical modern use|Obsolete|Standard Ethernet device|
-
-The most important row is:
-
-```
-Hub → repeats
-Switch → forwards
-```
-
-### Why Hubs Became Obsolete
-
-Hubs were simple.
-
-They were also inefficient.
-
-Consider a network with:
-
-```
-20 devices
-```
-
-connected through a hub.
-
-If one device transmits, the signal is repeated to the other devices.
-
-The shared medium creates:
-
-```
-More contention
-More unnecessary traffic
-Potential collisions
-Reduced efficiency
-```
-
-A switch can isolate each port and forward traffic based on MAC addresses.
-
-Therefore:
-
-```
-Hub
-→ Shared medium
-→ Collisions
-→ Inefficient
-
-Switch
-→ Segmented links
-→ MAC-based forwarding
-→ Much more efficient
-```
-
-This is why switches replaced hubs in normal Ethernet networks.
-
-### A Critical Mental Model
-
-Do not think:
-
-```
-Switch = smarter hub
-```
-
-That description is incomplete.
-
-A switch is not simply a hub with more intelligence.
-
-The underlying forwarding model is different.
-
-A hub operates on:
-
-```
-Physical signals
-```
-
-A switch operates on:
-
-```
-Ethernet frames
-+
-MAC addresses
-```
-
-This difference is what allows a switch to make forwarding decisions.
 
 ### Tracing a Frame Through a Switch
 
@@ -887,50 +795,28 @@ Another Network
 
 A switch is not the device that fundamentally determines how traffic moves between different IP networks.
 
-That is the job of the router.
+<u>That is the job of the router.</u>
 
 The next part will build this distinction carefully.
 
 ### Key Takeaways
 
-```
-A hub is a Layer 1 device.
-
-A hub repeats physical signals to its other ports.
-
-A hub does not understand MAC addresses.
-
-A hub creates a shared collision domain.
-
-Multiple devices connected to the same hub
-can contend for the same shared medium.
-
-A switch is primarily a Layer 2 device.
-
-A switch receives Ethernet frames.
-
-A switch examines MAC addresses.
-
-A switch learns source MAC addresses from incoming frames.
-
-The learned MAC-to-port mappings are stored in a
-CAM/MAC address table.
-
-A known destination MAC allows the switch to forward
-the frame to the appropriate port.
-
-An unknown unicast is generally flooded within the VLAN.
-
-Broadcast frames are also flooded within the VLAN.
-
-Switch ports separate collision domains.
-
-Modern switched Ethernet commonly operates full-duplex,
-so collisions are not expected on normal full-duplex links.
-
-Hubs became obsolete because switched Ethernet
-provides much more efficient communication.
-```
+1. A hub is a Layer 1 device
+2. A hub repeats physical signals to its other ports
+3. A hub does not understand MAC addresses
+4. A hub creates a shared collision domain
+5. Multiple devices connected to the same hub can contend for the same shared medium
+6. A switch is primarily a Layer 2 device
+7. A switch receives Ethernet frames
+8. A switch examines MAC addresses
+9. A switch learns source MAC addresses from incoming frames
+10. The learned MAC-to-port mappings are stored in a CAM/MAC address table
+11. A known destination MAC allows the switch to forward the frame to the appropriate port
+12. An unknown unicast is generally flooded within the VLAN
+13. Broadcast frames are also flooded within the VLAN
+14. Switch ports separate collision domains
+15. Modern switched Ethernet commonly operates full-duplex, so collisions are not expected on normal full-duplex links
+16. Hubs became obsolete because switched Ethernet provides much more efficient communication
 
 ### Final Mental Model
 
@@ -3073,1280 +2959,3 @@ Identify the networking functions it performs.
 
 That mental model will make enterprise networks, cloud networks, security appliances, and home networks much easier to understand.
 
-## Lesson 2.3 — Network Devices — Part 4
-
-### Lab: Hub vs Switch and the Complete Device Mental Model
-
-This part turns the concepts from the previous sections into an experiment.
-
-The objective is not simply to memorize:
-
-```
-Hub = Layer 1
-Switch = Layer 2
-Router = Layer 3
-AP = Wireless Layer 2
-Firewall = Traffic control
-```
-
-The objective is to observe what these devices actually do and then use that behavior to reason about real networks.
-
-The primary lab uses:
-
-```
-Cisco Packet Tracer
-```
-
-You will build two small Ethernet networks:
-
-```
-Network A
-→ Hub
-
-Network B
-→ Switch
-```
-
-You will then compare their behavior.
-
-### Lab Objectives
-
-By the end of the lab, you should be able to:
-
-```
-Identify a hub as a Layer 1 device.
-
-Identify a switch as a Layer 2 device.
-
-Explain why a hub repeats traffic.
-
-Explain why a switch forwards traffic selectively.
-
-Observe a switch learning MAC addresses.
-
-Read a switch MAC address table.
-
-Explain the difference between known-unicast
-and unknown-unicast forwarding.
-
-Explain why a hub creates one shared collision domain.
-
-Explain why switch ports provide separate collision domains.
-
-Explain why modern switched Ethernet normally operates
-without collisions on full-duplex links.
-
-Explain when a router becomes necessary.
-```
-
-### Part 1 — Build the Hub Network
-
-Open Cisco Packet Tracer.
-
-Create a simple topology containing:
-
-```
-3 PCs
-1 Hub
-```
-
-Connect them:
-
-```
-PC-A
-  |
-  |
- HUB
- / \
-PC-B PC-C
-```
-
-Use Ethernet connections appropriate for the Packet Tracer devices.
-
-The exact interface names may differ depending on the device models you select.
-
-The important topology is:
-
-```
-PC-A
-  |
-  |
-Hub
- / \
-PC-B PC-C
-```
-
-### Configure the PCs
-
-Give the PCs addresses in the same IPv4 subnet.
-
-For example:
-
-```
-PC-A
-IP: 192.168.10.10
-Mask: 255.255.255.0
-```
-
-```
-PC-B
-IP: 192.168.10.20
-Mask: 255.255.255.0
-```
-
-```
-PC-C
-IP: 192.168.10.30
-Mask: 255.255.255.0
-```
-
-A default gateway is not required for communication among these three hosts because they are in the same subnet.
-
-The important point is:
-
-```
-192.168.10.0/24
-```
-
-is the local network.
-
-### Verify Connectivity
-
-From PC-A, open the command prompt and test:
-
-```
-ping 192.168.10.20
-```
-
-Then:
-
-```
-ping 192.168.10.30
-```
-
-The pings should succeed if the topology and addressing are correct.
-
-You have now demonstrated basic local communication through the hub.
-
-### Enter Simulation Mode
-
-Packet Tracer has a simulation mode that allows you to observe packets as they move through the topology.
-
-Switch from:
-
-```
-Realtime
-```
-
-to:
-
-```
-Simulation
-```
-
-The interface may vary slightly between Packet Tracer versions, but the objective is the same:
-
-```
-Slow down network events
-Observe packets
-Inspect their movement
-```
-
-Generate traffic from PC-A to PC-B.
-
-For example:
-
-```
-ping 192.168.10.20
-```
-
-Observe what happens at the hub.
-
-### What You Should Observe
-
-The hub does not examine the destination MAC address and select one port.
-
-Instead, the hub repeats the signal toward its other ports.
-
-Conceptually:
-
-```
-PC-A
-  |
-  ↓
-HUB
- / \
-↓   ↓
-B   C
-```
-
-The intended destination is:
-
-```
-PC-B
-```
-
-but PC-C also receives the transmission at the physical level.
-
-This is the behavior that defines the hub's Layer 1 operation.
-
-### Lab Question 1
-
-Answer:
-
-```
-PC-A sends traffic specifically to PC-B.
-Why does PC-C still receive the transmission
-when the network uses a hub?
-```
-
-Expected reasoning:
-
-```
-Because the hub does not make a Layer 2 forwarding
-decision based on the destination MAC address.
-
-It repeats the physical signal toward its other ports.
-```
-
-Do not describe the hub as "checking the MAC and deciding to flood."
-
-That would incorrectly attribute Layer 2 intelligence to a Layer 1 device.
-
-### Lab Question 2
-
-How many collision domains exist in this hub topology?
-
-```
-PC-A
-  |
- HUB
- / \
-PC-B PC-C
-```
-
-Answer:
-
-```
-One collision domain.
-```
-
-All three devices share the same collision domain.
-
-### Part 2 — Build the Switch Network
-
-Create a second topology:
-
-```
-3 PCs
-1 Switch
-```
-
-Connect them:
-
-```
-PC-A
-  |
-  |
-SWITCH
- /   \
-PC-B PC-C
-```
-
-Configure the same addressing scheme:
-
-```
-PC-A
-192.168.10.10/24
-
-PC-B
-192.168.10.20/24
-
-PC-C
-192.168.10.30/24
-```
-
-This keeps the IP layer constant.
-
-The device changes.
-
-That is important because you want to isolate the effect of the networking device.
-
-### Generate Traffic
-
-From PC-A:
-
-```
-ping 192.168.10.20
-```
-
-Then:
-
-```
-ping 192.168.10.30
-```
-
-Observe the traffic in Simulation mode.
-
-You should see behavior that differs from the hub topology.
-
-The switch can use Layer 2 information to determine where a known destination is connected.
-
-### The Switch Learns
-
-When frames enter the switch, the switch learns from their source MAC addresses.
-
-Conceptually:
-
-```
-Frame arrives on Port 1
-
-Source MAC:
-AA:AA:AA:AA:AA:AA
-
-Switch learns:
-
-AA:AA:AA:AA:AA:AA → Port 1
-```
-
-After more traffic has passed, the switch can build a table similar to:
-
-```
-MAC Address              Port
-
-AA:AA:AA:AA:AA:AA        Port 1
-BB:BB:BB:BB:BB:BB        Port 2
-CC:CC:CC:CC:CC:CC        Port 3
-```
-
-The actual MAC addresses and interface names in Packet Tracer will differ.
-
-The concept is what matters:
-
-```
-MAC address → switch port
-```
-
-### Inspect the MAC Address Table
-
-On the switch, enter the appropriate CLI context and inspect the MAC address table.
-
-On Cisco IOS devices, a commonly used command is:
-
-```
-show mac address-table
-```
-
-Depending on the Packet Tracer switch model and IOS version, the displayed columns may include information such as:
-
-```
-VLAN
-MAC Address
-Type
-Ports
-```
-
-You are looking for learned dynamic MAC entries.
-
-The important relationship is:
-
-```
-MAC address
-      ↓
-Specific switch port
-```
-
-### Lab Question 3
-
-Why can the switch forward a frame specifically toward PC-B?
-
-Answer:
-
-```
-Because the switch can learn the MAC address
-associated with the port where PC-B is connected.
-```
-
-The switch therefore has information that a hub does not.
-
-### Known Unicast
-
-Suppose the switch knows:
-
-```
-PC-B MAC → Port 2
-```
-
-PC-A sends:
-
-```
-Destination MAC = PC-B MAC
-```
-
-The switch can perform:
-
-```
-Receive frame
-      ↓
-Read destination MAC
-      ↓
-Find MAC in table
-      ↓
-Port 2
-      ↓
-Forward through Port 2
-```
-
-This is a:
-
-```
-Known unicast
-```
-
-The switch does not need to send the frame to PC-C.
-
-### Unknown Unicast
-
-Now consider a situation where the switch does not know the destination MAC.
-
-For example:
-
-```
-Destination:
-DD:DD:DD:DD:DD:DD
-```
-
-but the MAC address table contains no entry for it.
-
-The switch cannot determine which port contains the destination.
-
-It therefore floods the frame within the relevant Layer 2 domain, excluding the incoming port.
-
-Conceptually:
-
-```
-          SWITCH
-         /      \
-        ↓        ↓
-      PC-B      PC-C
-```
-
-This is why a switch can sometimes appear to behave like a hub.
-
-The crucial difference is:
-
-```
-Hub
-→ Always repeats
-
-Switch
-→ Selectively forwards when destination is known
-→ Floods when destination is unknown
-```
-
-### Lab Question 4
-
-A student says:
-
-> "A switch and a hub are basically the same because both can send traffic to multiple ports."
-
-Is that statement correct?
-
-No.
-
-The forwarding logic is fundamentally different.
-
-A hub:
-
-```
-Layer 1
-Signal repetition
-No MAC-based forwarding
-```
-
-A switch:
-
-```
-Layer 2
-Frame processing
-MAC-based forwarding
-MAC learning
-```
-
-The fact that a switch may flood an unknown destination does not make it equivalent to a hub.
-
-### Collision Domain Comparison
-
-Now compare the two topologies.
-
-Hub:
-
-```
-       HUB
-     /  |  \
-   PC-A PC-B PC-C
-
-One shared collision domain
-```
-
-Switch:
-
-```
-      SWITCH
-     /  |  \
-   PC-A PC-B PC-C
-
-Separate collision domains per switch port
-```
-
-This is one of the major architectural advantages of switching.
-
-### Full-Duplex Observation
-
-Modern Ethernet switch links normally operate in:
-
-```
-Full-duplex
-```
-
-This means:
-
-```
-Transmit
-+
-Receive
-```
-
-can occur simultaneously.
-
-The link does not behave like the old shared half-duplex hub medium.
-
-Therefore, normal full-duplex switched Ethernet does not have the collision behavior associated with traditional shared Ethernet.
-
-### Lab Question 5
-
-Why does replacing a hub with a switch improve Ethernet performance?
-
-A strong answer should include several points:
-
-```
-The switch separates collision domains.
-
-The switch can forward known unicast frames
-only toward the appropriate port.
-
-The switch allows full-duplex operation on normal
-point-to-point Ethernet links.
-
-The network no longer depends on a single shared
-collision domain for all connected hosts.
-```
-
-### Part 3 — Add a Router
-
-Now extend the topology.
-
-Create two IP networks:
-
-```
-Network A
-192.168.10.0/24
-
-Network B
-192.168.20.0/24
-```
-
-A simplified topology:
-
-```
-PC-A
-192.168.10.10
-    |
-  Switch
-    |
-    |
-  Router
-    |
-    |
-  Switch
-    |
-PC-B
-192.168.20.20
-```
-
-Configure the router interfaces:
-
-```
-Interface toward Network A:
-192.168.10.1/24
-
-Interface toward Network B:
-192.168.20.1/24
-```
-
-Configure:
-
-```
-PC-A
-IP: 192.168.10.10
-Mask: 255.255.255.0
-Gateway: 192.168.10.1
-```
-
-and:
-
-```
-PC-B
-IP: 192.168.20.20
-Mask: 255.255.255.0
-Gateway: 192.168.20.1
-```
-
-### Test the Local Network
-
-From PC-A:
-
-```
-ping 192.168.10.1
-```
-
-This tests connectivity to the router interface on the local subnet.
-
-Then:
-
-```
-ping 192.168.20.20
-```
-
-This tests communication with a host on a different subnet.
-
-### Trace the Path
-
-The second ping should conceptually follow:
-
-```
-PC-A
-  ↓
-Switch
-  ↓
-Router
-  ↓
-Switch
-  ↓
-PC-B
-```
-
-This is the key device relationship:
-
-```
-Same subnet
-→ Switch
-
-Different subnet
-→ Router
-```
-
-The switches provide local Layer 2 connectivity.
-
-The router provides Layer 3 connectivity between the two IP networks.
-
-### Lab Question 6
-
-Why can PC-A not simply send the frame directly to PC-B's MAC address?
-
-Because PC-B is on another IP network.
-
-The local host needs to send the packet toward the router.
-
-The router then forwards the packet into the destination network.
-
-The important distinction is:
-
-```
-PC-A → Router
-```
-
-is local Layer 2 delivery on the first network.
-
-Then:
-
-```
-Router → PC-B
-```
-
-is local Layer 2 delivery on the second network.
-
-The IP packet can remain associated with the same end-to-end communication while the Layer 2 frame is rebuilt for each link.
-
-### Part 4 — Build the Complete Mental Model
-
-At this point, stop thinking about devices as isolated definitions.
-
-Instead, ask what problem each device solves.
-
-### Hub
-
-Question:
-
-```
-How can I repeat a physical signal to multiple ports?
-```
-
-Answer:
-
-```
-Hub
-```
-
-Layer:
-
-```
-Layer 1
-```
-
-Primary information:
-
-```
-Physical signal
-```
-
-Forwarding intelligence:
-
-```
-None
-```
-
-### Switch
-
-Question:
-
-```
-Which local Ethernet port should receive this frame?
-```
-
-Answer:
-
-```
-Switch
-```
-
-Layer:
-
-```
-Layer 2
-```
-
-Primary information:
-
-```
-MAC address
-```
-
-Table:
-
-```
-CAM / MAC address table
-```
-
-### Router
-
-Question:
-
-```
-Which network should this IP packet travel toward?
-```
-
-Answer:
-
-```
-Router
-```
-
-Layer:
-
-```
-Layer 3
-```
-
-Primary information:
-
-```
-IP address
-```
-
-Table:
-
-```
-Routing table
-```
-
-### Access Point
-
-Question:
-
-```
-How can wireless clients participate in the local network?
-```
-
-Answer:
-
-```
-Access Point
-```
-
-Primary role:
-
-```
-Wireless Layer 2 connectivity / bridging
-```
-
-Medium:
-
-```
-Radio
-```
-
-### Firewall
-
-Question:
-
-```
-Should this traffic be allowed across this security boundary?
-```
-
-Answer:
-
-```
-Firewall
-```
-
-Primary role:
-
-```
-Traffic inspection and policy enforcement
-```
-
-The firewall may operate at multiple layers depending on its design and capabilities.
-
-### One Network, Multiple Functions
-
-A real network may contain all of these:
-
-```
-                    Internet
-                       |
-                    Firewall
-                       |
-                     Router
-                       |
-                    Switch
-                  /   |   \
-                PC   Server  AP
-                              |
-                         Wi-Fi Clients
-```
-
-A home network may collapse many of these roles into one physical device:
-
-```
-                 ISP
-                  |
-           [Home Gateway]
-          /      |       \
-       Wi-Fi    LAN      Routing
-         |       |          |
-       Phone    PC       Internet
-```
-
-The physical architecture changes.
-
-The logical functions remain.
-
-### Troubleshooting Through Device Roles
-
-Suppose a computer cannot communicate with another computer.
-
-Do not immediately blame the "network."
-
-Break the problem into functions.
-
-Ask:
-
-```
-1. Is the physical link working?
-
-2. Can the device communicate at Layer 2?
-
-3. Is the destination on the same subnet?
-
-4. If it is remote, is the default gateway reachable?
-
-5. Does the router have a route to the destination network?
-
-6. Is a firewall blocking the traffic?
-
-7. Is the destination service actually listening?
-```
-
-This approach prevents random troubleshooting.
-
-### Example: Same-Subnet Failure
-
-Suppose:
-
-```
-PC-A:
-192.168.1.10/24
-
-PC-B:
-192.168.1.20/24
-```
-
-and they cannot communicate.
-
-The first devices to investigate are:
-
-```
-NIC
-Cable / Wi-Fi
-Switch
-Host firewall
-ARP / Layer 2 behavior
-```
-
-You would not immediately assume that an Internet router is the problem.
-
-Why?
-
-Because the destination is local:
-
-```
-192.168.1.0/24
-```
-
-The traffic does not fundamentally need Layer 3 routing to reach the other host.
-
-### Example: Different-Subnet Failure
-
-Now:
-
-```
-PC-A:
-192.168.1.10/24
-
-PC-B:
-192.168.2.20/24
-```
-
-The troubleshooting path changes.
-
-You should consider:
-
-```
-PC-A
-↓
-Local switch
-↓
-Default gateway
-↓
-Router
-↓
-Destination network
-```
-
-Questions become:
-
-```
-Can PC-A reach its gateway?
-
-Does the router have a route to 192.168.2.0/24?
-
-Is the return route correct?
-
-Are firewall policies allowing the traffic?
-```
-
-This is much more systematic.
-
-### Device Selection Exercise
-
-For each requirement, identify the primary device or function.
-
-#### Requirement 1
-
-"Connect several wired computers within the same local Ethernet network."
-
-Answer:
-
-```
-Switch
-```
-
-#### Requirement 2
-
-"Connect wireless laptops to the wired LAN."
-
-Answer:
-
-```
-Access Point
-```
-
-#### Requirement 3
-
-"Connect two different IP networks."
-
-Answer:
-
-```
-Router
-```
-
-#### Requirement 4
-
-"Repeat a physical Ethernet signal to multiple ports without Layer 2 forwarding intelligence."
-
-Answer:
-
-```
-Hub
-```
-
-#### Requirement 5
-
-"Block incoming traffic according to security policy."
-
-Answer:
-
-```
-Firewall
-```
-
-### Integrated Scenario
-
-Consider this network:
-
-```
-                         Internet
-                            |
-                         Firewall
-                            |
-                          Router
-                            |
-                         Switch
-                    /       |       \
-                  PC      Server     AP
-                                      |
-                                  Wi-Fi
-                                  /   \
-                               Phone Laptop
-```
-
-Now identify each function.
-
-```
-Firewall
-→ Controls traffic according to policy
-
-Router
-→ Connects the internal network to other networks
-
-Switch
-→ Provides local wired Layer 2 connectivity
-
-Access Point
-→ Provides wireless Layer 2 connectivity
-
-PC / Server / Phone / Laptop
-→ End hosts
-```
-
-If the physical deployment uses a single home gateway, several of these functions may be inside one box.
-
-### The Layered Device Model
-
-The entire lesson can now be condensed into:
-
-```
-PHYSICAL
-
-Hub
-→ Signals
-```
-
-```
-DATA LINK
-
-Switch
-→ Ethernet frames
-→ MAC addresses
-```
-
-```
-WIRELESS DATA LINK
-
-Access Point
-→ Wi-Fi
-→ Layer 2 bridging
-```
-
-```
-NETWORK
-
-Router
-→ IP packets
-→ IP addresses
-→ Routing table
-```
-
-```
-SECURITY
-
-Firewall
-→ Traffic policy
-→ Inspection
-→ Allow / deny decisions
-```
-
-These are functional roles.
-
-They may be implemented by:
-
-```
-Separate physical devices
-```
-
-or:
-
-```
-Multiple functions inside one appliance
-```
-
-### Final Lab Checklist
-
-Before considering this lesson complete, verify that you can answer all of these without looking at the notes.
-
-```
-What layer does a traditional hub operate at?
-
-What does a hub actually do with an incoming signal?
-
-What is a collision domain?
-
-Why does a hub create a shared collision domain?
-
-What layer does an Ethernet switch primarily operate at?
-
-What is a MAC address?
-
-What is a CAM/MAC address table?
-
-How does a switch learn MAC addresses?
-
-What is a known unicast?
-
-What is an unknown unicast?
-
-Why does a switch sometimes flood traffic?
-
-Why are switch ports separate collision domains?
-
-What is full-duplex Ethernet?
-
-What layer does a router operate at?
-
-What is a routing table?
-
-What is a default gateway?
-
-How does a host determine whether a destination is local?
-
-Why is a router needed for a different subnet?
-
-What is an access point?
-
-Why is an access point primarily associated with Layer 2?
-
-What does a firewall do?
-
-How is firewalling different from routing?
-
-Why can one home device contain a router, switch,
-access point, firewall, NAT, and DHCP server?
-```
-
-### Final Mental Model
-
-The complete device model should now look like this:
-
-```
-                NETWORK DEVICES
-
-Hub
-│
-├── Layer 1
-├── Repeats signals
-└── Shared collision domain
-
-
-Switch
-│
-├── Layer 2
-├── Ethernet frames
-├── MAC addresses
-├── CAM/MAC table
-└── Local forwarding
-
-
-Access Point
-│
-├── Wireless Layer 2
-├── Wi-Fi
-└── Bridges wireless clients to the LAN
-
-
-Router
-│
-├── Layer 3
-├── IP addresses
-├── Routing table
-└── Connects different networks
-
-
-Firewall
-│
-├── Security boundary
-├── Traffic inspection
-├── Policy enforcement
-└── Allow / deny decisions
-```
-
-The most important operational rule is:
-
-```
-Same subnet
-→ Local Layer 2 delivery
-→ Switch / AP
-
-Different subnet
-→ Layer 3 forwarding
-→ Router
-```
-
-And the most important architectural rule is:
-
-```
-One physical box can perform many networking functions.
-```
-
-If you can look at a network diagram and identify which device is responsible for:
-
-```
-physical signal handling
-local Ethernet forwarding
-wireless access
-network-to-network forwarding
-security policy
-```
-
-then you have moved beyond memorizing device names and started thinking like a network engineer.
