@@ -1,6 +1,6 @@
 # Networking Theory/pratice Course — Beginner to Strong Intermediate
 
-A structured path from zero networking background to CCNA/NSE4 readiness: ~65 lessons across 14 modules, every lesson following Problem → Concept → Demonstration → Wireshark Verification → Security Angle → Hands-On Lab.
+A structured path from zero networking background to CCNA -and networking in general- readiness: ~65 lessons across 14 modules, every lesson following Problem → Concept → Demonstration → Wireshark Verification → Security Angle → Hands-On Lab.
 
 ## Module status
 
