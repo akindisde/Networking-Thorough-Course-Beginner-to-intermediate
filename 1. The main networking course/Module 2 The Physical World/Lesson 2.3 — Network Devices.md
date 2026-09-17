@@ -505,8 +505,11 @@ Conceptually:
 
 ```
 PC-A
+
   ↓
+
 SWITCH
+
  / | \
 ↓  ↓  ↓
 B  C  D
